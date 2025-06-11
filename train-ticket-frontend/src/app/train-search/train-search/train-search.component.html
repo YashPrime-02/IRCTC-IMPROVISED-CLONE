@@ -18,21 +18,27 @@
       </option>
     </select>
 
-   <button (click)="onSearch(sourceRef.value, destinationRef.value)">Search Trains </button>
+    <button (click)="onSearch(sourceRef.value, destinationRef.value)">Search Trains</button>
+  </div>
 
+  <!-- MODAL Result -->
+  <div class="train-modal" *ngIf="trains.length > 0 && showModal">
+    <div class="modal-content">
+      <button class="close-btn" (click)="closeModal()">❌</button>
+      <h2>🚆 Available Trains ({{ trains.length }})</h2>
 
-
-    <div class="train-results" *ngIf="trains.length > 0">
-      <h3>🚆 Available Trains</h3>
-      <div *ngFor="let train of trains" class="train-card">
-        <p><strong>{{ train.trainName }}</strong></p>
-        <p>🕐 Departure: {{ train.departureTime }} | Arrival: {{ train.arrivalTime }}</p>
-        <p>⏱ Duration: {{ train.duration }}</p>
+      <div class="train-card-container">
+        <div *ngFor="let train of trains" class="train-card fade-in">
+          <p><strong>{{ train.trainName }}</strong></p>
+          <p>🕐 Departure: {{ train.departureTime }} | Arrival: {{ train.arrivalTime }}</p>
+          <p>⏱ Duration: {{ train.duration }}</p>
+        </div>
       </div>
     </div>
+  </div>
 
-    <div *ngIf="searched && trains.length === 0">
-      <p>No trains found for the selected route.</p>
-    </div>
+  <!-- No Results -->
+  <div *ngIf="searched && trains.length === 0" class="no-results">
+    <p>No trains found for the selected route.</p>
   </div>
 </div>

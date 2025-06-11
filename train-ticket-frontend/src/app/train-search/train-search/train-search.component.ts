@@ -1,7 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CommonModule } from '@angular/common'; // ✅ Required for *ngIf, *ngFor
-import { FormsModule } from '@angular/forms'; // ✅ If you use template forms
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 interface Station {
   stationID: number;
@@ -20,8 +20,8 @@ interface Train {
 
 @Component({
   selector: 'app-train-search',
-  standalone: true, // ✅ Only if you're using standalone components
-  imports: [CommonModule, FormsModule], // ✅ Add this line
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './train-search.component.html',
   styleUrls: ['./train-search.component.css']
 })
@@ -30,6 +30,7 @@ export class TrainSearchComponent implements OnInit {
   trainsList: Train[] = [];
   trains: Train[] = [];
   searched: boolean = false;
+  showModal: boolean = false;
 
   constructor(private http: HttpClient) {}
 
@@ -48,29 +49,27 @@ export class TrainSearchComponent implements OnInit {
     });
   }
 
- onSearch(source: string, destination: string): void {
-  this.searched = true;
+  onSearch(source: string, destination: string): void {
+    this.searched = true;
 
-  console.log("🔍 Source Selected:", source);
-  console.log("🔍 Destination Selected:", destination);
+    if (!source && !destination) {
+      this.trains = this.trainsList;
+    } else if (source && destination) {
+      this.trains = this.trainsList.filter(
+        t => t.sourceCode === source && t.destinationCode === destination
+      );
+    } else if (source) {
+      this.trains = this.trainsList.filter(t => t.sourceCode === source);
+    } else if (destination) {
+      this.trains = this.trainsList.filter(t => t.destinationCode === destination);
+    }
 
-  if (!source || !destination) {
-    console.log("⚠️ Either source or destination is missing.");
-    this.trains = [];
-    return;
+    this.showModal = this.trains.length > 0;
   }
 
-  this.trains = this.trainsList.filter(
-    t => t.sourceCode === source && t.destinationCode === destination
-  );
-
-  if (this.trains.length > 0) {
-    console.log("✅ Matching Trains Found:", this.trains);
-  } else {
-    console.log("❌ No trains found for selected route.");
+  closeModal(): void {
+    this.showModal = false;
   }
-}
-
 
   @HostListener('document:mousemove', ['$event'])
   onMouseMove(e: MouseEvent): void {

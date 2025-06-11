@@ -1,44 +1,68 @@
 <div class="page-container">
-  <div class="form-box">
-    <h2>🚄 Train Search</h2>
+  <div class="form-box glass-card">
+    <!-- Heading -->
+    <h2><i class="fas fa-train"></i> Train Search</h2>
 
-    <label for="source">Source Station</label>
-    <select id="source" #sourceRef>
-      <option value="">-- Select Source --</option>
-      <option *ngFor="let s of stations" [value]="s.stationCode">
-        {{ s.stationName }} ({{ s.stationCode }})
-      </option>
-    </select>
+    <!-- Source -->
+    <div class="form-group">
+      <label for="source"><i class="fas fa-map-marker-alt"></i> Source Station</label>
+      <select id="source" #sourceRef>
+        <option value="">🚉 Choose your source</option>
+        <option *ngFor="let s of stations" [value]="s.stationCode">
+          {{ s.stationName }} ({{ s.stationCode }})
+        </option>
+      </select>
+    </div>
 
-    <label for="destination">Destination Station</label>
-    <select id="destination" #destinationRef>
-      <option value="">-- Select Destination --</option>
-      <option *ngFor="let s of stations" [value]="s.stationCode">
-        {{ s.stationName }} ({{ s.stationCode }})
-      </option>
-    </select>
+    <!-- Destination -->
+    <div class="form-group">
+      <label for="destination"><i class="fas fa-map-marked-alt"></i> Destination Station</label>
+      <select id="destination" #destinationRef>
+        <option value="">🚉 Choose your destination</option>
+        <option *ngFor="let s of stations" [value]="s.stationCode">
+          {{ s.stationName }} ({{ s.stationCode }})
+        </option>
+      </select>
+    </div>
 
-    <button (click)="onSearch(sourceRef.value, destinationRef.value)">Search Trains</button>
+    <!-- Date -->
+    <div class="form-group">
+      <label for="journeyDate"><i class="fas fa-calendar-alt"></i> Journey Date</label>
+      <input type="date" id="journeyDate" [(ngModel)]="selectedDate" />
+    </div>
+
+    <!-- Search Button -->
+    <button (click)="onSearch(sourceRef.value, destinationRef.value)">
+      <i class="fas fa-search"></i> Search Trains
+    </button>
+
+    <!-- Progress Bar and Loader -->
+    <div *ngIf="loading" class="loading-container">
+      <i class="fas fa-spinner fa-spin loader-icon"></i>
+      <div class="progress-bar">
+        <div class="bar"></div>
+      </div>
+    </div>
   </div>
 
-  <!-- MODAL Result -->
+  <!-- Modal -->
   <div class="train-modal" *ngIf="trains.length > 0 && showModal">
-    <div class="modal-content">
+    <div class="modal-content glass-card">
       <button class="close-btn" (click)="closeModal()">❌</button>
-      <h2>🚆 Available Trains ({{ trains.length }})</h2>
+      <h2><i class="fas fa-list-ul"></i> Available Trains ({{ trains.length }})</h2>
 
       <div class="train-card-container">
-        <div *ngFor="let train of trains" class="train-card fade-in">
+        <div *ngFor="let train of trains" class="train-card">
           <p><strong>{{ train.trainName }}</strong></p>
-          <p>🕐 Departure: {{ train.departureTime }} | Arrival: {{ train.arrivalTime }}</p>
-          <p>⏱ Duration: {{ train.duration }}</p>
+          <p><i class="fas fa-clock"></i> {{ train.departureTime }} → {{ train.arrivalTime }}</p>
+          <p><i class="fas fa-hourglass-half"></i> Duration: {{ train.duration }}</p>
         </div>
       </div>
     </div>
   </div>
 
   <!-- No Results -->
-  <div *ngIf="searched && trains.length === 0" class="no-results">
-    <p>No trains found for the selected route.</p>
+  <div *ngIf="searched && trains.length === 0" class="no-results glass-card">
+    <p>🚫 No trains found for the selected route on {{ selectedDate || 'the selected date' }}.</p>
   </div>
 </div>

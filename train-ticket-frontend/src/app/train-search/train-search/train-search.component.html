@@ -1,0 +1,36 @@
+<div class="page-container">
+  <div class="form-box">
+    <h2>🚄 Train Search</h2>
+
+    <label for="source">Source Station</label>
+    <select id="source" #sourceRef>
+      <option value="">-- Select Source --</option>
+      <option *ngFor="let s of stations" [value]="s.stationCode">
+        {{ s.stationName }} ({{ s.stationCode }})
+      </option>
+    </select>
+
+    <label for="destination">Destination Station</label>
+    <select id="destination" #destinationRef>
+      <option value="">-- Select Destination --</option>
+      <option *ngFor="let s of stations" [value]="s.stationCode">
+        {{ s.stationName }} ({{ s.stationCode }})
+      </option>
+    </select>
+
+    <button (click)="onSearch(sourceRef.value, destinationRef.value)">Search Trains</button>
+
+    <div class="train-results" *ngIf="trains.length > 0">
+      <h3>🚆 Available Trains</h3>
+      <div *ngFor="let train of trains" class="train-card">
+        <p><strong>{{ train.trainName }}</strong></p>
+        <p>🕐 Departure: {{ train.departureTime }} | Arrival: {{ train.arrivalTime }}</p>
+        <p>⏱ Duration: {{ train.duration }}</p>
+      </div>
+    </div>
+
+    <div *ngIf="searched && trains.length === 0">
+      <p>No trains found for the selected route.</p>
+    </div>
+  </div>
+</div>

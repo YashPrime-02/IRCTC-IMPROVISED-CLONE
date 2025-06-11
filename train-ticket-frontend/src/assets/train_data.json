@@ -1,0 +1,216 @@
+{
+  "stations": [
+    { "stationID": 1, "stationName": "New Delhi", "stationCode": "NDLS" },
+    { "stationID": 2, "stationName": "Mumbai Central", "stationCode": "BCT" },
+    { "stationID": 3, "stationName": "Kolkata Howrah", "stationCode": "HWH" },
+    { "stationID": 4, "stationName": "Chennai Central", "stationCode": "MAS" },
+    { "stationID": 5, "stationName": "Bangalore City", "stationCode": "SBC" },
+    { "stationID": 6, "stationName": "Secunderabad", "stationCode": "SC" },
+    { "stationID": 7, "stationName": "Ahmedabad", "stationCode": "ADI" },
+    { "stationID": 8, "stationName": "Pune", "stationCode": "PUNE" },
+    { "stationID": 9, "stationName": "Bhopal Junction", "stationCode": "BPL" },
+    { "stationID": 10, "stationName": "Jaipur", "stationCode": "JP" },
+    { "stationID": 11, "stationName": "Lucknow", "stationCode": "LKO" },
+    { "stationID": 12, "stationName": "Varanasi", "stationCode": "BSB" },
+    { "stationID": 13, "stationName": "Patna", "stationCode": "PNBE" },
+    { "stationID": 14, "stationName": "Kanpur Central", "stationCode": "CNB" },
+    { "stationID": 15, "stationName": "Nagpur", "stationCode": "NGP" },
+    { "stationID": 16, "stationName": "Visakhapatnam", "stationCode": "VSKP" },
+    { "stationID": 17, "stationName": "Thiruvananthapuram", "stationCode": "TVC" },
+    { "stationID": 18, "stationName": "Coimbatore", "stationCode": "CBE" },
+    { "stationID": 19, "stationName": "Madurai", "stationCode": "MDU" },
+    { "stationID": 20, "stationName": "Agra Cantt", "stationCode": "AGC" },
+    { "stationID": 21, "stationName": "Guwahati", "stationCode": "GHY" },
+    { "stationID": 22, "stationName": "Ranchi", "stationCode": "RNC" },
+    { "stationID": 23, "stationName": "Jammu Tawi", "stationCode": "JAT" },
+    { "stationID": 24, "stationName": "Dehradun", "stationCode": "DDN" },
+    { "stationID": 25, "stationName": "Amritsar", "stationCode": "ASR" },
+    { "stationID": 26, "stationName": "Indore", "stationCode": "INDB" },
+    { "stationID": 27, "stationName": "Raipur", "stationCode": "R" },
+    { "stationID": 28, "stationName": "Surat", "stationCode": "ST" },
+    { "stationID": 29, "stationName": "Gorakhpur", "stationCode": "GKP" },
+    { "stationID": 30, "stationName": "Darbhanga", "stationCode": "DBG" },
+    { "stationID": 31, "stationName": "Udaipur", "stationCode": "UDZ" },
+    { "stationID": 32, "stationName": "Jabalpur", "stationCode": "JBP" },
+    { "stationID": 33, "stationName": "Bhagalpur", "stationCode": "BGP" },
+    { "stationID": 34, "stationName": "Aligarh", "stationCode": "ALJN" },
+    { "stationID": 35, "stationName": "Meerut City", "stationCode": "MTC" },
+    { "stationID": 36, "stationName": "Tatanagar", "stationCode": "TATA" },
+    { "stationID": 37, "stationName": "Bilaspur", "stationCode": "BSP" },
+    { "stationID": 38, "stationName": "Durg", "stationCode": "DURG" },
+    { "stationID": 39, "stationName": "Anand Vihar", "stationCode": "ANVT" },
+    { "stationID": 40, "stationName": "Gaya", "stationCode": "GAYA" }
+  ],
+
+  "trains": [
+    {
+      "trainName": "Lucknow Mail",
+      "departureTime": "22:00",
+      "arrivalTime": "06:50",
+      "duration": "08:50:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Kanpur Shatabdi",
+      "departureTime": "15:00",
+      "arrivalTime": "19:45",
+      "duration": "04:45:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Magadh Express",
+      "departureTime": "21:10",
+      "arrivalTime": "13:20",
+      "duration": "16:10:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "PNBE"
+    },
+    {
+      "trainName": "Vaishali Express",
+      "departureTime": "20:10",
+      "arrivalTime": "11:45",
+      "duration": "15:35:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "BGP"
+    },
+    {
+      "trainName": "Ganga Gomti Express",
+      "departureTime": "06:15",
+      "arrivalTime": "12:00",
+      "duration": "05:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "PNBE"
+    },
+    {
+      "trainName": "Swarna Shatabdi",
+      "departureTime": "07:30",
+      "arrivalTime": "13:50",
+      "duration": "06:20:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "ASR"
+    },
+    {
+      "trainName": "Mahananda Express",
+      "departureTime": "06:35",
+      "arrivalTime": "15:10",
+      "duration": "08:35:00",
+      "sourceCode": "LKO",
+      "destinationCode": "DBG"
+    },
+    {
+      "trainName": "Champaran Humsafar Express",
+      "departureTime": "12:00",
+      "arrivalTime": "02:30",
+      "duration": "14:30:00",
+      "sourceCode": "ANVT",
+      "destinationCode": "RNC"
+    },
+    {
+      "trainName": "Sapt Kranti Express",
+      "departureTime": "14:20",
+      "arrivalTime": "06:00",
+      "duration": "15:40:00",
+      "sourceCode": "ANVT",
+      "destinationCode": "DBG"
+    },
+    {
+      "trainName": "Kavi Guru Express",
+      "departureTime": "05:00",
+      "arrivalTime": "18:00",
+      "duration": "13:00:00",
+      "sourceCode": "LKO",
+      "destinationCode": "GAYA"
+    },
+    {
+      "trainName": "Shiv Ganga Express",
+      "departureTime": "20:00",
+      "arrivalTime": "05:00",
+      "duration": "09:00:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "BSB"
+    },
+    {
+      "trainName": "Gomti Express",
+      "departureTime": "12:20",
+      "arrivalTime": "21:30",
+      "duration": "09:10:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Gomti Express",
+      "departureTime": "05:45",
+      "arrivalTime": "15:30",
+      "duration": "09:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "NDLS"
+    },
+    {
+      "trainName": "Poorva Express",
+      "departureTime": "08:00",
+      "arrivalTime": "04:50",
+      "duration": "20:50:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "HWH"
+    },
+    {
+      "trainName": "Himgiri Express",
+      "departureTime": "22:45",
+      "arrivalTime": "14:10",
+      "duration": "15:25:00",
+      "sourceCode": "JAT",
+      "destinationCode": "HWH"
+    },
+    {
+      "trainName": "Kolkata Rajdhani",
+      "departureTime": "16:55",
+      "arrivalTime": "10:05",
+      "duration": "17:10:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "HWH"
+    },
+    {
+      "trainName": "Gorakhdham Express",
+      "departureTime": "08:05",
+      "arrivalTime": "20:25",
+      "duration": "12:20:00",
+      "sourceCode": "GKP",
+      "destinationCode": "NDLS"
+    },
+    {
+      "trainName": "Satyagrah Express",
+      "departureTime": "05:30",
+      "arrivalTime": "21:40",
+      "duration": "16:10:00",
+      "sourceCode": "RXL",
+      "destinationCode": "ANVT"
+    },
+    {
+      "trainName": "Lichchavi Express",
+      "departureTime": "15:30",
+      "arrivalTime": "08:30",
+      "duration": "17:00:00",
+      "sourceCode": "SIT",
+      "destinationCode": "ANVT"
+    },
+    {
+      "trainName": "Bihar Sampark Kranti",
+      "departureTime": "20:25",
+      "arrivalTime": "12:40",
+      "duration": "16:15:00",
+      "sourceCode": "DBG",
+      "destinationCode": "ANVT"
+    },
+    {
+      "trainName": "Jan Nayak Express",
+      "departureTime": "04:00",
+      "arrivalTime": "23:30",
+      "duration": "19:30:00",
+      "sourceCode": "DBG",
+      "destinationCode": "ANVT"
+    }
+  ]
+}
+

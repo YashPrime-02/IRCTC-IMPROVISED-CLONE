@@ -110,7 +110,7 @@ button i {
 }
 
 button:hover {
-  background: #005bb5;
+  background: red;
 }
 
 /* Train Modal */
@@ -141,7 +141,7 @@ button:hover {
   position: absolute;
   top: 16px;
   right: 20px;
-  background: var(--accent);
+
   color: #fff;
   border: none;
   border-radius: 50%;
@@ -150,10 +150,6 @@ button:hover {
   height: 36px;
   cursor: pointer;
   transition: background 0.3s;
-}
-
-.close-btn:hover {
-  background: #004a94;
 }
 
 /* Train Card Grid */

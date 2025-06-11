@@ -1,1 +1,38 @@
-/* You can add global styles to this file, and also import other style files */
+/* 🌌 Blue Glassmorphism Theme */
+.blue-glass-theme {
+  background: rgba(0, 0, 0, 0.85) !important;
+  color: #e3f2fd !important;
+}
+
+.blue-glass-theme .glass-card,
+.blue-glass-theme .form-box,
+.blue-glass-theme .modal-content,
+.blue-glass-theme .no-results {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45) !important;
+  color: #e3f2fd !important;
+}
+
+.blue-glass-theme .form-box select,
+.blue-glass-theme .form-box input[type="date"] {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  color: #e3f2fd !important;
+}
+
+.blue-glass-theme button {
+  background: #1565c0 !important;
+  color: white !important;
+}
+
+.blue-glass-theme button:hover {
+  background: #0d47a1 !important;
+}
+
+.blue-glass-theme .train-modal {
+  background: rgba(0, 0, 0, 0.85) !important;
+  backdrop-filter: blur(5px) !important;
+}

@@ -60,6 +60,32 @@
       "destinationCode": "CNB"
     },
     {
+      "trainName": "Kanpur Shatabdi",
+      "departureTime": "15:00",
+      "arrivalTime": "19:45",
+      "duration": "04:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "NDLS"
+    },
+    {
+      "trainName": "Lucknow Mail",
+      "departureTime": "22:00",
+      "arrivalTime": "06:50",
+      "duration": "08:50:00",
+      "sourceCode": "LKO",
+      "destinationCode": "NDLS"
+    },
+    {
+      "trainName": "IRCTC TEJAS EXPRESS",
+      "departureTime": "15:00",
+      "arrivalTime": "19:45",
+      "duration": "04:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "NDLS"
+    },
+
+
+    {
       "trainName": "Magadh Express",
       "departureTime": "21:10",
       "arrivalTime": "13:20",

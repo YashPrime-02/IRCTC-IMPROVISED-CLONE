@@ -30,7 +30,7 @@ import { AuthGuard } from './shared/auth.guard';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    CommonModule // ✅ Required for *ngFor and other directives
+    CommonModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

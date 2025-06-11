@@ -32,7 +32,11 @@ export class TrainSearchComponent implements OnInit {
   searched: boolean = false;
   showModal: boolean = false;
   loading: boolean = false;
-  selectedDate: string = ''; // Journey date
+
+  selectedDate: string = '';            // Journey Date
+  selectedTime: string = '';            // Journey Time
+  numberOfPeople: number = 1;           // Default People = 1
+  peopleOptions: number[] = [1, 2, 3, 4, 5, 6, 7, 8];  // Dropdown options
 
   constructor(private http: HttpClient) {}
 

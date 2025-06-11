@@ -27,8 +27,22 @@
 
     <!-- Date -->
     <div class="form-group">
-      <label for="journeyDate"><i class="fas fa-calendar-alt"></i> Journey Date</label>
+      <label for="journeyTime"><i class="fas fa-calendar-alt"></i> Journey Date</label>
       <input type="date" id="journeyDate" [(ngModel)]="selectedDate" />
+    </div>
+
+    <!-- Time -->
+    <div class="form-group">
+      <label for="journeyTime"><i class="fas fa-clock"></i> Journey Time</label>
+      <input type="time" id="journeyTime" [(ngModel)]="selectedTime" />
+    </div>
+
+    <!-- Number of People (Dropdown 1-8) -->
+    <div class="form-group">
+      <label for="numPeople"><i class="fas fa-users"></i> Number of People</label>
+      <select id="numPeople" [(ngModel)]="numberOfPeople">
+        <option *ngFor="let n of peopleOptions" [value]="n">{{ n }}</option>
+      </select>
     </div>
 
     <!-- Search Button -->
@@ -51,9 +65,16 @@
       <button class="close-btn" (click)="closeModal()">❌</button>
       <h2><i class="fas fa-list-ul"></i> Available Trains ({{ trains.length }})</h2>
 
+      <!-- Journey Info -->
+      <div class="user-journey-info">
+        <p><i class="fas fa-calendar-day"></i> Journey Date: <strong>{{ selectedDate || 'N/A' }}</strong></p>
+        <p><i class="fas fa-clock"></i> Journey Time: <strong>{{ selectedTime || 'N/A' }}</strong></p>
+        <p><i class="fas fa-user-friends"></i> People: <strong>{{ numberOfPeople }}</strong></p>
+      </div>
+
       <div class="train-card-container">
         <div *ngFor="let train of trains" class="train-card">
-          <p><strong>{{ train.trainName }}</strong></p>
+          <p><strong><i class="fas fa-train"></i> {{ train.trainName }}</strong></p>
           <p><i class="fas fa-clock"></i> {{ train.departureTime }} → {{ train.arrivalTime }}</p>
           <p><i class="fas fa-hourglass-half"></i> Duration: {{ train.duration }}</p>
         </div>

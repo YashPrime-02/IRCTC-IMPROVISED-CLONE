@@ -4,7 +4,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { TrainSearchComponent } from './train-search/train-search/train-search.component';
 import { BookingComponent } from './booking/booking/booking.component';
 import { TicketViewComponent } from './ticket-view/ticket-view/ticket-view.component';
-import { AuthGuard } from './shared/auth.guard'; // Make sure this is class-based
+import { AuthGuard } from './shared/auth.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },

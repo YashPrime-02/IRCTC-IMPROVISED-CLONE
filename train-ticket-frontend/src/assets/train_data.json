@@ -1,396 +1,207 @@
 {
   "stations": [
-    {
-      "stationID": 1,
-      "stationName": "New Delhi",
-      "stationCode": "NDLS"
-    },
-    {
-      "stationID": 2,
-      "stationName": "Mumbai Central",
-      "stationCode": "BCT"
-    },
-    {
-      "stationID": 3,
-      "stationName": "Kolkata Howrah",
-      "stationCode": "HWH"
-    },
-    {
-      "stationID": 4,
-      "stationName": "Chennai Central",
-      "stationCode": "MAS"
-    },
-    {
-      "stationID": 5,
-      "stationName": "Bangalore City",
-      "stationCode": "SBC"
-    },
-    {
-      "stationID": 6,
-      "stationName": "Secunderabad",
-      "stationCode": "SC"
-    },
-    {
-      "stationID": 7,
-      "stationName": "Ahmedabad",
-      "stationCode": "ADI"
-    },
-    {
-      "stationID": 8,
-      "stationName": "Pune",
-      "stationCode": "PUNE"
-    },
-    {
-      "stationID": 9,
-      "stationName": "Bhopal Junction",
-      "stationCode": "BPL"
-    },
-    {
-      "stationID": 10,
-      "stationName": "Jaipur",
-      "stationCode": "JP"
-    },
-    {
-      "stationID": 11,
-      "stationName": "Lucknow",
-      "stationCode": "LKO"
-    },
-    {
-      "stationID": 12,
-      "stationName": "Varanasi",
-      "stationCode": "BSB"
-    },
-    {
-      "stationID": 13,
-      "stationName": "Patna",
-      "stationCode": "PNBE"
-    },
-    {
-      "stationID": 14,
-      "stationName": "Kanpur Central",
-      "stationCode": "CNB"
-    },
-    {
-      "stationID": 15,
-      "stationName": "Nagpur",
-      "stationCode": "NGP"
-    },
-    {
-      "stationID": 16,
-      "stationName": "Visakhapatnam",
-      "stationCode": "VSKP"
-    },
-    {
-      "stationID": 17,
-      "stationName": "Thiruvananthapuram",
-      "stationCode": "TVC"
-    },
-    {
-      "stationID": 18,
-      "stationName": "Coimbatore",
-      "stationCode": "CBE"
-    },
-    {
-      "stationID": 19,
-      "stationName": "Madurai",
-      "stationCode": "MDU"
-    },
-    {
-      "stationID": 20,
-      "stationName": "Agra Cantt",
-      "stationCode": "AGC"
-    },
-    {
-      "stationID": 21,
-      "stationName": "Guwahati",
-      "stationCode": "GHY"
-    },
-    {
-      "stationID": 22,
-      "stationName": "Ranchi",
-      "stationCode": "RNC"
-    },
-    {
-      "stationID": 23,
-      "stationName": "Jammu Tawi",
-      "stationCode": "JAT"
-    },
-    {
-      "stationID": 24,
-      "stationName": "Dehradun",
-      "stationCode": "DDN"
-    },
-    {
-      "stationID": 25,
-      "stationName": "Amritsar",
-      "stationCode": "ASR"
-    },
-    {
-      "stationID": 26,
-      "stationName": "Indore",
-      "stationCode": "INDB"
-    },
-    {
-      "stationID": 27,
-      "stationName": "Raipur",
-      "stationCode": "R"
-    },
-    {
-      "stationID": 28,
-      "stationName": "Surat",
-      "stationCode": "ST"
-    },
-    {
-      "stationID": 29,
-      "stationName": "Gorakhpur",
-      "stationCode": "GKP"
-    },
-    {
-      "stationID": 30,
-      "stationName": "Darbhanga",
-      "stationCode": "DBG"
-    }
+    { "stationID": 1, "stationName": "New Delhi", "stationCode": "NDLS" },
+    { "stationID": 2, "stationName": "Mumbai Central", "stationCode": "BCT" },
+    { "stationID": 3, "stationName": "Kolkata Howrah", "stationCode": "HWH" },
+    { "stationID": 4, "stationName": "Chennai Central", "stationCode": "MAS" },
+    { "stationID": 5, "stationName": "Bangalore City", "stationCode": "SBC" },
+    { "stationID": 6, "stationName": "Secunderabad", "stationCode": "SC" },
+    { "stationID": 7, "stationName": "Ahmedabad", "stationCode": "ADI" },
+    { "stationID": 8, "stationName": "Pune", "stationCode": "PUNE" },
+    { "stationID": 9, "stationName": "Bhopal Junction", "stationCode": "BPL" },
+    { "stationID": 10, "stationName": "Jaipur", "stationCode": "JP" },
+    { "stationID": 11, "stationName": "Lucknow", "stationCode": "LKO" },
+    { "stationID": 12, "stationName": "Varanasi", "stationCode": "BSB" },
+    { "stationID": 13, "stationName": "Patna", "stationCode": "PNBE" },
+    { "stationID": 14, "stationName": "Kanpur Central", "stationCode": "CNB" },
+    { "stationID": 15, "stationName": "Nagpur", "stationCode": "NGP" },
+    { "stationID": 16, "stationName": "Visakhapatnam", "stationCode": "VSKP" },
+    { "stationID": 17, "stationName": "Thiruvananthapuram", "stationCode": "TVC" },
+    { "stationID": 18, "stationName": "Coimbatore", "stationCode": "CBE" },
+    { "stationID": 19, "stationName": "Madurai", "stationCode": "MDU" },
+    { "stationID": 20, "stationName": "Agra Cantt", "stationCode": "AGC" },
+    { "stationID": 21, "stationName": "Guwahati", "stationCode": "GHY" },
+    { "stationID": 22, "stationName": "Ranchi", "stationCode": "RNC" },
+    { "stationID": 23, "stationName": "Jammu Tawi", "stationCode": "JAT" },
+    { "stationID": 24, "stationName": "Dehradun", "stationCode": "DDN" },
+    { "stationID": 25, "stationName": "Amritsar", "stationCode": "ASR" },
+    { "stationID": 26, "stationName": "Indore", "stationCode": "INDB" },
+    { "stationID": 27, "stationName": "Raipur", "stationCode": "R" },
+    { "stationID": 28, "stationName": "Surat", "stationCode": "ST" },
+    { "stationID": 29, "stationName": "Gorakhpur", "stationCode": "GKP" },
+    { "stationID": 30, "stationName": "Darbhanga", "stationCode": "DBG" },
+    { "stationID": 31, "stationName": "Udaipur", "stationCode": "UDZ" },
+    { "stationID": 32, "stationName": "Jabalpur", "stationCode": "JBP" },
+    { "stationID": 33, "stationName": "Bhagalpur", "stationCode": "BGP" },
+    { "stationID": 34, "stationName": "Aligarh", "stationCode": "ALJN" },
+    { "stationID": 35, "stationName": "Meerut City", "stationCode": "MTC" },
+    { "stationID": 36, "stationName": "Tatanagar", "stationCode": "TATA" },
+    { "stationID": 37, "stationName": "Bilaspur", "stationCode": "BSP" },
+    { "stationID": 38, "stationName": "Durg", "stationCode": "DURG" },
+    { "stationID": 39, "stationName": "Anand Vihar", "stationCode": "ANVT" },
+    { "stationID": 40, "stationName": "Gaya", "stationCode": "GAYA" }
   ],
   "trains": [
     {
-      "trainName": "Train 1",
-      "departureTime": "08:22",
-      "arrivalTime": "06:39",
-      "duration": "22:17:00",
-      "sourceCode": "VSKP",
-      "destinationCode": "NGP"
-    },
-    {
-      "trainName": "Train 2",
-      "departureTime": "15:49",
-      "arrivalTime": "10:24",
-      "duration": "18:35:00",
-      "sourceCode": "GHY",
-      "destinationCode": "R"
-    },
-    {
-      "trainName": "Train 3",
-      "departureTime": "14:35",
-      "arrivalTime": "11:56",
-      "duration": "21:21:00",
-      "sourceCode": "SBC",
-      "destinationCode": "LKO"
-    },
-    {
-      "trainName": "Train 4",
-      "departureTime": "10:05",
-      "arrivalTime": "04:19",
-      "duration": "18:14:00",
-      "sourceCode": "SBC",
-      "destinationCode": "PUNE"
-    },
-    {
-      "trainName": "Train 5",
-      "departureTime": "10:06",
-      "arrivalTime": "06:08",
-      "duration": "20:02:00",
-      "sourceCode": "VSKP",
-      "destinationCode": "NDLS"
-    },
-    {
-      "trainName": "Train 6",
-      "departureTime": "06:26",
-      "arrivalTime": "09:52",
-      "duration": "3:26:00",
-      "sourceCode": "DDN",
-      "destinationCode": "ST"
-    },
-    {
-      "trainName": "Train 7",
-      "departureTime": "09:38",
-      "arrivalTime": "07:44",
-      "duration": "22:06:00",
-      "sourceCode": "MDU",
-      "destinationCode": "MAS"
-    },
-    {
-      "trainName": "Train 8",
-      "departureTime": "10:23",
-      "arrivalTime": "08:51",
-      "duration": "22:28:00",
-      "sourceCode": "AGC",
-      "destinationCode": "JAT"
-    },
-    {
-      "trainName": "Train 9",
-      "departureTime": "11:35",
-      "arrivalTime": "13:43",
-      "duration": "2:08:00",
-      "sourceCode": "ASR",
-      "destinationCode": "LKO"
-    },
-    {
-      "trainName": "Train 10",
-      "departureTime": "07:07",
-      "arrivalTime": "18:56",
-      "duration": "11:49:00",
+      "trainName": "Goa Express",
+      "departureTime": "06:00",
+      "arrivalTime": "23:00",
+      "duration": "17:00:00",
       "sourceCode": "NDLS",
-      "destinationCode": "DBG"
+      "destinationCode": "VASCO"
     },
     {
-      "trainName": "Train 11",
-      "departureTime": "13:25",
-      "arrivalTime": "07:03",
-      "duration": "17:38:00",
-      "sourceCode": "DDN",
-      "destinationCode": "PNBE"
-    },
-    {
-      "trainName": "Train 12",
-      "departureTime": "08:06",
-      "arrivalTime": "11:52",
-      "duration": "3:46:00",
-      "sourceCode": "PNBE",
-      "destinationCode": "SBC"
-    },
-    {
-      "trainName": "Train 13",
-      "departureTime": "11:46",
-      "arrivalTime": "16:50",
-      "duration": "5:04:00",
-      "sourceCode": "NGP",
-      "destinationCode": "JP"
-    },
-    {
-      "trainName": "Train 14",
-      "departureTime": "17:56",
-      "arrivalTime": "22:47",
-      "duration": "4:51:00",
-      "sourceCode": "MAS",
-      "destinationCode": "BSB"
-    },
-    {
-      "trainName": "Train 15",
-      "departureTime": "12:35",
-      "arrivalTime": "15:59",
-      "duration": "3:24:00",
-      "sourceCode": "JAT",
-      "destinationCode": "VSKP"
-    },
-    {
-      "trainName": "Train 16",
-      "departureTime": "09:17",
-      "arrivalTime": "20:04",
-      "duration": "10:47:00",
-      "sourceCode": "JAT",
-      "destinationCode": "PNBE"
-    },
-    {
-      "trainName": "Train 17",
-      "departureTime": "11:41",
-      "arrivalTime": "06:57",
-      "duration": "19:16:00",
-      "sourceCode": "HWH",
-      "destinationCode": "PUNE"
-    },
-    {
-      "trainName": "Train 18",
-      "departureTime": "14:38",
-      "arrivalTime": "12:12",
-      "duration": "21:34:00",
-      "sourceCode": "GKP",
+      "trainName": "Rajdhani Express",
+      "departureTime": "16:00",
+      "arrivalTime": "08:00",
+      "duration": "16:00:00",
+      "sourceCode": "NDLS",
       "destinationCode": "BCT"
     },
     {
-      "trainName": "Train 19",
-      "departureTime": "14:35",
-      "arrivalTime": "12:44",
-      "duration": "22:09:00",
-      "sourceCode": "MDU",
-      "destinationCode": "CBE"
+      "trainName": "August Kranti Express",
+      "departureTime": "17:20",
+      "arrivalTime": "09:45",
+      "duration": "16:25:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "BCT"
     },
     {
-      "trainName": "Train 20",
-      "departureTime": "08:39",
-      "arrivalTime": "03:01",
-      "duration": "18:22:00",
-      "sourceCode": "JAT",
-      "destinationCode": "DDN"
+      "trainName": "Kashi Vishwanath Express",
+      "departureTime": "11:00",
+      "arrivalTime": "05:00",
+      "duration": "18:00:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "BSB"
     },
     {
-      "trainName": "Train 21",
-      "departureTime": "17:24",
-      "arrivalTime": "02:13",
-      "duration": "8:49:00",
-      "sourceCode": "GKP",
-      "destinationCode": "DDN"
+      "trainName": "Mumbai Mail",
+      "departureTime": "19:00",
+      "arrivalTime": "14:30",
+      "duration": "19:30:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "BCT"
     },
     {
-      "trainName": "Train 22",
-      "departureTime": "16:23",
-      "arrivalTime": "19:23",
-      "duration": "3:00:00",
-      "sourceCode": "BSB",
-      "destinationCode": "CBE"
+      "trainName": "Garib Rath Express",
+      "departureTime": "15:30",
+      "arrivalTime": "08:00",
+      "duration": "16:30:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "LKO"
     },
     {
-      "trainName": "Train 23",
-      "departureTime": "07:02",
-      "arrivalTime": "11:15",
-      "duration": "4:13:00",
-      "sourceCode": "ADI",
-      "destinationCode": "AGC"
+      "trainName": "Karnataka Express",
+      "departureTime": "21:10",
+      "arrivalTime": "07:45",
+      "duration": "34:35:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "SBC"
     },
     {
-      "trainName": "Train 24",
-      "departureTime": "08:21",
-      "arrivalTime": "22:42",
-      "duration": "14:21:00",
-      "sourceCode": "ADI",
-      "destinationCode": "DBG"
+      "trainName": "Shatabdi Express",
+      "departureTime": "06:00",
+      "arrivalTime": "14:00",
+      "duration": "8:00:00",
+      "sourceCode": "LKO",
+      "destinationCode": "NDLS"
     },
     {
-      "trainName": "Train 25",
-      "departureTime": "17:46",
-      "arrivalTime": "04:57",
-      "duration": "11:11:00",
-      "sourceCode": "JP",
-      "destinationCode": "DBG"
+      "trainName": "Chennai Mail",
+      "departureTime": "07:15",
+      "arrivalTime": "19:30",
+      "duration": "12:15:00",
+      "sourceCode": "MAS",
+      "destinationCode": "BCT"
     },
     {
-      "trainName": "Train 26",
-      "departureTime": "16:48",
-      "arrivalTime": "15:09",
-      "duration": "22:21:00",
-      "sourceCode": "HWH",
-      "destinationCode": "RNC"
+      "trainName": "Pune Express",
+      "departureTime": "22:15",
+      "arrivalTime": "14:40",
+      "duration": "16:25:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "PUNE"
+    },
+
+    {
+      "trainName": "Visakha Express",
+      "departureTime": "15:45",
+      "arrivalTime": "12:30",
+      "duration": "20:45:00",
+      "sourceCode": "VSKP",
+      "destinationCode": "NGP"
     },
     {
-      "trainName": "Train 27",
-      "departureTime": "11:36",
-      "arrivalTime": "03:29",
-      "duration": "15:53:00",
-      "sourceCode": "ST",
-      "destinationCode": "R"
+      "trainName": "Visakha Superfast",
+      "departureTime": "19:00",
+      "arrivalTime": "14:30",
+      "duration": "19:30:00",
+      "sourceCode": "VSKP",
+      "destinationCode": "NGP"
     },
     {
-      "trainName": "Train 28",
-      "departureTime": "13:44",
-      "arrivalTime": "21:09",
-      "duration": "7:25:00",
+      "trainName": "Nagpur Duronto",
+      "departureTime": "20:00",
+      "arrivalTime": "07:00",
+      "duration": "11:00:00",
       "sourceCode": "NDLS",
       "destinationCode": "NGP"
     },
     {
-      "trainName": "Train 29",
-      "departureTime": "06:01",
-      "arrivalTime": "03:20",
-      "duration": "21:19:00",
-      "sourceCode": "SC",
-      "destinationCode": "MDU"
+      "trainName": "SBC Rajdhani",
+      "departureTime": "18:30",
+      "arrivalTime": "08:00",
+      "duration": "13:30:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "SBC"
     },
     {
-      "trainName": "Train 30",
-      "departureTime": "06:55",
-      "arrivalTime": "03:20",
-      "duration": "20:25:00",
+      "trainName": "Coimbatore Express",
+      "departureTime": "12:30",
+      "arrivalTime": "15:00",
+      "duration": "26:30:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "CBE"
+    },
+    {
+      "trainName": "Howrah Duronto",
+      "departureTime": "16:55",
+      "arrivalTime": "11:30",
+      "duration": "18:35:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "HWH"
+    },
+    {
+      "trainName": "Indore Intercity",
+      "departureTime": "06:10",
+      "arrivalTime": "15:25",
+      "duration": "9:15:00",
+      "sourceCode": "INDB",
+      "destinationCode": "JP"
+    },
+    {
+      "trainName": "Pataliputra Express",
+      "departureTime": "13:40",
+      "arrivalTime": "10:00",
+      "duration": "20:20:00",
+      "sourceCode": "PNBE",
+      "destinationCode": "NDLS"
+    },
+    {
+      "trainName": "Duronto Ranchi",
+      "departureTime": "21:10",
+      "arrivalTime": "10:30",
+      "duration": "13:20:00",
+      "sourceCode": "RNC",
+      "destinationCode": "NDLS"
+    },
+    {
+      "trainName": "Gorakhpur Superfast",
+      "departureTime": "07:45",
+      "arrivalTime": "03:30",
+      "duration": "19:45:00",
       "sourceCode": "GKP",
-      "destinationCode": "SBC"
+      "destinationCode": "NDLS"
     }
   ]
 }

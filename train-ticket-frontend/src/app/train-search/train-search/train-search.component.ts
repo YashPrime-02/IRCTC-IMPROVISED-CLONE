@@ -48,17 +48,29 @@ export class TrainSearchComponent implements OnInit {
     });
   }
 
-  onSearch(source: string, destination: string): void {
-    this.searched = true;
-    if (!source || !destination) {
-      this.trains = [];
-      return;
-    }
+ onSearch(source: string, destination: string): void {
+  this.searched = true;
 
-    this.trains = this.trainsList.filter(
-      t => t.sourceCode === source && t.destinationCode === destination
-    );
+  console.log("🔍 Source Selected:", source);
+  console.log("🔍 Destination Selected:", destination);
+
+  if (!source || !destination) {
+    console.log("⚠️ Either source or destination is missing.");
+    this.trains = [];
+    return;
   }
+
+  this.trains = this.trainsList.filter(
+    t => t.sourceCode === source && t.destinationCode === destination
+  );
+
+  if (this.trains.length > 0) {
+    console.log("✅ Matching Trains Found:", this.trains);
+  } else {
+    console.log("❌ No trains found for selected route.");
+  }
+}
+
 
   @HostListener('document:mousemove', ['$event'])
   onMouseMove(e: MouseEvent): void {

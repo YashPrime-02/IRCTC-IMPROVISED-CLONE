@@ -18,7 +18,9 @@
       </option>
     </select>
 
-    <button (click)="onSearch(sourceRef.value, destinationRef.value)">Search Trains</button>
+   <button (click)="onSearch(sourceRef.value, destinationRef.value)">Search Trains </button>
+
+
 
     <div class="train-results" *ngIf="trains.length > 0">
       <h3>🚆 Available Trains</h3>

@@ -140,3 +140,44 @@ button:hover {
     text-align: center;
   }
 }
+
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.password-wrapper input {
+  flex-grow: 1;
+  padding-right: 40px;
+  box-sizing: border-box;
+  font-size: 15px;
+}
+
+.toggle-icon {
+  position: absolute;
+  right: 12px;
+  cursor: pointer;
+  color: #888;
+  font-size: 16px;
+  user-select: none;
+  transition: color 0.3s ease;
+}
+
+.toggle-icon:hover {
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .password-wrapper input {
+    font-size: 13px;
+    padding-right: 36px;
+  }
+
+  .toggle-icon {
+    font-size: 14px;
+    right: 10px;
+  }
+}

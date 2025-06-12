@@ -15,18 +15,25 @@
       />
     </div>
 
-    <div class="form-group">
-      <label for="login-password">Password</label>
-      <input
-        type="password"
-        id="login-password"
-        name="password"
-        [(ngModel)]="password"
-        placeholder="Enter your password"
-        autocomplete="current-password"
-        required
-      />
-    </div>
+   <div class="form-group password-group">
+  <label for="login-password">Password</label>
+ <div class="password-wrapper">
+  <input
+    [type]="showPassword ? 'text' : 'password'"
+    id="login-password"
+    name="password"
+    [(ngModel)]="password"
+    placeholder="Enter your password"
+    autocomplete="current-password"
+    required
+  />
+  <span class="toggle-icon" (click)="togglePasswordVisibility()" title="Toggle Password Visibility">
+    <i class="fas" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+  </span>
+</div>
+
+</div>
+
 
     <button type="submit">
       <i class="fas fa-sign-in-alt"></i> Login

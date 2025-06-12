@@ -417,7 +417,7 @@ button:hover {
     padding: 20px 16px;
     margin: auto;
     position: fixed;
-    top: 50%;
+    top: 34%;
     left: 50%;
     transform: translate(-50%, -50%) !important;
     z-index: 999;

@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // ✅ added
 
 // Components
 import { AppComponent } from './app.component';
@@ -23,14 +24,16 @@ import { AuthGuard } from './shared/auth.guard';
     SignupComponent,
     TrainSearchComponent,
     BookingComponent,
-    TicketViewComponent
+    TicketViewComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    BrowserAnimationsModule  // ✅ added here
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

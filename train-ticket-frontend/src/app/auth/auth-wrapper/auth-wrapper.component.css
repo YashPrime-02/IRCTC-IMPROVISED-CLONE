@@ -74,99 +74,105 @@ html, body {
     transform: translateY(0);
   }
 }
-
-/* Forgot Password Modal */
 .forgot-overlay {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: rgba(0, 0, 0, 0.95);
-  padding: 30px;
-  border: 2px solid #0078d4;
-  border-radius: 12px;
-  z-index: 100;
-  width: 320px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
   animation: fadeSlideUp 0.4s ease-in-out;
 }
 
-.forgot-overlay h3 {
-  color: white;
-  font-size: 20px;
-  margin-bottom: 15px;
+/* Modal Glass Card */
+.forgot-modal {
+  /* background: rgba(10, 10, 10, 0.7); */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 32px;
+  width: 90%;
+  max-width: 400px;
+  animation: fadeSlideUp 0.4s ease-in-out;
+  color: #ffffff;
+}
+
+/* Title */
+.forgot-modal h3 {
+  font-size: 22px;
   text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.2);
 }
 
-.forgot-overlay input {
-  display: block;
-  margin-bottom: 14px;
-  padding: 12px;
-  width: 100%;
-  border-radius: 8px;
-  border: 1px solid white;
-  background-color: #fff;
-  color: black;
+/* Input Styling */
+.forgot-modal input {
+  width: 92%;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 15px;
   outline: none;
-  font-size: 14px;
+  transition: border 0.3s ease, background 0.3s ease;
 }
 
-.forgot-overlay input:focus {
+.forgot-modal input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.forgot-modal input:focus {
   border-color: #0078d4;
+  background: rgba(255, 255, 255, 0.15);
   box-shadow: 0 0 10px rgba(0, 120, 212, 0.4);
 }
 
-.forgot-overlay button {
-  background: #0078d4;
-  color: white;
-  border: none;
-  padding: 10px 14px;
+/* Button Styling */
+.forgot-modal button {
   width: 100%;
-  font-size: 14px;
-  font-weight: 600;
-  border-radius: 8px;
+  padding: 12px;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 10px;
+  border: none;
   cursor: pointer;
-  transition: background 0.3s ease;
-  margin-top: 10px;
+  transition: all 0.3s ease;
+  margin-top: 8px;
 }
 
-.forgot-overlay button:hover {
-  background: #005fa3;
+/* Primary button */
+.forgot-modal button:not(.close-btn) {
+  background-color: #0078d4;
+  color: white;
+}
+
+.forgot-modal button:not(.close-btn):hover {
+  background-color: #005fa3;
 }
 
 /* Close button */
-.close-btn {
-  background: #e74c3c;
-  margin-top: 10px;
+.forgot-modal .close-btn {
+  background-color: #e74c3c;
   color: white;
-  border: none;
-  padding: 10px;
+}
+
+.forgot-modal .close-btn:hover {
+  background-color: #c0392b;
+}
+.error-message {
+  color: #ff6b6b;
+  margin-top: -10px;
+  margin-bottom: 10px;
   font-size: 13px;
-  border-radius: 8px;
-  width: 100%;
-  cursor: pointer;
-}
-
-.close-btn:hover {
-  background: #c0392b;
-}
-
-/* Responsive handling */
-@media (max-width: 768px) {
-  .auth-container {
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-  }
-
-  .form-container {
-    max-width: 100%;
-  }
-
-  .forgot-overlay {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 360px;
-  }
 }

@@ -80,3 +80,86 @@ button:hover {
 .form-footer a:hover {
   text-decoration: underline;
 }
+/* Tablet Devices */
+@media (max-width: 1024px) {
+  .form-box {
+    padding: 30px 22px;
+    margin: 30px 16px;
+  }
+
+  .form-box h2 {
+    font-size: 24px;
+  }
+
+  input {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  button {
+    font-size: 15px;
+    padding: 12px;
+  }
+}
+
+/* Mobile Devices (Phones, iPhones) */
+/* Tablets (portrait & landscape) */
+@media (max-width: 1024px) {
+  .form-box {
+    margin: 40px auto;
+    padding: 30px 24px;
+    max-width: 90%;
+  }
+
+  .form-box h2 {
+    font-size: 24px;
+  }
+
+  input {
+    padding: 10px;
+    font-size: 15px;
+  }
+
+  button {
+    padding: 12px;
+    font-size: 15px;
+  }
+
+  .form-footer {
+    font-size: 14px;
+  }
+}
+
+/* Mobile and iPhone (smaller screens) */
+@media (max-width: 600px) {
+  .form-box {
+    margin: 40px auto;
+    padding: 24px 16px;
+    max-width: 90%;
+    box-shadow: 0 0 14px rgba(0, 0, 0, 0.3);
+  }
+
+  .form-box h2 {
+    font-size: 20px;
+    margin-bottom: 18px;
+  }
+
+  .form-group label {
+    font-size: 14px;
+  }
+
+  input {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  button {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .form-footer {
+    font-size: 13px;
+    margin-top: 10px;
+  }
+}

@@ -96,3 +96,47 @@ button:hover {
 .form-footer a:hover {
   text-decoration: underline;
 }
+
+
+/* Mobile Devices (Phones and iPhones) */
+@media (max-width: 600px) {
+  .form-box {
+    padding: 28px 20px;
+    margin: 48% auto;
+    width: 84%;
+    max-width: 360px;
+    border-radius: 10px;
+  }
+
+  .form-box h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .form-group label {
+    font-size: 14px;
+  }
+
+  input[type="email"],
+  input[type="password"],
+  input[type="text"],
+  input[type="number"] {
+    font-size: 13px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 10px;
+    width: 100%;
+  }
+
+  .form-footer {
+    font-size: 13px;
+    margin-top: 10px;
+    text-align: center;
+  }
+}

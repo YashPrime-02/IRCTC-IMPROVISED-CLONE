@@ -1,12 +1,25 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { HeaderComponent } from './booking/header/header.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [CommonModule, RouterOutlet, HeaderComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'train-ticket-frontend';
+
+  constructor(public router: Router) {}
+
+  showHeader(): boolean {
+    return [
+      '/train-search',
+      '/booking',
+      '/ticket-view'
+    ].includes(this.router.url);
+  }
 }

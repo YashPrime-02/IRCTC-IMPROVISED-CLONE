@@ -1,19 +1,47 @@
 <div class="form-box-2">
   <ng-container *ngIf="!isSignupMode; else signup">
-    <app-login
-      (switchToSignup)="toggleMode()"
-      (showForgot)="openForgotPassword()"
-    ></app-login>
+    <div [@fadeSlide]>
+      <app-login
+        (switchToSignup)="toggleMode()"
+        (showForgot)="openForgotPassword()"
+      ></app-login>
+    </div>
   </ng-container>
 
   <ng-template #signup>
-    <app-signup (switchToLogin)="toggleMode()"></app-signup>
+    <div [@fadeSlide]>
+      <app-signup
+        (switchToLogin)="toggleMode()"
+      ></app-signup>
+    </div>
   </ng-template>
 
-  <div *ngIf="isForgotPasswordVisible" class="forgot-overlay">
-    <h3>Reset Password</h3>
-    <input [(ngModel)]="forgotEmail" placeholder="Enter your email" />
-    <button (click)="handleForgot()">Send Link</button>
-    <button class="close-btn" (click)="isForgotPasswordVisible = false">Close</button>
+<div *ngIf="isForgotPasswordVisible" class="forgot-overlay" [@fadeSlide]>
+  <div class="forgot-modal">
+    <form (ngSubmit)="handleForgot()" #forgotForm="ngForm">
+      <h3>Reset Password</h3>
+
+      <input
+        type="email"
+        name="forgotEmail"
+        [(ngModel)]="forgotEmail"
+        placeholder="Enter your email"
+        required
+        email
+        #emailInput="ngModel"
+      />
+
+      <!-- Validation message -->
+      <div class="error-message" *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)">
+        <small *ngIf="emailInput.errors?.['required']">Email is required.</small>
+        <small *ngIf="emailInput.errors?.['email']">Enter a valid email.</small>
+      </div>
+
+      <button type="submit" [disabled]="forgotForm.invalid">Send Link</button>
+      <button type="button" class="close-btn" (click)="closeForgotPassword()">Close</button>
+    </form>
   </div>
+</div>
+
+
 </div>

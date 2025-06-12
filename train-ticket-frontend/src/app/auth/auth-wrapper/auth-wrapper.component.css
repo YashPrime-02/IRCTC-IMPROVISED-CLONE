@@ -1,0 +1,178 @@
+/* Global Reset and Background */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+   background: rgba(255, 255, 255, 0.08) !important;
+  background-size: 400% 400%;
+  animation: bgShift 20s ease infinite;
+  overflow-x: hidden;
+}
+
+/* Background animation */
+@keyframes bgShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Container to cover entire viewport */
+.auth-page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+/* Container for the whole auth section */
+.auth-container {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  gap: 40px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  animation: fadeSlideUp 0.6s ease-in-out;
+}
+
+/* Login/Signup form containers */
+.form-container {
+  flex: 1 1 100%;
+  max-width: 480px;
+  padding: 36px 28px;
+  /* background-color: rgba(0, 0, 0, 0.85); */
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  margin: 0 auto;
+  animation: fadeSlideUp 0.5s ease-in-out;
+}
+
+/* Handle display toggle between login/signup */
+.right-panel-active .sign-in-container {
+  display: none;
+}
+
+.right-panel-active .sign-up-container {
+  display: block;
+}
+
+/* Fade-slide animation */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.forgot-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  animation: fadeSlideUp 0.4s ease-in-out;
+}
+
+/* Modal Glass Card */
+.forgot-modal {
+  /* background: rgba(10, 10, 10, 0.7); */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 32px;
+  width: 90%;
+  max-width: 400px;
+  animation: fadeSlideUp 0.4s ease-in-out;
+  color: #ffffff;
+}
+
+/* Title */
+.forgot-modal h3 {
+  font-size: 22px;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.2);
+}
+
+/* Input Styling */
+.forgot-modal input {
+  width: 92%;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 15px;
+  outline: none;
+  transition: border 0.3s ease, background 0.3s ease;
+}
+
+.forgot-modal input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.forgot-modal input:focus {
+  border-color: #0078d4;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 10px rgba(0, 120, 212, 0.4);
+}
+
+/* Button Styling */
+.forgot-modal button {
+  width: 100%;
+  padding: 12px;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+}
+
+/* Primary button */
+.forgot-modal button:not(.close-btn) {
+  background-color: #0078d4;
+  color: white;
+}
+
+.forgot-modal button:not(.close-btn):hover {
+  background-color: #005fa3;
+}
+
+/* Close button */
+.forgot-modal .close-btn {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.forgot-modal .close-btn:hover {
+  background-color: #c0392b;
+}
+.error-message {
+  color: #ff6b6b;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  font-size: 13px;
+}

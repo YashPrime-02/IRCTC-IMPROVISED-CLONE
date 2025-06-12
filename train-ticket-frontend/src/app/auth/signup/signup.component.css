@@ -1,0 +1,165 @@
+/* Already available — just ensure it’s loaded globally or in the signup component's CSS */
+
+.form-box {
+  width: 100%;
+  max-width: 480px;
+  padding: 36px 28px;
+  background-color: rgba(0, 0, 0, 0.75);
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  margin: 40px auto;
+  animation: fadeSlideUp 0.5s ease-in-out;
+}
+
+.form-box h2 {
+  text-align: center;
+  color: white;
+  font-size: 28px;
+  margin-bottom: 24px;
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.3);
+}
+
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: white;
+}
+
+input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid white;
+  font-size: 15px;
+  color: black;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  border-color: var(--accent, #0078d4);
+  box-shadow: 0 0 10px rgba(0, 120, 212, 0.4);
+}
+
+button {
+  background: black;
+  border: none;
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: red;
+}
+
+.form-footer {
+  text-align: center;
+  color: #ccc;
+  margin-top: 14px;
+  font-size: 14px;
+}
+
+.form-footer a {
+  color: #ffd700;
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+.form-footer a:hover {
+  text-decoration: underline;
+}
+/* Tablet Devices */
+@media (max-width: 1024px) {
+  .form-box {
+    padding: 30px 22px;
+    margin: 30px 16px;
+  }
+
+  .form-box h2 {
+    font-size: 24px;
+  }
+
+  input {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  button {
+    font-size: 15px;
+    padding: 12px;
+  }
+}
+
+/* Mobile Devices (Phones, iPhones) */
+/* Tablets (portrait & landscape) */
+@media (max-width: 1024px) {
+  .form-box {
+    margin: 40px auto;
+    padding: 30px 24px;
+    max-width: 90%;
+  }
+
+  .form-box h2 {
+    font-size: 24px;
+  }
+
+  input {
+    padding: 10px;
+    font-size: 15px;
+  }
+
+  button {
+    padding: 12px;
+    font-size: 15px;
+  }
+
+  .form-footer {
+    font-size: 14px;
+  }
+}
+
+/* Mobile and iPhone (smaller screens) */
+@media (max-width: 600px) {
+  .form-box {
+    margin: 40px auto;
+    padding: 24px 16px;
+    max-width: 90%;
+    box-shadow: 0 0 14px rgba(0, 0, 0, 0.3);
+  }
+
+  .form-box h2 {
+    font-size: 20px;
+    margin-bottom: 18px;
+  }
+
+  .form-group label {
+    font-size: 14px;
+  }
+
+  input {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  button {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .form-footer {
+    font-size: 13px;
+    margin-top: 10px;
+  }
+}

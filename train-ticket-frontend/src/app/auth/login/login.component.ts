@@ -13,30 +13,38 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   email = '';
   password = '';
+  showPassword = false; // 👁️ Toggle state for password visibility
 
   @Output() switchToSignup = new EventEmitter<void>();
   @Output() showForgot = new EventEmitter<void>();
 
   constructor(private router: Router) {}
 
- onLogin(): void {
-  if (!this.email || !this.password) {
-    alert('Please enter both email and password.');
-    return;
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
   }
 
-  const savedUser = localStorage.getItem('userData');
-  if (savedUser) {
-    const user = JSON.parse(savedUser);
-    if (this.email === user.email && this.password === user.password) {
-      alert('✅ Login successful!');
-      this.router.navigate(['/train-search']);
-    } else {
-      alert('❌ Invalid credentials');
+  onLogin(): void {
+    // Trim inputs to avoid leading/trailing whitespace errors
+    const emailTrimmed = this.email.trim();
+    const passwordTrimmed = this.password.trim();
+
+    if (!emailTrimmed || !passwordTrimmed) {
+      alert('Please enter both email and password.');
+      return;
     }
-  } else {
-    alert('❌ No user found. Please sign up first.');
-  }
-}
 
+    const savedUser = localStorage.getItem('userData');
+    if (savedUser) {
+      const user = JSON.parse(savedUser);
+      if (emailTrimmed === user.email && passwordTrimmed === user.password) {
+        alert('✅ Login successful!');
+        this.router.navigate(['/train-search']);
+      } else {
+        alert('❌ Invalid credentials');
+      }
+    } else {
+      alert('❌ No user found. Please sign up first.');
+    }
+  }
 }

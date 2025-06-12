@@ -45,11 +45,15 @@
       <i class="fas fa-search"></i> Search Trains
     </button>
 
-    <!-- Loader -->
-    <div *ngIf="loading" class="loading-container">
-      <i class="fas fa-spinner fa-spin loader-icon"></i>
-      <div class="progress-bar"><div class="bar"></div></div>
-    </div>
+    <!-- Loader with Percentage -->
+<div *ngIf="loading" class="loading-container">
+  <i class="fas fa-spinner fa-spin loader-icon"></i>
+  <div class="progress-percentage">{{ loadingProgress }}%</div>
+  <div class="progress-bar">
+    <div class="bar" [style.width.%]="loadingProgress"></div>
+  </div>
+</div>
+
   </div>
 
   <!-- Results Modal -->

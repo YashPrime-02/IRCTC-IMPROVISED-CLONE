@@ -3,8 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-
-// 👇 Adjust the import path based on actual structure — assuming sibling folder named 'booking'
 import { BookingService } from '../../booking/booking.service';
 
 interface Station {
@@ -43,6 +41,7 @@ export class TrainSearchComponent implements OnInit {
   searched = false;
   showModal = false;
   loading = false;
+  loadingProgress = 0; // ✅ Percentage loader state
 
   constructor(
     private http: HttpClient,
@@ -68,12 +67,19 @@ export class TrainSearchComponent implements OnInit {
 
   onSearch(source: string, destination: string): void {
     this.resetSearchState();
-    setTimeout(() => {
-      this.trains = this.filterTrains(source, destination);
-      this.searched = true;
-      this.loading = false;
-      this.showModal = this.trains.length > 0;
-    }, 1000);
+
+    // ✅ Simulate progressive loading with percentage
+    const interval = setInterval(() => {
+      if (this.loadingProgress < 100) {
+        this.loadingProgress += 10;
+      } else {
+        clearInterval(interval);
+        this.trains = this.filterTrains(source, destination);
+        this.searched = true;
+        this.loading = false;
+        this.showModal = this.trains.length > 0;
+      }
+    }, 100); // ~1 second total (100ms * 10 steps)
   }
 
   filterTrains(source: string, destination: string): Train[] {
@@ -89,6 +95,7 @@ export class TrainSearchComponent implements OnInit {
     this.searched = false;
     this.showModal = false;
     this.loading = true;
+    this.loadingProgress = 0; // ✅ Reset progress
   }
 
   closeModal(): void {

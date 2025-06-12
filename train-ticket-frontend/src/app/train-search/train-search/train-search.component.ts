@@ -1,7 +1,9 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { BookingService } from '../../booking/booking.service';
 
 interface Station {
   stationID: number;
@@ -9,13 +11,14 @@ interface Station {
   stationCode: string;
 }
 
-interface Train {
+export interface Train {
   trainName: string;
   departureTime: string;
   arrivalTime: string;
   duration: string;
   sourceCode: string;
   destinationCode: string;
+  date?: string;
 }
 
 @Component({
@@ -29,56 +32,86 @@ export class TrainSearchComponent implements OnInit {
   stations: Station[] = [];
   trainsList: Train[] = [];
   trains: Train[] = [];
-  searched: boolean = false;
-  showModal: boolean = false;
-  loading: boolean = false;
-  selectedDate: string = ''; // Journey date
 
-  constructor(private http: HttpClient) {}
+  selectedDate = '';
+  selectedTime = '';
+  numberOfPeople = 1;
+  peopleOptions = Array.from({ length: 8 }, (_, i) => i + 1);
+
+  searched = false;
+  showModal = false;
+  loading = false;
+  loadingProgress = 0; // ✅ Percentage loader state
+
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private bookingService: BookingService
+  ) {}
 
   ngOnInit(): void {
+    this.loadTrainData();
+  }
+
+  loadTrainData(): void {
     this.http.get<any>('assets/train_data.json').subscribe({
       next: data => {
-        this.stations = data.stations;
-        this.trainsList = data.trains;
+        this.stations = data.stations || [];
+        this.trainsList = data.trains || [];
       },
       error: err => {
-        console.error('❌ Error loading JSON:', err);
+        console.error('❌ Failed to load train data:', err);
       }
     });
   }
 
   onSearch(source: string, destination: string): void {
-    this.searched = false;
-    this.trains = [];
-    this.loading = true;
-    this.showModal = false;
+    this.resetSearchState();
 
-    setTimeout(() => {
-      if (!source && !destination) {
-        this.trains = this.trainsList;
-      } else if (source && destination) {
-        this.trains = this.trainsList.filter(
-          t => t.sourceCode === source && t.destinationCode === destination
-        );
-      } else if (source) {
-        this.trains = this.trainsList.filter(t => t.sourceCode === source);
-      } else if (destination) {
-        this.trains = this.trainsList.filter(t => t.destinationCode === destination);
+    // ✅ Simulate progressive loading with percentage
+    const interval = setInterval(() => {
+      if (this.loadingProgress < 100) {
+        this.loadingProgress += 10;
+      } else {
+        clearInterval(interval);
+        this.trains = this.filterTrains(source, destination);
+        this.searched = true;
+        this.loading = false;
+        this.showModal = this.trains.length > 0;
       }
+    }, 100); // ~1 second total (100ms * 10 steps)
+  }
 
-      this.searched = true;
-      this.loading = false;
-      this.showModal = this.trains.length > 0;
-    }, 1000); // Simulate network delay
+  filterTrains(source: string, destination: string): Train[] {
+    if (!source && !destination) return this.trainsList;
+    if (source && destination)
+      return this.trainsList.filter(t => t.sourceCode === source && t.destinationCode === destination);
+    if (source) return this.trainsList.filter(t => t.sourceCode === source);
+    return this.trainsList.filter(t => t.destinationCode === destination);
+  }
+
+  resetSearchState(): void {
+    this.trains = [];
+    this.searched = false;
+    this.showModal = false;
+    this.loading = true;
+    this.loadingProgress = 0; // ✅ Reset progress
   }
 
   closeModal(): void {
     this.showModal = false;
   }
 
+  bookTrain(train: Train): void {
+    if (this.selectedDate) {
+      train.date = this.selectedDate;
+    }
+    this.bookingService.setSelectedTrain(train);
+    this.router.navigate(['/ticket-view']);
+  }
+
   @HostListener('document:mousemove', ['$event'])
-  onMouseMove(e: MouseEvent): void {
+  updateMouseCoords(e: MouseEvent): void {
     document.documentElement.style.setProperty('--x', `${e.clientX}px`);
     document.documentElement.style.setProperty('--y', `${e.clientY}px`);
   }

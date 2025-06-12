@@ -4,6 +4,15 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class BookingService {
+  private selectedTrain: any;
 
-  constructor() { }
+  constructor() {}
+
+  setSelectedTrain(train: any): void {
+    this.selectedTrain = train;
+  }
+
+  getSelectedTrain(): any {
+    return this.selectedTrain;
+  }
 }

@@ -1,43 +1,38 @@
 <div class="page-container">
   <div class="form-box glass-card">
-    <!-- Heading -->
-    <h2><i class="fas fa-train"></i> Train Search</h2>
+    <h2><i class="fas fa-train"></i> Search Your Train</h2>
 
-    <!-- Source -->
+    <!-- Input Fields -->
     <div class="form-group">
       <label for="source"><i class="fas fa-map-marker-alt"></i> Source Station</label>
       <select id="source" #sourceRef>
-        <option value="">🚉 Choose your source</option>
+        <option value="">🚉 Choose source</option>
         <option *ngFor="let s of stations" [value]="s.stationCode">
           {{ s.stationName }} ({{ s.stationCode }})
         </option>
       </select>
     </div>
 
-    <!-- Destination -->
     <div class="form-group">
       <label for="destination"><i class="fas fa-map-marked-alt"></i> Destination Station</label>
       <select id="destination" #destinationRef>
-        <option value="">🚉 Choose your destination</option>
+        <option value="">🚉 Choose destination</option>
         <option *ngFor="let s of stations" [value]="s.stationCode">
           {{ s.stationName }} ({{ s.stationCode }})
         </option>
       </select>
     </div>
 
-    <!-- Date -->
     <div class="form-group">
-      <label for="journeyTime"><i class="fas fa-calendar-alt"></i> Journey Date</label>
+      <label for="journeyDate"><i class="fas fa-calendar-alt"></i> Date</label>
       <input type="date" id="journeyDate" [(ngModel)]="selectedDate" />
     </div>
 
-    <!-- Time -->
     <div class="form-group">
-      <label for="journeyTime"><i class="fas fa-clock"></i> Journey Time</label>
+      <label for="journeyTime"><i class="fas fa-clock"></i> Time</label>
       <input type="time" id="journeyTime" [(ngModel)]="selectedTime" />
     </div>
 
-    <!-- Number of People (Dropdown 1-8) -->
     <div class="form-group">
       <label for="numPeople"><i class="fas fa-users"></i> Number of People</label>
       <select id="numPeople" [(ngModel)]="numberOfPeople">
@@ -50,40 +45,31 @@
       <i class="fas fa-search"></i> Search Trains
     </button>
 
-    <!-- Progress Bar and Loader -->
+    <!-- Loader -->
     <div *ngIf="loading" class="loading-container">
       <i class="fas fa-spinner fa-spin loader-icon"></i>
-      <div class="progress-bar">
-        <div class="bar"></div>
+      <div class="progress-bar"><div class="bar"></div></div>
+    </div>
+  </div>
+
+  <!-- Results Modal -->
+  <div class="modal-content" *ngIf="showModal && trains.length > 0">
+    <div class="train-cards-container">
+      <div class="train-card" *ngFor="let train of trains">
+        <h3><i class="fas fa-train"></i> {{ train.trainName }}</h3>
+        <p><i class="fas fa-clock"></i> {{ train.departureTime }} → {{ train.arrivalTime }}</p>
+        <p><i class="fas fa-hourglass-half"></i> Duration: {{ train.duration }}</p>
+        <p><i class="fas fa-calendar-day"></i> Date: {{ selectedDate || 'N/A' }}</p>
+
+        <button class="book-btn" (click)="bookTrain(train)">
+          <i class="fas fa-ticket-alt"></i> Book
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- Modal -->
-  <div class="train-modal" *ngIf="trains.length > 0 && showModal">
-    <div class="modal-content glass-card">
-      <button class="close-btn" (click)="closeModal()">❌</button>
-      <h2><i class="fas fa-list-ul"></i> Available Trains ({{ trains.length }})</h2>
-
-      <!-- Journey Info -->
-      <div class="user-journey-info">
-        <p><i class="fas fa-calendar-day"></i> Journey Date: <strong>{{ selectedDate || 'N/A' }}</strong></p>
-        <p><i class="fas fa-clock"></i> Journey Time: <strong>{{ selectedTime || 'N/A' }}</strong></p>
-        <p><i class="fas fa-user-friends"></i> People: <strong>{{ numberOfPeople }}</strong></p>
-      </div>
-
-      <div class="train-card-container">
-        <div *ngFor="let train of trains" class="train-card">
-          <p><strong><i class="fas fa-train"></i> {{ train.trainName }}</strong></p>
-          <p><i class="fas fa-clock"></i> {{ train.departureTime }} → {{ train.arrivalTime }}</p>
-          <p><i class="fas fa-hourglass-half"></i> Duration: {{ train.duration }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- No Results -->
+  <!-- No Results Message -->
   <div *ngIf="searched && trains.length === 0" class="no-results glass-card">
-    <p>🚫 No trains found for the selected route on {{ selectedDate || 'the selected date' }}.</p>
+    <p>🚫 No trains found for {{ selectedDate || 'this date' }}.</p>
   </div>
 </div>

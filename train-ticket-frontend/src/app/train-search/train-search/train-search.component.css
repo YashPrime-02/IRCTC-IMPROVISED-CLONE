@@ -264,3 +264,53 @@ html, body {
   background: rgba(0, 0, 0, 0.85) !important;
   backdrop-filter: blur(5px) !important;
 }
+.train-card {
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.train-card:hover {
+  transform: scale(1.02);
+  background: rgba(255, 255, 255, 0.2);
+}
+.train-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.train-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+}
+
+.train-card h3 {
+  margin-bottom: 10px;
+  font-size: 20px;
+  color: #333;
+}
+
+.train-card p {
+  margin: 6px 0;
+  color: #555;
+  font-size: 14px;
+}
+
+.book-btn {
+  margin-top: 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.3s ease;
+}
+
+.book-btn:hover {
+  background-color: #0056b3;
+}

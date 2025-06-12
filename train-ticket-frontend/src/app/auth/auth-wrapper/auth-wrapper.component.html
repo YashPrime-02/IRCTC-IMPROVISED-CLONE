@@ -1,0 +1,19 @@
+<div class="form-box-2">
+  <ng-container *ngIf="!isSignupMode; else signup">
+    <app-login
+      (switchToSignup)="toggleMode()"
+      (showForgot)="openForgotPassword()"
+    ></app-login>
+  </ng-container>
+
+  <ng-template #signup>
+    <app-signup (switchToLogin)="toggleMode()"></app-signup>
+  </ng-template>
+
+  <div *ngIf="isForgotPasswordVisible" class="forgot-overlay">
+    <h3>Reset Password</h3>
+    <input [(ngModel)]="forgotEmail" placeholder="Enter your email" />
+    <button (click)="handleForgot()">Send Link</button>
+    <button class="close-btn" (click)="isForgotPasswordVisible = false">Close</button>
+  </div>
+</div>

@@ -1,0 +1,82 @@
+/* Already available — just ensure it’s loaded globally or in the signup component's CSS */
+
+.form-box {
+  width: 100%;
+  max-width: 480px;
+  padding: 36px 28px;
+  background-color: rgba(0, 0, 0, 0.75);
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  margin: 40px auto;
+  animation: fadeSlideUp 0.5s ease-in-out;
+}
+
+.form-box h2 {
+  text-align: center;
+  color: white;
+  font-size: 28px;
+  margin-bottom: 24px;
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.3);
+}
+
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: white;
+}
+
+input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid white;
+  font-size: 15px;
+  color: black;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  border-color: var(--accent, #0078d4);
+  box-shadow: 0 0 10px rgba(0, 120, 212, 0.4);
+}
+
+button {
+  background: black;
+  border: none;
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: red;
+}
+
+.form-footer {
+  text-align: center;
+  color: #ccc;
+  margin-top: 14px;
+  font-size: 14px;
+}
+
+.form-footer a {
+  color: #ffd700;
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+.form-footer a:hover {
+  text-decoration: underline;
+}

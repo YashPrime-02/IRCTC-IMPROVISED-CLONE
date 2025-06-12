@@ -1,0 +1,172 @@
+/* Global Reset and Background */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+   background: rgba(255, 255, 255, 0.08) !important;
+  background-size: 400% 400%;
+  animation: bgShift 20s ease infinite;
+  overflow-x: hidden;
+}
+
+/* Background animation */
+@keyframes bgShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Container to cover entire viewport */
+.auth-page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+/* Container for the whole auth section */
+.auth-container {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  gap: 40px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  animation: fadeSlideUp 0.6s ease-in-out;
+}
+
+/* Login/Signup form containers */
+.form-container {
+  flex: 1 1 100%;
+  max-width: 480px;
+  padding: 36px 28px;
+  /* background-color: rgba(0, 0, 0, 0.85); */
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  margin: 0 auto;
+  animation: fadeSlideUp 0.5s ease-in-out;
+}
+
+/* Handle display toggle between login/signup */
+.right-panel-active .sign-in-container {
+  display: none;
+}
+
+.right-panel-active .sign-up-container {
+  display: block;
+}
+
+/* Fade-slide animation */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Forgot Password Modal */
+.forgot-overlay {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.95);
+  padding: 30px;
+  border: 2px solid #0078d4;
+  border-radius: 12px;
+  z-index: 100;
+  width: 320px;
+  animation: fadeSlideUp 0.4s ease-in-out;
+}
+
+.forgot-overlay h3 {
+  color: white;
+  font-size: 20px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.forgot-overlay input {
+  display: block;
+  margin-bottom: 14px;
+  padding: 12px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid white;
+  background-color: #fff;
+  color: black;
+  outline: none;
+  font-size: 14px;
+}
+
+.forgot-overlay input:focus {
+  border-color: #0078d4;
+  box-shadow: 0 0 10px rgba(0, 120, 212, 0.4);
+}
+
+.forgot-overlay button {
+  background: #0078d4;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 10px;
+}
+
+.forgot-overlay button:hover {
+  background: #005fa3;
+}
+
+/* Close button */
+.close-btn {
+  background: #e74c3c;
+  margin-top: 10px;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 13px;
+  border-radius: 8px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  background: #c0392b;
+}
+
+/* Responsive handling */
+@media (max-width: 768px) {
+  .auth-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .form-container {
+    max-width: 100%;
+  }
+
+  .forgot-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 360px;
+  }
+}

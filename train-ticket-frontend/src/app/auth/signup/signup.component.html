@@ -1,1 +1,30 @@
-<p>signup works!</p>
+<div class="form-box">
+  <h2>Create Account</h2>
+  <form (ngSubmit)="onSignup()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" [(ngModel)]="name" placeholder="Enter your name" required />
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" [(ngModel)]="email" placeholder="Enter your email" required />
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" [(ngModel)]="password" placeholder="Enter your password"
+        autocomplete="new-password" required />
+
+    </div>
+
+    <button type="submit">
+      <i class="fas fa-user-plus"></i> Sign Up
+    </button>
+  </form>
+
+  <p class="form-footer">
+    Already have an account?
+    <a href="#" (click)="switchToLogin.emit()">Sign In</a>
+  </p>
+</div>

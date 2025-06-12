@@ -4,7 +4,7 @@
 
     <!-- Input Fields -->
     <div class="form-group">
-      <label for="source"><i class="fas fa-map-marker-alt"></i> Source Station</label>
+      <label for="source"><i class="fas fa-map-marker-alt"></i><strong> Source Station</strong></label>
       <select id="source" #sourceRef>
         <option value="">🚉 Choose source</option>
         <option *ngFor="let s of stations" [value]="s.stationCode">
@@ -14,7 +14,7 @@
     </div>
 
     <div class="form-group">
-      <label for="destination"><i class="fas fa-map-marked-alt"></i> Destination Station</label>
+      <label for="destination"><i class="fas fa-map-marked-alt"></i><strong>Destination Station</strong></label>
       <select id="destination" #destinationRef>
         <option value="">🚉 Choose destination</option>
         <option *ngFor="let s of stations" [value]="s.stationCode">
@@ -24,17 +24,17 @@
     </div>
 
     <div class="form-group">
-      <label for="journeyDate"><i class="fas fa-calendar-alt"></i> Date</label>
+      <label for="journeyDate"><i class="fas fa-calendar-alt"></i> <strong>Date</strong></label>
       <input type="date" id="journeyDate" [(ngModel)]="selectedDate" />
     </div>
 
     <div class="form-group">
-      <label for="journeyTime"><i class="fas fa-clock"></i> Time</label>
+      <label for="journeyTime"><i class="fas fa-clock"></i> <strong>Time</strong></label>
       <input type="time" id="journeyTime" [(ngModel)]="selectedTime" />
     </div>
 
     <div class="form-group">
-      <label for="numPeople"><i class="fas fa-users"></i> Number of People</label>
+      <label for="numPeople"><i class="fas fa-users"></i> <strong>Number of People</strong></label>
       <select id="numPeople" [(ngModel)]="numberOfPeople">
         <option *ngFor="let n of peopleOptions" [value]="n">{{ n }}</option>
       </select>
@@ -54,6 +54,9 @@
 
   <!-- Results Modal -->
   <div class="modal-content" *ngIf="showModal && trains.length > 0">
+    <!-- Cross Button -->
+    <button class="close-cross-btn" (click)="closeModal()">×</button>
+
     <div class="train-cards-container">
       <div class="train-card" *ngFor="let train of trains">
         <h3><i class="fas fa-train"></i> {{ train.trainName }}</h3>
@@ -62,7 +65,7 @@
         <p><i class="fas fa-calendar-day"></i> Date: {{ selectedDate || 'N/A' }}</p>
 
         <button class="book-btn" (click)="bookTrain(train)">
-          <i class="fas fa-ticket-alt"></i> Book
+          <i class="fas fa-ticket-alt"></i> Proceed to Book Ticket
         </button>
       </div>
     </div>

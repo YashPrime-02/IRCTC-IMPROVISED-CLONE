@@ -83,8 +83,6 @@
       "sourceCode": "CNB",
       "destinationCode": "NDLS"
     },
-
-
     {
       "trainName": "Magadh Express",
       "departureTime": "21:10",
@@ -173,6 +171,7 @@
       "sourceCode": "LKO",
       "destinationCode": "NDLS"
     },
+
     {
       "trainName": "Poorva Express",
       "departureTime": "08:00",
@@ -239,4 +238,6 @@
     }
   ]
 }
+
+
 

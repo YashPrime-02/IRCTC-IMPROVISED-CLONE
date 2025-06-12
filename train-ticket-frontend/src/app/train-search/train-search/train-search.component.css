@@ -493,3 +493,25 @@ button:hover {
     /* Hide scrollbar */
   }
 }
+.invalid-input {
+  border: 2px solid #ff4d4f !important;
+  background-color: #ffeded;
+}
+
+.error {
+  font-size: 13px;
+  color: #ff4d4f;
+  margin-top: 4px;
+}
+
+@media (max-width: 768px) {
+  .form-group input,
+  .form-group select {
+    font-size: 15px;
+  }
+
+  button {
+    font-size: 15px;
+    padding: 10px 16px;
+  }
+}

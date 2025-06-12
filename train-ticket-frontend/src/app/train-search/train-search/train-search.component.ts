@@ -1,7 +1,7 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BookingService } from '../../booking/booking.service';
 
@@ -29,6 +29,10 @@ export interface Train {
   styleUrls: ['./train-search.component.css']
 })
 export class TrainSearchComponent implements OnInit {
+  @ViewChild('sourceRef') sourceRef!: ElementRef;
+  @ViewChild('destinationRef') destinationRef!: ElementRef;
+  @ViewChild('formBox') formBox!: ElementRef;
+
   stations: Station[] = [];
   trainsList: Train[] = [];
   trains: Train[] = [];
@@ -38,10 +42,15 @@ export class TrainSearchComponent implements OnInit {
   numberOfPeople = 1;
   peopleOptions = Array.from({ length: 8 }, (_, i) => i + 1);
 
+  sourceTouched = false;
+  destinationTouched = false;
+  dateTouched = false;
+  timeTouched = false;
+
   searched = false;
   showModal = false;
   loading = false;
-  loadingProgress = 0; // ✅ Percentage loader state
+  loadingProgress = 0;
 
   constructor(
     private http: HttpClient,
@@ -66,9 +75,18 @@ export class TrainSearchComponent implements OnInit {
   }
 
   onSearch(source: string, destination: string): void {
+    this.sourceTouched = true;
+    this.destinationTouched = true;
+    this.dateTouched = true;
+    this.timeTouched = true;
+
+    if (!source || !destination || !this.selectedDate || !this.selectedTime) {
+      this.scrollToFirstError();
+      return;
+    }
+
     this.resetSearchState();
 
-    // ✅ Simulate progressive loading with percentage
     const interval = setInterval(() => {
       if (this.loadingProgress < 100) {
         this.loadingProgress += 10;
@@ -79,15 +97,13 @@ export class TrainSearchComponent implements OnInit {
         this.loading = false;
         this.showModal = this.trains.length > 0;
       }
-    }, 100); // ~1 second total (100ms * 10 steps)
+    }, 100);
   }
 
   filterTrains(source: string, destination: string): Train[] {
-    if (!source && !destination) return this.trainsList;
-    if (source && destination)
-      return this.trainsList.filter(t => t.sourceCode === source && t.destinationCode === destination);
-    if (source) return this.trainsList.filter(t => t.sourceCode === source);
-    return this.trainsList.filter(t => t.destinationCode === destination);
+    return this.trainsList.filter(t =>
+      t.sourceCode === source && t.destinationCode === destination
+    );
   }
 
   resetSearchState(): void {
@@ -95,7 +111,7 @@ export class TrainSearchComponent implements OnInit {
     this.searched = false;
     this.showModal = false;
     this.loading = true;
-    this.loadingProgress = 0; // ✅ Reset progress
+    this.loadingProgress = 0;
   }
 
   closeModal(): void {
@@ -114,5 +130,18 @@ export class TrainSearchComponent implements OnInit {
   updateMouseCoords(e: MouseEvent): void {
     document.documentElement.style.setProperty('--x', `${e.clientX}px`);
     document.documentElement.style.setProperty('--y', `${e.clientY}px`);
+  }
+
+  scrollToFirstError(): void {
+    setTimeout(() => {
+      const invalid = this.formBox.nativeElement.querySelector('.invalid-input');
+      if (invalid) {
+        invalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 50);
+  }
+
+  isDisabled(): boolean {
+    return !this.selectedDate || !this.selectedTime || !this.sourceRef?.nativeElement.value || !this.destinationRef?.nativeElement.value;
   }
 }

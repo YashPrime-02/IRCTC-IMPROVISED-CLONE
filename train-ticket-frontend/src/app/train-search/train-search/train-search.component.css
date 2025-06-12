@@ -417,7 +417,7 @@ button:hover {
     padding: 20px 16px;
     margin: auto;
     position: fixed;
-    top: 50%;
+    top: 34%;
     left: 50%;
     transform: translate(-50%, -50%) !important;
     z-index: 999;
@@ -491,5 +491,27 @@ button:hover {
   .modal-content::-webkit-scrollbar {
     width: 0;
     /* Hide scrollbar */
+  }
+}
+.invalid-input {
+  border: 2px solid #ff4d4f !important;
+  background-color: #ffeded;
+}
+
+.error {
+  font-size: 13px;
+  color: #ff4d4f;
+  margin-top: 4px;
+}
+
+@media (max-width: 768px) {
+  .form-group input,
+  .form-group select {
+    font-size: 15px;
+  }
+
+  button {
+    font-size: 15px;
+    padding: 10px 16px;
   }
 }

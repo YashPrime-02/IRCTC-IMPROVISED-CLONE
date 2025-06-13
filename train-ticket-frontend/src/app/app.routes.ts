@@ -17,7 +17,11 @@ export const routes: Routes = [
   canActivate: [AuthGuard]
 },
 
-  { path: 'tickets', component: TicketViewComponent, canActivate: [AuthGuard] },
+  {
+  path: 'ticket-view',
+  loadComponent: () => import('./ticket-view/ticket-view/ticket-view.component').then(m => m.TicketViewComponent)
+},
+
 
   { path: '**', redirectTo: 'auth' }
 ];

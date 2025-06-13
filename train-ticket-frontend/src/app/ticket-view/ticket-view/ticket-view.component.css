@@ -1,0 +1,32 @@
+.no-print {
+  display: none;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
+.ticket-wrapper {
+  background-color: white;
+  color: black;
+  padding: 30px;
+  margin: 20px auto;
+  width: 80%;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #0275d8;
+  color: white;
+  border: none;
+  cursor: pointer;
+}

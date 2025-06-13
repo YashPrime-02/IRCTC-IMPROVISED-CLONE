@@ -9,15 +9,24 @@ export const routes: Routes = [
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
   { path: 'auth', component: AuthWrapperComponent },
 
-  { path: 'train-search', component: TrainSearchComponent, canActivate: [AuthGuard] },
- {
-  path: 'booking',
-  loadComponent: () =>
-    import('./booking/booking/booking.component').then(m => m.BookingComponent),
-  canActivate: [AuthGuard]
-},
+  {
+    path: 'train-search',loadComponent: () => import('./train-search/train-search/train-search.component').then(m => m.TrainSearchComponent),
 
-  { path: 'tickets', component: TicketViewComponent, canActivate: [AuthGuard] },
+  },
+
+  {
+    path: 'booking',
+    loadComponent: () =>
+      import('./booking/booking/booking.component').then(m => m.BookingComponent),
+    canActivate: [AuthGuard]
+  },
+
+  {
+    path: 'ticket-view',
+    loadComponent: () =>
+      import('./ticket-view/ticket-view/ticket-view.component').then(m => m.TicketViewComponent)
+  },
 
   { path: '**', redirectTo: 'auth' }
 ];
+

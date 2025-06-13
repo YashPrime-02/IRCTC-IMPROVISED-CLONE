@@ -49,10 +49,12 @@ onSignup(): void {
     age: this.age
   };
 
-  localStorage.setItem('userData', JSON.stringify(userData));
+   localStorage.setItem('userData', JSON.stringify(userData));
+
+  // 👇 Console log to verify what got saved
+  console.log('✅ Stored user data in localStorage:', userData);
 
   alert('✅ Signup successful. Please log in.');
   this.switchToLogin.emit();
 }
-
 }

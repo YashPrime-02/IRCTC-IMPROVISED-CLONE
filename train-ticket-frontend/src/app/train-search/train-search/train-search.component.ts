@@ -2,7 +2,7 @@ import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { BookingService } from '../../booking/booking.service';
 
 interface Station {
@@ -24,7 +24,7 @@ export interface Train {
 @Component({
   selector: 'app-train-search',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,RouterModule],
   templateUrl: './train-search.component.html',
   styleUrls: ['./train-search.component.css']
 })

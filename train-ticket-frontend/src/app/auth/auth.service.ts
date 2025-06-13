@@ -1,7 +1,8 @@
+// src/app/shared/auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,31 +12,42 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  // LOGIN METHOD
   login(email: string, password: string): Observable<boolean> {
     return this.http.post<{ token: string }>(`${this.apiUrl}/login`, { email, password }).pipe(
-      map(response => {
+      tap(response => {
         localStorage.setItem('token', response.token);
-        return true;
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('userEmail', email);
       }),
+      map(() => true),
       catchError(err => {
-        console.error('Login failed:', err);
+        console.error('❌ Login failed:', err);
         return of(false);
       })
     );
   }
 
-  // SIGNUP METHOD
   signup(name: string, email: string, password: string): Observable<boolean> {
     return this.http.post<{ message: string }>(`${this.apiUrl}/signup`, { name, email, password }).pipe(
-      map(response => {
-        console.log('Signup successful:', response.message);
-        return true;
-      }),
+      map(() => true),
       catchError(err => {
-        console.error('Signup failed:', err);
+        console.error('❌ Signup failed:', err);
         return of(false);
       })
     );
+  }
+
+  isLoggedIn(): boolean {
+    return localStorage.getItem('isLoggedIn') === 'true' && !!localStorage.getItem('token');
+  }
+
+  logout(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('userEmail');
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('token');
   }
 }

@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class BookingComponent implements OnInit {
   bookingData: any;
-  seatTypes: string[] = ['SL', '3A', '2A', '1A'];
+  seatTypes: string[] = ['2S','SL', '3A', '2A', '1A'];
   statuses: string[] = ['Confirmed', 'RAC', 'Waiting'];
   username = 'Yash';
   email = 'yash@example.com';
@@ -61,8 +61,8 @@ export class BookingComponent implements OnInit {
     this.passengers[i].fare = this.calculateFare(seat);
   }
 
-  calculateFare(seatType: 'SL' | '3A' | '2A' | '1A'): number {
-    const factorMap = { SL: 1, '3A': 2, '2A': 3, '1A': 4 };
+  calculateFare(seatType: '2S'| 'SL' | '3A' | '2A' | '1A'): number {
+    const factorMap = { '2S':1, SL: 2, '3A': 3, '2A': 4, '1A': 5 };
     const base = 150;
     const distanceFactor = Math.floor(Math.random() * 5) + 5;
     return base + factorMap[seatType] * distanceFactor * 10;

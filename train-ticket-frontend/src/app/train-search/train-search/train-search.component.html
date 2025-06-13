@@ -89,9 +89,9 @@
         <p><i class="fas fa-hourglass-half"></i> Duration: {{ train.duration }}</p>
         <p><i class="fas fa-calendar-day"></i> Date: {{ selectedDate || 'N/A' }}</p>
 
-        <button class="book-btn" (click)="bookTrain(train)">
-          <i class="fas fa-ticket-alt"></i> Proceed to Book Ticket
-        </button>
+        <button class="book-btn" (click)="bookTrain(train, selectedDate, numberOfPeople)">
+          <i class="fas fa-ticket-alt"></i> Proceed to Book Ticket</button>
+
       </div>
     </div>
   </div>

@@ -1,1 +1,83 @@
-<p>booking works!</p>
+<div class="booking-container">
+  <h2>🚆 Booking for {{ bookingData.trainName }}</h2>
+  <p><strong>User:</strong> {{ username }} | <strong>Email:</strong> {{ email }}</p>
+  <p><strong>Date:</strong> {{ bookingData.date }}</p>
+  <p><strong>From:</strong> {{ bookingData.source }} → <strong>To:</strong> {{ bookingData.destination }}</p>
+
+  <!-- Passenger Actions -->
+  <div class="actions">
+    <button (click)="addPassenger()" [disabled]="passengers.length >= 7">
+      ➕ Add Passenger
+    </button>
+    <button (click)="removePassenger()" [disabled]="passengers.length <= 1">
+      ➖ Remove Passenger
+    </button>
+    <span class="badge">👤 {{ passengers.length }}/7</span>
+  </div>
+
+  <!-- Booking Form -->
+  <form (ngSubmit)="confirmBooking()" #bookingForm="ngForm">
+    <div
+      *ngFor="let passenger of passengers; let i = index"
+      class="passenger-card animate"
+      [class.error]="errors[i]"
+    >
+      <h4><i class="fas fa-user"></i> Passenger {{ i + 1 }}</h4>
+
+      <!-- Name -->
+      <div class="form-group">
+        <label>Name</label>
+        <input
+          type="text"
+          name="name{{ i }}"
+          [(ngModel)]="passenger.name"
+          required
+          #nameRef="ngModel"
+          [class.invalid-input]="nameRef.invalid && nameRef.touched"
+        />
+        <small class="error-text" *ngIf="nameRef.invalid && nameRef.touched">Name is required.</small>
+      </div>
+
+      <!-- Age -->
+      <div class="form-group">
+        <label>Age</label>
+        <input
+          type="number"
+          name="age{{ i }}"
+          [(ngModel)]="passenger.age"
+          min="1"
+          required
+          #ageRef="ngModel"
+          [class.invalid-input]="ageRef.invalid && ageRef.touched"
+        />
+        <small class="error-text" *ngIf="ageRef.invalid && ageRef.touched">Enter a valid age.</small>
+      </div>
+
+      <!-- Seat Type -->
+      <div class="form-group">
+        <label>Seat Type</label>
+        <select
+          name="seat{{ i }}"
+          [(ngModel)]="passenger.seatType"
+          (change)="updateFare(i)"
+          required
+        >
+          <option value="">🪑 Choose Seat</option>
+          <option *ngFor="let seat of seatTypes" [value]="seat">{{ seat }}</option>
+        </select>
+      </div>
+
+      <!-- Status & Fare -->
+      <p>Status: <strong>{{ passenger.status }}</strong></p>
+      <p>Fare: ₹{{ passenger.fare }}</p>
+    </div>
+
+    <!-- Total Section -->
+    <div class="total-section">
+      <p><strong>Total Amount:</strong> ₹{{ calculateTotal() }}</p>
+      <button type="submit" [disabled]="!bookingForm.form.valid" class="pay-button">
+        💳 Pay & Book
+      </button>
+    </div>
+  </form>
+</div>

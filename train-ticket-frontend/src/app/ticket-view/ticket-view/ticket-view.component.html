@@ -1,1 +1,40 @@
-<p>ticket-view works!</p>
+<div *ngIf="summary; else loading">
+  <div #ticketRef class="ticket-wrapper">
+    <h2>🎟 Ticket Summary</h2>
+
+    <section>
+      <h3>User</h3>
+      <p>Name: {{ summary.user.name }}</p>
+      <p>Email: {{ summary.user.email }}</p>
+    </section>
+
+    <section>
+      <h3>Train Details</h3>
+      <p>Train: {{ summary.train.trainName }}</p>
+      <p>From: {{ summary.train.source }} → To: {{ summary.train.destination }}</p>
+      <p>Date: {{ summary.train.date }}</p>
+    </section>
+
+    <section>
+      <h3>Passengers</h3>
+      <ul>
+        <li *ngFor="let p of summary.passengers">
+          {{ p.name }} (Age: {{ p.age }}) - Seat: {{ p.seatType }} - ₹{{ p.fare }}
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Total Fare</h3>
+      <p>₹{{ summary.totalAmount }}</p>
+    </section>
+
+    <div class="actions">
+      <button (click)="print()">🖨 Print Ticket</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <p>⏳ Loading ticket data or nothing found!</p>
+</ng-template>

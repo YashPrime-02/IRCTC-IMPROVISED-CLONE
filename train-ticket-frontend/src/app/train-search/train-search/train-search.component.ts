@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BookingService } from '../../booking/booking.service';
 
@@ -51,6 +51,8 @@ export class TrainSearchComponent implements OnInit {
   showModal = false;
   loading = false;
   loadingProgress = 0;
+  selectedSource = '';
+  selectedDestination = '';
 
   constructor(
     private http: HttpClient,
@@ -85,6 +87,9 @@ export class TrainSearchComponent implements OnInit {
       return;
     }
 
+    this.selectedSource = source;
+    this.selectedDestination = destination;
+
     this.resetSearchState();
 
     const interval = setInterval(() => {
@@ -101,9 +106,7 @@ export class TrainSearchComponent implements OnInit {
   }
 
   filterTrains(source: string, destination: string): Train[] {
-    return this.trainsList.filter(t =>
-      t.sourceCode === source && t.destinationCode === destination
-    );
+    return this.trainsList.filter(t => t.sourceCode === source && t.destinationCode === destination);
   }
 
   resetSearchState(): void {
@@ -118,12 +121,19 @@ export class TrainSearchComponent implements OnInit {
     this.showModal = false;
   }
 
-  bookTrain(train: Train): void {
-    if (this.selectedDate) {
-      train.date = this.selectedDate;
-    }
-    this.bookingService.setSelectedTrain(train);
-    this.router.navigate(['/ticket-view']);
+  bookTrain(train: Train, selectedDate: string, numberOfPeople: number): void {
+    const bookingData = {
+      trainName: train.trainName,
+      departureTime: train.departureTime,
+      arrivalTime: train.arrivalTime,
+      duration: train.duration,
+      date: selectedDate,
+      source: this.stations.find(s => s.stationCode === this.selectedSource)?.stationName || '',
+      destination: this.stations.find(s => s.stationCode === this.selectedDestination)?.stationName || '',
+      numberOfPeople
+    };
+
+    this.router.navigate(['/booking'], { state: { bookingData } });
   }
 
   @HostListener('document:mousemove', ['$event'])

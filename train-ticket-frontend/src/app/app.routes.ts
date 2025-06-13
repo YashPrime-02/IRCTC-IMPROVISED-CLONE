@@ -10,7 +10,13 @@ export const routes: Routes = [
   { path: 'auth', component: AuthWrapperComponent },
 
   { path: 'train-search', component: TrainSearchComponent, canActivate: [AuthGuard] },
-  { path: 'booking', component: BookingComponent, canActivate: [AuthGuard] },
+ {
+  path: 'booking',
+  loadComponent: () =>
+    import('./booking/booking/booking.component').then(m => m.BookingComponent),
+  canActivate: [AuthGuard]
+},
+
   { path: 'tickets', component: TicketViewComponent, canActivate: [AuthGuard] },
 
   { path: '**', redirectTo: 'auth' }

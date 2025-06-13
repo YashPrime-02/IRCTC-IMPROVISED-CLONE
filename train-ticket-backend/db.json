@@ -1,0 +1,38 @@
+{
+  "bookings": [
+    {
+      "id": "cb4b",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Gomti Express",
+        "departureTime": "12:20",
+        "arrivalTime": "21:30",
+        "duration": "09:10:00",
+        "date": "2025-06-26",
+        "source": "New Delhi",
+        "destination": "Lucknow",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "Yash Mishra",
+          "age": 24,
+          "seatType": "3A",
+          "status": "Confirmed",
+          "fare": 310
+        },
+        {
+          "name": "Neelansh",
+          "age": 25,
+          "seatType": "SL",
+          "status": "Waiting",
+          "fare": 210
+        }
+      ],
+      "totalAmount": 520
+    }
+  ]
+}

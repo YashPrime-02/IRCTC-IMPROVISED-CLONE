@@ -1,40 +1,19 @@
-<div *ngIf="summary; else loading">
-  <div #ticketRef class="ticket-wrapper">
-    <h2>🎟 Ticket Summary</h2>
+<div class="ticket-container" *ngIf="bookingData">
+  <h2>🎟️ Ticket Summary</h2>
 
-    <section>
-      <h3>User</h3>
-      <p>Name: {{ summary.user.name }}</p>
-      <p>Email: {{ summary.user.email }}</p>
-    </section>
+  <div id="ticketSummary" class="ticket-summary">
+    <p><strong>Name:</strong> {{ bookingData.name }}</p>
+    <p><strong>Email:</strong> {{ bookingData.email }}</p>
+    <p><strong>Train:</strong> {{ bookingData.train }}</p>
+    <p><strong>From:</strong> {{ bookingData.source }}</p>
+    <p><strong>To:</strong> {{ bookingData.destination }}</p>
+    <p><strong>Date:</strong> {{ bookingData.date }}</p>
+    <p><strong>Class:</strong> {{ bookingData.class }}</p>
 
-    <section>
-      <h3>Train Details</h3>
-      <p>Train: {{ summary.train.trainName }}</p>
-      <p>From: {{ summary.train.source }} → To: {{ summary.train.destination }}</p>
-      <p>Date: {{ summary.train.date }}</p>
-    </section>
+    <img *ngIf="qrCodeDataURL" [src]="qrCodeDataURL" alt="QR Code" class="qr-image" />
+  </div>
 
-    <section>
-      <h3>Passengers</h3>
-      <ul>
-        <li *ngFor="let p of summary.passengers">
-          {{ p.name }} (Age: {{ p.age }}) - Seat: {{ p.seatType }} - ₹{{ p.fare }}
-        </li>
-      </ul>
-    </section>
-
-    <section>
-      <h3>Total Fare</h3>
-      <p>₹{{ summary.totalAmount }}</p>
-    </section>
-
-    <div class="actions">
-      <button (click)="print()">🖨 Print Ticket</button>
-    </div>
+  <div class="actions">
+    <button (click)="downloadPDF()">📄 Download PDF</button>
   </div>
 </div>
-
-<ng-template #loading>
-  <p>⏳ Loading ticket data or nothing found!</p>
-</ng-template>

@@ -1,32 +1,38 @@
-.no-print {
-  display: none;
+.ticket-container {
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+  font-family: 'Poppins', sans-serif;
+  background: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-@media print {
-  .no-print {
-    display: none !important;
-  }
-}
-.ticket-wrapper {
-  background-color: white;
-  color: black;
-  padding: 30px;
-  margin: 20px auto;
-  width: 80%;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
-  font-family: 'Segoe UI', sans-serif;
+.ticket-summary p {
+  margin: 8px 0;
+  font-size: 16px;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
+.qr-image {
+  width: 150px;
+  margin-top: 20px;
+}
+
+.actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 button {
   padding: 10px 20px;
-  background-color: #0275d8;
-  color: white;
   border: none;
+  background-color: #0066cc;
+  color: white;
+  font-weight: 600;
+  border-radius: 5px;
   cursor: pointer;
+}
+button:hover {
+  background-color: #004a99;
 }

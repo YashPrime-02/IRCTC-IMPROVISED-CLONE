@@ -132,7 +132,7 @@ export class TrainSearchComponent implements OnInit {
       destination: this.stations.find(s => s.stationCode === this.selectedDestination)?.stationName || '',
       numberOfPeople
     };
-
+    console.log('✅ Navigating to booking with data:', bookingData);
     this.router.navigate(['/booking'], { state: { bookingData } });
   }
 

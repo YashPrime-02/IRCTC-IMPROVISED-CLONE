@@ -136,7 +136,7 @@ button:hover {
 }
 .toast-notification {
   position: fixed;
-  bottom: 30px;
+  top: 10%;
   right: 30px;
   background: #28a745;
   color: white;
@@ -297,3 +297,14 @@ button:hover {
     padding: 4px 10px;
   }
 }
+@media (max-width: 576px) {
+  .toast-notification {
+    top: 10%;
+
+    right: 16px;
+    left: 16px;
+    width: auto;
+    font-size: 14px;
+    padding: 10px 16px;
+    height: 5% ;
+  }}

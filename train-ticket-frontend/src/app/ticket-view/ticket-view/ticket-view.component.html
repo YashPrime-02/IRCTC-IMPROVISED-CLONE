@@ -27,26 +27,29 @@
 
   <!-- Passengers -->
   <div *ngIf="bookingData?.passengers?.length">
-    <h3 class="text-light mb-4">👤 Passengers:</h3>
-    <div class="row g-3">
-      <div class="col-md-6" *ngFor="let p of bookingData.passengers">
-        <div class="passenger-card glass-box p-3">
-          <p><strong>👤 Name:</strong> {{ p.name }}</p>
-          <p><strong>🎂 Age:</strong> {{ p.age }}</p>
-          <p><strong>🚪 Class:</strong> {{ p.seatType }}</p>
-          <p *ngIf="p.seatNumber"><strong>🪑 Seat:</strong> {{ p.seatNumber }}</p>
-          <div class="status-badge" [ngClass]="{
-            'confirmed': p.status === 'Confirmed',
-            'rac': p.status === 'RAC',
-            'waiting': p.status === 'Waiting'
-          }">
-            {{ p.status }}
-          </div>
-          <p><strong>💰 Fare:</strong> ₹{{ p.fare }}</p>
+  <h3 class="text-light mb-4">👤 Passengers:</h3>
+
+  <div class="row g-3">
+    <div class="col-md-6" *ngFor="let p of bookingData.passengers">
+      <div class="passenger-card glass-box p-4 mb-4">
+        <p><strong>👤 Name:</strong> {{ p.name }}</p>
+        <p><strong>🎂 Age:</strong> {{ p.age }}</p>
+        <p><strong>🚪 Class:</strong> {{ p.seatType }}</p>
+        <p *ngIf="p.seatNumber"><strong>🪑 Seat:</strong> {{ p.seatNumber }}</p>
+        <div class="status-badge mt-2"
+             [ngClass]="{
+               'confirmed': p.status === 'Confirmed',
+               'rac': p.status === 'RAC',
+               'waiting': p.status === 'Waiting'
+             }">
+          {{ p.status }}
         </div>
+        <p class="mt-2"><strong>💰 Fare:</strong> ₹{{ p.fare }}</p>
       </div>
     </div>
   </div>
+</div>
+
 
   <!-- QR Section -->
   <div class="qr-section">

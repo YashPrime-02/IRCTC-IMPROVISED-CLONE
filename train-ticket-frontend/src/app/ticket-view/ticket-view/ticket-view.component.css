@@ -166,3 +166,48 @@ button:hover {
     transform: translateY(20px);
   }
 }
+.passenger-card {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #f0f0f0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 2%;
+}
+
+.passenger-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+
+.passenger-card p {
+  margin: 6px 0;
+  font-size: 15px;
+}
+
+/* Status Badge Styling */
+.status-badge {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-badge.confirmed {
+  background-color: #28a745; /* Green */
+  color: white;
+}
+
+.status-badge.rac {
+  background-color: #ffc107; /* Amber */
+  color: black;
+}
+
+.status-badge.waiting {
+  background-color: #dc3545; /* Red */
+  color: white;
+}

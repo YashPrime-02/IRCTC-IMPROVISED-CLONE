@@ -163,3 +163,36 @@ button:hover {
     margin-top: 10px;
   }
 }
+.toast-notification {
+  position: fixed;
+  top: 10%;
+  right: 30px;
+  background: #28a745;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  font-weight: 500;
+  z-index: 9999;
+  animation: fadeInOut 3s ease forwards;
+}
+
+@media (max-width: 576px) {
+  .toast-notification {
+    top: auto;
+    bottom: 20px;
+    right: 16px;
+    left: 16px;
+    width: auto;
+    font-size: 14px;
+    padding: 10px 16px;
+    text-align: center;
+  }
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-10px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-10px); }
+}

@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service'; // ✅ import auth service
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +16,9 @@ export class LoginComponent {
   password = '';
   showPassword = false;
 
+  showToast = false;
+  toastMessage = '';
+
   @Output() switchToSignup = new EventEmitter<void>();
   @Output() showForgot = new EventEmitter<void>();
 
@@ -25,53 +28,36 @@ export class LoginComponent {
     this.showPassword = !this.showPassword;
   }
 
- onLogin(): void {
-  const emailTrimmed = this.email.trim();
-  const passwordTrimmed = this.password.trim();
-
-  if (!emailTrimmed || !passwordTrimmed) {
-    alert('⚠️ Please enter both email and password.');
-    return;
+  showToastMessage(message: string): void {
+    this.toastMessage = message;
+    this.showToast = true;
+    setTimeout(() => this.showToast = false, 5000);
   }
 
-  const savedUser = localStorage.getItem('userData');
-  if (savedUser) {
-    const user = JSON.parse(savedUser);
+  onLogin(): void {
+    const emailTrimmed = this.email.trim();
+    const passwordTrimmed = this.password.trim();
 
-    // 👇 Debug logs to check saved and entered credentials
-    console.log('🧾 Saved user from localStorage:', user);
-    console.log('🔐 Entered login credentials:', {
-      email: emailTrimmed,
-      password: passwordTrimmed
-    });
+    if (!emailTrimmed || !passwordTrimmed) {
+      this.showToastMessage('⚠️ Please enter both email and password.');
+      return;
+    }
 
-    if (emailTrimmed === user.email && passwordTrimmed === user.password) {
-  alert('✅ Login successful!');
+    const savedUser = localStorage.getItem('userData');
+    if (savedUser) {
+      const user = JSON.parse(savedUser);
 
-  // 🟢 Debug logs to verify state
-  console.log('🔐 Login Success!');
-  console.log('📧 Email:', user.email);
-  console.log('🔑 Password:', user.password);
-  console.log('🟩 isLoggedIn set to:', 'true');
+      if (emailTrimmed === user.email && passwordTrimmed === user.password) {
+        this.showToastMessage('✅ Login successful!');
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('loggedInUser', JSON.stringify(user));
 
-  localStorage.setItem('isLoggedIn', 'true'); // 🟢 For AuthGuard
-  localStorage.setItem('loggedInUser', JSON.stringify(user)); // optional
-
-  // 🧪 Test route navigation result
-  this.router.navigate(['/train-search']).then(success => {
-    if (success) {
-      console.log('✅ Navigation to /train-search succeeded');
+        this.router.navigate(['/train-search']);
+      } else {
+        this.showToastMessage('❌ Invalid credentials. Please try again.');
+      }
     } else {
-      console.error('❌ Navigation to /train-search failed');
+      this.showToastMessage('❌ No user found. Please sign up first.');
     }
-  });
-}
- else {
-      alert('❌ Invalid credentials. Please try again.');
-    }
-  } else {
-    alert('❌ No user found. Please sign up first.');
   }
-}
-
 }

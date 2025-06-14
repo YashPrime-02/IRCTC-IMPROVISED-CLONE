@@ -211,3 +211,89 @@ button:hover {
   background-color: #dc3545; /* Red */
   color: white;
 }
+@media screen and (max-width: 768px) {
+  .ticket-container {
+          padding: 16px;
+        margin: 5px 0px;
+        border-radius: 12px;
+  }
+
+  .ticket-container h2 {
+    font-size: 20px;
+    flex-direction: column;
+    /* gap: 4px; */
+    text-align: center;
+  }
+
+  .ticket-summary p {
+    font-size: 14px;
+  }
+
+  .passenger-list li {
+    font-size: 14px;
+    padding-left: 10px;
+    border-left-width: 2px;
+  }
+
+  .qr-section {
+    flex-direction: column;
+    align-items: center;
+    margin: 16px 0;
+  }
+
+  .qr-image {
+    width: 130px;
+    padding: 8px;
+  }
+
+  .actions {
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+
+  .pnr-box {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    font-size: 16px;
+    padding: 8px 12px;
+  }
+
+  .copy-btn {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+
+  .pnr-advice {
+    font-size: 13px;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .toast-notification {
+    bottom: 20px;
+    right: 16px;
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+
+  .passenger-card {
+    padding: 12px;
+    border-radius: 12px;
+  }
+
+  .passenger-card p {
+    font-size: 14px;
+  }
+
+  .status-badge {
+    font-size: 12px;
+    padding: 4px 10px;
+  }
+}

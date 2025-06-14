@@ -78,7 +78,7 @@
 /* Mobile devices (e.g., iPhones, small phones) */
 @media (max-width: 600px) {
   .app-header {
-    padding: 10px 16px;
+    padding: 2px 15px;
     flex-direction: column;
     align-items: flex-start;
   }
@@ -91,7 +91,7 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
-    margin-top: 10px;
+    margin-top: 5px;
   }
 
   .user-controls .username {
@@ -99,7 +99,7 @@
   }
 
   .user-controls button {
-    padding: 5px 10px;
-    width: 100%;
+    padding: 1px 2px;
+    width: 60%;
   }
 }

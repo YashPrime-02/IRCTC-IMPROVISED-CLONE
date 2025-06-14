@@ -429,29 +429,43 @@ button:hover {
 
 /* 📱 Mobile (≤ 768px) */
 @media screen and (max-width: 768px) {
+  .modal-content {
+    width: 94%;
+    max-height: 90vh;
+    padding: 20px 16px;
+    margin: 20px auto;
+    position: fixed;
+    top: 41%;
+    left: 50%;
+    transform: translate(-50%, -50%) !important;
+    z-index: 9999;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  .modal-content::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .modal-content::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+  }
   .page-container {
     flex-direction: column;
     padding: 16px 12px;
   }
 
   .form-box {
-    padding: 24px 16px;
-    max-width: 90%;
-    margin-top: 20px;
+    padding: 0px 16px;
+    max-width: 89%;
+    margin-top: 0px;
     z-index: 1;
   }
 
-  .modal-content {
-    width: 94%;
-    max-height: 90vh;
-    padding: 20px 16px;
-    margin: auto;
-    position: fixed;
-    top: 34%;
-    left: 50%;
-    transform: translate(-50%, -50%) !important;
-    z-index: 999;
-  }
 
   .train-modal {
     display: flex;
@@ -541,7 +555,8 @@ button:hover {
   }
 
   button {
-    font-size: 15px;
-    padding: 10px 16px;
+          font-size: 13px;
+        padding: 7px 15px;
+        margin-bottom: 3%;
   }
 }

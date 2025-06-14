@@ -115,6 +115,33 @@
         }
       ],
       "totalAmount": 1120
+    },
+    {
+      "id": "1ea7",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Lucknow Mail",
+        "departureTime": "22:00",
+        "arrivalTime": "06:50",
+        "duration": "08:50:00",
+        "date": "2025-06-19",
+        "source": "New Delhi",
+        "destination": "Lucknow",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "OK",
+          "age": 22,
+          "seatType": "SL",
+          "status": "RAC",
+          "fare": 290
+        }
+      ],
+      "totalAmount": 290
     }
   ]
 }

@@ -43,7 +43,7 @@
 .passenger-card select {
   display: block;
   margin-top: 10px;
-  width: 100%;
+  width: 95%;
   padding: 8px;
   font-size: 14px;
   border: 1px solid #ccc;
@@ -101,3 +101,83 @@ button:disabled {
   font-size: 12px;
   margin-top: 4px;
 }
+
+@media only screen and (max-width: 768px) {
+  .booking-container {
+    padding: 16px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .passenger-card {
+    padding: 12px;
+    margin: 12px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+
+  .passenger-card input,
+  .passenger-card select {
+    width: 95%;
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .badge {
+    font-size: 12px;
+    padding: 4px 10px;
+  }
+
+  .total-section {
+    text-align: center;
+    font-size: 15px;
+    margin-top: 16px;
+  }
+
+  button {
+    width: 100%;
+    font-size: 15px;
+    padding: 12px 18px;
+    margin-top: 12px;
+    box-sizing: border-box;
+  }
+
+  .error-text {
+    font-size: 11px;
+  }
+
+  /* Ensure the last button is always visible even if many cards exist */
+  .booking-container {
+    padding-bottom: 80px; /* Add breathing room for bottom button */
+  }
+
+  /* Optional: Sticky footer action button (if needed) */
+  .sticky-footer-btn {
+    position: fixed;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    z-index: 1000;
+    width: calc(100% - 24px);
+    padding: 14px;
+    background-color: #2b7a78;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  }
+
+  .sticky-footer-btn:hover {
+    background-color: #226c6a;
+  }
+}
+
+

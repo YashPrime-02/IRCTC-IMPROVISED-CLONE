@@ -162,6 +162,189 @@
         }
       ],
       "totalAmount": 840
+    },
+    {
+      "id": "25f1",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Lucknow Mail",
+        "departureTime": "22:00",
+        "arrivalTime": "06:50",
+        "duration": "08:50:00",
+        "date": "2025-06-13",
+        "source": "New Delhi",
+        "destination": "Lucknow",
+        "numberOfPeople": "2"
+      },
+      "passengers": [
+        {
+          "name": "ok",
+          "age": 22,
+          "seatType": "SL",
+          "status": "RAC",
+          "fare": 250
+        }
+      ],
+      "totalAmount": 250
+    },
+    {
+      "id": "a23e",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Lucknow Mail",
+        "departureTime": "22:00",
+        "arrivalTime": "06:50",
+        "duration": "08:50:00",
+        "date": "2025-06-13",
+        "source": "New Delhi",
+        "destination": "Lucknow",
+        "numberOfPeople": "2"
+      },
+      "passengers": [
+        {
+          "name": "ok",
+          "age": 22,
+          "seatType": "SL",
+          "status": "RAC",
+          "fare": 250
+        }
+      ],
+      "totalAmount": 250
+    },
+    {
+      "id": "e6ca",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Lucknow Mail",
+        "departureTime": "22:00",
+        "arrivalTime": "06:50",
+        "duration": "08:50:00",
+        "date": "2025-06-13",
+        "source": "New Delhi",
+        "destination": "Lucknow",
+        "numberOfPeople": "2"
+      },
+      "passengers": [
+        {
+          "name": "ok",
+          "age": 22,
+          "seatType": "SL",
+          "status": "RAC",
+          "fare": 250
+        }
+      ],
+      "totalAmount": 250
+    },
+    {
+      "id": "1f1f",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Gomti Express",
+        "departureTime": "12:20",
+        "arrivalTime": "21:30",
+        "duration": "09:10:00",
+        "date": "2025-06-13",
+        "source": "New Delhi",
+        "destination": "Lucknow",
+        "numberOfPeople": "2"
+      },
+      "passengers": [
+        {
+          "name": "ok",
+          "age": 22,
+          "seatType": "2S",
+          "status": "RAC",
+          "fare": 230
+        }
+      ],
+      "totalAmount": 230
+    },
+    {
+      "id": "1851",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Gomti Express",
+        "departureTime": "12:20",
+        "arrivalTime": "21:30",
+        "duration": "09:10:00",
+        "date": "2025-06-13",
+        "source": "New Delhi",
+        "destination": "Lucknow",
+        "numberOfPeople": "2"
+      },
+      "passengers": [
+        {
+          "name": "Yash",
+          "age": 24,
+          "seatType": "SL",
+          "status": "Confirmed",
+          "fare": 270
+        },
+        {
+          "name": "Ashish",
+          "age": 22,
+          "seatType": "SL",
+          "status": "RAC",
+          "fare": 250
+        }
+      ],
+      "totalAmount": 520
+    },
+    {
+      "id": "13ad",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Lucknow Mail",
+        "departureTime": "22:00",
+        "arrivalTime": "06:50",
+        "duration": "08:50:00",
+        "date": "2025-06-20",
+        "source": "Lucknow",
+        "destination": "New Delhi",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "Yash Mishra",
+          "age": 23,
+          "seatType": "2A",
+          "status": "Confirmed",
+          "fare": 470
+        },
+        {
+          "name": "Divyanshu Gupta",
+          "age": 22,
+          "seatType": "2A",
+          "status": "Confirmed",
+          "fare": 350
+        },
+        {
+          "name": "Ashish Kumar",
+          "age": 21,
+          "seatType": "2A",
+          "status": "RAC",
+          "fare": 470
+        }
+      ],
+      "totalAmount": 1290
     }
   ]
 }

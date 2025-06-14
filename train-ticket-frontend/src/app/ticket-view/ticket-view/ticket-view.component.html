@@ -1,19 +1,36 @@
-<div class="ticket-container" *ngIf="bookingData">
-  <h2>🎟️ Ticket Summary</h2>
+<div class="ticket-container" id="ticketSummary">
+  <h2>
+    <span class="emoji">🎟️</span>
+    Ticket Summary
+  </h2>
 
-  <div id="ticketSummary" class="ticket-summary">
-    <p><strong>Name:</strong> {{ bookingData.name }}</p>
-    <p><strong>Email:</strong> {{ bookingData.email }}</p>
-    <p><strong>Train:</strong> {{ bookingData.train }}</p>
-    <p><strong>From:</strong> {{ bookingData.source }}</p>
-    <p><strong>To:</strong> {{ bookingData.destination }}</p>
-    <p><strong>Date:</strong> {{ bookingData.date }}</p>
-    <p><strong>Class:</strong> {{ bookingData.class }}</p>
+  <div class="ticket-summary">
+    <p><strong>Name:</strong> {{ bookingData?.user?.name }}</p>
+    <p><strong>Email:</strong> {{ bookingData?.user?.email }}</p>
+    <p><strong>Train:</strong> {{ bookingData?.train?.trainName }}</p>
+    <p><strong>From:</strong> {{ bookingData?.train?.source }}</p>
+    <p><strong>To:</strong> {{ bookingData?.train?.destination }}</p>
+    <p><strong>Date:</strong> {{ bookingData?.train?.date }}</p>
+    <p><strong>Class:</strong> {{ bookingData?.train?.class }}</p>
+    <p><strong>Total Fare:</strong> ₹{{ bookingData?.totalAmount }}</p>
+  </div>
 
+  <div *ngIf="bookingData?.passengers?.length">
+    <h3>👤 Passengers:</h3>
+    <ul class="passenger-list">
+      <li *ngFor="let p of bookingData.passengers">
+        {{ p.name }} | Age: {{ p.age }} | Seat: {{ p.seatType }} | Status: {{ p.status }} | Fare: ₹{{ p.fare }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="qr-section">
     <img *ngIf="qrCodeDataURL" [src]="qrCodeDataURL" alt="QR Code" class="qr-image" />
   </div>
 
   <div class="actions">
-    <button (click)="downloadPDF()">📄 Download PDF</button>
+    <button (click)="downloadPDF()">
+      📄 Download PDF
+    </button>
   </div>
 </div>

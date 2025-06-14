@@ -1,37 +1,60 @@
+
+
 <div class="ticket-container" id="ticketSummary">
   <h2>
     <span class="emoji">🎟️</span>
     Ticket Summary
   </h2>
 
-  <div id="ticketSummary" class="ticket-container" style="background-color: #1e1e1e; color: white;">
+  <!-- ✅ PNR Number -->
+  <div class="pnr-box">
+    <span class="label">🆔 PNR:</span>
+    <span class="value">{{ pnrNumber }}</span>
+    <button class="copy-btn" (click)="copyPNR()">📋 Copy</button>
+  </div>
+  <p class="pnr-advice">🔒 Do not share your PNR with untrusted sources.</p>
 
-    <p><strong>Name:</strong> {{ bookingData?.user?.name }}</p>
-    <p><strong>Email:</strong> {{ bookingData?.user?.email }}</p>
-    <p><strong>Train:</strong> {{ bookingData?.train?.trainName }}</p>
-    <p><strong>From:</strong> {{ bookingData?.train?.source }}</p>
-    <p><strong>To:</strong> {{ bookingData?.train?.destination }}</p>
-    <p><strong>Date:</strong> {{ bookingData?.train?.date }}</p>
-    <p><strong>Class:</strong> {{ bookingData?.train?.class }}</p>
-    <p><strong>Total Fare:</strong> ₹{{ bookingData?.totalAmount }}</p>
+  <!-- Booking Summary -->
+  <div class="ticket-summary">
+    <p><span class="label">👤 Name:</span> <span class="value">{{ bookingData?.user?.name }}</span></p>
+    <p><span class="label">📧 Email:</span> <span class="value">{{ bookingData?.user?.email }}</span></p>
+    <p><span class="label">🚆 Train:</span> <span class="value">{{ bookingData?.train?.trainName }}</span></p>
+    <p><span class="label">🛤️ From:</span> <span class="value">{{ bookingData?.train?.source }}</span></p>
+    <p><span class="label">🏁 To:</span> <span class="value">{{ bookingData?.train?.destination }}</span></p>
+    <p><span class="label">📅 Date:</span> <span class="value">{{ bookingData?.train?.date }}</span></p>
+    <p><span class="label">💰 Total Fare:</span> <span class="value">₹{{ bookingData?.totalAmount }}</span></p>
   </div>
 
+  <!-- Passengers -->
   <div *ngIf="bookingData?.passengers?.length">
-    <h3>👤 Passengers:</h3>
-    <ul class="passenger-list">
-      <li *ngFor="let p of bookingData.passengers">
-        {{ p.name }} | Age: {{ p.age }} | Seat: {{ p.seatType }} | Status: {{ p.status }} | Fare: ₹{{ p.fare }}
-      </li>
-    </ul>
+    <h3 class="text-light mb-4">👤 Passengers:</h3>
+    <div class="row g-3">
+      <div class="col-md-6" *ngFor="let p of bookingData.passengers">
+        <div class="passenger-card glass-box p-3">
+          <p><strong>👤 Name:</strong> {{ p.name }}</p>
+          <p><strong>🎂 Age:</strong> {{ p.age }}</p>
+          <p><strong>🚪 Class:</strong> {{ p.seatType }}</p>
+          <p *ngIf="p.seatNumber"><strong>🪑 Seat:</strong> {{ p.seatNumber }}</p>
+          <div class="status-badge" [ngClass]="{
+            'confirmed': p.status === 'Confirmed',
+            'rac': p.status === 'RAC',
+            'waiting': p.status === 'Waiting'
+          }">
+            {{ p.status }}
+          </div>
+          <p><strong>💰 Fare:</strong> ₹{{ p.fare }}</p>
+        </div>
+      </div>
+    </div>
   </div>
 
+  <!-- QR Section -->
   <div class="qr-section">
     <img *ngIf="qrCodeDataURL" [src]="qrCodeDataURL" alt="QR Code" class="qr-image" />
   </div>
 
+  <!-- Download Button -->
   <div class="actions">
-    <button (click)="downloadPDF()">
-      📄 Download PDF
-    </button>
+    <button (click)="downloadPDF()">📄 Download PDF</button>
   </div>
 </div>

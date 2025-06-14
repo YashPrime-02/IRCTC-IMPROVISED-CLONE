@@ -100,3 +100,69 @@ button:hover {
     display: none !important;
   }
 }
+.pnr-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.copy-btn {
+  background: #007bff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.2s ease;
+  font-size: 14px;
+}
+
+.copy-btn:hover {
+  background: #0056b3;
+}
+
+.pnr-advice {
+  font-size: 14px;
+  color: #ffb74d;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+.toast-notification {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #28a745;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  font-weight: 500;
+  z-index: 9999;
+  animation: fadeInOut 3s ease forwards;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}

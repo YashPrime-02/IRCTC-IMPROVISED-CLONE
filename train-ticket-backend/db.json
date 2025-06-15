@@ -487,6 +487,60 @@
         }
       ],
       "totalAmount": 310
+    },
+    {
+      "id": "3186",
+      "user": {
+        "name": "Shreya Singh",
+        "email": "Shreya123@gmail.com"
+      },
+      "train": {
+        "trainName": "Shatabdi Morning NDLS-LKO",
+        "departureTime": "07:30",
+        "arrivalTime": "15:00",
+        "duration": "07:30:00",
+        "date": "2025-06-16",
+        "source": "New Delhi",
+        "destination": "Lucknow",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "sdfds",
+          "age": 12,
+          "seatType": "SL",
+          "status": "RAC",
+          "fare": 290
+        }
+      ],
+      "totalAmount": 290
+    },
+    {
+      "id": "4388",
+      "user": {
+        "name": "Raj Mishra",
+        "email": "rajp65@gmail.com"
+      },
+      "train": {
+        "trainName": "Shatabdi Express",
+        "departureTime": "06:00",
+        "arrivalTime": "10:50",
+        "duration": "04:50:00",
+        "date": "2025-06-17",
+        "source": "Lucknow",
+        "destination": "New Delhi",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "Raj Mishra",
+          "age": 54,
+          "seatType": "2A",
+          "status": "Waiting",
+          "fare": 430
+        }
+      ],
+      "totalAmount": 430
     }
   ]
 }

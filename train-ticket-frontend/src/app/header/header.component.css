@@ -40,6 +40,13 @@
   background-color: #ddd;
   transform: scale(1.05);
 }
+.welcome-text {
+  color: white;
+}
+
+.username {
+  color: #ff0000;
+}
 
 /* Animation */
 @keyframes fadeInDown {

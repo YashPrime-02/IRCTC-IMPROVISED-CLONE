@@ -1,4 +1,3 @@
-
 <!-- ✅ Toasts -->
 <div *ngIf="emailSent" class="toast-success">
   📤 Email sent successfully!
@@ -31,38 +30,83 @@
 
   <!-- ✅ Booking Summary -->
   <div class="ticket-summary">
-    <p><span class="label">👤 Name:</span> <span class="value">{{ bookingData?.user?.name }}</span></p>
-    <p><span class="label">📧 Email:</span> <span class="value">{{ bookingData?.user?.email }}</span></p>
-    <p><span class="label">🚆 Train:</span> <span class="value">{{ bookingData?.train?.trainName }}</span></p>
-    <p><span class="label">🛤️ From:</span> <span class="value">{{ bookingData?.train?.source }}</span></p>
-    <p><span class="label">🏁 To:</span> <span class="value">{{ bookingData?.train?.destination }}</span></p>
-    <p><span class="label">📅 Date:</span> <span class="value">{{ bookingData?.train?.date }}</span></p>
-    <p><span class="label">💰 Total Fare:</span> <span class="value">₹{{ bookingData?.totalAmount }}</span></p>
-  </div>
+  <table>
+    <tbody>
+      <tr>
+        <th>👤 Name:</th>
+        <td><strong>{{ bookingData?.user?.name }}</strong></td>
+      </tr>
+      <tr>
+        <th>📧 Email:</th>
+        <td><strong>{{ bookingData?.user?.email }}</strong></td>
+      </tr>
+      <tr>
+        <th>🚆 Train:</th>
+        <td><strong>{{ bookingData?.train?.trainName }}</strong></td>
+      </tr>
+      <tr>
+        <th>🛤️ From:</th>
+        <td><strong>{{ bookingData?.train?.source }}</strong></td>
+      </tr>
+      <tr>
+        <th>🏁 To:</th>
+        <td><strong>{{ bookingData?.train?.destination }}</strong></td>
+      </tr>
+      <tr>
+        <th>📅 Date:</th>
+        <td><strong>{{ bookingData?.train?.date }}</strong></td>
+      </tr>
+      <tr>
+        <th>💰 Total Fare:</th>
+        <td><strong>₹{{ bookingData?.totalAmount }}</strong></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
 
   <!-- ✅ Passengers -->
   <div *ngIf="bookingData?.passengers?.length">
-    <h3 class="text-light mb-4">👤 Passengers:</h3>
-    <div class="row g-3">
-      <div class="col-md-6" *ngFor="let p of bookingData.passengers">
-        <div class="passenger-card glass-box p-4 mb-4">
-          <p><strong>👤 Name:</strong> {{ p.name }}</p>
-          <p><strong>🎂 Age:</strong> {{ p.age }}</p>
-          <p><strong>🚪 Class:</strong> {{ p.seatType }}</p>
-          <p *ngIf="p.seatNumber"><strong>🪑 Seat:</strong> {{ p.seatNumber }}</p>
-          <div class="status-badge mt-2"
-               [ngClass]="{
-                 'confirmed': p.status === 'Confirmed',
-                 'rac': p.status === 'RAC',
-                 'waiting': p.status === 'Waiting'
-               }">
-            {{ p.status }}
-          </div>
-          <p class="mt-2"><strong>💰 Fare:</strong> ₹{{ p.fare }}</p>
-        </div>
-      </div>
-    </div>
+  <h3 class="text-light mb-4">👤 Passengers:</h3>
+  <div class="passengers-table-wrapper">
+    <table class="passengers-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Class</th>
+          <th>Seat</th>
+          <th>Status</th>
+          <th>Fare</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of bookingData.passengers">
+          <td data-label="👤 Name"><strong>{{ p.name }}</strong></td>
+          <td data-label="🎂 Age"><strong>{{ p.age }}</strong></td>
+          <td data-label="🚪 Class"><strong>{{ p.seatType }}</strong></td>
+          <td data-label="🪑 Seat"><strong>{{ p.seatNumber || '-' }}</strong></td>
+          <td data-label="Status">
+            <span
+              class="status-badge"
+              [ngClass]="{
+                confirmed: p.status === 'Confirmed',
+                rac: p.status === 'RAC',
+                waiting: p.status === 'Waiting'
+              }"
+            >
+              {{ p.status }}
+            </span>
+          </td>
+          <td data-label="💰 Individual Fare(s)"><strong>₹{{ p.fare }}</strong></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+</div>
+
 
   <!-- ✅ QR Section -->
   <div class="qr-section">

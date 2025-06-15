@@ -342,3 +342,201 @@ button:hover {
   z-index: 9999;
   animation: fadeInOut 4s ease-out;
 }
+.ticket-summary {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 0 10px;
+}
+
+.ticket-summary table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Poppins', sans-serif;
+}
+
+.ticket-summary th,
+.ticket-summary td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #444;
+}
+
+.ticket-summary th {
+  color: yellow;
+  font-weight: 700;
+  width: 35%;
+  white-space: nowrap;
+  background-color: #222;
+}
+
+.ticket-summary td {
+  color: white;
+  background-color: #333;
+}
+
+/* Responsive styling */
+@media screen and (max-width: 480px) {
+  .ticket-summary table,
+  .ticket-summary tbody,
+  .ticket-summary tr,
+  .ticket-summary th,
+  .ticket-summary td {
+    display: block;
+    width: 100%;
+  }
+
+  .ticket-summary tr {
+    margin-bottom: 16px;
+    border-bottom: 2px solid #555;
+  }
+
+  .ticket-summary th {
+    background-color: transparent;
+    color: yellow;
+    font-weight: 700;
+    padding: 6px 0;
+    border-bottom: none;
+  }
+
+  .ticket-summary td {
+    padding-left: 50%;
+    position: relative;
+    background-color: transparent;
+    color: white;
+    border-bottom: 1px solid #666;
+  }
+
+  .ticket-summary td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    top: 12px;
+    padding-left: 16px;
+    font-weight: 700;
+    color: yellow;
+    white-space: nowrap;
+  }
+}
+/* 💡 Common Table Wrapper */
+.ticket-summary,
+.passengers-table-wrapper {
+  max-width: 700px;
+  margin: 0 auto 40px;
+  padding: 0 10px;
+  font-family: 'Poppins', sans-serif;
+  overflow-x: auto;
+}
+
+/* 💡 Common Table Style */
+.ticket-summary table,
+.passengers-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto; /* important fix: let table auto adjust to content */
+}
+
+/* ✅ Common Cell Styles */
+.ticket-summary th,
+.ticket-summary td,
+.passengers-table th,
+.passengers-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #444;
+  text-align: left;
+  background-color: #333;
+  color: #fff;
+  vertical-align: top;
+  word-wrap: break-word;
+}
+
+/* 💛 Table Headings */
+.ticket-summary th,
+.passengers-table th {
+  background-color: #222;
+  color: yellow;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* 🔥 Remove empty cell spacing */
+td:empty,
+th:empty {
+  display: none;
+  padding: 0;
+  border: none;
+}
+
+/* 🟢 STATUS BADGES */
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.9em;
+  display: inline-block;
+  text-align: center;
+  min-width: 70px;
+  white-space: nowrap;
+}
+
+.status-badge.confirmed {
+  background-color: #27ae60;
+  color: white;
+}
+
+.status-badge.rac {
+  background-color: #f39c12;
+  color: white;
+}
+
+.status-badge.waiting {
+  background-color: #c0392b;
+  color: white;
+}
+
+/* 📱 RESPONSIVE TWEAKS */
+@media (max-width: 768px) {
+  .ticket-summary,
+  .passengers-table-wrapper {
+    padding: 0 8px;
+  }
+
+  .ticket-summary th,
+  .ticket-summary td,
+  .passengers-table th,
+  .passengers-table td {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+
+  .status-badge {
+    font-size: 0.85em;
+    padding: 3px 8px;
+    min-width: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ticket-summary,
+  .passengers-table-wrapper {
+    padding: 0 5px;
+  }
+
+  .ticket-summary th,
+  .ticket-summary td,
+  .passengers-table th,
+  .passengers-table td {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+
+  .ticket-summary th,
+  .passengers-table th {
+    white-space: normal;
+  }
+
+  .status-badge {
+    font-size: 0.8em;
+    padding: 2px 6px;
+    min-width: 50px;
+  }
+}

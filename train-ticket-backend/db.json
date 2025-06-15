@@ -352,6 +352,33 @@
         }
       ],
       "totalAmount": 330
+    },
+    {
+      "id": "b9cd",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Kanpur Shatabdi",
+        "departureTime": "16:20",
+        "arrivalTime": "19:45",
+        "duration": "03:25:00",
+        "date": "2025-06-16",
+        "source": "Ghaziabad",
+        "destination": "Kanpur Central",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "Ashish Kumar",
+          "age": 21,
+          "seatType": "1A",
+          "status": "Confirmed",
+          "fare": 600
+        }
+      ],
+      "totalAmount": 600
     }
   ]
 }

@@ -406,6 +406,87 @@
         }
       ],
       "totalAmount": 250
+    },
+    {
+      "id": "8eba",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Garib Rath Express NDLS-CNB",
+        "departureTime": "23:50",
+        "arrivalTime": "07:20",
+        "duration": "07:30:00",
+        "date": "2025-06-15",
+        "source": "New Delhi",
+        "destination": "Kanpur Central",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "Yash",
+          "age": 22,
+          "seatType": "SL",
+          "status": "Waiting",
+          "fare": 290
+        }
+      ],
+      "totalAmount": 290
+    },
+    {
+      "id": "508a",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Sampooran Express",
+        "departureTime": "17:40",
+        "arrivalTime": "06:35",
+        "duration": "16:15:00",
+        "date": "2025-06-16",
+        "source": "New Delhi",
+        "destination": "Patna",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "Shreya Singh",
+          "age": 20,
+          "seatType": "1A",
+          "status": "Confirmed",
+          "fare": 500
+        }
+      ],
+      "totalAmount": 500
+    },
+    {
+      "id": "80f8",
+      "user": {
+        "name": "Shreya Singh",
+        "email": "Shreya123@gmail.com"
+      },
+      "train": {
+        "trainName": "Shatabdi Morning NDLS-LKO",
+        "departureTime": "07:30",
+        "arrivalTime": "15:00",
+        "duration": "07:30:00",
+        "date": "2025-06-16",
+        "source": "New Delhi",
+        "destination": "Lucknow",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "Shreya Singh",
+          "age": 24,
+          "seatType": "SL",
+          "status": "Waiting",
+          "fare": 310
+        }
+      ],
+      "totalAmount": 310
     }
   ]
 }

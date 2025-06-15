@@ -18,7 +18,6 @@ export class TicketViewComponent implements OnInit {
   pnrNumber: string = '';
   showToast = false;
 
-  // ✅ EmailJS state variables
   emailSent = false;
   emailFailed = false;
   isSendingEmail = false;
@@ -28,6 +27,20 @@ export class TicketViewComponent implements OnInit {
     if (storedData) {
       this.bookingData = JSON.parse(storedData);
       console.log("✅ Booking data loaded:", this.bookingData);
+
+      // ✅ Inject user details from localStorage if missing
+      if (!this.bookingData.user || !this.bookingData.user.email) {
+        const storedUser = localStorage.getItem('loggedInUser');
+        if (storedUser) {
+          const user = JSON.parse(storedUser);
+          const name = user.name || this.extractUsernameFromEmail(user.email);
+          this.bookingData.user = {
+            name,
+            email: user.email || 'guest@example.com'
+          };
+        }
+      }
+
       this.generateQRCode(JSON.stringify(this.bookingData));
       this.generatePNR();
 
@@ -42,11 +55,14 @@ export class TicketViewComponent implements OnInit {
         return p;
       });
 
-      // ✅ Auto-send email on load
       this.sendConfirmationEmail();
     } else {
       console.warn("⚠️ No booking summary found in sessionStorage");
     }
+  }
+
+  extractUsernameFromEmail(email: string): string {
+    return email?.split('@')[0] || 'Guest';
   }
 
   generateQRCode(data: string): void {
@@ -127,42 +143,41 @@ export class TicketViewComponent implements OnInit {
     });
   }
 
- sendConfirmationEmail(): void {
-  this.isSendingEmail = true;
+  sendConfirmationEmail(): void {
+    this.isSendingEmail = true;
 
-  const emailData = {
-    user_name: this.bookingData?.user?.name,
-    user_email: this.bookingData?.user?.email,
-    train_name: this.bookingData?.train?.trainName,
-    train_date: this.bookingData?.train?.date,
-    source: this.bookingData?.train?.source,
-    destination: this.bookingData?.train?.destination,
-    passenger_count: this.bookingData?.passengers?.length,
-    totalAmount: this.bookingData?.totalAmount,
-    qr_code: this.qrCodeDataURL,
+    const emailData = {
+      user_name: this.bookingData?.user?.name,
+      user_email: this.bookingData?.user?.email,
+      train_name: this.bookingData?.train?.trainName,
+      train_date: this.bookingData?.train?.date,
+      source: this.bookingData?.train?.source,
+      destination: this.bookingData?.train?.destination,
+      passenger_count: this.bookingData?.passengers?.length,
+      totalAmount: this.bookingData?.totalAmount,
+      qr_code: this.qrCodeDataURL,
 
-    passengers: this.bookingData?.passengers.map((p: any) => ({
-      name: p.name,
-      age: p.age,
-      seatType: p.seatType,
-      fare: p.fare,
-      status: p.status
-    }))
-  };
+      passengers: this.bookingData?.passengers.map((p: any) => ({
+        name: p.name,
+        age: p.age,
+        seatType: p.seatType,
+        fare: p.fare,
+        status: p.status
+      }))
+    };
 
-  // ✅ Log the final payload before sending
-  console.log('📧 Sending email with data:', emailData);
+    console.log('📧 Sending email with data:', emailData);
 
-  emailjs.send('service_a8hnvli', 'template_nly90ge', emailData, 'Wa0lCeJ_wk1Ep39F3')
-    .then(() => {
-      this.emailSent = true;
-      this.isSendingEmail = false;
-      setTimeout(() => this.emailSent = false, 4000);
-    })
-    .catch(() => {
-      this.emailFailed = true;
-      this.isSendingEmail = false;
-      setTimeout(() => this.emailFailed = false, 4000);
-    });
-}
+    emailjs.send('service_a8hnvli', 'template_nly90ge', emailData, 'Wa0lCeJ_wk1Ep39F3')
+      .then(() => {
+        this.emailSent = true;
+        this.isSendingEmail = false;
+        setTimeout(() => this.emailSent = false, 4000);
+      })
+      .catch(() => {
+        this.emailFailed = true;
+        this.isSendingEmail = false;
+        setTimeout(() => this.emailFailed = false, 4000);
+      });
+  }
 }

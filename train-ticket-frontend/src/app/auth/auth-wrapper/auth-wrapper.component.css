@@ -153,12 +153,12 @@ html, body {
 
 /* Primary button */
 .forgot-modal button:not(.close-btn) {
-  background-color: #0078d4;
+  background-color: #084f85;
   color: white;
 }
 
 .forgot-modal button:not(.close-btn):hover {
-  background-color: #005fa3;
+  background-color:purple;
 }
 
 /* Close button */

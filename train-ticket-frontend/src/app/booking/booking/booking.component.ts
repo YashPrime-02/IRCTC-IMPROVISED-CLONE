@@ -15,8 +15,8 @@ export class BookingComponent implements OnInit {
   bookingData: any;
   seatTypes: string[] = ['2S','SL', '3A', '2A', '1A'];
   statuses: string[] = ['Confirmed', 'RAC', 'Waiting'];
-  username = 'Yash';
-  email = 'yash@example.com';
+  username = '';
+  email = '';
 
   passengers: any[] = [];
   errors: { name: boolean; age: boolean }[] = [];
@@ -30,11 +30,26 @@ export class BookingComponent implements OnInit {
       return;
     }
 
+    // ✅ Get logged-in user data from localStorage
+    const storedUser = localStorage.getItem('loggedInUser');
+    if (storedUser) {
+      const user = JSON.parse(storedUser);
+      this.email = user.email || 'guest@example.com';
+      this.username = user.name || this.extractUsernameFromEmail(this.email);
+    } else {
+      this.email = 'guest@example.com';
+      this.username = 'Guest';
+    }
+
     this.bookingData = nav;
     sessionStorage.setItem('bookingData', JSON.stringify(this.bookingData));
 
     const count = Math.min(this.bookingData.numberOfPeople || 1, 7);
     for (let i = 0; i < count; i++) this.addPassenger();
+  }
+
+  extractUsernameFromEmail(email: string): string {
+    return email.split('@')[0];
   }
 
   addPassenger(): void {

@@ -34,13 +34,13 @@
 
 /* Highlight error card */
 .passenger-card.error {
-  background-color: rgba(0, 0, 0, 0.35);           /* Glassy dark background */
-  border: 1px solid white;      /* Soft red translucent border */
-  backdrop-filter: blur(10px);                    /* Frosted glass effect */
-  -webkit-backdrop-filter: blur(10px);            /* Safari support */
+  background-color: rgba(0, 0, 0, 0.35);
+  border: 1px solid white;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(255, 0, 0, 0.1);     /* Soft red shadow */
-  color: #fff;                                     /* Ensure good readability */
+  box-shadow: 0 4px 20px rgba(255, 0, 0, 0.1);
+  color: #fff;
   transition: all 0.3s ease;
 }
 
@@ -54,6 +54,7 @@
   font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 6px;
+  margin-bottom: 1%;
 }
 
 /* Total summary section */
@@ -158,12 +159,12 @@ button:disabled {
     font-size: 11px;
   }
 
-  /* Ensure the last button is always visible even if many cards exist */
+
   .booking-container {
-    padding-bottom: 80px; /* Add breathing room for bottom button */
+    padding-bottom: 80px;
   }
 
-  /* Optional: Sticky footer action button (if needed) */
+
   .sticky-footer-btn {
     position: fixed;
     bottom: 12px;
@@ -187,3 +188,17 @@ button:disabled {
 }
 
 
+@media screen and (max-width: 600px) {
+  .sticky-footer-btn {
+    font-size: 14px;
+    padding: 12px 16px;
+    border-radius: 6px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .sticky-footer-btn {
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+}

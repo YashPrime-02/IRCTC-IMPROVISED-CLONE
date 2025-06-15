@@ -560,3 +560,60 @@ button:hover {
         margin-bottom: 3%;
   }
 }
+.time-toast {
+  margin-top: 10px;
+  background-color: #ffecb3;
+  color: #8d6e63;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  animation: fadeInOut 4s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
+}
+/* Toast Styling */
+.toast {
+  padding: 12px 20px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  font-weight: 500;
+  animation: fadein 0.3s ease-in;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.toast-danger {
+  background-color: #ffebeb;
+  color: #d10000;
+  border: 1px solid #d10000;
+}
+
+.toast-warning {
+  background-color: #fff7e6;
+  color: #ff9900;
+  border: 1px solid #ff9900;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Optional: Gray out disabled dates visually */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: grayscale(100%);
+}

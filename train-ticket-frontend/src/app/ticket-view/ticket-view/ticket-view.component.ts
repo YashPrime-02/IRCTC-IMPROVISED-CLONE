@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import html2pdf from 'html2pdf.js';
 import { CommonModule } from '@angular/common';
 import QRCode from 'qrcode';
+import emailjs from '@emailjs/browser';
 
 @Component({
   selector: 'app-ticket-view',
@@ -16,6 +17,11 @@ export class TicketViewComponent implements OnInit {
   qrCodeDataURL: string = '';
   pnrNumber: string = '';
   showToast = false;
+
+  // ✅ EmailJS state variables
+  emailSent = false;
+  emailFailed = false;
+  isSendingEmail = false;
 
   ngOnInit(): void {
     const storedData = sessionStorage.getItem('bookingSummary');
@@ -35,6 +41,9 @@ export class TicketViewComponent implements OnInit {
         }
         return p;
       });
+
+      // ✅ Auto-send email on load
+      this.sendConfirmationEmail();
     } else {
       console.warn("⚠️ No booking summary found in sessionStorage");
     }
@@ -114,8 +123,46 @@ export class TicketViewComponent implements OnInit {
       this.showToast = true;
       setTimeout(() => {
         this.showToast = false;
-      }, 3000); // toast disappears after 3s
+      }, 3000);
     });
   }
-}
 
+ sendConfirmationEmail(): void {
+  this.isSendingEmail = true;
+
+  const emailData = {
+    user_name: this.bookingData?.user?.name,
+    user_email: this.bookingData?.user?.email,
+    train_name: this.bookingData?.train?.trainName,
+    train_date: this.bookingData?.train?.date,
+    source: this.bookingData?.train?.source,
+    destination: this.bookingData?.train?.destination,
+    passenger_count: this.bookingData?.passengers?.length,
+    totalAmount: this.bookingData?.totalAmount,
+    qr_code: this.qrCodeDataURL,
+
+    passengers: this.bookingData?.passengers.map((p: any) => ({
+      name: p.name,
+      age: p.age,
+      seatType: p.seatType,
+      fare: p.fare,
+      status: p.status
+    }))
+  };
+
+  // ✅ Log the final payload before sending
+  console.log('📧 Sending email with data:', emailData);
+
+  emailjs.send('service_a8hnvli', 'template_nly90ge', emailData, 'Wa0lCeJ_wk1Ep39F3')
+    .then(() => {
+      this.emailSent = true;
+      this.isSendingEmail = false;
+      setTimeout(() => this.emailSent = false, 4000);
+    })
+    .catch(() => {
+      this.emailFailed = true;
+      this.isSendingEmail = false;
+      setTimeout(() => this.emailFailed = false, 4000);
+    });
+}
+}

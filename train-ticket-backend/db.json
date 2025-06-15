@@ -142,6 +142,216 @@
         }
       ],
       "totalAmount": 290
+    },
+    {
+      "id": "12b8",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Lucknow Mail",
+        "departureTime": "22:00",
+        "arrivalTime": "06:50",
+        "duration": "08:50:00",
+        "date": "2025-06-25",
+        "source": "New Delhi",
+        "destination": "Lucknow",
+        "numberOfPeople": "2"
+      },
+      "passengers": [
+        {
+          "name": "Yash Mishra",
+          "age": 24,
+          "seatType": "2A",
+          "status": "Confirmed",
+          "fare": 390
+        },
+        {
+          "name": "Ashish Kumar",
+          "age": 22,
+          "seatType": "2A",
+          "status": "Confirmed",
+          "fare": 510
+        }
+      ],
+      "totalAmount": 900
+    },
+    {
+      "id": "7bef",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Lucknow Mail",
+        "departureTime": "22:00",
+        "arrivalTime": "06:50",
+        "duration": "08:50:00",
+        "date": "2025-06-13",
+        "source": "New Delhi",
+        "destination": "Lucknow",
+        "numberOfPeople": "2"
+      },
+      "passengers": [
+        {
+          "name": "Yash Mishra",
+          "age": 24,
+          "seatType": "3A",
+          "status": "Confirmed",
+          "fare": 300
+        },
+        {
+          "name": "Amarjeet Pandey",
+          "age": 19,
+          "seatType": "3A",
+          "status": "Confirmed",
+          "fare": 330
+        }
+      ],
+      "totalAmount": 630
+    },
+    {
+      "id": "5dff",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Gomti Express",
+        "departureTime": "12:20",
+        "arrivalTime": "21:30",
+        "duration": "09:10:00",
+        "date": "2025-06-21",
+        "source": "New Delhi",
+        "destination": "Lucknow",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "Amarjeet Pandey",
+          "age": 20,
+          "seatType": "2A",
+          "status": "RAC",
+          "fare": 390
+        }
+      ],
+      "totalAmount": 390
+    },
+    {
+      "id": "2959",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Lucknow Mail",
+        "departureTime": "22:00",
+        "arrivalTime": "06:50",
+        "duration": "08:50:00",
+        "date": "2025-06-25",
+        "source": "New Delhi",
+        "destination": "Lucknow",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "Yash",
+          "age": 21,
+          "seatType": "3A",
+          "status": "RAC",
+          "fare": 360
+        }
+      ],
+      "totalAmount": 360
+    },
+    {
+      "id": "72fb",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Gomti Express",
+        "departureTime": "12:20",
+        "arrivalTime": "21:30",
+        "duration": "09:10:00",
+        "date": "2025-06-05",
+        "source": "New Delhi",
+        "destination": "Lucknow",
+        "numberOfPeople": "2"
+      },
+      "passengers": [
+        {
+          "name": "Ashish Kumar",
+          "age": 20,
+          "seatType": "1A",
+          "status": "Waiting",
+          "fare": 400
+        },
+        {
+          "name": "Divyam Kumar",
+          "age": 21,
+          "seatType": "1A",
+          "status": "Confirmed",
+          "fare": 550
+        }
+      ],
+      "totalAmount": 950
+    },
+    {
+      "id": "45e5",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Gomti Express",
+        "departureTime": "12:20",
+        "arrivalTime": "21:30",
+        "duration": "09:10:00",
+        "date": "2025-06-19",
+        "source": "New Delhi",
+        "destination": "Lucknow",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "Preetam Ray",
+          "age": 21,
+          "seatType": "3A",
+          "status": "Confirmed",
+          "fare": 390
+        }
+      ],
+      "totalAmount": 390
+    },
+    {
+      "id": "80f6",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Gomti Express",
+        "departureTime": "12:20",
+        "arrivalTime": "21:30",
+        "duration": "09:10:00",
+        "date": "2025-06-07",
+        "source": "New Delhi",
+        "destination": "Lucknow",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "Yash Mishra",
+          "age": 23,
+          "seatType": "SL",
+          "status": "RAC",
+          "fare": 330
+        }
+      ],
+      "totalAmount": 330
     }
   ]
 }

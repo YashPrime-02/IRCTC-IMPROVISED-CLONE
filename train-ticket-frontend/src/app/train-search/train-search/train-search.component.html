@@ -5,7 +5,8 @@
     <!-- Source Station -->
     <div class="form-group">
       <label for="source"><i class="fas fa-map-marker-alt"></i> <strong>Source Station</strong></label>
-      <select id="source" #sourceRef (blur)="sourceTouched = true" [class.invalid-input]="sourceTouched && !sourceRef.value">
+      <select id="source" #sourceRef (blur)="sourceTouched = true"
+        [class.invalid-input]="sourceTouched && !sourceRef.value">
         <option value="">🚉 Choose source</option>
         <option *ngFor="let s of stations" [value]="s.stationCode">
           {{ s.stationName }} ({{ s.stationCode }})
@@ -17,38 +18,38 @@
     <!-- Destination Station -->
     <div class="form-group">
       <label for="destination"><i class="fas fa-map-marked-alt"></i> <strong>Destination Station</strong></label>
-      <select id="destination" #destinationRef (blur)="destinationTouched = true" [class.invalid-input]="destinationTouched && !destinationRef.value">
+      <select id="destination" #destinationRef (blur)="destinationTouched = true"
+        [class.invalid-input]="destinationTouched && !destinationRef.value">
         <option value="">🚉 Choose destination</option>
         <option *ngFor="let s of stations" [value]="s.stationCode">
           {{ s.stationName }} ({{ s.stationCode }})
         </option>
       </select>
-      <small class="error" *ngIf="destinationTouched && !destinationRef.value">Please select a destination station.</small>
+      <small class="error" *ngIf="destinationTouched && !destinationRef.value">Please select a destination
+        station.</small>
     </div>
 
     <!-- Journey Date -->
     <div class="form-group">
       <label for="journeyDate"><i class="fas fa-calendar-alt"></i> <strong>Date</strong></label>
-      <input
-        type="date"
-        id="journeyDate"
-        [(ngModel)]="selectedDate"
-        (blur)="dateTouched = true"
-        [class.invalid-input]="dateTouched && !selectedDate"
-      />
+      <input type="date" [(ngModel)]="selectedDate" [min]="minDate" (change)="dateTouched = true"
+        class="form-control date-input" required />
+
       <small class="error" *ngIf="dateTouched && !selectedDate">Please select a journey date.</small>
     </div>
 
     <!-- Journey Time -->
     <div class="form-group">
       <label for="journeyTime"><i class="fas fa-clock"></i> <strong>Time</strong></label>
-      <input
-        type="time"
-        id="journeyTime"
-        [(ngModel)]="selectedTime"
-        (blur)="timeTouched = true"
-        [class.invalid-input]="timeTouched && !selectedTime"
-      />
+      <!-- Time Picker Input -->
+      <input type="time" id="journeyTime" [(ngModel)]="selectedTime" [min]="getMinTime()" (blur)="timeTouched = true"
+        [class.invalid-input]="timeTouched && !selectedTime" />
+
+      <!-- Time Correction Toast -->
+      <div *ngIf="showTimeToast" class="time-toast">
+        ⏰ Journey time auto-adjusted to current time as selected time was in the past.
+      </div>
+
       <small class="error" *ngIf="timeTouched && !selectedTime">Please select a journey time.</small>
     </div>
 
@@ -61,10 +62,7 @@
     </div>
 
     <!-- Search Button -->
-    <button
-      (click)="onSearch(sourceRef.value, destinationRef.value)"
-      [disabled]="isDisabled()"
-    >
+    <button (click)="onSearch(sourceRef.value, destinationRef.value)" [disabled]="isDisabled()">
       <i class="fas fa-search"></i> Search Trains
     </button>
 
@@ -100,4 +98,13 @@
   <div *ngIf="searched && trains.length === 0" class="no-results glass-card">
     <p>🚫 No trains found for {{ selectedDate || 'this date' }}.</p>
   </div>
+</div>
+<!-- Toast: Invalid Past Date -->
+<div *ngIf="showPastDateToast" class="toast toast-danger">
+  ❌ You cannot select a past date.
+</div>
+
+<!-- Toast: Time Auto-correct -->
+<div *ngIf="showTimeToast" class="toast toast-warning">
+  ⚠️ Time auto-corrected to current time.
 </div>

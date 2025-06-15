@@ -24,7 +24,7 @@ export interface Train {
 @Component({
   selector: 'app-train-search',
   standalone: true,
-  imports: [CommonModule, FormsModule,RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './train-search.component.html',
   styleUrls: ['./train-search.component.css']
 })
@@ -54,6 +54,11 @@ export class TrainSearchComponent implements OnInit {
   selectedSource = '';
   selectedDestination = '';
 
+  showTimeToast = false;
+  showPastDateToast = false;
+
+  minDate = '';
+
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -61,6 +66,7 @@ export class TrainSearchComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.minDate = new Date().toISOString().split('T')[0];
     this.loadTrainData();
   }
 
@@ -81,6 +87,26 @@ export class TrainSearchComponent implements OnInit {
     this.destinationTouched = true;
     this.dateTouched = true;
     this.timeTouched = true;
+
+    const todayDateOnly = new Date().toISOString().split('T')[0];
+    if (this.selectedDate < todayDateOnly) {
+      this.showPastDateToast = true;
+      setTimeout(() => {
+        this.showPastDateToast = false;
+      }, 4000);
+      return;
+    }
+
+    if (this.selectedDate === todayDateOnly) {
+      const minTime = this.getMinTime();
+      if (this.selectedTime < minTime) {
+        this.selectedTime = minTime;
+        this.showTimeToast = true;
+        setTimeout(() => {
+          this.showTimeToast = false;
+        }, 4000);
+      }
+    }
 
     if (!source || !destination || !this.selectedDate || !this.selectedTime) {
       this.scrollToFirstError();
@@ -106,7 +132,20 @@ export class TrainSearchComponent implements OnInit {
   }
 
   filterTrains(source: string, destination: string): Train[] {
-    return this.trainsList.filter(t => t.sourceCode === source && t.destinationCode === destination);
+    return this.trainsList.filter(t =>
+      t.sourceCode === source &&
+      t.destinationCode === destination &&
+      this.isTimeMatch(t.departureTime, this.selectedTime)
+    );
+  }
+
+  isTimeMatch(trainTime: string, selectedTime: string): boolean {
+    const [trainHours, trainMinutes] = trainTime.split(':').map(Number);
+    const [selectedHours, selectedMinutes] = selectedTime.split(':').map(Number);
+
+    if (trainHours > selectedHours) return true;
+    if (trainHours === selectedHours && trainMinutes >= selectedMinutes) return true;
+    return false;
   }
 
   resetSearchState(): void {
@@ -134,6 +173,13 @@ export class TrainSearchComponent implements OnInit {
     };
     console.log('✅ Navigating to booking with data:', bookingData);
     this.router.navigate(['/booking'], { state: { bookingData } });
+  }
+
+  getMinTime(): string {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    return `${hours}:${minutes}`;
   }
 
   @HostListener('document:mousemove', ['$event'])

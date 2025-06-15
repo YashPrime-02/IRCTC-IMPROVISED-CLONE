@@ -308,3 +308,37 @@ button:hover {
     padding: 10px 16px;
     height: 5% ;
   }}
+.toast-success, .toast-error {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  z-index: 9999;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.toast-success {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.toast-error {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.email-loader {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  background: #343a40;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-family: 'Poppins', sans-serif;
+  z-index: 9999;
+  animation: fadeInOut 4s ease-out;
+}

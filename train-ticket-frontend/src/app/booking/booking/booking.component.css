@@ -3,7 +3,7 @@
   padding: 20px;
   max-width: 900px;
   margin: auto;
-  color: #ca5151;
+  color:white;
 }
 
 /* Passenger card box */
@@ -34,8 +34,14 @@
 
 /* Highlight error card */
 .passenger-card.error {
-  border: 1px solid #e74c3c;
-  background-color: #ffe6e6;
+  background-color: rgba(0, 0, 0, 0.35);           /* Glassy dark background */
+  border: 1px solid white;      /* Soft red translucent border */
+  backdrop-filter: blur(10px);                    /* Frosted glass effect */
+  -webkit-backdrop-filter: blur(10px);            /* Safari support */
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(255, 0, 0, 0.1);     /* Soft red shadow */
+  color: #fff;                                     /* Ensure good readability */
+  transition: all 0.3s ease;
 }
 
 /* Inputs & dropdowns */
@@ -59,7 +65,7 @@
 
 /* Action buttons */
 button {
-  background-color: #2b7a78;
+  background-color: black;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -70,11 +76,11 @@ button {
 }
 
 button:hover:not(:disabled) {
-  background-color: #226c6a;
+  background-color: red;
 }
 
 button:disabled {
-  background-color: #999;
+  background-color: #771919;
   cursor: not-allowed;
 }
 

@@ -63,7 +63,7 @@ export class TrainSearchComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private bookingService: BookingService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.minDate = new Date().toISOString().split('T')[0];
@@ -129,6 +129,24 @@ export class TrainSearchComponent implements OnInit {
         this.showModal = this.trains.length > 0;
       }
     }, 100);
+  }
+  swapStations(): void {
+    const src = this.sourceRef.nativeElement;
+    const dest = this.destinationRef.nativeElement;
+
+    if (!src.value || !dest.value) return;
+
+    const temp = src.value;
+    src.classList.add('swap-animation');
+    dest.classList.add('swap-animation');
+
+    setTimeout(() => {
+      src.value = dest.value;
+      dest.value = temp;
+
+      src.classList.remove('swap-animation');
+      dest.classList.remove('swap-animation');
+    }, 300);
   }
 
   filterTrains(source: string, destination: string): Train[] {

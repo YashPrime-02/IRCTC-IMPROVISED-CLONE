@@ -617,3 +617,29 @@ button:hover {
 input[type="date"]::-webkit-calendar-picker-indicator {
   filter: grayscale(100%);
 }
+/* Swap Button Styling */
+.swap-btn {
+  display: inline-block;
+  margin: 10px auto;
+  padding: 8px 12px;
+  font-size: 16px;
+  background-color: #1161ed;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+
+/* Animate Select on Swap */
+select.swap-animation {
+  animation: swapPulse 0.3s ease-in-out;
+}
+
+@keyframes swapPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); background-color: #cde6ff; }
+  100% { transform: scale(1); }
+}

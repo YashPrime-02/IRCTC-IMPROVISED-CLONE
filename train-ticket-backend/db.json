@@ -379,6 +379,33 @@
         }
       ],
       "totalAmount": 600
+    },
+    {
+      "id": "bed9",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "NZM Bandra Yuva Express",
+        "departureTime": "16:30",
+        "arrivalTime": "08:50",
+        "duration": "16:20:00",
+        "date": "2025-06-18",
+        "source": "Hazrat Nizamuddin",
+        "destination": "Mumbai Central",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "Ash",
+          "age": 23,
+          "seatType": "SL",
+          "status": "RAC",
+          "fare": 250
+        }
+      ],
+      "totalAmount": 250
     }
   ]
 }

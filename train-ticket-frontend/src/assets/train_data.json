@@ -2159,13 +2159,9 @@
     "duration": "16:20:00",
     "sourceCode": "NZM",
     "destinationCode": "BCT"
-  }
-]
-✅ MUM → NZM
-json
-Copy
-Edit
-[
+  },
+
+
   {
     "trainName": "August Kranti Rajdhani",
     "departureTime": "17:40",

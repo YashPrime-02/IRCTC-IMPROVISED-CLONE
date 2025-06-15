@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
@@ -11,15 +11,30 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./booking.component.css'],
   imports: [CommonModule, FormsModule]
 })
-export class BookingComponent implements OnInit {
+export class BookingComponent implements OnInit, OnDestroy {
   bookingData: any;
   seatTypes: string[] = ['2S','SL', '3A', '2A', '1A'];
   statuses: string[] = ['Confirmed', 'RAC', 'Waiting'];
   username = '';
   email = '';
-
   passengers: any[] = [];
   errors: { name: boolean; age: boolean }[] = [];
+
+  // ⏰ Countdown Timer
+  countdown: number = 1 * 35;
+  timerInterval: any;
+  minutes: number = 1;
+  seconds: number = 0;
+  showWarningAnimation = false;
+  showTimeoutModal = false;
+
+  // 🔔 Toast Logic
+  showToast = false;
+  toastMessage = '';
+  toastType: 'success' | 'error' | 'warning' = 'warning';
+
+  // 🔊 Sound reference
+  @ViewChild('audioRef') audioRef!: ElementRef;
 
   constructor(private router: Router, private http: HttpClient) {}
 
@@ -30,7 +45,6 @@ export class BookingComponent implements OnInit {
       return;
     }
 
-    // ✅ Get logged-in user data from localStorage
     const storedUser = localStorage.getItem('loggedInUser');
     if (storedUser) {
       const user = JSON.parse(storedUser);
@@ -46,8 +60,53 @@ export class BookingComponent implements OnInit {
 
     const count = Math.min(this.bookingData.numberOfPeople || 1, 7);
     for (let i = 0; i < count; i++) this.addPassenger();
+
+    this.startCountdown();
   }
 
+  ngOnDestroy(): void {
+    clearInterval(this.timerInterval);
+  }
+
+  startCountdown(): void {
+    this.updateTimeDisplay();
+
+    this.timerInterval = setInterval(() => {
+      this.countdown--;
+      this.updateTimeDisplay();
+
+      if (this.countdown === 30 && this.audioRef) {
+        this.audioRef.nativeElement.play().catch(() => {});
+        this.showWarningAnimation = true;
+        this.showToastMessage('⏳ Only 30 seconds left!', 'warning');
+      }
+
+      if (this.countdown <= 0) {
+        clearInterval(this.timerInterval);
+        this.showTimeoutModal = true;
+        this.showToastMessage('⏰ Session expired. Logging out...', 'error');
+        localStorage.removeItem('loggedInUser');
+        sessionStorage.removeItem('bookingData');
+
+        setTimeout(() => this.router.navigate(['/']), 4000);
+      }
+    }, 1000);
+  }
+
+  updateTimeDisplay(): void {
+    this.minutes = Math.floor(this.countdown / 60);
+    this.seconds = this.countdown % 60;
+  }
+
+  // 📢 Toast Display
+  showToastMessage(message: string, type: 'success' | 'error' | 'warning' = 'success') {
+    this.toastMessage = message;
+    this.toastType = type;
+    this.showToast = true;
+    setTimeout(() => this.showToast = false, 4000);
+  }
+
+  // 🧠 Utility
   extractUsernameFromEmail(email: string): string {
     return email.split('@')[0];
   }
@@ -115,10 +174,13 @@ export class BookingComponent implements OnInit {
     sessionStorage.setItem('bookingSummary', JSON.stringify(bookingSummary));
 
     this.http.post('http://localhost:3000/bookings', bookingSummary).subscribe({
-      next: () => this.router.navigate(['/ticket-view']),
+      next: () => {
+        clearInterval(this.timerInterval);
+        this.router.navigate(['/ticket-view']);
+      },
       error: err => {
         console.error('❌ Error saving booking:', err);
-        alert('Failed to save booking.');
+        this.showToastMessage('Failed to save booking.', 'error');
       }
     });
   }

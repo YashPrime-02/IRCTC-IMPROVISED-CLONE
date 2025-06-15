@@ -6,13 +6,14 @@
 
   <!-- Passenger Actions -->
   <div class="actions">
-    <button (click)="addPassenger()" [disabled]="passengers.length >= 7">
-      ➕ Add Passenger
-    </button>
-    <button (click)="removePassenger()" [disabled]="passengers.length <= 1">
-      ➖ Remove Passenger
-    </button>
+    <button (click)="addPassenger()" [disabled]="passengers.length >= 7">➕ Add Passenger</button>
+    <button (click)="removePassenger()" [disabled]="passengers.length <= 1">➖ Remove Passenger</button>
     <span class="badge">👤 {{ passengers.length }}/7</span>
+  </div>
+
+  <!-- ⏰ Timer -->
+  <div class="countdown-timer">
+    <span>⏳ Time Left: {{ minutes }}:{{ seconds < 10 ? '0' + seconds : seconds }}</span>
   </div>
 
   <!-- Booking Form -->
@@ -80,4 +81,21 @@
       </button>
     </div>
   </form>
+</div>
+
+
+<!-- 🔊 Audio (last 30s) -->
+<audio #audioRef src="assets/timeout-alert.mp3" preload="auto"></audio>
+
+<!-- ⚠️ Toast -->
+<div class="custom-toast" *ngIf="showToast" [ngClass]="toastType">
+  {{ toastMessage }}
+</div>
+
+<!-- 🧨 Timeout Modal -->
+<div class="modal-backdrop" *ngIf="showTimeoutModal">
+  <div class="modal">
+    <h3>⏰ Session Expired</h3>
+    <p>Your booking session has ended. Redirecting to homepage...</p>
+  </div>
 </div>

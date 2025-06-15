@@ -202,3 +202,142 @@ button:disabled {
     padding: 10px 12px;
   }
 }
+/* Countdown Timer */
+.countdown-timer {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: black;
+  background: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  margin: 10px 0 20px 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+}
+
+.countdown-timer.warning {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+/* 🔔 Custom Toast Notification */
+.custom-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #323232;
+  color: #fff;
+  padding: 14px 20px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  z-index: 10000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  animation: toastFadeIn 0.4s forwards;
+  font-family: 'Poppins', sans-serif;
+}
+
+@keyframes toastFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Optional: Add types if needed */
+.custom-toast.success {
+  background: #28a745;
+}
+.custom-toast.warning {
+  background: #ffc107;
+  color: #000;
+}
+.custom-toast.error {
+  background: #dc3545;
+}
+
+/* 🧨 Timeout Modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 30, 30, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  animation: modalZoom 0.3s ease-out;
+}
+
+@keyframes modalZoom {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.modal h3 {
+  margin-bottom: 12px;
+  color: #e74c3c;
+  font-size: 1.4rem;
+}
+
+.modal p {
+  font-size: 1rem;
+  color: #444;
+}
+@media (max-width: 768px) {
+  /* 🔔 Toast: Top Center on Mobile */
+  .custom-toast {
+    bottom: auto;
+    top: 20px;
+    right: 0%;
+    transform: translateX(50%);
+    width: 90%;
+    font-size: 0.85rem;
+    padding: 12px 16px;
+    text-align: center;
+  }
+
+  /* 🧨 Modal */
+  .modal {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .modal h3 {
+    font-size: 1.2rem;
+  }
+
+  .modal p {
+    font-size: 0.95rem;
+  }
+
+  /* ⏰ Countdown Timer */
+  .countdown-timer {
+    font-size: 1rem;
+    padding: 8px 16px;
+    margin: 8px 0 16px 0;
+  }
+}

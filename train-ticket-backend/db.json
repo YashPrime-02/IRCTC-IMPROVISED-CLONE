@@ -568,6 +568,33 @@
         }
       ],
       "totalAmount": 550
+    },
+    {
+      "id": "aa57",
+      "user": {
+        "name": "Yash Mishra",
+        "email": "yashprime000@gmail.com"
+      },
+      "train": {
+        "trainName": "Kashi Tejas Special",
+        "departureTime": "13:00",
+        "arrivalTime": "20:30",
+        "duration": "07:30:00",
+        "date": "2025-06-18",
+        "source": "New Delhi",
+        "destination": "Kanpur Central",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "Yash ",
+          "age": 22,
+          "seatType": "SL",
+          "status": "Waiting",
+          "fare": 270
+        }
+      ],
+      "totalAmount": 270
     }
   ]
 }

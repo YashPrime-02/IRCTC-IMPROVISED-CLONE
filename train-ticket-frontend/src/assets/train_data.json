@@ -210,7 +210,13 @@
       "stationID": 42,
       "stationName": "Hazrat Nizamuddin",
       "stationCode": "NZM"
+    },
+    {
+      "stationID": 43,
+      "stationName": "Moradabad",
+      "stationCode": "MB"
     }
+
 
   ],
   "trains": [
@@ -2201,6 +2207,70 @@
     "duration": "13:15:00",
     "sourceCode": "NDLS",
     "destinationCode": "PNBE"
+  },
+  {
+    "trainName": "Intercity Express",
+    "departureTime": "06:10",
+    "arrivalTime": "09:20",
+    "duration": "03:10:00",
+    "sourceCode": "MB",
+    "destinationCode": "NDLS"
+  },
+  {
+    "trainName": "Shatabdi Express",
+    "departureTime": "07:45",
+    "arrivalTime": "10:10",
+    "duration": "02:25:00",
+    "sourceCode": "MB",
+    "destinationCode": "NDLS"
+  },
+  {
+    "trainName": "Garib Rath Express",
+    "departureTime": "11:00",
+    "arrivalTime": "13:40",
+    "duration": "02:40:00",
+    "sourceCode": "MB",
+    "destinationCode": "NDLS"
+  },
+  {
+    "trainName": "Sadbhavna Express",
+    "departureTime": "15:30",
+    "arrivalTime": "18:20",
+    "duration": "02:50:00",
+    "sourceCode": "MB",
+    "destinationCode": "NDLS"
+  },
+  {
+    "trainName": "Intercity Express",
+    "departureTime": "08:15",
+    "arrivalTime": "11:35",
+    "duration": "03:20:00",
+    "sourceCode": "NDLS",
+    "destinationCode": "MB"
+  },
+  {
+    "trainName": "Double Decker Express",
+    "departureTime": "14:00",
+    "arrivalTime": "16:30",
+    "duration": "02:30:00",
+    "sourceCode": "NDLS",
+    "destinationCode": "MB"
+  },
+  {
+    "trainName": "Jan Shatabdi Express",
+    "departureTime": "17:00",
+    "arrivalTime": "19:20",
+    "duration": "02:20:00",
+    "sourceCode": "NDLS",
+    "destinationCode": "MB"
+  },
+  {
+    "trainName": "Satyagrah Express",
+    "departureTime": "20:45",
+    "arrivalTime": "23:30",
+    "duration": "02:45:00",
+    "sourceCode": "NDLS",
+    "destinationCode": "MB"
   }
 ]
 }

@@ -541,6 +541,33 @@
         }
       ],
       "totalAmount": 430
+    },
+    {
+      "id": "242a",
+      "user": {
+        "name": "Raj Mishra",
+        "email": "rajp65@gmail.com"
+      },
+      "train": {
+        "trainName": "Sadbhavna Express",
+        "departureTime": "15:30",
+        "arrivalTime": "18:20",
+        "duration": "02:50:00",
+        "date": "2025-06-16",
+        "source": "Moradabad",
+        "destination": "New Delhi",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "Divyanshu Gupta",
+          "age": 22,
+          "seatType": "1A",
+          "status": "Confirmed",
+          "fare": 550
+        }
+      ],
+      "totalAmount": 550
     }
   ]
 }

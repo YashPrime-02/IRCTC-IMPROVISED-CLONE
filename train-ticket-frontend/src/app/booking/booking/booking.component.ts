@@ -21,9 +21,9 @@ export class BookingComponent implements OnInit, OnDestroy {
   errors: { name: boolean; age: boolean }[] = [];
 
   // ⏰ Countdown Timer
-  countdown: number = 1 * 35;
+  countdown: number = 9 * 60;
   timerInterval: any;
-  minutes: number = 1;
+  minutes: number = 9;
   seconds: number = 0;
   showWarningAnimation = false;
   showTimeoutModal = false;

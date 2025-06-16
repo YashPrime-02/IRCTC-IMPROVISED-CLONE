@@ -38,7 +38,7 @@ export class HeaderComponent {
       setTimeout(() => {
         this.showLogoutModal = false;
         this.router.navigate(['/']);
-      }, 5000);
+      }, 4000);
     }
   }
 
@@ -74,6 +74,6 @@ export class HeaderComponent {
 
     setTimeout(() => {
       this.showToast = false;
-    }, 3000); // Toast duration: 3 seconds
+    }, 4000); // Toast duration: 3 seconds
   }
 }

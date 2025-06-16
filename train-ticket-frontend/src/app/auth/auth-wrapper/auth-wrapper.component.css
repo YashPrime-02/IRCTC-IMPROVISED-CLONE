@@ -7,7 +7,7 @@ html, body {
   font-family: 'Segoe UI', sans-serif;
   font-size: 16px;
   line-height: 1.6;
-   background: rgba(255, 255, 255, 0.08) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
   background-size: 400% 400%;
   animation: bgShift 20s ease infinite;
   overflow-x: hidden;
@@ -47,7 +47,6 @@ html, body {
   flex: 1 1 100%;
   max-width: 480px;
   padding: 36px 28px;
-  /* background-color: rgba(0, 0, 0, 0.85); */
   border-radius: 12px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   margin: 0 auto;
@@ -58,7 +57,6 @@ html, body {
 .right-panel-active .sign-in-container {
   display: none;
 }
-
 .right-panel-active .sign-up-container {
   display: block;
 }
@@ -74,6 +72,8 @@ html, body {
     transform: translateY(0);
   }
 }
+
+/* Forgot Password Overlay */
 .forgot-overlay {
   position: fixed;
   top: 0;
@@ -91,7 +91,6 @@ html, body {
 
 /* Modal Glass Card */
 .forgot-modal {
-  /* background: rgba(10, 10, 10, 0.7); */
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 14px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
@@ -127,11 +126,9 @@ html, body {
   outline: none;
   transition: border 0.3s ease, background 0.3s ease;
 }
-
 .forgot-modal input::placeholder {
   color: rgba(255, 255, 255, 0.6);
 }
-
 .forgot-modal input:focus {
   border-color: #0078d4;
   background: rgba(255, 255, 255, 0.15);
@@ -156,9 +153,8 @@ html, body {
   background-color: #084f85;
   color: white;
 }
-
 .forgot-modal button:not(.close-btn):hover {
-  background-color:purple;
+  background-color: purple;
 }
 
 /* Close button */
@@ -166,13 +162,125 @@ html, body {
   background-color: #e74c3c;
   color: white;
 }
-
 .forgot-modal .close-btn:hover {
   background-color: #c0392b;
 }
+
+/* Error Message */
 .error-message {
   color: #ff6b6b;
   margin-top: -10px;
   margin-bottom: 10px;
   font-size: 13px;
+}
+
+/* Toast Notification */
+.toast-message {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: green;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  z-index: 9999;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  animation: fadeToast 0.4s ease-in-out;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+
+/* ✅ Checkmark Icon */
+.toast-message .check-icon {
+  margin-right: 10px;
+  font-size: 18px;
+  background-color: white;
+  color: #2b7a78;
+  border-radius: 50%;
+  padding: 3px 6px;
+  font-weight: bold;
+  vertical-align: middle;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes fadeToast {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* 📱 Responsive Tweaks */
+@media (max-width: 768px) {
+  .auth-container {
+    gap: 24px;
+  }
+
+  .form-container {
+    padding: 28px 20px;
+  }
+
+  .forgot-modal {
+    padding: 24px 18px;
+  }
+
+  .forgot-modal input {
+    width: 94%;
+    padding: 10px 12px;
+  }
+
+  .forgot-modal h3 {
+    font-size: 20px;
+  }
+
+  .forgot-modal button {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .toast-message {
+    top: 16px;
+    font-size: 0.85rem;
+    padding: 10px 16px;
+    max-width: 90%;
+  }
+
+  .toast-message .check-icon {
+    font-size: 16px;
+    padding: 2px 5px;
+    margin-right: 8px;
+  }
+}
+
+@media (max-width: 430px) {
+  .form-container {
+    padding: 24px 16px;
+  }
+
+  .forgot-modal {
+    padding: 20px 14px;
+  }
+
+  .forgot-modal h3 {
+    font-size: 18px;
+  }
+
+  .toast-message {
+    font-size: 0.8rem;
+    padding: 8px 14px;
+    top: 14px;
+  }
+
+  .toast-message .check-icon {
+    font-size: 14px;
+    padding: 2px 4px;
+    margin-right: 6px;
+  }
 }

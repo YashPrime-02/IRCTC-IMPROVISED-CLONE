@@ -47,11 +47,18 @@ export class AuthWrapperComponent {
     this.isForgotPasswordVisible = true;
   }
 
-  handleForgot(): void {
-    console.log('Forgot password email:', this.forgotEmail);
-    alert('Reset link sent to email (mock).');
+  showToast = false;
+
+handleForgot(): void {
+  console.log('Forgot password email:', this.forgotEmail);
+  this.showToast = true;
+
+  setTimeout(() => {
+    this.showToast = false;
     this.closeForgotPassword();
-  }
+  }, 3000); // Toast disappears after 3 seconds
+}
+
 
   closeForgotPassword(): void {
     this.isForgotPasswordVisible = false;

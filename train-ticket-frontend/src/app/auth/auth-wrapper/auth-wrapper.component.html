@@ -42,6 +42,11 @@
     </form>
   </div>
 </div>
+<!-- ✅ Toast Notification -->
+<div *ngIf="showToast" class="toast-message">
+<span class="check-icon">✔</span>
+Reset link sent to:  <strong>{{ forgotEmail }}</strong>
+</div>
 
 
 </div>

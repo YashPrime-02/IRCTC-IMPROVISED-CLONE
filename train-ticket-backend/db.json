@@ -595,6 +595,33 @@
         }
       ],
       "totalAmount": 270
+    },
+    {
+      "id": "0886",
+      "user": {
+        "name": "Yash Mishra",
+        "email": "yashprime000@gmail.com"
+      },
+      "train": {
+        "trainName": "Intercity Express",
+        "departureTime": "16:40",
+        "arrivalTime": "22:00",
+        "duration": "05:20:00",
+        "date": "2025-06-17",
+        "source": "New Delhi",
+        "destination": "Lucknow",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "Yash",
+          "age": 12,
+          "seatType": "SL",
+          "status": "RAC",
+          "fare": 250
+        }
+      ],
+      "totalAmount": 250
     }
   ]
 }

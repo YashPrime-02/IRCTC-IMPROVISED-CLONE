@@ -2,24 +2,35 @@
 <header class="app-header">
   <div class="logo">Train Booking App 🚆</div>
   <div class="user-controls">
-    <span class="welcome-text">Welcome, <span class="username"><strong>{{ userName }}</strong></span></span>
+    <span class="welcome-text">
+      Welcome, <span class="username"><strong>{{ userName }}</strong></span>
+    </span>
     <button (click)="openLogoutModal()">Logout</button>
   </div>
 </header>
 
-<!-- ✅ Logout Confirmation Modal -->
+<!-- ✅ Logout / Invalid User Modal -->
 <div *ngIf="showLogoutModal" class="modal-overlay" (click)="closeOnBackdrop($event)">
   <div class="modal-content" (click)="$event.stopPropagation()">
     <div class="modal-warning-icon">⚠️</div>
-    <h2>
-      Are you sure you want to
-      <span class="logout-blink">Log Out</span>?
+
+    <!-- Dynamic Heading -->
+    <h2 *ngIf="!invalidUser">
+      Are you sure you want to <span class="logout-blink">Log Out</span>?
     </h2>
-    <div class="modal-buttons">
+    <h2 *ngIf="invalidUser">
+      Please <span class="logout-blink">Login</span> to continue!
+    </h2>
+
+    <!-- Show buttons only for manual logout -->
+    <div class="modal-buttons" *ngIf="!invalidUser">
       <button class="yes" (click)="confirmLogout()">Yes</button>
       <button class="no" (click)="cancelLogout()">No</button>
     </div>
   </div>
 </div>
-
+<!-- ✅ Toast Message -->
+<div *ngIf="showToast" class="toast">
+  Redirecting to login page...
+</div>
 

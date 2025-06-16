@@ -1,3 +1,4 @@
+// ... [your current imports]
 import { Component, OnInit } from '@angular/core';
 // @ts-ignore
 import html2pdf from 'html2pdf.js';
@@ -28,7 +29,6 @@ export class TicketViewComponent implements OnInit {
       this.bookingData = JSON.parse(storedData);
       console.log("✅ Booking data loaded:", this.bookingData);
 
-      // ✅ Inject user details from localStorage if missing
       if (!this.bookingData.user || !this.bookingData.user.email) {
         const storedUser = localStorage.getItem('loggedInUser');
         if (storedUser) {
@@ -156,7 +156,6 @@ export class TicketViewComponent implements OnInit {
       passenger_count: this.bookingData?.passengers?.length,
       totalAmount: this.bookingData?.totalAmount,
       qr_code: this.qrCodeDataURL,
-
       passengers: this.bookingData?.passengers.map((p: any) => ({
         name: p.name,
         age: p.age,
@@ -179,5 +178,71 @@ export class TicketViewComponent implements OnInit {
         this.isSendingEmail = false;
         setTimeout(() => this.emailFailed = false, 4000);
       });
+  }
+
+  // ✅ New Method: Share Ticket via Web Share API or Email fallback
+  shareTicket(): void {
+    const ticketElement = document.getElementById('ticketSummary');
+    if (!ticketElement) return;
+
+    const cloned = ticketElement.cloneNode(true) as HTMLElement;
+ const style = document.createElement('style');
+    style.textContent = `
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+      * {
+        font-family: 'Poppins', sans-serif !important;
+        color: white !important;
+      }
+      .ticket-container {
+        background: #1e1e1e !important;
+        color: white !important;
+        padding: 20px !important;
+        border-radius: 12px !important;
+        box-shadow: 0 0 20px rgba(255,255,255,0.1) !important;
+      }
+      .ticket-summary p {
+        margin: 10px 0;
+        font-size: 16px !important;
+      }
+      .qr-image {
+        width: 150px !important;
+        margin-top: 20px !important;
+      }
+      ul, li {
+        color: white !important;
+      }
+      body {
+        background: #121212 !important;
+        color: white !important;
+      }
+    `;
+
+    cloned.appendChild(style);
+    const opt = {
+      margin: 0,
+      filename: 'IRCTC_Ticket.pdf',
+      image: { type: 'jpeg', quality: 1 },
+      html2canvas: {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: '#1e1e1e',
+      },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+
+    html2pdf().set(opt).from(cloned).outputPdf('blob').then((pdfBlob: Blob) => {
+      const file = new File([pdfBlob], 'IRCTC_Ticket.pdf', { type: 'application/pdf' });
+
+      if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+        navigator.share({
+          title: 'IRCTC Ticket',
+          text: 'Here is your train ticket',
+          files: [file]
+        }).catch(err => console.error('❌ Share failed', err));
+      } else {
+        const mailBody = encodeURIComponent(`Hello,\n\nPlease find attached your IRCTC ticket.\n\nThank you!`);
+        window.location.href = `mailto:?subject=IRCTC Ticket&body=${mailBody}`;
+      }
+    });
   }
 }

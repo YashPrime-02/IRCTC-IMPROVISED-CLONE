@@ -23,7 +23,7 @@
   <!-- ✅ PNR Number -->
   <div class="pnr-box">
     <span class="label">🆔 PNR:</span>
-    <span class="value">{{ pnrNumber }}</span>
+    <span class="value"><strong>{{ pnrNumber }}</strong></span>
     <button class="copy-btn" (click)="copyPNR()">📋 Copy</button>
   </div>
   <p class="pnr-advice">🔒 Do not share your PNR with untrusted sources.</p>
@@ -115,6 +115,7 @@
 
   <!-- ✅ Download PDF Button -->
   <div class="actions">
-    <button (click)="downloadPDF()">📄 Download PDF</button>
-  </div>
+  <button (click)="downloadPDF()">📄 Download PDF</button>
+  <button (click)="shareTicket()">📤 Share Ticket</button>
 </div>
+

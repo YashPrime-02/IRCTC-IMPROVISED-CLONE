@@ -25,7 +25,7 @@ import { AuthGuard } from './shared/auth.guard';
     TrainSearchComponent,
     TicketViewComponent,
     HeaderComponent
-    // BookingComponent ❌ REMOVE FROM HERE
+
   ],
   imports: [
     BrowserModule,

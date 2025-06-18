@@ -1,7 +1,7 @@
 const dbConfig = require("../config/db.config.js");
 const { Sequelize } = require("sequelize");
 
-// Create Sequelize instance with MySQL connection
+// Create Sequelize instance
 const sequelize = new Sequelize(
   dbConfig.DB,
   dbConfig.USER,
@@ -10,17 +10,18 @@ const sequelize = new Sequelize(
     host: dbConfig.HOST,
     port: dbConfig.PORT,
     dialect: dbConfig.dialect,
-    logging: false // Set to true to enable SQL query logs
+    logging: false
   }
 );
 
-// Initialize db object to store Sequelize and models
+// Initialize db object
 const db = {};
 
-db.Sequelize = Sequelize;   // Sequelize class (for operators, etc.)
-db.sequelize = sequelize;   // Sequelize instance (connected to DB)
+db.Sequelize = Sequelize;
+db.sequelize = sequelize;
 
-// 🔧 Models will be added here later, like:
-// db.user = require("./user.model")(sequelize, Sequelize.DataTypes);
+// ✅ Register user model correctly (note the plural "users")
+db.users = require("./user.model")(sequelize, Sequelize.DataTypes);
 
+// Export the db object
 module.exports = db;

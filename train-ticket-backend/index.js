@@ -8,19 +8,29 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json()); // Parse JSON requests
-app.use(express.urlencoded({ extended: true })); // Parse URL-encoded
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded requests
 
 // Root route (test purpose)
 app.get("/", (req, res) => {
   res.send("🚄 IRCTC Clone Backend is Running!");
 });
 
-// Sequelize Connection Test
-db.sequelize.authenticate()
+// Import and use Auth Routes
+const authRoutes = require("./routes/auth.routes");
+app.use("/api/auth", authRoutes);
+
+// Test DB Connection + Sync models
+db.sequelize
+  .authenticate()
   .then(() => {
     console.log("✅ MySQL connected successfully.");
+
+    // Sync models (create tables if not exist)
+    db.sequelize.sync().then(() => {
+      console.log("🛠️ Tables synced successfully.");
+    });
   })
-  .catch(err => {
+  .catch((err) => {
     console.error("❌ Unable to connect to MySQL:", err);
   });
 

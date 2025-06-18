@@ -63,7 +63,7 @@ export class TrainSearchComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private bookingService: BookingService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.minDate = new Date().toISOString().split('T')[0];
@@ -88,24 +88,17 @@ export class TrainSearchComponent implements OnInit {
     this.dateTouched = true;
     this.timeTouched = true;
 
-    const todayDateOnly = new Date().toISOString().split('T')[0];
-    if (this.selectedDate < todayDateOnly) {
+    const today = new Date().toISOString().split('T')[0];
+    if (this.selectedDate < today) {
       this.showPastDateToast = true;
-      setTimeout(() => {
-        this.showPastDateToast = false;
-      }, 4000);
+      setTimeout(() => this.showPastDateToast = false, 4000);
       return;
     }
 
-    if (this.selectedDate === todayDateOnly) {
-      const minTime = this.getMinTime();
-      if (this.selectedTime < minTime) {
-        this.selectedTime = minTime;
-        this.showTimeToast = true;
-        setTimeout(() => {
-          this.showTimeToast = false;
-        }, 4000);
-      }
+    if (this.selectedDate === today && this.selectedTime < this.getMinTime()) {
+      this.selectedTime = this.getMinTime();
+      this.showTimeToast = true;
+      setTimeout(() => this.showTimeToast = false, 4000);
     }
 
     if (!source || !destination || !this.selectedDate || !this.selectedTime) {
@@ -130,6 +123,7 @@ export class TrainSearchComponent implements OnInit {
       }
     }, 100);
   }
+
   swapStations(): void {
     const src = this.sourceRef.nativeElement;
     const dest = this.destinationRef.nativeElement;
@@ -143,7 +137,6 @@ export class TrainSearchComponent implements OnInit {
     setTimeout(() => {
       src.value = dest.value;
       dest.value = temp;
-
       src.classList.remove('swap-animation');
       dest.classList.remove('swap-animation');
     }, 300);
@@ -158,12 +151,9 @@ export class TrainSearchComponent implements OnInit {
   }
 
   isTimeMatch(trainTime: string, selectedTime: string): boolean {
-    const [trainHours, trainMinutes] = trainTime.split(':').map(Number);
-    const [selectedHours, selectedMinutes] = selectedTime.split(':').map(Number);
-
-    if (trainHours > selectedHours) return true;
-    if (trainHours === selectedHours && trainMinutes >= selectedMinutes) return true;
-    return false;
+    const [th, tm] = trainTime.split(':').map(Number);
+    const [sh, sm] = selectedTime.split(':').map(Number);
+    return th > sh || (th === sh && tm >= sm);
   }
 
   resetSearchState(): void {
@@ -178,26 +168,23 @@ export class TrainSearchComponent implements OnInit {
     this.showModal = false;
   }
 
-  bookTrain(train: Train, selectedDate: string, numberOfPeople: number): void {
+  bookTrain(train: Train, date: string, count: number): void {
     const bookingData = {
       trainName: train.trainName,
       departureTime: train.departureTime,
       arrivalTime: train.arrivalTime,
       duration: train.duration,
-      date: selectedDate,
+      date,
       source: this.stations.find(s => s.stationCode === this.selectedSource)?.stationName || '',
       destination: this.stations.find(s => s.stationCode === this.selectedDestination)?.stationName || '',
-      numberOfPeople
+      numberOfPeople: count
     };
-    console.log('✅ Navigating to booking with data:', bookingData);
     this.router.navigate(['/booking'], { state: { bookingData } });
   }
 
   getMinTime(): string {
     const now = new Date();
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    return `${hours}:${minutes}`;
+    return `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
   }
 
   @HostListener('document:mousemove', ['$event'])

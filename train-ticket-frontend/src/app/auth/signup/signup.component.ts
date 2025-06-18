@@ -50,16 +50,19 @@ export class SignupComponent {
       return;
     }
 
-    const userData = {
-      name: this.name,
-      email: this.email,
-      password: this.password,
-      age: this.age
-    };
-
-    localStorage.setItem('userData', JSON.stringify(userData));
-    this.showToastMessage('✅ Signup successful. Please log in.');
-
-    setTimeout(() => this.switchToLogin.emit(), 3500);
+    this.authService.signup(this.name, this.email, this.password).subscribe({
+      next: () => {
+        this.showToastMessage('✅ Signup successful! Please log in.');
+        setTimeout(() => this.switchToLogin.emit(), 3000);
+      },
+      error: (err) => {
+        console.error('Signup failed:', err);
+        if (err.error?.message === 'User already exists!') {
+          this.showToastMessage('⚠️ Email already in use. Try logging in.');
+        } else {
+          this.showToastMessage('❌ Signup failed. Please try again.');
+        }
+      }
+    });
   }
 }

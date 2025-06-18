@@ -11,34 +11,62 @@ import { CommonModule } from '@angular/common';
 })
 export class HeaderComponent {
   userName: string = 'User';
-  showLogoutModal: boolean = false;
-  invalidUser: boolean = false;
-  showToast: boolean = false;
+  showLogoutModal = false;
+  invalidUser = false;
+  showToast = false;
 
   constructor(private router: Router) {
+    this.initializeUserData();
+  }
+
+  // ✅ Centralized user init
+  initializeUserData(): void {
     const userData = localStorage.getItem('userData');
-    if (userData) {
-      try {
-        const parsed = JSON.parse(userData);
-        this.userName = parsed.name || 'User';
-      } catch (err) {
-        console.error('Error parsing user data:', err);
+
+    if (!userData || userData === 'undefined') {
+      console.warn('⚠️ No valid user data found.');
+      this.invalidateSession();
+      return;
+    }
+
+    try {
+      const parsed = JSON.parse(userData);
+      if (parsed && parsed.name) {
+        this.userName = parsed.name;
+      } else {
+        console.warn('⚠️ Missing "name" in userData.');
+        this.invalidateSession();
       }
+    } catch (err) {
+      console.error('❌ Error parsing user data:', err);
+      this.invalidateSession();
     }
 
     this.checkUserValidity();
   }
 
-  checkUserValidity(): void {
-    if (this.userName === 'User') {
-      this.invalidUser = true;
-      this.showLogoutModal = true;
-      this.triggerToast('Redirecting to login page...');
+  // ✅ Invalidate + redirect logic
+  invalidateSession(): void {
+    this.invalidUser = true;
+    this.showLogoutModal = true;
+    localStorage.removeItem('userData');
+    localStorage.removeItem('token');
+    localStorage.removeItem('isLoggedIn');
 
-      setTimeout(() => {
-        this.showLogoutModal = false;
-        this.router.navigate(['/']);
-      }, 4000);
+    this.triggerToast('⚠️ Session expired. Redirecting to login...');
+    setTimeout(() => {
+      this.showLogoutModal = false;
+      this.router.navigate(['/auth']);
+    }, 4000);
+  }
+
+  // ✅ Minimal additional check
+  checkUserValidity(): void {
+    const token = localStorage.getItem('token');
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+
+    if (!token || isLoggedIn !== 'true') {
+      this.invalidateSession();
     }
   }
 
@@ -53,13 +81,9 @@ export class HeaderComponent {
   confirmLogout(): void {
     localStorage.removeItem('userData');
     localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('loggedInUser');
+    localStorage.removeItem('token');
     this.showLogoutModal = false;
-    this.router.navigate(['/']);
-  }
-
-  closeOnBackdrop(event: MouseEvent): void {
-    this.cancelLogout();
+    this.router.navigate(['/auth']);
   }
 
   @HostListener('document:keydown.escape', ['$event'])
@@ -69,11 +93,12 @@ export class HeaderComponent {
     }
   }
 
+  closeOnBackdrop(event: MouseEvent): void {
+    this.cancelLogout();
+  }
+
   triggerToast(message: string): void {
     this.showToast = true;
-
-    setTimeout(() => {
-      this.showToast = false;
-    }, 4000); // Toast duration: 3 seconds
+    setTimeout(() => this.showToast = false, 4000);
   }
 }

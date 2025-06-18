@@ -5,26 +5,26 @@ const db = require("./models");
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-// Middlewares
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// Middleware setup
+app.use(cors()); // Enable Cross-Origin Resource Sharing
+app.use(express.json()); // Parse incoming JSON
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
-// Routes
-require("./routes/station.routes")(app);
-require("./routes/train.routes")(app);
+// Register API routes
+require("./routes/station.routes")(app); // Routes to fetch station data
+require("./routes/train.routes")(app);   // Routes for train search
 
-// Root Route
+// Root route - health check
 app.get("/", (req, res) => {
   res.send("🚆 IRCTC Backend API Running!");
 });
 
-// DB Sync (Optional here, already done in seed.js)
+// Connect to MySQL DB (sync without forcing)
 db.sequelize.sync().then(() => {
   console.log("✅ Connected to MySQL DB.");
 });
 
-// Start server
+// Start the server
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
 });

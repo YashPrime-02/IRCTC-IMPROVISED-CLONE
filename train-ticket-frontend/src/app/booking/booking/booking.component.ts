@@ -20,7 +20,6 @@ export class BookingComponent implements OnInit, OnDestroy {
   passengers: any[] = [];
   errors: { name: boolean; age: boolean }[] = [];
 
-  // ⏰ Countdown Timer
   countdown: number = 9 * 60;
   timerInterval: any;
   minutes: number = 9;
@@ -28,12 +27,10 @@ export class BookingComponent implements OnInit, OnDestroy {
   showWarningAnimation = false;
   showTimeoutModal = false;
 
-  // 🔔 Toast Logic
   showToast = false;
   toastMessage = '';
   toastType: 'success' | 'error' | 'warning' = 'warning';
 
-  // 🔊 Sound reference
   @ViewChild('audioRef') audioRef!: ElementRef;
 
   constructor(private router: Router, private http: HttpClient) {}
@@ -87,7 +84,6 @@ export class BookingComponent implements OnInit, OnDestroy {
         this.showToastMessage('⏰ Session expired. Logging out...', 'error');
         localStorage.removeItem('loggedInUser');
         sessionStorage.removeItem('bookingData');
-
         setTimeout(() => this.router.navigate(['/']), 4000);
       }
     }, 1000);
@@ -98,7 +94,6 @@ export class BookingComponent implements OnInit, OnDestroy {
     this.seconds = this.countdown % 60;
   }
 
-  // 📢 Toast Display
   showToastMessage(message: string, type: 'success' | 'error' | 'warning' = 'success') {
     this.toastMessage = message;
     this.toastType = type;
@@ -106,7 +101,6 @@ export class BookingComponent implements OnInit, OnDestroy {
     setTimeout(() => this.showToast = false, 4000);
   }
 
-  // 🧠 Utility
   extractUsernameFromEmail(email: string): string {
     return email.split('@')[0];
   }
@@ -135,8 +129,8 @@ export class BookingComponent implements OnInit, OnDestroy {
     this.passengers[i].fare = this.calculateFare(seat);
   }
 
-  calculateFare(seatType: '2S'| 'SL' | '3A' | '2A' | '1A'): number {
-    const factorMap = { '2S':1, SL: 2, '3A': 3, '2A': 4, '1A': 5 };
+  calculateFare(seatType: '2S' | 'SL' | '3A' | '2A' | '1A'): number {
+    const factorMap = { '2S': 1, SL: 2, '3A': 3, '2A': 4, '1A': 5 };
     const base = 150;
     const distanceFactor = Math.floor(Math.random() * 5) + 5;
     return base + factorMap[seatType] * distanceFactor * 10;
@@ -167,7 +161,13 @@ export class BookingComponent implements OnInit, OnDestroy {
     const bookingSummary = {
       user: { name: this.username, email: this.email },
       train: this.bookingData,
-      passengers: this.passengers,
+      passengers: this.passengers.map(p => ({
+        name: p.name,
+        age: p.age,
+        seatType: p.seatType,
+        status: p.status,
+        fare: p.fare
+      })),
       totalAmount: this.calculateTotal()
     };
 

@@ -1,7 +1,7 @@
 const dbConfig = require("../config/db.config.js");
-const { Sequelize } = require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize");
 
-// Create Sequelize instance
+// ✅ Create Sequelize instance
 const sequelize = new Sequelize(
   dbConfig.DB,
   dbConfig.USER,
@@ -10,18 +10,23 @@ const sequelize = new Sequelize(
     host: dbConfig.HOST,
     port: dbConfig.PORT,
     dialect: dbConfig.dialect,
-    logging: false
+    port: dbConfig.PORT,
+    logging: false, // Disable logging
   }
 );
 
-// Initialize db object
+// ✅ Initialize DB object
 const db = {};
 
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-// ✅ Register user model correctly (note the plural "users")
-db.users = require("./user.model")(sequelize, Sequelize.DataTypes);
+// ✅ Register all models
+db.users = require("./user.model")(sequelize, DataTypes);
+db.stations = require("./station.model")(sequelize, DataTypes);
+db.trains = require("./train.model")(sequelize, DataTypes);
 
-// Export the db object
+// 🔗 Optional: Define model relationships/associations here if needed
+
+// ✅ Export the db object
 module.exports = db;

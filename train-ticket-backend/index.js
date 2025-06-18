@@ -15,17 +15,20 @@ app.get("/", (req, res) => {
   res.send("🚄 IRCTC Clone Backend is Running!");
 });
 
-// Import and use Auth Routes
+// Auth Routes (Signup/Login)
 const authRoutes = require("./routes/auth.routes");
 app.use("/api/auth", authRoutes);
 
-// Test DB Connection + Sync models
+// ✅ Test Protected Route
+const testRoutes = require("./routes/test.routes");
+app.use("/api/test", testRoutes);
+
+// Connect to DB and sync
 db.sequelize
   .authenticate()
   .then(() => {
     console.log("✅ MySQL connected successfully.");
 
-    // Sync models (create tables if not exist)
     db.sequelize.sync().then(() => {
       console.log("🛠️ Tables synced successfully.");
     });
@@ -34,10 +37,8 @@ db.sequelize
     console.error("❌ Unable to connect to MySQL:", err);
   });
 
-// Define the port
+// Start server
 const PORT = process.env.PORT || 8080;
-
-// Start the server
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on http://localhost:${PORT}`);
 });

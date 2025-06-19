@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class BookingComponent implements OnInit, OnDestroy {
   bookingData: any;
-  seatTypes: string[] = ['2S','SL', '3A', '2A', '1A'];
+  seatTypes: string[] = ['2S', 'SL', '3A', '2A', '1A'];
   statuses: string[] = ['Confirmed', 'RAC', 'Waiting'];
   username = '';
   email = '';
@@ -33,7 +33,7 @@ export class BookingComponent implements OnInit, OnDestroy {
 
   @ViewChild('audioRef') audioRef!: ElementRef;
 
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(private router: Router, private http: HttpClient) { }
 
   ngOnInit(): void {
     const nav = history.state.bookingData || JSON.parse(sessionStorage.getItem('bookingData') || 'null');
@@ -73,7 +73,7 @@ export class BookingComponent implements OnInit, OnDestroy {
       this.updateTimeDisplay();
 
       if (this.countdown === 30 && this.audioRef) {
-        this.audioRef.nativeElement.play().catch(() => {});
+        this.audioRef.nativeElement.play().catch(() => { });
         this.showWarningAnimation = true;
         this.showToastMessage('⏳ Only 30 seconds left!', 'warning');
       }
@@ -155,46 +155,45 @@ export class BookingComponent implements OnInit, OnDestroy {
     return isValid;
   }
 
-confirmBooking(): void {
-  if (!this.validatePassengers()) return;
+  confirmBooking(): void {
+    if (!this.validatePassengers()) return;
 
-  // ✅ Fix: use bookingData directly (no .train)
-  const train = this.bookingData;
+    const train = this.bookingData;
 
-  console.log('📦 bookingData:', train);
-  console.log('🚆 trainName:', train.trainName);
-  console.log('🏁 sourceCode:', train.sourceCode);
-  console.log('🏁 destinationCode:', train.destinationCode);
-
-  const bookingSummary = {
-    email: this.email,
-    trainName: train.trainName,
-    sourceCode: train.sourceCode,
-    destinationCode: train.destinationCode,
-    passengers: this.passengers.map(p => ({
-      name: p.name,
-      age: p.age,
-      seatType: p.seatType,
-      status: p.status,
-      fare: p.fare
-    })),
-    totalAmount: this.calculateTotal(),
-    bookingDate: new Date()
-  };
-
-  console.log('✅ Final booking payload to be sent to backend:', bookingSummary);
-
-  this.http.post('http://localhost:8080/api/bookings', bookingSummary).subscribe({
-    next: () => {
-      clearInterval(this.timerInterval);
-      this.router.navigate(['/ticket-view']);
-    },
-    error: err => {
-      console.error('❌ Error saving booking:', err);
-      this.showToastMessage('Failed to save booking.', 'error');
-    }
-  });
-}
+    const bookingSummary = {
+      email: this.email,
+      trainName: train.trainName,
+      sourceCode: train.sourceCode,
+      destinationCode: train.destinationCode,
+      date: train.date,
+      duration: train.duration,
+      passengers: this.passengers.map(p => ({
+        name: p.name,
+        age: p.age,
+        seatType: p.seatType,
+        status: p.status,
+        fare: p.fare
+      })),
+      totalAmount: this.calculateTotal(),
+      bookingDate: new Date()
+    };
 
 
+    console.log('✅ Final booking payload to be sent to backend:', bookingSummary);
+
+    this.http.post('http://localhost:8080/api/bookings', bookingSummary).subscribe({
+      next: () => {
+        clearInterval(this.timerInterval);
+
+        // ✅ Fix added: sessionStorage save before routing
+        sessionStorage.setItem('bookingSummary', JSON.stringify(bookingSummary));
+
+        this.router.navigate(['/ticket-view']);
+      },
+      error: err => {
+        console.error('❌ Error saving booking:', err);
+        this.showToastMessage('Failed to save booking.', 'error');
+      }
+    });
+  }
 }

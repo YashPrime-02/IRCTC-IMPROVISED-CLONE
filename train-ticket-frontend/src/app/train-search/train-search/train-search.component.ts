@@ -168,19 +168,22 @@ export class TrainSearchComponent implements OnInit {
     this.showModal = false;
   }
 
-  bookTrain(train: Train, date: string, count: number): void {
-    const bookingData = {
-      trainName: train.trainName,
-      departureTime: train.departureTime,
-      arrivalTime: train.arrivalTime,
-      duration: train.duration,
-      date,
-      source: this.stations.find(s => s.stationCode === this.selectedSource)?.stationName || '',
-      destination: this.stations.find(s => s.stationCode === this.selectedDestination)?.stationName || '',
-      numberOfPeople: count
-    };
-    this.router.navigate(['/booking'], { state: { bookingData } });
-  }
+ bookTrain(train: Train, date: string, count: number): void {
+  const bookingData = {
+    trainName: train.trainName,
+    departureTime: train.departureTime,
+    arrivalTime: train.arrivalTime,
+    duration: train.duration,
+    date,
+    source: this.stations.find(s => s.stationCode === this.selectedSource)?.stationName || '',
+    destination: this.stations.find(s => s.stationCode === this.selectedDestination)?.stationName || '',
+    sourceCode: this.selectedSource,              // ✅ Added
+    destinationCode: this.selectedDestination,    // ✅ Added
+    numberOfPeople: count
+  };
+  this.router.navigate(['/booking'], { state: { bookingData } });
+}
+
 
   getMinTime(): string {
     const now = new Date();

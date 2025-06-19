@@ -10,8 +10,7 @@ const sequelize = new Sequelize(
     host: dbConfig.HOST,
     port: dbConfig.PORT,
     dialect: dbConfig.dialect,
-    port: dbConfig.PORT,
-    logging: false, // Disable logging
+    logging: false, // Disable SQL query logs
   }
 );
 
@@ -21,12 +20,18 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-// ✅ Register all models
+// ✅ Register Models
 db.users = require("./user.model")(sequelize, DataTypes);
 db.stations = require("./station.model")(sequelize, DataTypes);
 db.trains = require("./train.model")(sequelize, DataTypes);
 
-// 🔗 Optional: Define model relationships/associations here if needed
+db.bookings = require('./booking.model')(sequelize, DataTypes);
 
-// ✅ Export the db object
+
+// 🔗 (Optional) Define Associations if needed later
+// Example: 
+// db.trains.belongsTo(db.stations, { foreignKey: 'sourceCode', targetKey: 'stationCode' });
+// db.trains.belongsTo(db.stations, { foreignKey: 'destinationCode', targetKey: 'stationCode' });
+
+// ✅ Export db object
 module.exports = db;

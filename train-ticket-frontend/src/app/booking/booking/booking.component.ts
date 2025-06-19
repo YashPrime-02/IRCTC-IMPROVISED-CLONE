@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -155,33 +155,46 @@ export class BookingComponent implements OnInit, OnDestroy {
     return isValid;
   }
 
-  confirmBooking(): void {
-    if (!this.validatePassengers()) return;
+confirmBooking(): void {
+  if (!this.validatePassengers()) return;
 
-    const bookingSummary = {
-      user: { name: this.username, email: this.email },
-      train: this.bookingData,
-      passengers: this.passengers.map(p => ({
-        name: p.name,
-        age: p.age,
-        seatType: p.seatType,
-        status: p.status,
-        fare: p.fare
-      })),
-      totalAmount: this.calculateTotal()
-    };
+  // ✅ Fix: use bookingData directly (no .train)
+  const train = this.bookingData;
 
-    sessionStorage.setItem('bookingSummary', JSON.stringify(bookingSummary));
+  console.log('📦 bookingData:', train);
+  console.log('🚆 trainName:', train.trainName);
+  console.log('🏁 sourceCode:', train.sourceCode);
+  console.log('🏁 destinationCode:', train.destinationCode);
 
-    this.http.post('http://localhost:3000/bookings', bookingSummary).subscribe({
-      next: () => {
-        clearInterval(this.timerInterval);
-        this.router.navigate(['/ticket-view']);
-      },
-      error: err => {
-        console.error('❌ Error saving booking:', err);
-        this.showToastMessage('Failed to save booking.', 'error');
-      }
-    });
-  }
+  const bookingSummary = {
+    email: this.email,
+    trainName: train.trainName,
+    sourceCode: train.sourceCode,
+    destinationCode: train.destinationCode,
+    passengers: this.passengers.map(p => ({
+      name: p.name,
+      age: p.age,
+      seatType: p.seatType,
+      status: p.status,
+      fare: p.fare
+    })),
+    totalAmount: this.calculateTotal(),
+    bookingDate: new Date()
+  };
+
+  console.log('✅ Final booking payload to be sent to backend:', bookingSummary);
+
+  this.http.post('http://localhost:8080/api/bookings', bookingSummary).subscribe({
+    next: () => {
+      clearInterval(this.timerInterval);
+      this.router.navigate(['/ticket-view']);
+    },
+    error: err => {
+      console.error('❌ Error saving booking:', err);
+      this.showToastMessage('Failed to save booking.', 'error');
+    }
+  });
+}
+
+
 }

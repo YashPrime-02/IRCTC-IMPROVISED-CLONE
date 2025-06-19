@@ -101,4 +101,7 @@ export class HeaderComponent {
     this.showToast = true;
     setTimeout(() => this.showToast = false, 4000);
   }
+  goToBookingHistory(): void {
+  this.router.navigate(['/booking-history']);
+}
 }

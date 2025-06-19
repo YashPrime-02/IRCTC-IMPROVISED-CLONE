@@ -22,6 +22,7 @@ app.use("/api/test", require("./routes/test.routes"));      // Protected test ro
 app.use("/api/trains", require("./routes/train.routes"));   // Train search
 app.use("/api/stations", require("./routes/station.routes"));// Station list
 app.use("/api/dev", require("./routes/dev.routes"));        // Dev tools: GET/DELETE users
+app.use("/api/bookings", require("./routes/booking.routes")); //booking routes
 
 // ✅ Connect and sync DB
 db.sequelize.authenticate()

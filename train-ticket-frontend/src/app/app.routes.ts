@@ -26,6 +26,11 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./ticket-view/ticket-view/ticket-view.component').then(m => m.TicketViewComponent)
   },
+  {
+  path: 'booking-history',
+  loadComponent: () => import('./booking/booking/booking/booking-history/booking-history.component').then(m => m.BookingHistoryComponent)
+},
+
 
   { path: '**', redirectTo: 'auth' }
 ];

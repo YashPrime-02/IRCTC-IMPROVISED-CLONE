@@ -264,3 +264,18 @@
     height: 2px;
   }
 }
+.nav-link {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  padding: 8px 12px;
+  color: #007bff;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+  color: #0056b3;
+}

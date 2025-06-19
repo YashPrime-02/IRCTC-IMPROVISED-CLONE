@@ -1,59 +1,145 @@
-# TrainTicketFrontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.10.
+---
 
-## Development server
+## ✅ **Frontend README (`/train-ticket-frontend/README.md`)**
 
-To start a local development server, run:
+```markdown
+# 🚆 IRCTC Clone Frontend – Angular 17+
+
+This is the frontend application for the IRCTC booking system. It supports dynamic train search, booking, countdowns, ticket view with QR and PDF support, and booking history.
+
+---
+
+## 📁 Key Components
+
+- `auth/` → Login, Signup with localStorage support
+- `train-search/` → Station swap, train list filters
+- `booking/` → Animated passenger form, countdown, toast alerts
+- `ticket-view/` → Ticket confirmation, QR + PDF, email trigger
+- `booking-history/` → Filterable booking history cards
+- `services/` → BookingService for backend API communication
+
+---
+
+## ⚙️ Setup
 
 ```bash
+cd train-ticket-frontend
+npm install
 ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+App will run at http://localhost:4200/
 
-## Code scaffolding
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+📂 Environment Setup
+Create .env (optional for EmailJS config):
 
-```bash
-ng generate component component-name
-```
+env
+Copy
+Edit
+EMAIL_SERVICE_ID=service_id
+EMAIL_TEMPLATE_ID=template_id
+EMAIL_PUBLIC_KEY=public_key
+These are injected into the ticket-view component for email confirmations.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+📦 Tools & Libraries
+Bootstrap 5 (responsive design)
 
-```bash
-ng generate --help
-```
+html2pdf.js (PDF generation)
 
-## Building
+EmailJS (for sending email with QR)
 
-To build the project run:
+QR Code Generator (Angular QR)
 
-```bash
-ng build
-```
+LocalStorage & SessionStorage
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-## Running unit tests
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
 
-```bash
-ng test
-```
+---
 
-## Running end-to-end tests
+## ✅ **Backend README (`/train-ticket-backend/README.md`)**
 
-For end-to-end (e2e) testing, run:
+```markdown
+# 🧠 IRCTC Clone Backend – Node.js + MySQL
 
-```bash
-ng e2e
-```
+This is the backend API for the IRCTC Clone Booking System. Built using Express, Sequelize ORM, and JWT-based auth.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## 🔧 Technologies Used
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Express.js
+- Sequelize ORM
+- MySQL
+- JWT Auth
+- CORS, bcrypt
+- RESTful APIs
+
+---
+
+## 🔌 API Endpoints
+
+### Auth Routes
+
+| Method | Route          | Description        |
+|--------|----------------|--------------------|
+| POST   | `/api/auth/signup` | Register user |
+| POST   | `/api/auth/login`  | Login user    |
+
+### Booking Routes
+
+| Method | Route                    | Description              |
+|--------|--------------------------|--------------------------|
+| POST   | `/api/bookings`          | Save a new booking       |
+| GET    | `/api/bookings?email=..` | Fetch bookings by email  |
+| DELETE | `/api/bookings/:id`      | Delete booking by ID     |
+
+### Train & Station Routes
+
+| Method | Route             | Description               |
+|--------|-------------------|---------------------------|
+| GET    | `/api/trains`     | Get all train records     |
+| GET    | `/api/stations`   | Get all station records   |
+
+---
+
+## 🧪 Setup Instructions
+
+1. Create `.env` file
+
+```env
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=your_password
+DB_NAME=irctc_clone
+JWT_SECRET=mysecret
+
+
+Run Backend:
+
+bash
+Copy
+Edit
+npm install
+npm start
+Backend runs at: http://localhost:8080
+
+
+📄 Models
+User
+name, email, password
+
+Booking
+trainName, sourceCode, destinationCode
+
+email, passengers (JSON), totalAmount
+
+date, duration, bookingDate
+
+🛡️ Security
+Passwords hashed with bcrypt
+
+JWT-based login system
+
+All input validated before DB write

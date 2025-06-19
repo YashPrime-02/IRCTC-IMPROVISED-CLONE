@@ -1,7 +1,7 @@
 
 ---
 
-## ✅ **Frontend README (`/train-ticket-frontend/README.md`)**
+## ✅ **Frontend +Backend README (`/train-ticket-frontend/README.md`)**
 
 ```markdown
 # 🚆 IRCTC Clone Frontend – Angular 17+

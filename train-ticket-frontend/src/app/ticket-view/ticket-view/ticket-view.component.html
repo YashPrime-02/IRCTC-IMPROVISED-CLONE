@@ -30,82 +30,76 @@
 
   <!-- ✅ Booking Summary -->
   <div class="ticket-summary">
-  <table>
-    <tbody>
-      <tr>
-        <th>👤 Name:</th>
-        <td><strong>{{ bookingData?.user?.name }}</strong></td>
-      </tr>
-      <tr>
-        <th>📧 Email:</th>
-        <td><strong>{{ bookingData?.user?.email }}</strong></td>
-      </tr>
-      <tr>
-        <th>🚆 Train:</th>
-        <td><strong>{{ bookingData?.train?.trainName }}</strong></td>
-      </tr>
-      <tr>
-        <th>🛤️ From:</th>
-        <td><strong>{{ bookingData?.train?.source }}</strong></td>
-      </tr>
-      <tr>
-        <th>🏁 To:</th>
-        <td><strong>{{ bookingData?.train?.destination }}</strong></td>
-      </tr>
-      <tr>
-        <th>📅 Date:</th>
-        <td><strong>{{ bookingData?.train?.date }}</strong></td>
-      </tr>
-      <tr>
-        <th>💰 Total Fare:</th>
-        <td><strong>₹{{ bookingData?.totalAmount }}</strong></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+    <table>
+      <tbody>
+        <tr>
+          <th>🚆 Train:</th>
+          <td><strong>{{ bookingData?.trainName }}</strong></td>
+        </tr>
+        <tr>
+          <th>🛤️ From:</th>
+          <td><strong>{{ bookingData?.source }}</strong> ({{ bookingData?.sourceCode }})</td>
+        </tr>
+        <tr>
+          <th>🏁 To:</th>
+          <td><strong>{{ bookingData?.destination }}</strong> ({{ bookingData?.destinationCode }})</td>
+        </tr>
+        <tr>
+          <th>📅 Date:</th>
+          <td><strong>{{ bookingData?.date }}</strong></td>
+        </tr>
+        <tr>
+          <th>⏱ Duration:</th>
+          <td><strong>{{ bookingData?.duration }}</strong></td>
+        </tr>
+        <tr>
+          <th>💰 Total Fare:</th>
+          <td><strong>₹{{ bookingData?.totalAmount }}</strong></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
 
 
 
 
   <!-- ✅ Passengers -->
   <div *ngIf="bookingData?.passengers?.length">
-  <h3 class="text-light mb-4">👤 Passengers:</h3>
-  <div class="passengers-table-wrapper">
-    <table class="passengers-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Age</th>
-          <th>Class</th>
-          <th>Seat</th>
-          <th>Status</th>
-          <th>Fare</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let p of bookingData.passengers">
-          <td data-label="👤 Name"><strong>{{ p.name }}</strong></td>
-          <td data-label="🎂 Age"><strong>{{ p.age }}</strong></td>
-          <td data-label="🚪 Class"><strong>{{ p.seatType }}</strong></td>
-          <td data-label="🪑 Seat"><strong>{{ p.seatNumber || '-' }}</strong></td>
-          <td data-label="Status">
-            <span
-              class="status-badge"
-              [ngClass]="{
+    <h3 class="text-light mb-4">👤 Passengers:</h3>
+    <div class="passengers-table-wrapper">
+      <table class="passengers-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Class</th>
+            <th>Seat</th>
+            <th>Status</th>
+            <th>Fare</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of bookingData.passengers">
+            <td data-label="👤 Name"><strong>{{ p.name }}</strong></td>
+            <td data-label="🎂 Age"><strong>{{ p.age }}</strong></td>
+            <td data-label="🚪 Class"><strong>{{ p.seatType }}</strong></td>
+            <td data-label="🪑 Seat"><strong>{{ p.seatNumber || '-' }}</strong></td>
+            <td data-label="Status">
+              <span class="status-badge" [ngClass]="{
                 confirmed: p.status === 'Confirmed',
                 rac: p.status === 'RAC',
                 waiting: p.status === 'Waiting'
-              }"
-            >
-              {{ p.status }}
-            </span>
-          </td>
-          <td data-label="💰 Individual Fare(s)"><strong>₹{{ p.fare }}</strong></td>
-        </tr>
-      </tbody>
-    </table>
+              }">
+                {{ p.status }}
+              </span>
+            </td>
+            <td data-label="💰 Individual Fare(s)"><strong>₹{{ p.fare }}</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
 
 
   <!-- ✅ QR Section -->
@@ -115,7 +109,6 @@
 
   <!-- ✅ Download PDF Button -->
   <div class="actions">
-  <button (click)="downloadPDF()">📄 Download PDF</button>
-  <button (click)="shareTicket()">📤 Share Ticket</button>
-</div>
-
+    <button (click)="downloadPDF()">📄 Download PDF</button>
+    <button (click)="shareTicket()">📤 Share Ticket</button>
+  </div>

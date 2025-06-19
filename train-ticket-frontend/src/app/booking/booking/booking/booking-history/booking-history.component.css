@@ -1,0 +1,116 @@
+.history-container {
+  padding: 24px;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #1e1e1e, #292929);
+  color: #f0f0f0;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.booking-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 20px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  transition: transform 0.2s ease;
+  margin-top: 2%;
+}
+
+.booking-card:hover {
+  transform: scale(1.02);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.fare {
+  font-weight: bold;
+  color: #0ff;
+}
+
+.filters select {
+  margin-right: 10px;
+  padding: 6px 10px;
+  border-radius: 5px;
+  background-color: #222;
+  color: white;
+  border: 1px solid #444;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.delete-btn:hover {
+  background-color: #a71d2a;
+}
+
+
+.filters select {
+  margin-right: 10px;
+  padding: 6px 10px;
+  border-radius: 5px;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.85em;
+  min-width: 70px;
+}
+
+.status-badge.confirmed {
+  background-color: #28a745;
+  color: white;
+}
+
+.status-badge.rac {
+  background-color: #ffc107;
+  color: black;
+}
+
+.status-badge.waiting {
+  background-color: #dc3545;
+  color: white;
+}
+.download-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 20px;
+  box-shadow: 0 4px 14px rgba(0, 123, 255, 0.3);
+}
+
+.download-btn:hover {
+  background-color: #0056b3;
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.5);
+}

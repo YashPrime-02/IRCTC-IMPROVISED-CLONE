@@ -13,14 +13,13 @@ import { FormsModule } from '@angular/forms';
 })
 export class BookingComponent implements OnInit, OnDestroy {
   bookingData: any;
-  seatTypes: string[] = ['2S','SL', '3A', '2A', '1A'];
+  seatTypes: string[] = ['2S', 'SL', '3A', '2A', '1A'];
   statuses: string[] = ['Confirmed', 'RAC', 'Waiting'];
   username = '';
   email = '';
   passengers: any[] = [];
   errors: { name: boolean; age: boolean }[] = [];
 
-  // ⏰ Countdown Timer
   countdown: number = 9 * 60;
   timerInterval: any;
   minutes: number = 9;
@@ -28,12 +27,10 @@ export class BookingComponent implements OnInit, OnDestroy {
   showWarningAnimation = false;
   showTimeoutModal = false;
 
-  // 🔔 Toast Logic
   showToast = false;
   toastMessage = '';
   toastType: 'success' | 'error' | 'warning' = 'warning';
 
-  // 🔊 Sound reference
   @ViewChild('audioRef') audioRef!: ElementRef;
 
   constructor(private router: Router, private http: HttpClient) {}
@@ -45,14 +42,17 @@ export class BookingComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const storedUser = localStorage.getItem('loggedInUser');
+    const storedUser = localStorage.getItem('userData'); // ✅ FIXED key
     if (storedUser) {
       const user = JSON.parse(storedUser);
-      this.email = user.email || 'guest@example.com';
-      this.username = user.name || this.extractUsernameFromEmail(this.email);
+      if (user.email) {
+        this.email = user.email;
+        this.username = user.name || this.extractUsernameFromEmail(this.email);
+      } else {
+        this.fallbackToGuest(); // fallback
+      }
     } else {
-      this.email = 'guest@example.com';
-      this.username = 'Guest';
+      this.fallbackToGuest(); // fallback
     }
 
     this.bookingData = nav;
@@ -62,6 +62,12 @@ export class BookingComponent implements OnInit, OnDestroy {
     for (let i = 0; i < count; i++) this.addPassenger();
 
     this.startCountdown();
+  }
+
+  fallbackToGuest(): void {
+    this.email = 'guest@example.com';
+    this.username = 'Guest';
+    console.warn('⚠️ Proceeding as guest. Booking may not appear in logged-in user history.');
   }
 
   ngOnDestroy(): void {
@@ -87,7 +93,6 @@ export class BookingComponent implements OnInit, OnDestroy {
         this.showToastMessage('⏰ Session expired. Logging out...', 'error');
         localStorage.removeItem('loggedInUser');
         sessionStorage.removeItem('bookingData');
-
         setTimeout(() => this.router.navigate(['/']), 4000);
       }
     }, 1000);
@@ -98,7 +103,6 @@ export class BookingComponent implements OnInit, OnDestroy {
     this.seconds = this.countdown % 60;
   }
 
-  // 📢 Toast Display
   showToastMessage(message: string, type: 'success' | 'error' | 'warning' = 'success') {
     this.toastMessage = message;
     this.toastType = type;
@@ -106,7 +110,6 @@ export class BookingComponent implements OnInit, OnDestroy {
     setTimeout(() => this.showToast = false, 4000);
   }
 
-  // 🧠 Utility
   extractUsernameFromEmail(email: string): string {
     return email.split('@')[0];
   }
@@ -135,8 +138,8 @@ export class BookingComponent implements OnInit, OnDestroy {
     this.passengers[i].fare = this.calculateFare(seat);
   }
 
-  calculateFare(seatType: '2S'| 'SL' | '3A' | '2A' | '1A'): number {
-    const factorMap = { '2S':1, SL: 2, '3A': 3, '2A': 4, '1A': 5 };
+  calculateFare(seatType: '2S' | 'SL' | '3A' | '2A' | '1A'): number {
+    const factorMap = { '2S': 1, SL: 2, '3A': 3, '2A': 4, '1A': 5 };
     const base = 150;
     const distanceFactor = Math.floor(Math.random() * 5) + 5;
     return base + factorMap[seatType] * distanceFactor * 10;
@@ -164,18 +167,32 @@ export class BookingComponent implements OnInit, OnDestroy {
   confirmBooking(): void {
     if (!this.validatePassengers()) return;
 
+    const train = this.bookingData;
+
     const bookingSummary = {
-      user: { name: this.username, email: this.email },
-      train: this.bookingData,
-      passengers: this.passengers,
-      totalAmount: this.calculateTotal()
+      email: this.email,
+      trainName: train.trainName,
+      sourceCode: train.sourceCode,
+      destinationCode: train.destinationCode,
+      date: train.date || new Date().toISOString().split('T')[0],
+      duration: train.duration || 'Unknown',
+      passengers: this.passengers.map(p => ({
+        name: p.name,
+        age: p.age,
+        seatType: p.seatType,
+        status: p.status,
+        fare: p.fare
+      })),
+      totalAmount: this.calculateTotal(),
+      bookingDate: new Date()
     };
 
-    sessionStorage.setItem('bookingSummary', JSON.stringify(bookingSummary));
+    console.log('✅ Final booking payload to be sent to backend:', bookingSummary);
 
-    this.http.post('http://localhost:3000/bookings', bookingSummary).subscribe({
+    this.http.post('http://localhost:8080/api/bookings', bookingSummary).subscribe({
       next: () => {
         clearInterval(this.timerInterval);
+        sessionStorage.setItem('bookingSummary', JSON.stringify(bookingSummary));
         this.router.navigate(['/ticket-view']);
       },
       error: err => {

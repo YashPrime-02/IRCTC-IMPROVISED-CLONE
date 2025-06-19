@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +11,18 @@ import { HeaderComponent } from './header/header.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'train-ticket-frontend';
 
-  constructor(public router: Router) {}
+  constructor(public router: Router, private authService: AuthService) {}
+
+  ngOnInit(): void {
+    // 🔁 Redirect to train-search if token exists and user is at root
+    const isAuthRoute = this.router.url.startsWith('/auth') || this.router.url === '/';
+    if (this.authService.isLoggedIn() && isAuthRoute) {
+      this.router.navigate(['/train-search']);
+    }
+  }
 
   showHeader(): boolean {
     return [

@@ -1,53 +1,67 @@
-// src/app/shared/auth.service.ts
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { map, catchError, tap } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { catchError, of, Observable } from 'rxjs';
+import { environment } from '../environments/environment';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080/api/auth'; // Spring Boot backend base URL
+  private baseUrl = `${environment.apiUrl}/auth`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
-  login(email: string, password: string): Observable<boolean> {
-    return this.http.post<{ token: string }>(`${this.apiUrl}/login`, { email, password }).pipe(
-      tap(response => {
-        localStorage.setItem('token', response.token);
-        localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('userEmail', email);
-      }),
-      map(() => true),
+  // 🟢 Signup
+  signup(name: string, email: string, password: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/signup`, { name, email, password });
+  }
+
+  // 🟢 Login
+  login(email: string, password: string): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/login`, { email, password }).pipe(
       catchError(err => {
-        console.error('❌ Login failed:', err);
-        return of(false);
+        console.error('Login failed:', err);
+        return of(null);
       })
     );
   }
 
-  signup(name: string, email: string, password: string): Observable<boolean> {
-    return this.http.post<{ message: string }>(`${this.apiUrl}/signup`, { name, email, password }).pipe(
-      map(() => true),
-      catchError(err => {
-        console.error('❌ Signup failed:', err);
-        return of(false);
-      })
-    );
+  // ✅ Save token and user
+  saveToken(token: string, user: any): void {
+    try {
+      localStorage.setItem('token', token);
+      localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('userData', JSON.stringify(user));
+    } catch (e) {
+      console.error('Error saving auth data to localStorage:', e);
+    }
   }
 
-  isLoggedIn(): boolean {
-    return localStorage.getItem('isLoggedIn') === 'true' && !!localStorage.getItem('token');
-  }
-
-  logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('userEmail');
-  }
-
+  // 🔐 Get JWT
   getToken(): string | null {
     return localStorage.getItem('token');
+  }
+
+  // ✅ Get User
+  getUser(): any {
+    const userData = localStorage.getItem('userData');
+    try {
+      return userData ? JSON.parse(userData) : null;
+    } catch (e) {
+      console.error('Error parsing user data:', e);
+      return null;
+    }
+  }
+
+  // 🟢 Check Login
+  isLoggedIn(): boolean {
+    return localStorage.getItem('isLoggedIn') === 'true' && !!this.getToken();
+  }
+
+  // 🚪 Logout
+  logout(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userData');
+    localStorage.removeItem('isLoggedIn');
+    this.router.navigate(['/auth']);
   }
 }

@@ -1,0 +1,44 @@
+<div id="bookingHistoryPDF" class="history-container">
+  <h2>📖 Booking History</h2>
+
+  <!-- Filter Controls -->
+  <div class="filters mb-3">
+    <select [(ngModel)]="selectedMonth" (change)="filterBookings()">
+      <option value="">Filter by Month</option>
+      <option *ngFor="let m of months" [value]="m.value">{{ m.name }}</option>
+    </select>
+
+    <select [(ngModel)]="selectedYear" (change)="filterBookings()">
+      <option value="">Filter by Year</option>
+      <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+    </select>
+  </div>
+
+
+  <!-- Booking Table -->
+<div *ngIf="filteredBookings.length > 0" class="card-list">
+  <div class="booking-card" *ngFor="let booking of filteredBookings">
+    <div class="card-header">
+      <h4>🚆 {{ booking.trainName }}</h4>
+      <span class="fare">₹{{ booking.totalAmount }}</span>
+    </div>
+    <p><strong>📍 Route:</strong> {{ booking.sourceCode }} → {{ booking.destinationCode }}</p>
+    <p><strong>📅 Date:</strong> {{ booking.date || 'N/A' }}</p>
+    <p><strong>⏱ Duration:</strong> {{ booking.duration || 'N/A' }}</p>
+
+    <button (click)="deleteBooking(booking.id)" class="delete-btn">🗑 Delete</button>
+  </div>
+</div>
+
+
+  <!-- No Data -->
+  <div *ngIf="filteredBookings.length === 0">
+    <p>❌ No bookings found for the selected filters.</p>
+  </div>
+
+  <!-- PDF Button -->
+  <div class="actions mt-4">
+  <button (click)="downloadPDF()" class="download-btn">📄 Download PDF</button>
+</div>
+
+</div>

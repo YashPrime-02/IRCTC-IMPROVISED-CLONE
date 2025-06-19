@@ -43,21 +43,20 @@ export class LoginComponent {
       return;
     }
 
-    const savedUser = localStorage.getItem('userData');
-    if (savedUser) {
-      const user = JSON.parse(savedUser);
-
-      if (emailTrimmed === user.email && passwordTrimmed === user.password) {
-        this.showToastMessage('✅ Login successful!');
-        localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('loggedInUser', JSON.stringify(user));
-
-        this.router.navigate(['/train-search']);
-      } else {
-        this.showToastMessage('❌ Invalid credentials. Please try again.');
+    this.authService.login(emailTrimmed, passwordTrimmed).subscribe({
+      next: (res) => {
+        if (res?.token && res?.user) {
+          this.authService.saveToken(res.token, res.user);  // ✅ Save correctly
+          this.showToastMessage('✅ Login successful!');
+          this.router.navigate(['/train-search']);
+        } else {
+          this.showToastMessage('❌ Login failed. Try again.');
+        }
+      },
+      error: (err) => {
+        console.error('Login failed:', err);
+        this.showToastMessage('❌ Invalid credentials or server error.');
       }
-    } else {
-      this.showToastMessage('❌ No user found. Please sign up first.');
-    }
+    });
   }
 }

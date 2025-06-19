@@ -32,7 +32,8 @@ export class BookingHistoryComponent implements OnInit {
   constructor(private bookingService: BookingService) {}
 
   ngOnInit(): void {
-    const user = JSON.parse(localStorage.getItem('loggedInUser') || 'null');
+    const user = JSON.parse(localStorage.getItem('userData') || 'null');
+
     if (user && user.email) {
       this.email = user.email;
       this.loadBookingHistory();

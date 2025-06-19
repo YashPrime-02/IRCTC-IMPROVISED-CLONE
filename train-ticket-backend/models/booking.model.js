@@ -1,3 +1,4 @@
+// models/booking.js
 module.exports = (sequelize, DataTypes) => {
   return sequelize.define('Booking', {
     email: {
@@ -16,8 +17,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    date: {
+      type: DataTypes.STRING, // 👈 Add this
+      allowNull: true
+    },
+    duration: {
+      type: DataTypes.STRING, // 👈 And this
+      allowNull: true
+    },
     passengers: {
-      type: DataTypes.JSON, // ✅ JSON field
+      type: DataTypes.JSON,
       allowNull: false
     },
     totalAmount: {

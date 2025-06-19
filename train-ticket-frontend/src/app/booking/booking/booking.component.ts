@@ -33,7 +33,7 @@ export class BookingComponent implements OnInit, OnDestroy {
 
   @ViewChild('audioRef') audioRef!: ElementRef;
 
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(private router: Router, private http: HttpClient) {}
 
   ngOnInit(): void {
     const nav = history.state.bookingData || JSON.parse(sessionStorage.getItem('bookingData') || 'null');
@@ -42,14 +42,17 @@ export class BookingComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const storedUser = localStorage.getItem('loggedInUser');
+    const storedUser = localStorage.getItem('userData'); // ✅ FIXED key
     if (storedUser) {
       const user = JSON.parse(storedUser);
-      this.email = user.email || 'guest@example.com';
-      this.username = user.name || this.extractUsernameFromEmail(this.email);
+      if (user.email) {
+        this.email = user.email;
+        this.username = user.name || this.extractUsernameFromEmail(this.email);
+      } else {
+        this.fallbackToGuest(); // fallback
+      }
     } else {
-      this.email = 'guest@example.com';
-      this.username = 'Guest';
+      this.fallbackToGuest(); // fallback
     }
 
     this.bookingData = nav;
@@ -59,6 +62,12 @@ export class BookingComponent implements OnInit, OnDestroy {
     for (let i = 0; i < count; i++) this.addPassenger();
 
     this.startCountdown();
+  }
+
+  fallbackToGuest(): void {
+    this.email = 'guest@example.com';
+    this.username = 'Guest';
+    console.warn('⚠️ Proceeding as guest. Booking may not appear in logged-in user history.');
   }
 
   ngOnDestroy(): void {
@@ -73,7 +82,7 @@ export class BookingComponent implements OnInit, OnDestroy {
       this.updateTimeDisplay();
 
       if (this.countdown === 30 && this.audioRef) {
-        this.audioRef.nativeElement.play().catch(() => { });
+        this.audioRef.nativeElement.play().catch(() => {});
         this.showWarningAnimation = true;
         this.showToastMessage('⏳ Only 30 seconds left!', 'warning');
       }
@@ -165,8 +174,8 @@ export class BookingComponent implements OnInit, OnDestroy {
       trainName: train.trainName,
       sourceCode: train.sourceCode,
       destinationCode: train.destinationCode,
-      date: train.date,
-      duration: train.duration,
+      date: train.date || new Date().toISOString().split('T')[0],
+      duration: train.duration || 'Unknown',
       passengers: this.passengers.map(p => ({
         name: p.name,
         age: p.age,
@@ -178,16 +187,12 @@ export class BookingComponent implements OnInit, OnDestroy {
       bookingDate: new Date()
     };
 
-
     console.log('✅ Final booking payload to be sent to backend:', bookingSummary);
 
     this.http.post('http://localhost:8080/api/bookings', bookingSummary).subscribe({
       next: () => {
         clearInterval(this.timerInterval);
-
-        // ✅ Fix added: sessionStorage save before routing
         sessionStorage.setItem('bookingSummary', JSON.stringify(bookingSummary));
-
         this.router.navigate(['/ticket-view']);
       },
       error: err => {

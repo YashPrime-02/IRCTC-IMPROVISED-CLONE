@@ -1,105 +1,78 @@
-/* 🌐 Base History Container */
-.history-wrapper {
-  padding: 30px;
-  max-width: 700px;
-  margin: 40px auto;
-  font-family: 'Poppins', sans-serif;
-  background: rgba(255, 255, 255, 0.07);
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+.history-container {
+  padding: 24px;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #1e1e1e, #292929);
+  color: #f0f0f0;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Heading */
-.history-wrapper h2 {
-  font-size: 24px;
-  font-weight: 700;
-  margin-bottom: 24px;
-  color: #ffffff;
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
 }
 
-/* 🧾 Each Booking Card */
-.history-item {
-  background: rgba(255, 255, 255, 0.08);
+.booking-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 16px;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #f0f0f0;
-  margin-bottom: 24px;
-  padding: 16px 20px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 20px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  transition: transform 0.2s ease;
+  margin-top: 2%;
 }
 
-.history-item:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+.booking-card:hover {
+  transform: scale(1.02);
 }
 
-.history-item h3 {
-  font-size: 18px;
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.fare {
+  font-weight: bold;
+  color: #0ff;
+}
+
+.filters select {
+  margin-right: 10px;
+  padding: 6px 10px;
+  border-radius: 5px;
+  background-color: #222;
+  color: white;
+  border: 1px solid #444;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
   font-weight: 600;
-  margin-bottom: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
 }
 
-.history-item p {
-  margin: 4px 0;
-  font-size: 15px;
-  color: #e0e0e0;
+.delete-btn:hover {
+  background-color: #a71d2a;
 }
 
-/* Passenger List */
-.history-item ul {
-  list-style: none;
-  padding: 0;
-  margin: 12px 0;
+
+.filters select {
+  margin-right: 10px;
+  padding: 6px 10px;
+  border-radius: 5px;
 }
 
-.history-item li {
-  margin-bottom: 6px;
-  padding-left: 12px;
-  border-left: 3px solid #2196f3;
-  font-size: 15px;
-  color: #f0f0f0;
-}
-
-/* No History Message */
-p {
-  text-align: center;
-  font-size: 16px;
-  color: #ccc;
-  margin-top: 40px;
-}
-
-/* Responsive Adjustments */
-@media screen and (max-width: 768px) {
-  .history-wrapper {
-    padding: 16px;
-    margin: 20px 8px;
-    border-radius: 12px;
-  }
-
-  .history-wrapper h2 {
-    font-size: 20px;
-    text-align: center;
-  }
-
-  .history-item {
-    padding: 14px;
-  }
-
-  .history-item h3 {
-    font-size: 16px;
-  }
-
-  .history-item p,
-  .history-item li {
-    font-size: 14px;
-  }
-}
 .status-badge {
   display: inline-block;
   padding: 4px 10px;
@@ -123,18 +96,21 @@ p {
   background-color: #dc3545;
   color: white;
 }
-.delete-btn {
-  background-color: #dc3545;
+.download-btn {
+  background-color: #007bff;
   color: white;
   border: none;
   border-radius: 8px;
-  padding: 6px 12px;
+  padding: 10px 18px;
   font-weight: 600;
+  font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 10px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 20px;
+  box-shadow: 0 4px 14px rgba(0, 123, 255, 0.3);
 }
 
-.delete-btn:hover {
-  background-color: #a71d2a;
+.download-btn:hover {
+  background-color: #0056b3;
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.5);
 }

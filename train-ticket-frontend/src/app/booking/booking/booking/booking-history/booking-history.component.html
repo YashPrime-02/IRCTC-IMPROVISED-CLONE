@@ -1,65 +1,44 @@
-<!-- 🔍 Filters -->
-<div class="ticket-container" style="margin: 20px auto; text-align: center;">
-  <label>
-    📅 Year:
-    <select [(ngModel)]="selectedYear" (change)="filterBookings()">
-      <option value="">All</option>
-      <option *ngFor="let y of years" [value]="y">{{ y }}</option>
-    </select>
-  </label>
+<div id="bookingHistoryPDF" class="history-container">
+  <h2>📖 Booking History</h2>
 
-  <label style="margin-left: 20px;">
-    🗓️ Month:
+  <!-- Filter Controls -->
+  <div class="filters mb-3">
     <select [(ngModel)]="selectedMonth" (change)="filterBookings()">
-      <option value="">All</option>
+      <option value="">Filter by Month</option>
       <option *ngFor="let m of months" [value]="m.value">{{ m.name }}</option>
     </select>
-  </label>
-</div>
 
-<!-- 🔙 Back & Export -->
-<div class="actions" style="margin-top: 20px; display: flex; justify-content: center;">
-  <button routerLink="/train-search">⬅️ Back to Dashboard</button>
-  <button (click)="downloadPDF()">📄 Export as PDF</button>
-</div>
+    <select [(ngModel)]="selectedYear" (change)="filterBookings()">
+      <option value="">Filter by Year</option>
+      <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+    </select>
+  </div>
 
-<!-- 🧾 Booking History -->
-<div id="bookingHistoryPDF" class="history-wrapper" *ngIf="filteredBookings.length > 0; else noHistory">
-  <h2>🧾 Booking History for {{ email }}</h2>
 
-  <div class="history-item" *ngFor="let booking of filteredBookings">
-    <h3>{{ booking.train.trainName }} ({{ booking.train.sourceCode }} → {{ booking.train.destinationCode }})</h3>
-    <p><strong>Date:</strong> {{ booking.createdAt | date: 'medium' }}</p>
-    <p><strong>Total Fare:</strong> ₹{{ booking.totalAmount }}</p>
-
-    <ul>
-      <li *ngFor="let p of booking.passengers">
-        👤 {{ p.name }} (Age {{ p.age }}) — {{ p.seatType }} —
-        <span class="status-badge"
-              [ngClass]="{
-                'confirmed': p.status === 'Confirmed',
-                'rac': p.status === 'RAC',
-                'waiting': p.status === 'Waiting'
-              }">
-          {{ p.status }}
-        </span>
-        — ₹{{ p.fare }}
-      </li>
-    </ul>
-
-    <div class="actions" style="justify-content: flex-end;">
-      <button (click)="deleteBooking(booking.id)">🗑️ Delete</button>
+  <!-- Booking Table -->
+<div *ngIf="filteredBookings.length > 0" class="card-list">
+  <div class="booking-card" *ngFor="let booking of filteredBookings">
+    <div class="card-header">
+      <h4>🚆 {{ booking.trainName }}</h4>
+      <span class="fare">₹{{ booking.totalAmount }}</span>
     </div>
+    <p><strong>📍 Route:</strong> {{ booking.sourceCode }} → {{ booking.destinationCode }}</p>
+    <p><strong>📅 Date:</strong> {{ booking.date || 'N/A' }}</p>
+    <p><strong>⏱ Duration:</strong> {{ booking.duration || 'N/A' }}</p>
+
+    <button (click)="deleteBooking(booking.id)" class="delete-btn">🗑 Delete</button>
   </div>
 </div>
 
-<!-- 🚫 No History -->
-<ng-template #noHistory>
-  <div class="ticket-container" style="text-align: center; padding: 20px;">
-    <h2>📭 No Bookings Yet</h2>
-    <p>You haven't made any bookings yet. Start by searching for trains.</p>
-    <div class="actions" style="margin-top: 20px;">
-      <button routerLink="/train-search">🔍 Book Now</button>
-    </div>
+
+  <!-- No Data -->
+  <div *ngIf="filteredBookings.length === 0">
+    <p>❌ No bookings found for the selected filters.</p>
   </div>
-</ng-template>
+
+  <!-- PDF Button -->
+  <div class="actions mt-4">
+  <button (click)="downloadPDF()" class="download-btn">📄 Download PDF</button>
+</div>
+
+</div>

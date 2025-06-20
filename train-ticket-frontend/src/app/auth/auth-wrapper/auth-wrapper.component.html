@@ -10,43 +10,49 @@
 
   <ng-template #signup>
     <div [@fadeSlide]>
-      <app-signup
-        (switchToLogin)="toggleMode()"
-      ></app-signup>
+      <app-signup (switchToLogin)="toggleMode()"></app-signup>
     </div>
   </ng-template>
 
-<div *ngIf="isForgotPasswordVisible" class="forgot-overlay" [@fadeSlide]>
-  <div class="forgot-modal">
-    <form (ngSubmit)="handleForgot()" #forgotForm="ngForm">
-      <h3>Reset Password</h3>
+  <!-- Forgot Password Modal -->
+  <div *ngIf="isForgotPasswordVisible" class="forgot-overlay" [@fadeSlide]>
+    <div class="forgot-modal">
+      <form (ngSubmit)="handleForgot()" #forgotForm="ngForm">
+        <h3>Reset Password</h3>
 
-      <input
-        type="email"
-        name="forgotEmail"
-        [(ngModel)]="forgotEmail"
-        placeholder="Enter your email"
-        required
-        email
-        #emailInput="ngModel"
-      />
+        <input
+          type="email"
+          name="forgotEmail"
+          [(ngModel)]="forgotEmail"
+          placeholder="Enter your email"
+          required
+          email
+          #emailInput="ngModel"
+        />
 
-      <!-- Validation message -->
-      <div class="error-message" *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)">
-        <small *ngIf="emailInput.errors?.['required']">Email is required.</small>
-        <small *ngIf="emailInput.errors?.['email']">Enter a valid email.</small>
-      </div>
+        <!-- Validation -->
+        <div class="error-message" *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)">
+          <small *ngIf="emailInput.errors?.['required']">Email is required.</small>
+          <small *ngIf="emailInput.errors?.['email']">Enter a valid email.</small>
+        </div>
 
-      <button type="submit" [disabled]="forgotForm.invalid">Send Link</button>
-      <button type="button" class="close-btn" (click)="closeForgotPassword()">Close</button>
-    </form>
+        <!-- Loader -->
+        <div *ngIf="loading" class="loader">Sending reset link...</div>
+
+        <!-- Error -->
+        <div *ngIf="errorMessage" class="error-message">
+          {{ errorMessage }}
+        </div>
+
+        <button type="submit" [disabled]="forgotForm.invalid || loading">Send Link</button>
+        <button type="button" class="close-btn" (click)="closeForgotPassword()">Close</button>
+      </form>
+    </div>
   </div>
-</div>
-<!-- ✅ Toast Notification -->
-<div *ngIf="showToast" class="toast-message">
-<span class="check-icon">✔</span>
-Reset link sent to:  <strong>{{ forgotEmail }}</strong>
-</div>
 
-
+  <!-- Toast -->
+  <div *ngIf="showToast" class="toast-message success">
+    <span class="check-icon">✔</span>
+    Reset link sent to: <strong>{{ forgotEmail }}</strong>
+  </div>
 </div>

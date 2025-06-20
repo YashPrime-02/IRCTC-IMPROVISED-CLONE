@@ -284,3 +284,19 @@ html, body {
     margin-right: 6px;
   }
 }
+.loader {
+  font-size: 13px;
+  font-weight: 500;
+  color: #3498db;
+  margin-top: 8px;
+}
+
+.toast-message.success {
+  background: rgba(46, 204, 113, 0.9);
+  padding: 12px 16px;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  margin-top: 16px;
+  animation: fadeIn 0.3s ease-in-out;
+}

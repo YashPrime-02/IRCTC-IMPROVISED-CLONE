@@ -3,6 +3,8 @@ import { SignupComponent } from '../signup/signup.component';
 import { LoginComponent } from '../login/login.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router'; // ✅ IMPORT THIS
 import {
   trigger,
   transition,
@@ -38,6 +40,12 @@ export class AuthWrapperComponent {
   isForgotPasswordVisible = false;
   forgotEmail = '';
 
+  showToast = false;
+  loading = false;
+  errorMessage = '';
+
+  constructor(private http: HttpClient, private router: Router) {} // ✅ CORRECTED INJECTION
+
   toggleMode(): void {
     this.isSignupMode = !this.isSignupMode;
     this.isForgotPasswordVisible = false;
@@ -47,21 +55,34 @@ export class AuthWrapperComponent {
     this.isForgotPasswordVisible = true;
   }
 
-  showToast = false;
-
-handleForgot(): void {
-  console.log('Forgot password email:', this.forgotEmail);
-  this.showToast = true;
-
-  setTimeout(() => {
-    this.showToast = false;
-    this.closeForgotPassword();
-  }, 3000); // Toast disappears after 3 seconds
-}
-
-
   closeForgotPassword(): void {
     this.isForgotPasswordVisible = false;
     this.forgotEmail = '';
+    this.errorMessage = '';
+  }
+
+  handleForgot(): void {
+    if (!this.forgotEmail || !this.forgotEmail.includes('@')) {
+      this.errorMessage = 'Please enter a valid email.';
+      return;
+    }
+
+    this.loading = true;
+    this.http.post('http://localhost:8080/api/auth/send-otp', {
+      email: this.forgotEmail
+    }).subscribe({
+      next: () => {
+        this.loading = false;
+        // ✅ Navigate to OTP screen with email + action
+        this.router.navigate(['/otp-verification'], {
+          queryParams: { email: this.forgotEmail, action: 'forgot-password' }
+        });
+      },
+      error: (err) => {
+        this.loading = false;
+        console.error('❌ Forgot password error:', err);
+        this.errorMessage = 'Something went wrong while sending OTP.';
+      }
+    });
   }
 }

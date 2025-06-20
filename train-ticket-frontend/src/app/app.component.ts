@@ -17,7 +17,6 @@ export class AppComponent implements OnInit {
   constructor(public router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
-    // 🔁 Redirect to train-search if token exists and user is at root
     const isAuthRoute = this.router.url.startsWith('/auth') || this.router.url === '/';
     if (this.authService.isLoggedIn() && isAuthRoute) {
       this.router.navigate(['/train-search']);
@@ -25,10 +24,13 @@ export class AppComponent implements OnInit {
   }
 
   showHeader(): boolean {
-    return [
-      '/train-search',
-      '/booking',
-      '/ticket-view'
-    ].includes(this.router.url);
+    const excludedRoutes = [
+      '/auth/login',
+      '/auth/signup',
+      '/auth/forgot-password',
+      '/reset-password'
+    ];
+    const currentPath = this.router.url.split('?')[0]; // remove query params if any
+    return !excludedRoutes.includes(currentPath);
   }
 }

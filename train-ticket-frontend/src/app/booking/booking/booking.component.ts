@@ -1,4 +1,10 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  ElementRef
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
@@ -36,23 +42,25 @@ export class BookingComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private http: HttpClient) {}
 
   ngOnInit(): void {
-    const nav = history.state.bookingData || JSON.parse(sessionStorage.getItem('bookingData') || 'null');
+    const nav =
+      history.state.bookingData ||
+      JSON.parse(sessionStorage.getItem('bookingData') || 'null');
     if (!nav) {
       this.router.navigate(['/train-search']);
       return;
     }
 
-    const storedUser = localStorage.getItem('userData'); // ✅ FIXED key
+    const storedUser = localStorage.getItem('userData');
     if (storedUser) {
       const user = JSON.parse(storedUser);
       if (user.email) {
         this.email = user.email;
         this.username = user.name || this.extractUsernameFromEmail(this.email);
       } else {
-        this.fallbackToGuest(); // fallback
+        this.fallbackToGuest();
       }
     } else {
-      this.fallbackToGuest(); // fallback
+      this.fallbackToGuest();
     }
 
     this.bookingData = nav;
@@ -67,7 +75,9 @@ export class BookingComponent implements OnInit, OnDestroy {
   fallbackToGuest(): void {
     this.email = 'guest@example.com';
     this.username = 'Guest';
-    console.warn('⚠️ Proceeding as guest. Booking may not appear in logged-in user history.');
+    console.warn(
+      '⚠️ Proceeding as guest. Booking may not appear in logged-in user history.'
+    );
   }
 
   ngOnDestroy(): void {
@@ -107,7 +117,7 @@ export class BookingComponent implements OnInit, OnDestroy {
     this.toastMessage = message;
     this.toastType = type;
     this.showToast = true;
-    setTimeout(() => this.showToast = false, 4000);
+    setTimeout(() => (this.showToast = false), 4000);
   }
 
   extractUsernameFromEmail(email: string): string {
@@ -116,13 +126,32 @@ export class BookingComponent implements OnInit, OnDestroy {
 
   addPassenger(): void {
     if (this.passengers.length >= 7) return;
+
+    const seatType = 'SL'; // default
+    const index = this.passengers.length;
+
+    let status = '';
+
+    if (index === 0) {
+      // First passenger
+      status = this.randomStatus();
+    } else {
+      const firstStatus = this.passengers[0].status;
+      if (firstStatus.startsWith('Waiting')) {
+        status = `Waiting WL${index + 1}`;
+      } else {
+        status = this.randomStatus();
+      }
+    }
+
     this.passengers.push({
       name: '',
       age: null,
-      seatType: 'SL',
-      status: this.randomStatus(),
-      fare: this.calculateFare('SL')
+      seatType,
+      status,
+      fare: this.calculateFare(seatType, status)
     });
+
     this.errors.push({ name: false, age: false });
   }
 
@@ -135,18 +164,26 @@ export class BookingComponent implements OnInit, OnDestroy {
 
   updateFare(i: number): void {
     const seat = this.passengers[i].seatType;
-    this.passengers[i].fare = this.calculateFare(seat);
+    const status = this.passengers[i].status;
+    this.passengers[i].fare = this.calculateFare(seat, status);
   }
 
-  calculateFare(seatType: '2S' | 'SL' | '3A' | '2A' | '1A'): number {
-    const factorMap = { '2S': 1, SL: 2, '3A': 3, '2A': 4, '1A': 5 };
-    const base = 150;
-    const distanceFactor = Math.floor(Math.random() * 5) + 5;
-    return base + factorMap[seatType] * distanceFactor * 10;
+  calculateFare(seatType: '2S' | 'SL' | '3A' | '2A' | '1A', status: string): number {
+    const baseMap = { '2S': 120, SL: 180, '3A': 500, '2A': 900, '1A': 1500 };
+    let baseFare = baseMap[seatType];
+
+    if (status.includes('RAC')) baseFare += 30;
+    if (status.includes('Waiting')) baseFare += 50;
+
+    const surge = Math.floor(Math.random() * 50); // ₹0-₹50
+    return baseFare + surge;
   }
 
   randomStatus(): string {
-    return this.statuses[Math.floor(Math.random() * this.statuses.length)];
+    const roll = Math.random();
+    if (roll < 0.6) return 'Confirmed';
+    if (roll < 0.85) return 'RAC';
+    return 'Waiting WL1';
   }
 
   calculateTotal(): number {
@@ -200,5 +237,10 @@ export class BookingComponent implements OnInit, OnDestroy {
         this.showToastMessage('Failed to save booking.', 'error');
       }
     });
+  }
+
+  // ✅ Used in template to show warning
+  shouldShowStatusRule(): boolean {
+    return this.passengers.length > 0 && this.passengers[0].status.startsWith('Waiting');
   }
 }

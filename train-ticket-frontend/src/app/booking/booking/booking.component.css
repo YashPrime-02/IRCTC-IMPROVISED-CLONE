@@ -3,16 +3,16 @@
   padding: 20px;
   max-width: 900px;
   margin: auto;
-  color:white;
+  color: white;
 }
 
 /* Passenger card box */
 .passenger-card {
-  background: #f2f2f2;
+  background: rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   padding: 15px;
   margin: 15px 0;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-in-out;
 }
 
@@ -26,6 +26,7 @@
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -77,7 +78,7 @@ button {
 }
 
 button:hover:not(:disabled) {
-  background-color: red;
+  background-color: #43a047;
 }
 
 button:disabled {
@@ -95,11 +96,11 @@ button:disabled {
 }
 
 .badge {
-  background-color: #17252a;
+  background-color: #04060a;
   color: #fff;
-  padding: 5px 12px;
+  padding: 12px 20px;
   border-radius: 20px;
-  font-size: 13px;
+  font-size: 16px;
 }
 
 /* Inline error messages */
@@ -120,7 +121,7 @@ button:disabled {
   .passenger-card {
     padding: 12px;
     margin: 12px 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   }
 
   .passenger-card input,
@@ -179,7 +180,7 @@ button:disabled {
     font-weight: 600;
     border-radius: 8px;
     border: none;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
   }
 
   .sticky-footer-btn:hover {
@@ -202,6 +203,7 @@ button:disabled {
     padding: 10px 12px;
   }
 }
+
 /* Countdown Timer */
 .countdown-timer {
   font-weight: bold;
@@ -220,9 +222,17 @@ button:disabled {
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
 }
+
 /* 🔔 Custom Toast Notification */
 .custom-toast {
   position: fixed;
@@ -245,6 +255,7 @@ button:disabled {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -255,10 +266,12 @@ button:disabled {
 .custom-toast.success {
   background: #28a745;
 }
+
 .custom-toast.warning {
   background: #ffc107;
   color: #000;
 }
+
 .custom-toast.error {
   background: #dc3545;
 }
@@ -291,6 +304,7 @@ button:disabled {
     transform: scale(0.8);
     opacity: 0;
   }
+
   100% {
     transform: scale(1);
     opacity: 1;
@@ -307,7 +321,9 @@ button:disabled {
   font-size: 1rem;
   color: #444;
 }
+
 @media (max-width: 768px) {
+
   /* 🔔 Toast: Top Center on Mobile */
   .custom-toast {
     bottom: auto;
@@ -339,5 +355,216 @@ button:disabled {
     font-size: 1rem;
     padding: 8px 16px;
     margin: 8px 0 16px 0;
+  }
+}
+
+.status-info {
+  background-color: #fff3cd;
+  border-left: 5px solid #ffecb5;
+  padding: 12px;
+  margin-top: 15px;
+  font-size: 14px;
+  color: black;
+  border-radius: 6px;
+}
+
+/* ✅ General Styling */
+.booking-wrapper {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  color: #fff;
+  background: #1c1c1c;
+  border-radius: 8px;
+}
+
+.booking-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color:white;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* ✅ Passenger Card */
+.passenger-card {
+  background: #121212;
+  border: 1px solid #555;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.passenger-card h4 {
+  margin-bottom: 10px;
+  color: #e4e4e4;
+}
+
+label {
+  display: block;
+  margin: 8px 0 4px;
+  font-weight: 500;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 4px;
+  border: none;
+  background: #fff;
+  color: #000;
+}
+
+.error-input {
+  border: 2px solid #e63946;
+}
+
+/* ✅ Status Styling */
+.status-line {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.status-confirmed {
+  color: #00c853;
+  font-weight: bold;
+}
+
+.status-rac {
+  color: #ff9100;
+  font-weight: bold;
+}
+
+.status-wl {
+  color: #e53935;
+  font-weight: bold;
+}
+
+/* ✅ Fare */
+.fare {
+  margin-top: 6px;
+  font-size: 15px;
+}
+
+/* ✅ Booking Controls */
+.booking-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+button {
+  padding: 10px 15px;
+  font-weight: bold;
+  background: #1f75fe;
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ✅ Total */
+.total-section {
+ margin-top: 25px;
+    font-size: 19px;
+    font-weight: bold;
+    margin-bottom: 1%;
+}
+
+/* ✅ Confirm Button */
+.confirm-btn {
+  margin-top: 10px;
+  width: 100%;
+  background-color: #1f75fe;
+}
+
+/* ✅ Countdown */
+.countdown {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 3%;
+}
+
+.countdown.warning {
+  color: #ffab00;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* ✅ Timeout Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background: #1e1e1e;
+  color: white;
+  padding: 30px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* ✅ Toast */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 15px 20px;
+  border-radius: 6px;
+  color: white;
+  font-weight: bold;
+  z-index: 9999;
+}
+
+.toast.success {
+  background-color: #43a047;
+}
+
+.toast.error {
+  background-color: #d32f2f;
+}
+
+.toast.warning {
+  background-color: #ff9800;
+}
+
+.toast-loader {
+  height: 4px;
+  background: white;
+  margin-top: 5px;
+  animation: load 4s linear forwards;
+}
+
+@keyframes load {
+  from {
+    width: 100%;
+  }
+
+  to {
+    width: 0%;
   }
 }

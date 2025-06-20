@@ -1,101 +1,73 @@
-<div class="booking-container">
-  <h2>🚆 Booking for {{ bookingData.trainName }}</h2>
-  <p><strong>User:</strong> {{ username }} | <strong>Email:</strong> {{ email }}</p>
-  <p><strong>Date:</strong> {{ bookingData.date }}</p>
-  <p><strong>From:</strong> {{ bookingData.source }} → <strong>To:</strong> {{ bookingData.destination }}</p>
+<div class="booking-wrapper">
+  <div class="booking-title">🚆 Booking Details for {{ username }}</div>
 
-  <!-- Passenger Actions -->
+  <div class="countdown" [class.warning]="showWarningAnimation">
+    ⏳ Time Left: {{ minutes }}:{{ seconds < 10 ? '0' + seconds : seconds }}
+  </div>
+
   <div class="actions">
     <button (click)="addPassenger()" [disabled]="passengers.length >= 7">➕ Add Passenger</button>
-    <button (click)="removePassenger()" [disabled]="passengers.length <= 1">➖ Remove Passenger</button>
-    <span class="badge">👤 {{ passengers.length }}/7</span>
+    <button (click)="removePassenger()" [disabled]="passengers.length <= 1">➖ Remove</button>
+    <span class="badge"><strong>Total: {{ passengers.length }}/7</strong></span>
   </div>
 
-  <!-- ⏰ Timer -->
-  <div class="countdown-timer">
-    <span>⏳ Time Left: {{ minutes }}:{{ seconds < 10 ? '0' + seconds : seconds }}</span>
+  <div
+    *ngIf="passengers.length && passengers[0].status.includes('WL')"
+    class="status-info"
+  >
+    ℹ️ Since the first passenger has <strong>Waiting</strong> status, all others are added to the <strong>waiting list</strong> in sequence.
   </div>
 
-  <!-- Booking Form -->
-  <form (ngSubmit)="confirmBooking()" #bookingForm="ngForm">
-    <div
-      *ngFor="let passenger of passengers; let i = index"
-      class="passenger-card animate"
-      [class.error]="errors[i]"
-    >
-      <h4><i class="fas fa-user"></i> Passenger {{ i + 1 }}</h4>
+  <div
+    *ngFor="let p of passengers; let i = index"
+    class="passenger-card animate"
+    [class.error]="errors[i]?.name || errors[i]?.age"
+  >
+    <h4>👤 Passenger {{ i + 1 }}</h4>
+    <label>Name</label>
+    <input [(ngModel)]="p.name" [class.error-input]="errors[i]?.name" />
 
-      <!-- Name -->
-      <div class="form-group">
-        <label>Name</label>
-        <input
-          type="text"
-          name="name{{ i }}"
-          [(ngModel)]="passenger.name"
-          required
-          #nameRef="ngModel"
-          [class.invalid-input]="nameRef.invalid && nameRef.touched"
-        />
-        <small class="error-text" *ngIf="nameRef.invalid && nameRef.touched">Name is required.</small>
-      </div>
+    <label>Age</label>
+    <input type="number" [(ngModel)]="p.age" [class.error-input]="errors[i]?.age" />
 
-      <!-- Age -->
-      <div class="form-group">
-        <label>Age</label>
-        <input
-          type="number"
-          name="age{{ i }}"
-          [(ngModel)]="passenger.age"
-          min="1"
-          required
-          #ageRef="ngModel"
-          [class.invalid-input]="ageRef.invalid && ageRef.touched"
-        />
-        <small class="error-text" *ngIf="ageRef.invalid && ageRef.touched">Enter a valid age.</small>
-      </div>
+    <label>Class Type</label>
+    <select [(ngModel)]="p.seatType" (change)="updateFare(i)">
+      <option *ngFor="let seat of seatTypes" [value]="seat">{{ seat }}</option>
+    </select>
 
-      <!-- Seat Type -->
-      <div class="form-group">
-        <label>Class Type</label>
-        <select
-          name="seat{{ i }}"
-          [(ngModel)]="passenger.seatType"
-          (change)="updateFare(i)"
-          required
-        >
-          <option value="">🪑 Choose Seat</option>
-          <option *ngFor="let seat of seatTypes" [value]="seat">{{ seat }}</option>
-        </select>
-      </div>
-
-      <!-- Status & Fare -->
-      <p>Status: <strong>{{ passenger.status }}</strong></p>
-      <p>Fare: ₹{{ passenger.fare }}</p>
+    <div class="status-line">
+      Status:
+      <span
+        [ngClass]="{
+          'status-confirmed': p.status === 'Confirmed',
+          'status-rac': p.status === 'RAC',
+          'status-wl': p.status.includes('WL')
+        }"
+      >
+        {{ p.status }}
+      </span>
     </div>
 
-    <!-- Total Section -->
-    <div class="total-section">
-      <p><strong>Total Amount:</strong> ₹{{ calculateTotal() }}</p>
-      <button type="submit" [disabled]="!bookingForm.form.valid" class="sticky-footer-btn">
-        💳 Pay & Book
-      </button>
-    </div>
-  </form>
+    <div class="fare">Fare: ₹{{ p.fare }}</div>
+  </div>
+
+  <div class="total-section">Total Fare: ₹{{ calculateTotal() }}</div>
+
+  <button class="confirm-btn" (click)="confirmBooking()">✅ Confirm Booking</button>
 </div>
 
+<audio #audioRef src="assets/timer.mp3" preload="auto"></audio>
 
-<!-- 🔊 Audio (last 30s) -->
-<audio #audioRef src="assets/timeout-alert.mp3" preload="auto"></audio>
-
-<!-- ⚠️ Toast -->
-<div class="custom-toast" *ngIf="showToast" [ngClass]="toastType">
+<!-- Toast -->
+<div *ngIf="showToast" class="toast" [ngClass]="toastType">
   {{ toastMessage }}
+  <div class="toast-loader"></div>
 </div>
 
-<!-- 🧨 Timeout Modal -->
-<div class="modal-backdrop" *ngIf="showTimeoutModal">
-  <div class="modal">
-    <h3>⏰ Session Expired</h3>
-    <p>Your booking session has ended. Redirecting to homepage...</p>
+<!-- Timeout Modal -->
+<div class="modal-overlay" *ngIf="showTimeoutModal">
+  <div class="modal-content">
+    <h3>⏰ Time's Up!</h3>
+    <p>Your session has expired. Redirecting...</p>
   </div>
 </div>

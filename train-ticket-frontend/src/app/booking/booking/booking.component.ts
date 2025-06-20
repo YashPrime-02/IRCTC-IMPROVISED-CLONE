@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ViewChild,
-  ElementRef
-} from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
@@ -15,12 +9,11 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   templateUrl: './booking.component.html',
   styleUrls: ['./booking.component.css'],
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule],
 })
 export class BookingComponent implements OnInit, OnDestroy {
   bookingData: any;
   seatTypes: string[] = ['2S', 'SL', '3A', '2A', '1A'];
-  statuses: string[] = ['Confirmed', 'RAC', 'Waiting'];
   username = '';
   email = '';
   passengers: any[] = [];
@@ -37,14 +30,15 @@ export class BookingComponent implements OnInit, OnDestroy {
   toastMessage = '';
   toastType: 'success' | 'error' | 'warning' = 'warning';
 
+  waitingStartNumber = 0;
+  statusCounter = 0;
+
   @ViewChild('audioRef') audioRef!: ElementRef;
 
   constructor(private router: Router, private http: HttpClient) {}
 
   ngOnInit(): void {
-    const nav =
-      history.state.bookingData ||
-      JSON.parse(sessionStorage.getItem('bookingData') || 'null');
+    const nav = history.state.bookingData || JSON.parse(sessionStorage.getItem('bookingData') || 'null');
     if (!nav) {
       this.router.navigate(['/train-search']);
       return;
@@ -53,14 +47,11 @@ export class BookingComponent implements OnInit, OnDestroy {
     const storedUser = localStorage.getItem('userData');
     if (storedUser) {
       const user = JSON.parse(storedUser);
-      if (user.email) {
-        this.email = user.email;
-        this.username = user.name || this.extractUsernameFromEmail(this.email);
-      } else {
-        this.fallbackToGuest();
-      }
+      this.email = user.email || 'guest@example.com';
+      this.username = user.name || this.extractUsernameFromEmail(this.email);
     } else {
-      this.fallbackToGuest();
+      this.email = 'guest@example.com';
+      this.username = 'Guest';
     }
 
     this.bookingData = nav;
@@ -72,16 +63,12 @@ export class BookingComponent implements OnInit, OnDestroy {
     this.startCountdown();
   }
 
-  fallbackToGuest(): void {
-    this.email = 'guest@example.com';
-    this.username = 'Guest';
-    console.warn(
-      '⚠️ Proceeding as guest. Booking may not appear in logged-in user history.'
-    );
-  }
-
   ngOnDestroy(): void {
     clearInterval(this.timerInterval);
+  }
+
+  extractUsernameFromEmail(email: string): string {
+    return email.split('@')[0];
   }
 
   startCountdown(): void {
@@ -120,36 +107,58 @@ export class BookingComponent implements OnInit, OnDestroy {
     setTimeout(() => (this.showToast = false), 4000);
   }
 
-  extractUsernameFromEmail(email: string): string {
-    return email.split('@')[0];
+  calculateFare(seatType: '2S' | 'SL' | '3A' | '2A' | '1A'): number {
+    const factorMap = { '2S': 1, SL: 2, '3A': 3, '2A': 4, '1A': 5 };
+    const base = 120 + Math.floor(Math.random() * 100);
+    const distanceFactor = Math.floor(Math.random() * 5) + 5;
+    return base + factorMap[seatType] * distanceFactor * 10;
+  }
+
+  generateStatusForPassenger(index: number): string {
+    if (index === 0) {
+      const firstStatus = this.randomStatus();
+      if (firstStatus === 'WL') {
+        this.waitingStartNumber = Math.floor(Math.random() * 10) + 10;
+        this.statusCounter = this.waitingStartNumber;
+        return `WL${this.statusCounter}`;
+      } else {
+        return firstStatus;
+      }
+    } else {
+      const first = this.passengers[0]?.status;
+      if (first?.startsWith('WL')) {
+        this.statusCounter++;
+        return `WL${this.statusCounter}`;
+      } else {
+        const roll = Math.random();
+        if (roll < 0.5) return 'Confirmed';
+        else if (roll < 0.8) return 'RAC';
+        else {
+          this.statusCounter++;
+          return `WL${this.statusCounter}`;
+        }
+      }
+    }
+  }
+
+  randomStatus(): string {
+    const statuses = ['Confirmed', 'RAC', 'WL'];
+    return statuses[Math.floor(Math.random() * statuses.length)];
   }
 
   addPassenger(): void {
     if (this.passengers.length >= 7) return;
 
-    const seatType = 'SL'; // default
     const index = this.passengers.length;
-
-    let status = '';
-
-    if (index === 0) {
-      // First passenger
-      status = this.randomStatus();
-    } else {
-      const firstStatus = this.passengers[0].status;
-      if (firstStatus.startsWith('Waiting')) {
-        status = `Waiting WL${index + 1}`;
-      } else {
-        status = this.randomStatus();
-      }
-    }
+    const status = this.generateStatusForPassenger(index);
+    const seatType = 'SL';
 
     this.passengers.push({
       name: '',
       age: null,
       seatType,
       status,
-      fare: this.calculateFare(seatType, status)
+      fare: this.calculateFare(seatType)
     });
 
     this.errors.push({ name: false, age: false });
@@ -164,30 +173,7 @@ export class BookingComponent implements OnInit, OnDestroy {
 
   updateFare(i: number): void {
     const seat = this.passengers[i].seatType;
-    const status = this.passengers[i].status;
-    this.passengers[i].fare = this.calculateFare(seat, status);
-  }
-
-  calculateFare(seatType: '2S' | 'SL' | '3A' | '2A' | '1A', status: string): number {
-    const baseMap = { '2S': 120, SL: 180, '3A': 500, '2A': 900, '1A': 1500 };
-    let baseFare = baseMap[seatType];
-
-    if (status.includes('RAC')) baseFare += 30;
-    if (status.includes('Waiting')) baseFare += 50;
-
-    const surge = Math.floor(Math.random() * 50); // ₹0-₹50
-    return baseFare + surge;
-  }
-
-  randomStatus(): string {
-    const roll = Math.random();
-    if (roll < 0.6) return 'Confirmed';
-    if (roll < 0.85) return 'RAC';
-    return 'Waiting WL1';
-  }
-
-  calculateTotal(): number {
-    return this.passengers.reduce((sum, p) => sum + p.fare, 0);
+    this.passengers[i].fare = this.calculateFare(seat);
   }
 
   validatePassengers(): boolean {
@@ -199,6 +185,10 @@ export class BookingComponent implements OnInit, OnDestroy {
       return { name: nameError, age: ageError };
     });
     return isValid;
+  }
+
+  calculateTotal(): number {
+    return this.passengers.reduce((sum, p) => sum + p.fare, 0);
   }
 
   confirmBooking(): void {
@@ -224,8 +214,6 @@ export class BookingComponent implements OnInit, OnDestroy {
       bookingDate: new Date()
     };
 
-    console.log('✅ Final booking payload to be sent to backend:', bookingSummary);
-
     this.http.post('http://localhost:8080/api/bookings', bookingSummary).subscribe({
       next: () => {
         clearInterval(this.timerInterval);
@@ -237,10 +225,5 @@ export class BookingComponent implements OnInit, OnDestroy {
         this.showToastMessage('Failed to save booking.', 'error');
       }
     });
-  }
-
-  // ✅ Used in template to show warning
-  shouldShowStatusRule(): boolean {
-    return this.passengers.length > 0 && this.passengers[0].status.startsWith('Waiting');
   }
 }

@@ -1,7 +1,7 @@
-const db = require('../middleware/models');
-const transporter = require('../config/node.mailer');
-const crypto = require('crypto');
-const { Op } = require('sequelize');
+const db = require("../middleware/models");
+const transporter = require("../config/node.mailer");
+const crypto = require("crypto");
+const { Op } = require("sequelize");
 
 const Otp = db.otps;
 const User = db.users;
@@ -14,6 +14,9 @@ exports.sendOTP = async (req, res) => {
   try {
     const otp = Math.floor(100000 + Math.random() * 900000).toString(); // 6-digit OTP
     const expiresAt = new Date(Date.now() + 5 * 60 * 1000); // expires in 5 mins
+    // 🧠 Fetch user for name
+    const user = await User.findOne({ where: { email } });
+    const userName = user?.name || "User";
 
     // ✅ Store or update OTP
     await Otp.upsert({ email, otp, expiresAt });
@@ -22,19 +25,36 @@ exports.sendOTP = async (req, res) => {
     await transporter.sendMail({
       from: `"IRCTC Clone" <${process.env.EMAIL_USER}>`,
       to: email,
-      subject: "🔐 Your OTP for Password Reset",
+      subject: "🔐 Your OTP for IRCTC Password Reset",
       html: `
-        <p>Hello,</p>
-        <p>Your OTP to reset your IRCTC password is:</p>
-        <h2>${otp}</h2>
-        <p>This OTP is valid for 5 minutes.</p>
-      `
+    <div style="font-family: 'Segoe UI', sans-serif; color: #333; padding: 20px; line-height: 1.6; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 8px;">
+      <p style="font-size: 16px; margin-bottom: 10px;">Hello <strong>${userName}</strong>,</p>
+
+      <p style="font-size: 15px; margin-bottom: 10px;">
+        We received a request to reset your <strong>IRCTC Clone</strong> account password.
+      </p>
+
+      <p style="font-size: 15px; margin-bottom: 10px;">Please use the following OTP to proceed:</p>
+
+      <h2 style="font-size: 28px; color: #1f75fe; letter-spacing: 4px; text-align: center; margin: 20px 0;">${otp}</h2>
+
+      <p style="font-size: 14px; color: #666; margin-bottom: 20px;">
+        This OTP is valid for <strong>5 minutes</strong>. Please do not share it with anyone.
+      </p>
+
+      <p style="font-size: 14px; color: #999;">If you didn’t request this, you can safely ignore this email.</p>
+
+      <p style="font-size: 14px; color: #999; margin-top: 30px;">Regards,<br/><strong>IRCTC Clone Support Team</strong></p>
+    </div>
+  `,
     });
 
     res.status(200).json({ message: "OTP sent successfully to your email." });
   } catch (error) {
     console.error("❌ Send OTP Error:", error);
-    res.status(500).json({ message: "Failed to send OTP", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Failed to send OTP", error: error.message });
   }
 };
 
@@ -50,8 +70,8 @@ exports.verifyOTP = async (req, res) => {
       where: {
         email,
         otp,
-        expiresAt: { [Op.gt]: new Date() } // not expired
-      }
+        expiresAt: { [Op.gt]: new Date() }, // not expired
+      },
     });
 
     if (!record) {
@@ -75,11 +95,12 @@ exports.verifyOTP = async (req, res) => {
     // ✅ Send token back to frontend (to use in reset-password route)
     return res.status(200).json({
       message: "OTP verified successfully.",
-      token: resetToken
+      token: resetToken,
     });
-
   } catch (error) {
     console.error("❌ Verify OTP Error:", error);
-    res.status(500).json({ message: "OTP verification failed", error: error.message });
+    res
+      .status(500)
+      .json({ message: "OTP verification failed", error: error.message });
   }
 };

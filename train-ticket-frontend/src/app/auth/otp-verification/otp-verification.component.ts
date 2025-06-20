@@ -37,6 +37,7 @@ export class OtpVerificationComponent implements OnInit {
 
       if (!this.email) this.router.navigate(['/auth']);
     });
+
   }
 
   verifyOtp(): void {
@@ -76,4 +77,8 @@ export class OtpVerificationComponent implements OnInit {
       complete: () => this.isLoading = false
     });
   }
+  goToLogin(): void {
+  this.router.navigate(['/auth']);
+}
+
 }

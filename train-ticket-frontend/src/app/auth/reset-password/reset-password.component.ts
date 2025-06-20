@@ -19,6 +19,7 @@ export class ResetPasswordComponent implements OnInit {
   errorMessage = '';
   successMessage = '';
 
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -60,4 +61,18 @@ export class ResetPasswordComponent implements OnInit {
       }
     });
   }
+    goToLogin(): void {
+  this.router.navigate(['/auth']);
+}
+showNewPassword: boolean = false;
+showConfirmPassword: boolean = false;
+
+toggleNewPasswordVisibility(): void {
+  this.showNewPassword = !this.showNewPassword;
+}
+
+toggleConfirmPasswordVisibility(): void {
+  this.showConfirmPassword = !this.showConfirmPassword;
+}
+
 }

@@ -10,35 +10,22 @@
   <form (ngSubmit)="onLogin()">
     <div class="form-group">
       <label for="login-email">Email</label>
-      <input
-        type="email"
-        id="login-email"
-        name="email"
-        [(ngModel)]="email"
-        placeholder="Enter your email"
-        autocomplete="email"
-        required
-      />
+      <input type="email" id="login-email" name="email" [(ngModel)]="email" placeholder="Enter your email"
+        autocomplete="email" required />
     </div>
 
-   <div class="form-group password-group">
-  <label for="login-password">Password</label>
- <div class="password-wrapper">
-  <input
-    [type]="showPassword ? 'text' : 'password'"
-    id="login-password"
-    name="password"
-    [(ngModel)]="password"
-    placeholder="Enter your password"
-    autocomplete="current-password"
-    required
-  />
-  <span class="toggle-icon" (click)="togglePasswordVisibility()" title="Toggle Password Visibility">
-    <i class="fas" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
-  </span>
-</div>
+    <div class="form-group password-group">
+      <label for="login-password">Password</label>
+      <div class="password-wrapper">
+        <input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="password" name="password"
+          placeholder="Enter your password" autocomplete="current-password" required />
+        <span class="toggle-icon" (click)="togglePasswordVisibility()" title="Toggle Password Visibility">
+          {{ showPassword ? '🙈' : '👁️' }}
+        </span>
+      </div>
 
-</div>
+
+    </div>
 
 
     <button type="submit">

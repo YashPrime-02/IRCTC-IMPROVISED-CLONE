@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../models');
+const db = require('../middleware/models');
 const Station = db.stations;
 
 // 🔁 Bulk insert stations

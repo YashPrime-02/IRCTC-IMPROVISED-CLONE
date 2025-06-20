@@ -1,4 +1,4 @@
-const db = require("../models");
+const db = require("../middleware/models");
 const Booking = db.bookings;
 
 // 📥 GET bookings by email

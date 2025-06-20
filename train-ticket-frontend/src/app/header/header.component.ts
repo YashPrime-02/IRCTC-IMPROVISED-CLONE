@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-header',
@@ -15,37 +16,58 @@ export class HeaderComponent {
   invalidUser = false;
   showToast = false;
 
-  constructor(private router: Router) {
+  private readonly verifyUrl = 'http://localhost:8080/api/auth/verify-token';
+
+  constructor(private router: Router, private http: HttpClient) {
     this.initializeUserData();
   }
 
   // ✅ Centralized user init
   initializeUserData(): void {
     const userData = localStorage.getItem('userData');
+    const token = localStorage.getItem('token');
 
-    if (!userData || userData === 'undefined') {
-      console.warn('⚠️ No valid user data found.');
+    if (!userData || !token || userData === 'undefined') {
+      console.warn('⚠️ No valid user or token found.');
       this.invalidateSession();
       return;
     }
 
     try {
       const parsed = JSON.parse(userData);
-      if (parsed && parsed.name) {
+      if (parsed?.name) {
         this.userName = parsed.name;
       } else {
-        console.warn('⚠️ Missing "name" in userData.');
+        console.warn('⚠️ Missing name in userData.');
         this.invalidateSession();
+        return;
       }
     } catch (err) {
-      console.error('❌ Error parsing user data:', err);
+      console.error('❌ Failed to parse userData:', err);
       this.invalidateSession();
+      return;
     }
 
-    this.checkUserValidity();
+    this.checkTokenWithBackend(token);
   }
 
-  // ✅ Invalidate + redirect logic
+  // ✅ Verify token with backend
+  checkTokenWithBackend(token: string): void {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    this.http.get<{ valid: boolean }>(this.verifyUrl, { headers }).subscribe({
+      next: (res) => {
+        if (!res.valid) {
+          this.invalidateSession();
+        }
+      },
+      error: () => {
+        this.invalidateSession();
+      }
+    });
+  }
+
+  // ✅ Logout and invalidate session
   invalidateSession(): void {
     this.invalidUser = true;
     this.showLogoutModal = true;
@@ -60,17 +82,8 @@ export class HeaderComponent {
     }, 4000);
   }
 
-  // ✅ Minimal additional check
-  checkUserValidity(): void {
-    const token = localStorage.getItem('token');
-    const isLoggedIn = localStorage.getItem('isLoggedIn');
-
-    if (!token || isLoggedIn !== 'true') {
-      this.invalidateSession();
-    }
-  }
-
   openLogoutModal(): void {
+    this.invalidUser = false;
     this.showLogoutModal = true;
   }
 
@@ -101,7 +114,8 @@ export class HeaderComponent {
     this.showToast = true;
     setTimeout(() => this.showToast = false, 4000);
   }
+
   goToBookingHistory(): void {
-  this.router.navigate(['/booking-history']);
-}
+    this.router.navigate(['/booking-history']);
+  }
 }

@@ -1,0 +1,115 @@
+/* Glassmorphic OTP Card */
+.otp-wrapper {
+  max-width: 400px;
+  margin: 80px auto;
+  padding: 32px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  color: #ffffff;
+  background-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
+}
+
+/* Title */
+h2 {
+  text-align: center;
+  margin-bottom: 12px;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Description Paragraph */
+p {
+  text-align: center;
+  font-size: 14px;
+  color: #e0e0e0;
+  margin-top: 6px;
+}
+
+/* Form Group */
+.form-group {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+/* OTP Input */
+input.form-control {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  backdrop-filter: blur(8px);
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+input.form-control::placeholder {
+  color: #ddd;
+}
+
+input.form-control:focus {
+  border-color: #00bfff;
+}
+
+/* Submit Button */
+button.btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  background-color: #00bfff;
+  color: white;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+button.btn:hover {
+  background-color: #009acd;
+}
+
+/* Feedback Messages */
+.success-text {
+  color: #90ee90;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.error-text {
+  color: #ff6b6b;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.loading {
+  font-size: 14px;
+  text-align: center;
+  color: #00bfff;
+  margin-top: 10px;
+}
+
+/* Navigation Link */
+.back-link {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 13px;
+}
+
+.back-link a {
+  color: #00bfff;
+  text-decoration: none;
+}
+
+.back-link a:hover {
+  text-decoration: underline;
+}

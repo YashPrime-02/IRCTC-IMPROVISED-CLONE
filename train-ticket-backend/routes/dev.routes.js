@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../models');
+const db = require('../middleware/models');
 
 // ✅ GET all users
 router.get('/users', async (req, res) => {

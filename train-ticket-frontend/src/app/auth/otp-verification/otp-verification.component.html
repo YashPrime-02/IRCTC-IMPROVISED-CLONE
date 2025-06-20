@@ -1,0 +1,38 @@
+<div class="otp-wrapper">
+  <h2>🔐 OTP Verification</h2>
+  <p>Please enter the 6-digit OTP sent to <strong>{{ email }}</strong></p>
+
+  <form (ngSubmit)="verifyOtp()" class="otp-form">
+    <div class="form-group">
+      <input
+        type="text"
+        maxlength="6"
+        class="form-control"
+        placeholder="Enter OTP"
+        [(ngModel)]="otp"
+        name="otp"
+        required
+      />
+    </div>
+
+    <!-- 🔁 Loading Spinner -->
+    <div *ngIf="isLoading" class="loading">
+      ⏳ Verifying OTP...
+    </div>
+
+    <!-- ✅ Success -->
+    <p *ngIf="successMessage" class="success-text">{{ successMessage }}</p>
+
+    <!-- ❌ Error -->
+    <p *ngIf="error" class="error-text">{{ error }}</p>
+
+    <button type="submit" class="btn btn-primary" [disabled]="isLoading || otp.length !== 6">
+      ✅ Verify OTP
+    </button>
+  </form>
+
+  <div class="back-link">
+  <a routerLink="/auth">← Back to login</a>
+</div>
+
+</div>

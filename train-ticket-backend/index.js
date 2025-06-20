@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const db = require("./models"); // Sequelize instance
+const db = require("./middleware/models"); // Sequelize instance
 require("dotenv").config(); // Load environment variables from .env
 
 const app = express();
@@ -23,6 +23,7 @@ app.use("/api/trains", require("./routes/train.routes"));   // Train search
 app.use("/api/stations", require("./routes/station.routes"));// Station list
 app.use("/api/dev", require("./routes/dev.routes"));        // Dev tools: GET/DELETE users
 app.use("/api/bookings", require("./routes/booking.routes")); // Booking routes
+
 
 // ✅ Connect and sync DB
 db.sequelize.authenticate()

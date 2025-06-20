@@ -30,6 +30,16 @@ export const routes: Routes = [
   path: 'booking-history',
   loadComponent: () => import('./booking/booking/booking/booking-history/booking-history.component').then(m => m.BookingHistoryComponent)
 },
+{
+  path: 'reset-password',
+  loadComponent: () =>
+    import('./auth/reset-password/reset-password.component').then(m => m.ResetPasswordComponent)
+},
+{
+  path: 'otp-verification',
+  loadComponent: () =>
+    import('./auth/otp-verification/otp-verification.component').then(m => m.OtpVerificationComponent)
+},
 
 
   { path: '**', redirectTo: 'auth' }

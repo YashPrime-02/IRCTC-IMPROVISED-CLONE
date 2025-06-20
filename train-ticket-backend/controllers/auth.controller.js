@@ -1,7 +1,7 @@
 const db = require("../middleware/models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const transporter = require('../config/node.mailer');
+const transporter = require("../config/node.mailer");
 const crypto = require("crypto");
 const { Op } = require("sequelize");
 
@@ -33,23 +33,30 @@ exports.login = async (req, res) => {
   const { email, password } = req.body;
   try {
     if (!email || !password)
-      return res.status(400).json({ message: "Email and password are required." });
+      return res
+        .status(400)
+        .json({ message: "Email and password are required." });
 
     const user = await User.findOne({ where: { email } });
     if (!user) return res.status(404).json({ message: "User not found" });
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(401).json({ message: "Invalid credentials" });
+    if (!isMatch)
+      return res.status(401).json({ message: "Invalid credentials" });
 
-    const token = jwt.sign({ id: user.id, email: user.email }, "irctc_secret_key", { expiresIn: "2h" });
+    const token = jwt.sign(
+      { id: user.id, email: user.email },
+      "irctc_secret_key",
+      { expiresIn: "2h" }
+    );
 
     res.status(200).json({
       token,
       user: {
         id: user.id,
         name: user.name,
-        email: user.email
-      }
+        email: user.email,
+      },
     });
   } catch (error) {
     console.error("❌ Login Error:", error);
@@ -82,7 +89,7 @@ exports.forgotPassword = async (req, res) => {
         <p>You requested a password reset. Click below to reset your password:</p>
         <a href="${resetLink}">Reset Password</a>
         <p>This link will expire in 15 minutes.</p>
-      `
+      `,
     });
 
     res.status(200).json({ message: "Reset link sent to your email." });
@@ -100,8 +107,8 @@ exports.resetPassword = async (req, res) => {
     const user = await User.findOne({
       where: {
         resetToken: token,
-        resetTokenExpiry: { [Op.gt]: new Date() }
-      }
+        resetTokenExpiry: { [Op.gt]: new Date() },
+      },
     });
 
     if (!user)
@@ -117,4 +124,18 @@ exports.resetPassword = async (req, res) => {
     console.error("❌ Reset Password Error:", error);
     res.status(500).json({ message: "Server error", error: error.message });
   }
+  const jwt = require("jsonwebtoken");
+
+  exports.verifyToken = async (req, res) => {
+    const token = req.headers.authorization?.split(" ")[1]; // Bearer <token>
+
+    if (!token) return res.status(401).json({ message: "No token provided" });
+
+    try {
+      const decoded = jwt.verify(token, "irctc_secret_key");
+      res.status(200).json({ valid: true, user: decoded });
+    } catch (err) {
+      res.status(401).json({ message: "Invalid or expired token" });
+    }
+  };
 };

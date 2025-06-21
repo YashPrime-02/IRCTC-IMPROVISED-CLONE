@@ -1,4 +1,4 @@
-# 📦 IRCTC Booking Clone – Full Project Structure (Frontend)
+# 📦 IRCTC Booking Clone – Full Project Structure (Frontend + Backend)
 
 ---
 
@@ -41,5 +41,3 @@ src/app/
 - ⚠️ **Error Handling**: Toast notifications, form validation, modal fallback
 
 ---
-
-🛤️ *Happy Coding!* — *Built with ❤️ by Yash Mishra*

@@ -1,21 +1,14 @@
 <div class="otp-wrapper">
   <!-- ✖ Close Button -->
-<div class="close-btn" (click)="goToLogin()">×</div>
+  <div class="close-btn" (click)="goToLogin()">×</div>
 
   <h2>🔐 OTP Verification</h2>
   <p>Please enter the 6-digit OTP sent to <strong>{{ email }}</strong></p>
 
   <form (ngSubmit)="verifyOtp()" class="otp-form">
     <div class="form-group">
-      <input
-        type="text"
-        maxlength="6"
-        class="form-control"
-        placeholder="Enter OTP"
-        [(ngModel)]="otp"
-        name="otp"
-        required
-      />
+      <input type="text" maxlength="6" class="form-control" placeholder="Enter OTP" [(ngModel)]="otp" name="otp"
+        required />
     </div>
 
     <!-- 🔁 Loading Spinner -->

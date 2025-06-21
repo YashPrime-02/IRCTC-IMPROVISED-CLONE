@@ -21,14 +21,14 @@
   <div
     *ngFor="let p of passengers; let i = index"
     class="passenger-card animate"
-    [class.error]="errors[i]?.name || errors[i]?.age"
+    [class.error]="errors[i].name || errors[i].age"
   >
     <h4>👤 Passenger {{ i + 1 }}</h4>
     <label>Name</label>
-    <input [(ngModel)]="p.name" [class.error-input]="errors[i]?.name" />
+    <input [(ngModel)]="p.name" [class.error-input]="errors[i].name" />
 
     <label>Age</label>
-    <input type="number" [(ngModel)]="p.age" [class.error-input]="errors[i]?.age" />
+    <input type="number" [(ngModel)]="p.age" [class.error-input]="errors[i].age" />
 
     <label>Class Type</label>
     <select [(ngModel)]="p.seatType" (change)="updateFare(i)">

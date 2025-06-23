@@ -5,13 +5,16 @@
     <span class="welcome-text">
       Welcome, <span class="username"><strong>{{ userName }}</strong></span>
     </span>
-   <button (click)="goToBookingHistory()" class="nav-link btn btn-link p-0 m-0">📜 Booking History</button>
 
 
+
+    <!-- 📜 Booking History Button -->
+    <button (click)="goToBookingHistory()" class="nav-link btn btn-link p-0 m-0">📜 Booking History</button>
 
     <button (click)="openLogoutModal()">Logout</button>
   </div>
 </header>
+
 
 <!-- ✅ Logout / Invalid User Modal -->
 <div *ngIf="showLogoutModal" class="modal-overlay" (click)="closeOnBackdrop($event)">

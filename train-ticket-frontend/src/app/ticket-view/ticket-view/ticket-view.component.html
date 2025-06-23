@@ -1,14 +1,4 @@
-<!--
-<div *ngIf="emailSent" class="toast-success">
-  📤 Email sent successfully!
-</div>
-
-<div *ngIf="emailFailed" class="toast-error">
-  ❌ Failed to send email. Please try again.
-</div> -->
-
 <!-- ✅ Toast Notification -->
-
 <div *ngIf="showToast" class="toast-notification">
   📋 PNR copied to clipboard!
 </div>
@@ -56,15 +46,11 @@
           <th>💰 Total Fare:</th>
           <td><strong>₹{{ bookingData?.totalAmount }}</strong></td>
         </tr>
-
       </tbody>
     </table>
   </div>
 
-
-
-
-  <!-- ✅ Passengers -->
+  <!-- ✅ Passengers Table -->
   <div *ngIf="bookingData?.passengers?.length">
     <h3 class="text-light mb-4">👤 Passengers:</h3>
     <div class="passengers-table-wrapper">
@@ -83,32 +69,68 @@
           <tr *ngFor="let p of bookingData.passengers">
             <td data-label="👤 Name"><strong>{{ p.name }}</strong></td>
             <td data-label="🎂 Age"><strong>{{ p.age }}</strong></td>
-            <td data-label="🚪 Class"><strong>{{ p.seatType }}</strong></td>
-            <td data-label="🪑 Seat"><strong>{{ p.seatNumber || '-' }}</strong></td>
+
+            <!-- ✅ Class + Icon -->
+            <td data-label="🚪 Class">
+              <strong>
+                <ng-container [ngSwitch]="p.seatType">
+                  <span *ngSwitchCase="'1A'">🛌 1A</span>
+                  <span *ngSwitchCase="'2A'">🛏️ 2A</span>
+                  <span *ngSwitchCase="'3A'">🛋️ 3A</span>
+                  <span *ngSwitchCase="'SL'">🚉 SL</span>
+                  <span *ngSwitchDefault>💺 2S</span>
+                </ng-container>
+              </strong>
+            </td>
+
+            <!-- ✅ Seat with tooltip -->
+            <td data-label="🪑 Seat">
+              <strong>
+                <ng-container [ngSwitch]="p.status">
+                  <span *ngSwitchCase="'Confirmed'"
+                    [attr.title]="'Coach: ' + p.seatNumber?.split('-')[0] + ', Seat No: ' + p.seatNumber?.split('-')[1]?.split(' ')[0] + ', Berth: ' + p.seatNumber?.split(' ')[1]">
+                    {{ p.seatNumber }}
+                  </span>
+                  <span *ngSwitchCase="'RAC'" [attr.title]="'RAC Number: ' + p.seatNumber?.replace('RAC', '')">
+                    {{ p.seatNumber }}
+                  </span>
+                  <span *ngSwitchDefault [attr.title]="'WL Number: ' + p.seatNumber?.replace('WL', '')">
+                    {{ p.seatNumber || '-' }}
+                  </span>
+                </ng-container>
+              </strong>
+            </td>
+
+
+            <!-- ✅ Status with colored badge -->
             <td data-label="Status">
               <span class="status-badge" [ngClass]="{
                 confirmed: p.status === 'Confirmed',
                 rac: p.status === 'RAC',
-                waiting: p.status === 'Waiting'
+                waiting: p.status?.includes('WL')
               }">
                 {{ p.status }}
               </span>
             </td>
-            <td data-label="💰 Individual Fare(s)"><strong>₹{{ p.fare }}</strong></td>
+
+            <td data-label="💰 Individual Fare(s)">
+              <strong>₹{{ p.fare }}</strong>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
 
-
   <!-- ✅ QR Section -->
   <div class="qr-section">
     <img *ngIf="qrCodeDataURL" [src]="qrCodeDataURL" alt="QR Code" class="qr-image" />
   </div>
 
-  <!-- ✅ Download PDF Button -->
+  <!-- ✅ Actions -->
   <div class="actions">
+    <button (click)="goToTrainSearch()" class="nav-link btn btn-link p-0 m-0">🚆 Back to Train Search</button>
     <button (click)="downloadPDF()">📄 Download PDF</button>
     <button (click)="shareTicket()">📤 Share Ticket</button>
   </div>
+</div>

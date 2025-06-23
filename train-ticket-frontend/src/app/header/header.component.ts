@@ -118,4 +118,6 @@ export class HeaderComponent {
   goToBookingHistory(): void {
     this.router.navigate(['/booking-history']);
   }
+
+
 }

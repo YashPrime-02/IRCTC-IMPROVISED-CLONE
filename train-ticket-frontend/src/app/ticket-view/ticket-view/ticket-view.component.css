@@ -113,7 +113,7 @@ th:empty {
 /* 🟢 Status Badge */
 .status-badge {
   display: inline-block;
-  padding: 4px 10px;
+  padding: 4px 4px;
   border-radius: 12px;
   font-weight: 600;
   font-size: 0.9em;
@@ -305,133 +305,179 @@ button:hover {
   }
 }
 
-/* 📱 Responsive Styles */
+/* RESPONSIVE MEDIA CSS */
+/* ✅ Mobile and Small Tablet Responsive Design */
 @media screen and (max-width: 768px) {
   .ticket-container {
-    padding: 16px;
-    margin: 5px 0;
+    padding: 20px 12px;
+    margin: 20px 10px;
     border-radius: 12px;
   }
 
   .ticket-container h2 {
     font-size: 20px;
-    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
     text-align: center;
+  }
+
+  .ticket-summary,
+  .passengers-table {
+    overflow-x: auto;
   }
 
   .ticket-summary th,
   .ticket-summary td,
   .passengers-table th,
   .passengers-table td {
+    padding: 8px 10px;
+    font-size: 13px;
+    word-break: break-word;
+  }
+
+  .passenger-card {
+    padding: 10px;
     font-size: 14px;
-    padding: 10px 12px;
   }
 
-  .ticket-summary,
-  .passengers-table-wrapper {
-    padding: 0 8px;
-  }
-
-  .qr-section {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .qr-image {
-    width: 130px;
-    padding: 8px;
-  }
-
-  .actions {
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  button {
-    padding: 10px 20px;
+  .passenger-card p {
     font-size: 13px;
   }
 
   .pnr-box {
     flex-direction: column;
+    font-size: 14px;
+    gap: 6px;
     align-items: flex-start;
-    font-size: 16px;
-    padding: 8px 12px;
   }
 
   .copy-btn {
-    padding: 6px 10px;
+    padding: 6px 12px;
     font-size: 13px;
+    width: 100%;
   }
 
   .pnr-advice {
-    font-size: 13px;
+    font-size: 12px;
     text-align: center;
+    margin-bottom: 12px;
   }
 
-  .status-badge {
-    font-size: 0.85em;
-    padding: 3px 8px;
-    min-width: 60px;
+  .qr-section {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
   }
 
-  .passenger-card p {
+  .qr-image {
+    width: 130px;
+    margin: auto;
+  }
+
+  .actions {
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 18px;
+  }
+
+  button {
+    width: 100%;
     font-size: 14px;
+    padding: 10px 0;
+  }
+
+  .toast-notification,
+  .toast-success,
+  .toast-error,
+  .email-loader {
+    top: 20px;
+    right: 10px;
+    left: 10px;
+    font-size: 14px;
+    padding: 10px 16px;
+    text-align: center;
   }
 }
 
-@media screen and (max-width: 480px) {
+/* ✅ Ultra Small Devices (≤ 425px like iPhone SE, old Androids) */
+@media screen and (max-width: 425px) {
+  .ticket-container {
+    padding: 16px 8px;
+    margin: 16px 6px;
+  }
+
+  .ticket-container h2 {
+    font-size: 18px;
+  }
+
   .ticket-summary th,
   .ticket-summary td,
   .passengers-table th,
   .passengers-table td {
-    display: block;
-    width: 100%;
+    font-size: 7.25px;
+    padding: 6px 8px;
   }
 
-  .ticket-summary tr,
-  .passengers-table tr {
-    margin-bottom: 16px;
-    border-bottom: 2px solid #555;
+  .qr-image {
+    width: 110px;
   }
 
-  .ticket-summary td,
-  .passengers-table td {
-    padding-left: 50%;
-    position: relative;
-    background-color: transparent;
-    border-bottom: 1px solid #666;
+  .copy-btn {
+    font-size: 12px;
   }
 
-  .ticket-summary td::before,
-  .passengers-table td::before {
-    content: attr(data-label);
-    position: absolute;
-    left: 0;
-    top: 12px;
-    padding-left: 16px;
-    font-weight: 700;
-    color: yellow;
-    white-space: nowrap;
+  .pnr-box {
+    font-size: 13px;
   }
 
-  .status-badge {
-    font-size: 0.8em;
-    padding: 2px 6px;
-    min-width: 50px;
+  .passenger-card p {
+    font-size: 12px;
   }
 
-  .ticket-summary,
-  .passengers-table-wrapper {
-    padding: 0 5px;
+  button {
+    font-size: 13px;
   }
 
-  .toast-notification {
-    top: 10%;
-    right: 16px;
-    left: 16px;
-    width: auto;
-    padding: 10px 16px;
-    font-size: 14px;
+  .pnr-advice {
+    font-size: 11px;
+  }
+
+  .toast-notification,
+  .toast-success,
+  .toast-error,
+  .email-loader {
+    font-size: 13px;
+    padding: 10px 14px;
+  }
+}
+
+.status-badge.confirmed,
+.status-badge.rac,
+.status-badge.waiting {
+  font-size: 0.85rem;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* Tablet and smaller */
+@media screen and (max-width: 768px) {
+  .status-badge.confirmed,
+  .status-badge.rac,
+  .status-badge.waiting {
+        font-size: 7px;
+        padding: 0px 0px;
+  }
+}
+
+/* Phones ≤ 425px */
+@media screen and (max-width: 425px) {
+  .status-badge.confirmed,
+  .status-badge.rac,
+  .status-badge.waiting {
+        font-size: 9px;
+        padding: 0px 0px;
   }
 }

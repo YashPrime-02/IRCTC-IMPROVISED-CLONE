@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import confetti from 'canvas-confetti';
 
 @Component({
   selector: 'app-booking',
@@ -178,17 +179,49 @@ export class BookingComponent implements OnInit, OnDestroy {
 
   validatePassengers(): boolean {
     let isValid = true;
+
     this.errors = this.passengers.map(p => {
-      const nameError = !p.name.trim();
-      const ageError = !p.age || p.age <= 0;
+      const nameError = !p.name.trim() || /\d/.test(p.name);
+      const ageError = !p.age || p.age < 12;
+
       if (nameError || ageError) isValid = false;
+
       return { name: nameError, age: ageError };
     });
+
+    if (!isValid) {
+      this.showToastMessage('⚠️ Passengers must be 12+ years and have valid names.', 'warning');
+    }
+
     return isValid;
   }
 
   calculateTotal(): number {
     return this.passengers.reduce((sum, p) => sum + p.fare, 0);
+  }
+
+  launchConfetti(): void {
+    const duration = 2 * 1000;
+    const end = Date.now() + duration;
+
+    (function frame() {
+      confetti({
+        particleCount: 3,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0 },
+      });
+      confetti({
+        particleCount: 3,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1 },
+      });
+
+      if (Date.now() < end) {
+        requestAnimationFrame(frame);
+      }
+    })();
   }
 
   confirmBooking(): void {
@@ -218,6 +251,7 @@ export class BookingComponent implements OnInit, OnDestroy {
       next: () => {
         clearInterval(this.timerInterval);
         sessionStorage.setItem('bookingSummary', JSON.stringify(bookingSummary));
+        this.launchConfetti(); // 🎉 trigger confetti
         this.router.navigate(['/ticket-view']);
       },
       error: err => {

@@ -6,6 +6,11 @@ const morgan = require('morgan');
 const logger = require('./utils/logger');
 const app = express();
 const PORT = process.env.PORT || 8080;
+const requestLogger = require('./controllers/requestLogger');
+app.use(requestLogger); // 🛜 Apply logging to all routes
+
+
+
 
 // HTTP logs using Morgan + Winston
 const stream = {

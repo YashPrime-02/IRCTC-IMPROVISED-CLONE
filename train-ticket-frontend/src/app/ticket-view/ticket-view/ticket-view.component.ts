@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import html2pdf from 'html2pdf.js';
 import { CommonModule } from '@angular/common';
 import QRCode from 'qrcode';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ticket-view',
@@ -16,6 +17,11 @@ export class TicketViewComponent implements OnInit {
   qrCodeDataURL: string = '';
   pnrNumber: string = '';
   showToast = false;
+  constructor(private router: Router) { }
+
+  goToTrainSearch(): void {
+    this.router.navigate(['/train-search']);
+  }
 
   ngOnInit(): void {
     const sessionBooking = sessionStorage.getItem('bookingSummary');

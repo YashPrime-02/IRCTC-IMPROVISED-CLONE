@@ -102,7 +102,7 @@ button:hover {
 @media (max-width: 600px) {
   .form-box {
     padding: 28px 20px;
-    margin: 48% auto;
+    margin: 16% auto;
     width: 84%;
     max-width: 360px;
     border-radius: 10px;

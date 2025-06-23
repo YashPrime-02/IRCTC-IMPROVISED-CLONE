@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { BookingService } from '../../../booking.service';
 // @ts-ignore
 import html2pdf from 'html2pdf.js';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-booking-history',
@@ -29,7 +30,14 @@ export class BookingHistoryComponent implements OnInit {
   ];
   years: number[] = [];
 
-  constructor(private bookingService: BookingService) {}
+   constructor(
+    private router: Router,
+    private bookingService: BookingService
+  ) {}
+
+  goToTrainSearch(): void {
+    this.router.navigate(['/train-search']);
+  }
 
   ngOnInit(): void {
     const user = JSON.parse(localStorage.getItem('userData') || 'null');

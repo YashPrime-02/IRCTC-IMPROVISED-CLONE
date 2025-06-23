@@ -103,12 +103,7 @@ button:disabled {
   font-size: 16px;
 }
 
-/* Inline error messages */
-.error-text {
-  color: red;
-  font-size: 12px;
-  margin-top: 4px;
-}
+
 
 @media only screen and (max-width: 768px) {
   .booking-container {
@@ -376,6 +371,8 @@ button:disabled {
   color: #fff;
   background: #1c1c1c;
   border-radius: 8px;
+  font-family: sans-serif;
+
 }
 
 .booking-title {
@@ -422,9 +419,10 @@ select {
 
 /* ✅ Status Styling */
 .status-line {
-  margin-top: 10px;
-  font-size: 14px;
-  font-weight: 500;
+    margin-top: 16px;
+    font-size: 17px;
+    font-weight: 500;
+    font-family: sans-serif;
 }
 
 .status-confirmed {
@@ -444,8 +442,9 @@ select {
 
 /* ✅ Fare */
 .fare {
-  margin-top: 6px;
-  font-size: 15px;
+    margin-top: 10px;
+    font-size: 17px;
+    font-family: sans-serif;
 }
 
 /* ✅ Booking Controls */
@@ -567,4 +566,25 @@ button:disabled {
   to {
     width: 0%;
   }
+}
+.error-input {
+  border: 1px solid red;
+  animation: shake 0.2s ease-in-out 2;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-4px); }
+  100% { transform: translateX(0); }
+}
+
+.error-text {
+    color: red;
+    font-size: 14px;
+    margin-top: 2px;
+    opacity: 0.9;
+    transition: opacity 0.3s ease-in-out;
+    font-family: sans-serif;
 }

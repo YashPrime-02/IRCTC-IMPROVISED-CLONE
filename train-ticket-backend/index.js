@@ -2,9 +2,23 @@ const express = require("express");
 const cors = require("cors");
 const db = require("./middleware/models"); // Sequelize instance
 require("dotenv").config(); // Load environment variables from .env
-
+const morgan = require('morgan');
+const logger = require('./utils/logger');
 const app = express();
 const PORT = process.env.PORT || 8080;
+const requestLogger = require('./controllers/requestLogger');
+app.use(requestLogger); // 🛜 Apply logging to all routes
+
+
+
+
+// HTTP logs using Morgan + Winston
+const stream = {
+  write: (message) => logger.http(message.trim())
+};
+app.use(morgan('combined', { stream }));
+
+
 
 // ✅ Middleware
 app.use(cors());

@@ -1,0 +1,30 @@
+[2025-06-23 16:22:21] INFO: ✅ Login successful: yashprime000@gmail.com
+[2025-06-23 16:23:17] WARN: Login failed: Invalid credentials (yashprime000@gmail.com)
+[2025-06-23 16:24:41] WARN: Signup failed: User already exists (yashprime000@gmail.com)
+[2025-06-23 16:28:44] INFO: ✅ Login successful: yashprime000@gmail.com
+[2025-06-23 16:36:41] WARN: Login failed: Invalid credentials (yashprime000@gmail.com)
+[2025-06-23 16:36:46] INFO: ✅ Login successful: yashprime000@gmail.com
+[2025-06-23 16:47:18] INFO: 📡 OPTIONS /api/auth/login | IP: ::1 | Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36
+[2025-06-23 16:47:18] INFO: 📡 POST /api/auth/login | IP: ::1 | Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36
+[2025-06-23 16:47:19] INFO: ✅ Login successful: yashprime000@gmail.com
+[2025-06-23 16:48:11] INFO: 📡 OPTIONS /api/bookings | IP: ::1 | Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36
+[2025-06-23 16:48:11] INFO: 📡 POST /api/bookings | IP: ::1 | Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36
+[2025-06-23 16:52:31] INFO: 📡 OPTIONS /api/auth/login | IP: ::1 | Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36
+[2025-06-23 16:52:31] INFO: 📡 POST /api/auth/login | IP: ::1 | Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36
+[2025-06-23 16:52:31] INFO: ✅ Login successful: yashprime000@gmail.com
+[2025-06-23 16:53:11] INFO: 📡 OPTIONS /api/bookings | IP: ::1 | Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36
+[2025-06-23 16:53:11] INFO: 📡 POST /api/bookings | IP: ::1 | Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36
+[2025-06-23 16:54:33] INFO: 📡 OPTIONS /api/auth/login | IP: ::1 | Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36
+[2025-06-23 16:54:33] INFO: 📡 POST /api/auth/login | IP: ::1 | Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36
+[2025-06-23 16:54:33] INFO: ✅ Login successful: yashprime000@gmail.com
+[2025-06-23 16:55:02] INFO: 📡 OPTIONS /api/auth/login | IP: ::1 | Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36
+[2025-06-23 16:55:02] INFO: 📡 POST /api/auth/login | IP: ::1 | Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36
+[2025-06-23 16:55:02] INFO: ✅ Login successful: yashprime000@gmail.com
+[2025-06-23 16:55:37] INFO: 📡 OPTIONS /api/bookings | IP: ::1 | Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36
+[2025-06-23 16:55:37] INFO: 📡 POST /api/bookings | IP: ::1 | Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36
+[2025-06-23 16:58:10] INFO: 📡 OPTIONS /api/bookings | IP: ::1 | Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36
+[2025-06-23 16:58:10] INFO: 📡 POST /api/bookings | IP: ::1 | Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36
+[2025-06-23 16:58:39] info: 📡 OPTIONS /api/bookings | IP: ::1 | Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36
+[2025-06-23 16:58:39] info: 📡 POST /api/bookings | IP: ::1 | Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36
+[2025-06-23 16:59:52] info: 📡 OPTIONS /api/bookings | IP: ::1 | Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36
+[2025-06-23 16:59:52] info: 📡 POST /api/bookings | IP: ::1 | Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36

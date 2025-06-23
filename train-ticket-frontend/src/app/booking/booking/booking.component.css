@@ -105,99 +105,7 @@ button:disabled {
 
 
 
-@media only screen and (max-width: 768px) {
-  .booking-container {
-    padding: 16px;
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-  }
 
-  .passenger-card {
-    padding: 12px;
-    margin: 12px 0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  }
-
-  .passenger-card input,
-  .passenger-card select {
-    width: 95%;
-    font-size: 14px;
-    padding: 8px;
-  }
-
-  .actions {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-  }
-
-  .badge {
-    font-size: 12px;
-    padding: 4px 10px;
-  }
-
-  .total-section {
-    text-align: center;
-    font-size: 15px;
-    margin-top: 16px;
-  }
-
-  button {
-    width: 100%;
-    font-size: 15px;
-    padding: 12px 18px;
-    margin-top: 12px;
-    box-sizing: border-box;
-  }
-
-  .error-text {
-    font-size: 11px;
-  }
-
-
-  .booking-container {
-    padding-bottom: 80px;
-  }
-
-
-  .sticky-footer-btn {
-    position: fixed;
-    bottom: 12px;
-    left: 12px;
-    right: 12px;
-    z-index: 1000;
-    width: calc(100% - 24px);
-    padding: 14px;
-    background-color: #2b7a78;
-    color: white;
-    font-size: 16px;
-    font-weight: 600;
-    border-radius: 8px;
-    border: none;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-  }
-
-  .sticky-footer-btn:hover {
-    background-color: #226c6a;
-  }
-}
-
-
-@media screen and (max-width: 600px) {
-  .sticky-footer-btn {
-    font-size: 14px;
-    padding: 12px 16px;
-    border-radius: 6px;
-  }
-}
-
-@media screen and (max-width: 400px) {
-  .sticky-footer-btn {
-    font-size: 13px;
-    padding: 10px 12px;
-  }
-}
 
 /* Countdown Timer */
 .countdown-timer {
@@ -317,41 +225,7 @@ button:disabled {
   color: #444;
 }
 
-@media (max-width: 768px) {
 
-  /* 🔔 Toast: Top Center on Mobile */
-  .custom-toast {
-    bottom: auto;
-    top: 20px;
-    right: 0%;
-    transform: translateX(50%);
-    width: 90%;
-    font-size: 0.85rem;
-    padding: 12px 16px;
-    text-align: center;
-  }
-
-  /* 🧨 Modal */
-  .modal {
-    width: 95%;
-    padding: 20px;
-  }
-
-  .modal h3 {
-    font-size: 1.2rem;
-  }
-
-  .modal p {
-    font-size: 0.95rem;
-  }
-
-  /* ⏰ Countdown Timer */
-  .countdown-timer {
-    font-size: 1rem;
-    padding: 8px 16px;
-    margin: 8px 0 16px 0;
-  }
-}
 
 .status-info {
   background-color: #fff3cd;
@@ -372,7 +246,7 @@ button:disabled {
   background: #1c1c1c;
   border-radius: 8px;
   font-family: sans-serif;
-
+  margin-top: 1%;
 }
 
 .booking-title {
@@ -587,4 +461,260 @@ button:disabled {
     opacity: 0.9;
     transition: opacity 0.3s ease-in-out;
     font-family: sans-serif;
+}
+
+
+
+/* Responsive MEDIA CSS */
+/* 📱 Extra Small Devices (e.g., iPhone SE, ≤ 400px) */
+@media screen and (max-width: 400px) {
+  .booking-container,
+  .booking-wrapper {
+    padding: 15px 10px;
+    max-width: 100%;
+  }
+
+  .passenger-card {
+    padding: 12px;
+    margin: 10px 0;
+  }
+
+  .booking-title {
+    font-size: 18px;
+  }
+
+  input,
+  select {
+    font-size: 13px;
+    padding: 7px;
+  }
+
+  .badge {
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+
+  .countdown-timer {
+    font-size: 1rem;
+    padding: 8px 14px;
+  }
+
+  button,
+  .confirm-btn {
+    font-size: 10px;
+    padding: 8px 14px;
+  }
+
+  .total-section,
+  .fare,
+  .status-line {
+    font-size: 15px;
+  }
+
+  .modal {
+    padding: 20px;
+    font-size: 14px;
+  }
+
+  .modal h3 {
+    font-size: 1.2rem;
+  }
+
+  .toast {
+    font-size: 14px;
+    padding: 12px 16px;
+  }
+
+  .error-text {
+    font-size: 12px;
+  }
+}
+
+/* 📱 Small Devices (401px - 599px) */
+@media screen and (min-width: 401px) and (max-width: 599px) {
+  .booking-container,
+  .booking-wrapper {
+    padding: 20px 15px;
+    max-width: 100%;
+  }
+
+  .booking-title {
+    font-size: 19px;
+  }
+
+  input,
+  select {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+
+  .passenger-card {
+    margin: 12px 0;
+    padding: 14px;
+  }
+
+  .badge {
+    font-size: 15px;
+    padding: 11px 16px;
+  }
+
+  .total-section,
+  .fare,
+  .status-line {
+    font-size: 16px;
+  }
+
+  .confirm-btn {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .toast {
+    font-size: 14px;
+    padding: 13px 18px;
+  }
+}
+
+/* 📱 Medium Devices (600px - 767px, large phones & foldables) */
+@media screen and (min-width: 600px) and (max-width: 767px) {
+  .booking-container,
+  .booking-wrapper {
+    padding: 25px 20px;
+    max-width: 95%;
+  }
+
+  .booking-title {
+    font-size: 20px;
+  }
+
+  .passenger-card {
+    padding: 16px;
+  }
+
+  input,
+  select {
+    font-size: 15px;
+    padding: 9px 11px;
+  }
+
+  .badge {
+    font-size: 16px;
+    padding: 12px 18px;
+  }
+
+  button,
+  .confirm-btn {
+    padding: 10px 16px;
+    font-size: 15px;
+  }
+
+  .countdown-timer {
+    font-size: 1.1rem;
+  }
+
+  .modal {
+    padding: 26px;
+  }
+
+  .modal h3 {
+    font-size: 1.3rem;
+  }
+
+  .toast {
+    font-size: 15px;
+  }
+}
+
+/* 📲 Tablets (768px - 1024px, iPads) */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .booking-container,
+  .booking-wrapper {
+    padding: 30px 30px;
+    max-width: 92%;
+  }
+
+  .booking-title {
+    font-size: 22px;
+  }
+
+  .passenger-card {
+    padding: 18px;
+  }
+
+  input,
+  select {
+    font-size: 16px;
+    padding: 10px 12px;
+  }
+
+  .badge {
+    font-size: 17px;
+    padding: 12px 20px;
+  }
+
+  button,
+  .confirm-btn {
+    font-size: 16px;
+    padding: 12px 20px;
+  }
+
+  .countdown-timer {
+    font-size: 1.2rem;
+  }
+
+  .modal h3 {
+    font-size: 1.5rem;
+  }
+
+  .toast {
+    font-size: 15px;
+    padding: 14px 22px;
+  }
+}
+
+/* 💻 Small Laptops (1025px - 1199px) */
+@media screen and (min-width: 1025px) and (max-width: 1199px) {
+  .booking-container {
+    padding: 30px;
+    max-width: 860px;
+  }
+
+  .booking-title {
+    font-size: 24px;
+  }
+
+  .badge {
+    font-size: 18px;
+  }
+
+  .toast {
+    font-size: 16px;
+  }
+}
+
+/* 💻 Large Screens (≥ 1200px) */
+@media screen and (min-width: 1200px) {
+  .booking-container {
+    padding: 30px;
+    max-width: 900px;
+  }
+
+  .booking-title {
+    font-size: 26px;
+  }
+
+  .passenger-card {
+    padding: 20px;
+  }
+
+  input,
+  select {
+    font-size: 16px;
+    padding: 10px 12px;
+  }
+
+  button {
+    font-size: 16px;
+    padding: 12px 22px;
+  }
 }

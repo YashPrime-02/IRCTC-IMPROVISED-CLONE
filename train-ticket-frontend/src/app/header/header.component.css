@@ -151,88 +151,9 @@
   50% { color: white; }
 }
 
-/* === Responsive Styles === */
-@media (max-width: 1024px) {
-  .app-header {
-    padding: 12px 20px;
-    flex-direction: column;
-    align-items: flex-start;
-  }
 
-  .user-controls {
-    margin-top: 8px;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-}
 
-@media (max-width: 768px) {
-  .modal-content {
-    padding: 24px 20px;
-    max-width: 360px;
-  }
 
-  .modal-warning-icon {
-    font-size: 2.8rem;
-  }
-
-  .modal-content h2 {
-    font-size: 1.1rem;
-  }
-
-  .modal-buttons {
-    flex-direction: column;
-    gap: 14px;
-  }
-
-  .modal-buttons button {
-    width: 100%;
-  }
-}
-
-@media (max-width: 600px) {
-  .app-header {
-    padding: 2px 15px;
-    text-align: center;
-  }
-
-  .logo {
-    font-size: 1.2rem;
-  }
-
-  .user-controls {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-    margin-top: 5px;
-  }
-
-  .username {
-    font-size: 0.9rem;
-  }
-
-  .user-controls button {
-    padding: 6px 12px;
-    width: 60%;
-  }
-
-  .modal-content {
-    padding: 20px 16px;
-    max-width: 320px;
-  }
-
-  .modal-warning-icon {
-    font-size: 2.5rem;
-  }
-
-  .modal-content h2 {
-    font-size: 1rem;
-  }
-
-  .logout-blink {
-    font-size: 1.05rem;
-  }
-}
 /* ✅ Toast Loader (Progress Bar) */
 .toast-loader {
   margin-top: 2%;
@@ -253,18 +174,7 @@
   }
 }
 
-/* ✅ Responsive for toast loader */
-@media (max-width: 768px) {
-  .toast-loader {
-    height: 3px;
-  }
-}
 
-@media (max-width: 480px) {
-  .toast-loader {
-    height: 2px;
-  }
-}
 .nav-link {
   font-family: 'Poppins', sans-serif;
   font-size: 16px;
@@ -279,4 +189,196 @@
 .nav-link:hover {
   text-decoration: underline;
   color: #0056b3;
+}
+
+
+/* RESPOSNSIVE MEDIA CSS */
+/* 📱 Extra Small Devices (≤ 400px) */
+@media screen and (max-width: 400px) {
+  .app-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 16px;
+  }
+
+  .logo {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  .user-controls {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .user-controls button {
+    width: 100%;
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+
+  .modal-content {
+    padding: 20px;
+    width: 90%;
+    font-size: 14px;
+  }
+
+  .modal-warning-icon {
+    font-size: 2.5rem;
+  }
+
+  .modal-buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .modal-buttons button {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .toast-loader {
+    height: 3px;
+  }
+}
+
+/* 📱 Small Devices (401px - 599px) */
+@media screen and (min-width: 401px) and (max-width: 599px) {
+  .app-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 14px 20px;
+  }
+
+  .logo {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+  }
+
+  .user-controls {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .user-controls button {
+    font-size: 14px;
+    padding: 8px 14px;
+  }
+
+  .modal-content {
+    padding: 24px;
+    font-size: 15px;
+  }
+
+  .modal-buttons {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .modal-buttons button {
+    font-size: 14px;
+    padding: 9px 16px;
+  }
+}
+
+/* 📲 Medium Devices (600px - 767px, foldables/large phones) */
+@media screen and (min-width: 600px) and (max-width: 767px) {
+  .app-header {
+    padding: 14px 26px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-size: 1.35rem;
+  }
+
+  .user-controls {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .modal-content {
+    padding: 28px;
+    font-size: 15px;
+  }
+
+  .modal-buttons {
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .modal-buttons button {
+    padding: 10px 16px;
+  }
+}
+
+/* 📱 Tablets (768px - 1024px) */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .app-header {
+    padding: 16px 32px;
+  }
+
+  .logo {
+    font-size: 1.4rem;
+  }
+
+  .user-controls button {
+    font-size: 15px;
+    padding: 8px 16px;
+  }
+
+  .modal-content {
+    max-width: 420px;
+    padding: 30px;
+  }
+
+  .modal-buttons button {
+    font-size: 15px;
+  }
+}
+
+/* 💻 Small Laptops (1025px - 1199px) */
+@media screen and (min-width: 1025px) and (max-width: 1199px) {
+  .app-header {
+    padding: 18px 36px;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+  }
+
+  .user-controls button {
+    font-size: 15px;
+    padding: 8px 18px;
+  }
+
+  .modal-content {
+    max-width: 450px;
+    padding: 32px;
+  }
+}
+
+/* 💻 Large Screens (≥ 1200px) */
+@media screen and (min-width: 1200px) {
+  .app-header {
+    padding: 20px 40px;
+  }
+
+  .logo {
+    font-size: 1.6rem;
+  }
+
+  .user-controls button {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+
+  .modal-content {
+    max-width: 500px;
+  }
 }

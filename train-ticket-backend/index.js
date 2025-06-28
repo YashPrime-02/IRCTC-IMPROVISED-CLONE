@@ -1,53 +1,53 @@
+require("dotenv").config(); // Load env variables first
+
 const express = require("express");
 const cors = require("cors");
-const db = require("./middleware/models"); // Sequelize instance
-require("dotenv").config(); // Load environment variables from .env
-const morgan = require('morgan');
-const logger = require('./utils/logger');
+const morgan = require("morgan");
+const logger = require("./utils/logger");
+const db = require("./middleware/models"); // Sequelize setup
+const requestLogger = require("./controllers/requestLogger");
+
 const app = express();
 const PORT = process.env.PORT || 8080;
-const requestLogger = require('./controllers/requestLogger');
-app.use(requestLogger); // 🛜 Apply logging to all routes
 
-
-
-
-// HTTP logs using Morgan + Winston
+// ✅ Logging: Winston + Morgan combined
 const stream = {
-  write: (message) => logger.http(message.trim())
+  write: (message) => logger.http(message.trim()),
 };
-app.use(morgan('combined', { stream }));
+app.use(morgan("combined", { stream }));
+app.use(requestLogger);
 
-
-
-// ✅ Middleware
+// ✅ Middlewares
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ✅ Root route - Health check
+// ✅ Root health route
 app.get("/", (req, res) => {
   res.send("🚄 IRCTC Clone Backend is Running!");
 });
 
-// ✅ Routes
-app.use("/api/auth", require("./routes/auth.routes"));      // Login/Signup
-app.use("/api/test", require("./routes/test.routes"));      // Protected test route
-app.use("/api/trains", require("./routes/train.routes"));   // Train search
-app.use("/api/stations", require("./routes/station.routes"));// Station list
-app.use("/api/dev", require("./routes/dev.routes"));        // Dev tools: GET/DELETE users
-app.use("/api/bookings", require("./routes/booking.routes")); // Booking routes
+// ✅ Main routes
+app.use("/api/auth", require("./routes/auth.routes"));
+app.use("/api/test", require("./routes/test.routes"));
+app.use("/api/trains", require("./routes/train.routes"));
+app.use("/api/stations", require("./routes/station.routes"));
+app.use("/api/dev", require("./routes/dev.routes"));
+app.use("/api/bookings", require("./routes/booking.routes"));
 
+// ✅ DB Connection + Table Sync
+const isDev = process.env.NODE_ENV !== "production";
 
-// ✅ Connect and sync DB
-db.sequelize.authenticate()
+db.sequelize
+  .authenticate()
   .then(() => {
     console.log("✅ MySQL connected successfully.");
-    // 🔁 Alter instead of just sync to update schema (e.g., adding 'date', 'duration')
-    return db.sequelize.sync({ alter: true });
+
+    // Use alter: true only in dev (not in production)
+    return db.sequelize.sync({ alter: isDev });
   })
   .then(() => {
-    console.log("🛠️ Tables synced successfully (with alter: true).");
+    console.log("🛠️ Tables synced successfully.");
     app.listen(PORT, () => {
       console.log(`🚀 Server is running on http://localhost:${PORT}`);
     });

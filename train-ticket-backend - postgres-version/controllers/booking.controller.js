@@ -1,18 +1,20 @@
-const db = require("../middleware/models");
-const Booking = db.bookings;
+const supabase = require("../utils/supabaseClient");
 const logger = require('../utils/logger');
 
-// 📥 GET bookings by email
+// 📥 GET bookings by email (sorted by latest)
 exports.getBookingsByEmail = async (req, res) => {
   const email = req.query.email;
 
   try {
     logger.info(`📩 Fetching bookings for email: ${email}`);
 
-    const bookings = await Booking.findAll({
-      where: { email },
-      order: [['createdAt', 'DESC']]
-    });
+    const { data: bookings, error } = await supabase
+      .from("bookings")
+      .select("*")
+      .eq("email", email)
+      .order("createdAt", { ascending: false });
+
+    if (error) throw error;
 
     res.status(200).json(bookings);
   } catch (error) {
@@ -28,9 +30,14 @@ exports.deleteBookingById = async (req, res) => {
   try {
     logger.info(`🗑️ Delete request for booking ID: ${bookingId}`);
 
-    const deleted = await Booking.destroy({ where: { id: bookingId } });
+    const { data, error } = await supabase
+      .from("bookings")
+      .delete()
+      .eq("id", bookingId);
 
-    if (deleted) {
+    if (error) throw error;
+
+    if (data?.length > 0) {
       logger.info(`✅ Booking ID ${bookingId} deleted`);
       return res.status(200).json({ message: "Booking deleted successfully" });
     } else {

@@ -48,8 +48,9 @@ db.sequelize.authenticate()
 
     // ✅ Start server - Bind to 0.0.0.0 for Render compatibility
     app.listen(PORT, '0.0.0.0', () => {
-      console.log(`🚀 Server is running on http://0.0.0.0:${PORT}`);
-    });
+  console.log(`🚀 Server is running on http://0.0.0.0:${PORT}`);
+});
+
   })
   .catch((err) => {
     console.error("❌ Unable to connect to PostgreSQL:", err);

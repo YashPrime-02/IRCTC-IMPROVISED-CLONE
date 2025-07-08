@@ -1,14 +1,17 @@
-const db = require("../models");
-const Station = db.stations;
-const Train = db.trains;
+const supabase = require("../utils/supabaseClient");
 const logger = require("../utils/logger");
 
-// GET: All Stations
+// 🚉 GET all stations (for dropdowns etc.)
 exports.getAllStations = async (req, res) => {
   try {
     logger.info("📍 Fetching station list (Train Controller)");
 
-    const stations = await Station.findAll();
+    const { data: stations, error } = await supabase
+      .from("stations")
+      .select("*");
+
+    if (error) throw error;
+
     res.status(200).json(stations);
   } catch (err) {
     logger.error(`❌ Error fetching stations: ${err.message}`);
@@ -16,7 +19,7 @@ exports.getAllStations = async (req, res) => {
   }
 };
 
-// GET: Search Trains
+// 🚄 SEARCH trains based on source & destination
 exports.searchTrains = async (req, res) => {
   const { sourceCode, destinationCode } = req.query;
 
@@ -28,12 +31,13 @@ exports.searchTrains = async (req, res) => {
   try {
     logger.info(`🔍 Train search: ${sourceCode} → ${destinationCode}`);
 
-    const trains = await Train.findAll({
-      where: {
-        sourceCode,
-        destinationCode,
-      },
-    });
+    const { data: trains, error } = await supabase
+      .from("trains")
+      .select("*")
+      .eq("sourceCode", sourceCode)
+      .eq("destinationCode", destinationCode);
+
+    if (error) throw error;
 
     if (trains.length === 0) {
       logger.warn(`🚫 No trains found: ${sourceCode} → ${destinationCode}`);
@@ -44,6 +48,6 @@ exports.searchTrains = async (req, res) => {
     res.status(200).json(trains);
   } catch (err) {
     logger.error(`❌ Train search failed: ${err.message}`);
-    res.status(500).json({ message: "Search failed" });
+    res.status(500).json({ message: "Search failed", error: err.message });
   }
 };

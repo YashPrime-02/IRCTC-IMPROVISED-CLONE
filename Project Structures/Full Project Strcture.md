@@ -65,7 +65,7 @@ backend/
 ├── utils/
 │   └── generatePNR.js
 ├── .env
-├── server.js
+├── index.js
 └── package.json
 ```
 

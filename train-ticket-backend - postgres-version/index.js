@@ -46,10 +46,10 @@ db.sequelize.authenticate()
     // return db.sequelize.sync({ alter: true });
 
     console.log("🛠️ Skipping model sync. Using Supabase-managed schema.");
-    
-    // ✅ Start server
-    app.listen(PORT, () => {
-      console.log(`🚀 Server is running on http://localhost:${PORT}`);
+
+    // ✅ Start server with 0.0.0.0 to expose port on Render
+    app.listen(PORT, '0.0.0.0', () => {
+      console.log(`🚀 Server is running on http://0.0.0.0:${PORT}`);
     });
   })
   .catch((err) => {

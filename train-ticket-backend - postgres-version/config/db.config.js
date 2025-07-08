@@ -7,7 +7,7 @@ module.exports = {
   USER: process.env.DB_USER,            // Supabase user (usually 'postgres')
   PASSWORD: process.env.DB_PASSWORD,    // Supabase password
   DB: process.env.DB_NAME,              // Supabase DB name (usually 'postgres')
-  PORT: process.env.DB_PORT || 5432,    // PostgreSQL default port
+  PORT: process.env.DB_PORT || 5432,    // PostgreSQL port (Render = 6543)
 
   // ✅ SQL dialect for Supabase (PostgreSQL)
   dialect: "postgres",
@@ -16,7 +16,7 @@ module.exports = {
   dialectOptions: {
     ssl: {
       require: true,                    // Require SSL (Supabase needs this)
-      rejectUnauthorized: false         // Accept self-signed certificates (important for Render/Supabase)
+      rejectUnauthorized: false        // Accept self-signed certificates
     }
   },
 

@@ -12,52 +12,54 @@ const logger = require("./utils/logger");                  // Custom Winston log
 const requestLogger = require("./controllers/requestLogger"); // Custom middleware logger
 
 const app = express();
-const PORT = process.env.PORT; // ⚠️ Do NOT fallback to 8080 — Render assigns dynamic port
+const PORT = process.env.PORT || 3000; // ✅ Fallback only for local dev
 
-// ✅ Log all incoming requests using custom middleware
+// ✅ Middleware: Log all incoming requests
 app.use(requestLogger);
 
 // ✅ HTTP logging (Morgan piped to Winston)
-const stream = {
-  write: (message) => logger.http(message.trim()),
-};
-app.use(morgan("combined", { stream }));
+app.use(morgan("combined", {
+  stream: {
+    write: (message) => logger.http(message.trim()),
+  },
+}));
 
 // ✅ Global middleware
 app.use(cors());                                 // Enable cross-origin access
 app.use(express.json());                         // Parse JSON body
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded data
 
-// ✅ Health check endpoint (basic test)
+// ✅ Health check
 app.get("/", (req, res) => {
   res.send("🚄 IRCTC Clone Backend is Running!");
 });
 
-// ✅ Register API routes
-app.use("/api/auth", require("./routes/auth.routes"));         // 🔐 Login / Signup / Reset
-app.use("/api/test", require("./routes/test.routes"));         // 🔒 Protected test route
-app.use("/api/trains", require("./routes/train.routes"));      // 🚆 Train search APIs
-app.use("/api/stations", require("./routes/station.routes"));  // 🏢 Stations list
-app.use("/api/dev", require("./routes/dev.routes"));           // 🛠️ Dev/admin utilities
-app.use("/api/bookings", require("./routes/booking.routes"));  // 🎟️ Ticket booking logic
+// ✅ Register routes
+app.use("/api/auth", require("./routes/auth.routes"));
+app.use("/api/test", require("./routes/test.routes"));
+app.use("/api/trains", require("./routes/train.routes"));
+app.use("/api/stations", require("./routes/station.routes"));
+app.use("/api/dev", require("./routes/dev.routes"));
+app.use("/api/bookings", require("./routes/booking.routes"));
 
-// ✅ Connect to PostgreSQL via Supabase (with optional delay)
-setTimeout(() => {
-  db.sequelize.authenticate()
-    .then(() => {
-      console.log("✅ PostgreSQL connected successfully.");
+// ✅ Connect to PostgreSQL (Supabase)
+db.sequelize.authenticate()
+  .then(() => {
+    console.log("✅ PostgreSQL connected successfully.");
 
-      // ⚠️ Avoid syncing unless you're controlling schema via Sequelize
-      // return db.sequelize.sync({ alter: true });
+    // 🚫 Skipping Sequelize sync since Supabase manages schema
+    console.log("🛠️ Skipping model sync. Using Supabase-managed schema.");
 
-      console.log("🛠️ Skipping model sync. Using Supabase-managed schema.");
-
-      // ✅ Start Express server — bind to 0.0.0.0 for Render hosting
+    // ✅ Start server only in local or hosted environments
+    if (process.env.NODE_ENV !== "vercel") {
       app.listen(PORT, '0.0.0.0', () => {
         console.log(`🚀 Server is running on http://0.0.0.0:${PORT}`);
       });
-    })
-    .catch((err) => {
-      console.error("❌ Unable to connect to PostgreSQL:", err);
-    });
-}, 3000); // ⏳ 3-second delay to avoid cold-start issues with Supabase
+    }
+  })
+  .catch((err) => {
+    console.error("❌ Unable to connect to PostgreSQL:", err);
+  });
+
+// ✅ For Vercel: export the app
+module.exports = app;

@@ -1,4 +1,14 @@
 {
+  "name": "irctc-backend",
+  "version": "1.0.0",
+  "description": "IRCTC Clone Backend with Supabase & Vercel",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": "20.x"
+  },
   "dependencies": {
     "@supabase/supabase-js": "^2.50.3",
     "bcryptjs": "^3.0.2",

@@ -7,7 +7,7 @@ const logger = require("./utils/logger");
 const requestLogger = require("./controllers/requestLogger");
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT; // ✅ Required for Render (do not fallback to 8080)
 
 // ✅ Log all incoming HTTP requests
 app.use(requestLogger);

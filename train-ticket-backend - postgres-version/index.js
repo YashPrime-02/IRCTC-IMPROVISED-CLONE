@@ -9,16 +9,16 @@ const requestLogger = require("./controllers/requestLogger");
 const app = express();
 const PORT = process.env.PORT; // ✅ Required for Render (do not fallback to 8080)
 
-// ✅ Log all incoming HTTP requests
+// ✅ Log all incoming HTTP requests using custom logger
 app.use(requestLogger);
 
-// ✅ Pipe Morgan logs into Winston logger for HTTP logging
+// ✅ Pipe HTTP logs into Winston via Morgan
 const stream = {
   write: (message) => logger.http(message.trim()),
 };
 app.use(morgan("combined", { stream }));
 
-// ✅ Global middleware for CORS and body parsing
+// ✅ Core middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -28,26 +28,25 @@ app.get("/", (req, res) => {
   res.send("🚄 IRCTC Clone Backend is Running!");
 });
 
-// ✅ Register routes
-app.use("/api/auth", require("./routes/auth.routes"));           // User login/signup
-app.use("/api/test", require("./routes/test.routes"));           // Token-protected test route
+// ✅ Register route handlers
+app.use("/api/auth", require("./routes/auth.routes"));           // Login / Signup
+app.use("/api/test", require("./routes/test.routes"));           // Protected test
 app.use("/api/trains", require("./routes/train.routes"));        // Train search
 app.use("/api/stations", require("./routes/station.routes"));    // Station list
 app.use("/api/dev", require("./routes/dev.routes"));             // Developer utilities
-app.use("/api/bookings", require("./routes/booking.routes"));    // Booking routes
+app.use("/api/bookings", require("./routes/booking.routes"));    // Booking management
 
-// ✅ Connect to Supabase PostgreSQL and optionally sync models
+// ✅ Connect to Supabase PostgreSQL
 db.sequelize.authenticate()
   .then(() => {
     console.log("✅ PostgreSQL connected successfully.");
-    
-    // ❗ Optional: Only use sync if you're not managing schema manually
-    // For Supabase, avoid syncing unless you're confident
+
+    // ⚠️ Optional: Enable only if using Sequelize migrations for schema control
     // return db.sequelize.sync({ alter: true });
 
     console.log("🛠️ Skipping model sync. Using Supabase-managed schema.");
 
-    // ✅ Start server with 0.0.0.0 to expose port on Render
+    // ✅ Start server - Bind to 0.0.0.0 for Render compatibility
     app.listen(PORT, '0.0.0.0', () => {
       console.log(`🚀 Server is running on http://0.0.0.0:${PORT}`);
     });

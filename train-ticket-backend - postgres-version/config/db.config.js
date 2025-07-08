@@ -3,20 +3,28 @@ require('dotenv').config();
 
 module.exports = {
   // 🔌 PostgreSQL connection credentials from environment variables
-  HOST: process.env.DB_HOST,       // Supabase host (e.g., db.xyz.supabase.co)
-  USER: process.env.DB_USER,       // Supabase user
-  PASSWORD: process.env.DB_PASSWORD, // Supabase password
-  DB: process.env.DB_NAME,         // Supabase database name
-  PORT: process.env.DB_PORT || 5432, // PostgreSQL default port
+  HOST: process.env.DB_HOST,            // Supabase DB host (e.g., xyz.supabase.co)
+  USER: process.env.DB_USER,            // Supabase user (usually 'postgres')
+  PASSWORD: process.env.DB_PASSWORD,    // Supabase password
+  DB: process.env.DB_NAME,              // Supabase DB name (usually 'postgres')
+  PORT: process.env.DB_PORT || 5432,    // PostgreSQL default port
 
-  // ✅ Specify the SQL dialect for Sequelize
-  dialect: "postgres", // Switched from 'mysql' to 'postgres' for Supabase
+  // ✅ SQL dialect for Supabase (PostgreSQL)
+  dialect: "postgres",
+
+  // 🔐 Enable SSL for Supabase
+  dialectOptions: {
+    ssl: {
+      require: true,                    // Require SSL (Supabase needs this)
+      rejectUnauthorized: false         // Accept self-signed certificates (important for Render/Supabase)
+    }
+  },
 
   // 🧠 Connection pooling options
   pool: {
-    max: 10,            // Max number of connections Sequelize can use at once
-    min: 0,             // Minimum number of idle connections Sequelize maintains
-    acquire: 30000,     // Max time (ms) Sequelize will wait for a connection before throwing error
-    idle: 10000         // Time (ms) a connection must be idle before being released
+    max: 10,                            // Max connections Sequelize can keep
+    min: 0,                             // Min idle connections
+    acquire: 30000,                     // Max time (ms) to get a connection before throwing error
+    idle: 10000                         // Time (ms) before idle connection is released
   }
 };

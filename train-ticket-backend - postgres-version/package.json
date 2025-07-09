@@ -1,7 +1,7 @@
 {
   "name": "irctc-backend",
   "version": "1.0.0",
-  "description": "IRCTC Clone Backend with Supabase & Vercel",
+  "description": "IRCTC Clone Backend with Supabase & Render",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"

@@ -1,14 +1,16 @@
 const express = require("express");
 const router = express.Router();
+
+// ✅ Controllers
 const supabase = require("../utils/supabaseClient");
 const authController = require("../controllers/auth.controller");
 const otpController = require("../controllers/otp.controller");
 
-// ✅ OTP routes
+// ✅ OTP Routes
 router.post("/send-otp", otpController.sendOTP);
 router.post("/verify-otp", otpController.verifyOTP);
 
-// ✅ Signup using Supabase Auth
+// ✅ Signup (Supabase Auth)
 router.post("/signup", async (req, res) => {
   const { email, password } = req.body;
 
@@ -26,7 +28,7 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-// ✅ Login using Supabase Auth
+// ✅ Login (Supabase Auth)
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -45,11 +47,19 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// ✅ Forgot & Reset Password (Custom controller logic)
+// ✅ Forgot / Reset Password (handled via controller)
 router.post("/forgot-password", authController.forgotPassword);
 router.post("/reset-password", authController.resetPassword);
 
-// ✅ Token Verification Route (WORKS IN POSTMAN + Render)
-router.get("/verify-token", authController.verifyToken);
+// ✅ Verify Token Endpoint (✔️ tested in Postman & Render)
+const verifyToken = require("../middleware/verifyToken");
+
+router.get("/verify-token", verifyToken, (req, res) => {
+  return res.status(200).json({
+    valid: true,
+    user: req.user,
+    message: "Token is valid ✅"
+  });
+});
 
 module.exports = router;

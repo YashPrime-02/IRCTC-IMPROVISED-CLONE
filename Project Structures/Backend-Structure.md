@@ -1,7 +1,13 @@
 # 📦 IRCTC Booking Clone – Full Project Structure (Backend)
+🔁 This project has two versions of the backend:
 
+✅ Primary: PostgreSQL + Supabase (latest, production-ready)
 
-## 🖥️ Backend (Node.js + Express + Sequelize + MySQL)
+🗃️ Legacy (optional): MySQL + Sequelize version
+
+-------------------------------------------------------------------------------------------------------------------------
+
+## 🖥️ Backend (Node.js + Express + Sequelize + Postgres SQL)
 Location: `/train-ticket-backend-postgres-version`
 
 ```
@@ -71,6 +77,50 @@ train-ticket-backend-postgres-version/
 ✅ **Session safety + UX fallback for invalid users**  
 ✅ **Toast and modal feedback across app**
 
+-------------------------------------------------------------------------------------------------------------------------
+
+
+
+## 🖥️ Backend (Node.js + Express + Sequelize + MY SQL)
+Location: `/train-ticket-backend`
+
 ---
+
+
+train-ticket-backend/
+│
+├── config/
+│   ├── db.config.js              # MySQL connection config
+│   └── node.mailer.js            # NodeMailer config (if needed)
+│
+├── controllers/
+│   ├── auth.controller.js
+│   └── booking.controller.js
+│
+├── middleware/
+│   ├── auth.middleware.js
+│   └── errorHandler.js
+│
+├── models/
+│   ├── index.js                  # Sequelize init
+│   ├── user.model.js
+│   └── booking.model.js
+│
+├── routes/
+│   ├── auth.routes.js
+│   ├── booking.routes.js
+│   └── train.routes.js
+│
+├── utils/
+│   └── logger.js
+│
+├── .env
+├── index.js
+├── package.json
+└── seed.js
+
+
+
+
 
 🛤️ *Happy Coding!* — *Built with ❤️ by Yash Mishra*

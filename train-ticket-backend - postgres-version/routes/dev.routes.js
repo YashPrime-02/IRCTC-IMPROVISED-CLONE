@@ -2,6 +2,15 @@ const express = require('express');
 const router = express.Router();
 const supabase = require('../utils/supabaseClient');
 
+// ✅ Render Ping Route (for cron)
+router.get('/ping', (req, res) => {
+  res.status(200).json({
+    status: '✅ IRCTC backend awake',
+    time: new Date().toISOString(),
+    server: 'Render (Node.js + Supabase)',
+  });
+});
+
 // ✅ GET all users
 router.get('/users', async (req, res) => {
   try {

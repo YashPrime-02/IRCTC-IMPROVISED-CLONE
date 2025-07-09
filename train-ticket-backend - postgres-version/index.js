@@ -1,63 +1,65 @@
-// ✅ Core dependencies
-const express = require("express");
-const cors = require("cors");
-require("dotenv").config(); // Load environment variables from .env
+const express = require('express');
+const router = express.Router();
+const supabase = require('../utils/supabaseClient');
 
-// ✅ Database (Sequelize models)
-const db = require("./middleware/models");
-
-// ✅ Logging tools
-const morgan = require("morgan");
-const logger = require("./utils/logger");
-const requestLogger = require("./controllers/requestLogger");
-
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-// ✅ Middleware: Log all incoming requests
-app.use(requestLogger);
-
-// ✅ HTTP logging (Morgan piped to Winston)
-app.use(
-  morgan("combined", {
-    stream: {
-      write: (message) => logger.http(message.trim()),
-    },
-  })
-);
-
-// ✅ Global middleware
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// ✅ Health check
-app.get("/", (req, res) => {
-  res.send("🚄 IRCTC Clone Backend is Running!");
+// ✅ Render Ping Route (for cron or uptime)
+router.get('/ping', (req, res) => {
+  console.log("📡 Ping received from cron or Render health check at", new Date().toISOString());
+  res.status(200).json({
+    status: '✅ IRCTC backend awake',
+    time: new Date().toISOString(),
+    server: 'Render (Node.js + Supabase)',
+  });
 });
 
-// ✅ API routes
-app.use("/api/auth", require("./routes/auth.routes"));
-app.use("/api/test", require("./routes/test.routes"));
-app.use("/api/trains", require("./routes/train.routes"));
-app.use("/api/stations", require("./routes/station.routes"));
-app.use("/api/dev", require("./routes/dev.routes"));
-app.use("/api/bookings", require("./routes/booking.routes"));
+// ✅ GET all users
+router.get('/users', async (req, res) => {
+  try {
+    const { data: users, error } = await supabase
+      .from('users')
+      .select('*');
 
-// ✅ PostgreSQL connection
-db.sequelize
-  .authenticate()
-  .then(() => {
-    console.log("✅ PostgreSQL connected successfully.");
-    console.log("🛠️ Skipping model sync. Using Supabase-managed schema.");
-    if (process.env.NODE_ENV !== "vercel") {
-      app.listen(PORT, "0.0.0.0", () => {
-        console.log(`🚀 Server is running on http://0.0.0.0:${PORT}`);
-      });
-    }
-  })
-  .catch((err) => {
-    console.error("❌ Unable to connect to PostgreSQL:", err);
-  });
+    if (error) throw error;
 
-module.exports = app;
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching users', error: err.message });
+  }
+});
+
+// ✅ DELETE all users
+router.delete('/users', async (req, res) => {
+  try {
+    const { error } = await supabase
+      .from('users')
+      .delete()
+      .neq('id', 0); // delete all except system user (optional)
+
+    if (error) throw error;
+
+    res.status(200).json({ message: 'All users deleted' });
+  } catch (err) {
+    res.status(500).json({ message: 'Error deleting users', error: err.message });
+  }
+});
+
+// ✅ POST - Create new user (manual insert)
+router.post('/users', async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+
+    const { data, error } = await supabase
+      .from('users')
+      .insert([{ name, email, password }])
+      .select()
+      .single();
+
+    if (error) throw error;
+
+    res.status(201).json({ message: 'User created', user: data });
+  } catch (err) {
+    res.status(500).json({ message: 'Error creating user', error: err.message });
+  }
+});
+
+module.exports = router;

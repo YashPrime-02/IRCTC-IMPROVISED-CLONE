@@ -19,14 +19,13 @@
     <h4>👤 Passenger {{ i + 1 }}</h4>
 
     <label>Name</label>
-
-    <input [(ngModel)]="p.name" [class.error-input]="errors[i].name" />
-
-    <label>Age</label>
-    <input type="number" [(ngModel)]="p.age" [class.error-input]="errors[i].age" />
-
     <input [(ngModel)]="p.name" [class.error-input]="errors[i].name" placeholder="Full Name" />
     <div class="error-text" *ngIf="errors[i].name">Name is required and must not contain numbers</div>
+
+    <label>Age</label>
+    <input type="number" [(ngModel)]="p.age" [class.error-input]="errors[i].age" placeholder="Age (12+)" />
+    <div class="error-text" *ngIf="errors[i].age">Age must be 12 years or older</div>
+
     <label>Class Type</label>
     <select [(ngModel)]="p.seatType" (change)="updateFare(i)">
       <option *ngFor="let seat of seatTypes" [value]="seat">{{ seat }}</option>

@@ -1,0 +1,2277 @@
+{
+  "stations": [
+    {
+      "stationID": 1,
+      "stationName": "New Delhi",
+      "stationCode": "NDLS"
+    },
+    {
+      "stationID": 2,
+      "stationName": "Mumbai Central",
+      "stationCode": "BCT"
+    },
+    {
+      "stationID": 3,
+      "stationName": "Kolkata Howrah",
+      "stationCode": "HWH"
+    },
+    {
+      "stationID": 4,
+      "stationName": "Chennai Central",
+      "stationCode": "MAS"
+    },
+    {
+      "stationID": 5,
+      "stationName": "Bangalore City",
+      "stationCode": "SBC"
+    },
+    {
+      "stationID": 6,
+      "stationName": "Secunderabad",
+      "stationCode": "SC"
+    },
+    {
+      "stationID": 7,
+      "stationName": "Ahmedabad",
+      "stationCode": "ADI"
+    },
+    {
+      "stationID": 8,
+      "stationName": "Pune",
+      "stationCode": "PUNE"
+    },
+    {
+      "stationID": 9,
+      "stationName": "Bhopal Junction",
+      "stationCode": "BPL"
+    },
+    {
+      "stationID": 10,
+      "stationName": "Jaipur",
+      "stationCode": "JP"
+    },
+    {
+      "stationID": 11,
+      "stationName": "Lucknow",
+      "stationCode": "LKO"
+    },
+    {
+      "stationID": 12,
+      "stationName": "Varanasi",
+      "stationCode": "BSB"
+    },
+    {
+      "stationID": 13,
+      "stationName": "Patna",
+      "stationCode": "PNBE"
+    },
+    {
+      "stationID": 14,
+      "stationName": "Kanpur Central",
+      "stationCode": "CNB"
+    },
+    {
+      "stationID": 15,
+      "stationName": "Nagpur",
+      "stationCode": "NGP"
+    },
+    {
+      "stationID": 16,
+      "stationName": "Visakhapatnam",
+      "stationCode": "VSKP"
+    },
+    {
+      "stationID": 17,
+      "stationName": "Thiruvananthapuram",
+      "stationCode": "TVC"
+    },
+    {
+      "stationID": 18,
+      "stationName": "Coimbatore",
+      "stationCode": "CBE"
+    },
+    {
+      "stationID": 19,
+      "stationName": "Madurai",
+      "stationCode": "MDU"
+    },
+    {
+      "stationID": 20,
+      "stationName": "Agra Cantt",
+      "stationCode": "AGC"
+    },
+    {
+      "stationID": 21,
+      "stationName": "Guwahati",
+      "stationCode": "GHY"
+    },
+    {
+      "stationID": 22,
+      "stationName": "Ranchi",
+      "stationCode": "RNC"
+    },
+    {
+      "stationID": 23,
+      "stationName": "Jammu Tawi",
+      "stationCode": "JAT"
+    },
+    {
+      "stationID": 24,
+      "stationName": "Dehradun",
+      "stationCode": "DDN"
+    },
+    {
+      "stationID": 25,
+      "stationName": "Amritsar",
+      "stationCode": "ASR"
+    },
+    {
+      "stationID": 26,
+      "stationName": "Indore",
+      "stationCode": "INDB"
+    },
+    {
+      "stationID": 27,
+      "stationName": "Raipur",
+      "stationCode": "R"
+    },
+    {
+      "stationID": 28,
+      "stationName": "Surat",
+      "stationCode": "ST"
+    },
+    {
+      "stationID": 29,
+      "stationName": "Gorakhpur",
+      "stationCode": "GKP"
+    },
+    {
+      "stationID": 30,
+      "stationName": "Darbhanga",
+      "stationCode": "DBG"
+    },
+    {
+      "stationID": 31,
+      "stationName": "Udaipur",
+      "stationCode": "UDZ"
+    },
+    {
+      "stationID": 32,
+      "stationName": "Jabalpur",
+      "stationCode": "JBP"
+    },
+    {
+      "stationID": 33,
+      "stationName": "Bhagalpur",
+      "stationCode": "BGP"
+    },
+    {
+      "stationID": 34,
+      "stationName": "Aligarh",
+      "stationCode": "ALJN"
+    },
+    {
+      "stationID": 35,
+      "stationName": "Meerut City",
+      "stationCode": "MTC"
+    },
+    {
+      "stationID": 36,
+      "stationName": "Tatanagar",
+      "stationCode": "TATA"
+    },
+    {
+      "stationID": 37,
+      "stationName": "Bilaspur",
+      "stationCode": "BSP"
+    },
+    {
+      "stationID": 38,
+      "stationName": "Durg",
+      "stationCode": "DURG"
+    },
+    {
+      "stationID": 39,
+      "stationName": "Anand Vihar",
+      "stationCode": "ANVT"
+    },
+    {
+      "stationID": 40,
+      "stationName": "Gaya",
+      "stationCode": "GAYA"
+    },
+
+     {
+      "stationID": 41,
+      "stationName": "Ghaziabad",
+      "stationCode": "GZB"
+    },
+    {
+      "stationID": 42,
+      "stationName": "Hazrat Nizamuddin",
+      "stationCode": "NZM"
+    },
+    {
+      "stationID": 43,
+      "stationName": "Moradabad",
+      "stationCode": "MB"
+    }
+
+
+  ],
+  "trains": [
+    {
+      "trainName": "Lucknow Mail",
+      "departureTime": "22:00",
+      "arrivalTime": "06:50",
+      "duration": "08:50:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Kanpur Shatabdi",
+      "departureTime": "15:00",
+      "arrivalTime": "19:45",
+      "duration": "04:45:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Kanpur Shatabdi",
+      "departureTime": "16:20",
+      "arrivalTime": "19:45",
+      "duration": "03:25:00",
+      "sourceCode": "GZB",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Kanpur Shatabdi",
+      "departureTime": "15:00",
+      "arrivalTime": "19:45",
+      "duration": "04:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "NDLS"
+    },
+    {
+      "trainName": "Lucknow Mail",
+      "departureTime": "22:00",
+      "arrivalTime": "06:50",
+      "duration": "08:50:00",
+      "sourceCode": "LKO",
+      "destinationCode": "NDLS"
+    },
+    {
+      "trainName": "IRCTC TEJAS EXPRESS",
+      "departureTime": "15:00",
+      "arrivalTime": "19:45",
+      "duration": "04:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "NDLS"
+    },
+    {
+      "trainName": "Magadh Express",
+      "departureTime": "21:10",
+      "arrivalTime": "13:20",
+      "duration": "16:10:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "PNBE"
+    },
+    {
+      "trainName": "Vaishali Express",
+      "departureTime": "20:10",
+      "arrivalTime": "11:45",
+      "duration": "15:35:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "BGP"
+    },
+    {
+      "trainName": "Ganga Gomti Express",
+      "departureTime": "06:15",
+      "arrivalTime": "12:00",
+      "duration": "05:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "PNBE"
+    },
+    {
+      "trainName": "Swarna Shatabdi",
+      "departureTime": "07:30",
+      "arrivalTime": "13:50",
+      "duration": "06:20:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "ASR"
+    },
+    {
+      "trainName": "Mahananda Express",
+      "departureTime": "06:35",
+      "arrivalTime": "15:10",
+      "duration": "08:35:00",
+      "sourceCode": "LKO",
+      "destinationCode": "DBG"
+    },
+    {
+      "trainName": "Gomti Express",
+      "departureTime": "08:10",
+      "arrivalTime": "17:30",
+      "duration": "09:20:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Shiv Ganga Express",
+      "departureTime": "19:15",
+      "arrivalTime": "04:45",
+      "duration": "09:30:00",
+      "sourceCode": "BSB",
+      "destinationCode": "NDLS"
+    },
+    {
+      "trainName": "Shatabdi Express",
+      "departureTime": "06:00",
+      "arrivalTime": "10:50",
+      "duration": "04:50:00",
+      "sourceCode": "LKO",
+      "destinationCode": "NDLS"
+    },
+    {
+      "trainName": "Chhattisgarh Express",
+      "departureTime": "17:30",
+      "arrivalTime": "03:40",
+      "duration": "10:10:00",
+      "sourceCode": "BPL",
+      "destinationCode": "NDLS"
+    },
+    {
+      "trainName": "Avadh Express",
+      "departureTime": "07:00",
+      "arrivalTime": "15:20",
+      "duration": "08:20:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "GKP"
+    },
+    {
+      "trainName": "Poorvottar Sampark Kranti",
+      "departureTime": "15:25",
+      "arrivalTime": "05:10",
+      "duration": "13:45:00",
+      "sourceCode": "GKP",
+      "destinationCode": "NDLS"
+    },
+    {
+      "trainName": "Ganga Sutlej Express",
+      "departureTime": "09:00",
+      "arrivalTime": "19:10",
+      "duration": "10:10:00",
+      "sourceCode": "LKO",
+      "destinationCode": "ASR"
+    },
+    {
+      "trainName": "Shan-e-Punjab",
+      "departureTime": "06:00",
+      "arrivalTime": "13:30",
+      "duration": "07:30:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "ASR"
+    },
+    {
+      "trainName": "Intercity Express",
+      "departureTime": "16:40",
+      "arrivalTime": "22:00",
+      "duration": "05:20:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Kashi Vishwanath Express",
+      "departureTime": "06:10",
+      "arrivalTime": "18:30",
+      "duration": "12:20:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "BSB"
+    },
+    {
+      "trainName": "Saryu Yamuna Express",
+      "departureTime": "18:00",
+      "arrivalTime": "04:30",
+      "duration": "10:30:00",
+      "sourceCode": "ANVT",
+      "destinationCode": "AY"
+    },
+    {
+      "trainName": "Mahamana Express",
+      "departureTime": "06:30",
+      "arrivalTime": "17:10",
+      "duration": "10:40:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "BSB"
+    },
+    {
+      "trainName": "Bareilly Intercity",
+      "departureTime": "05:30",
+      "arrivalTime": "11:00",
+      "duration": "05:30:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "BE"
+    },
+    {
+      "trainName": "Gorakhdham Express",
+      "departureTime": "08:30",
+      "arrivalTime": "18:10",
+      "duration": "09:40:00",
+      "sourceCode": "GKP",
+      "destinationCode": "NDLS"
+    },
+    {
+      "trainName": "Shaheed Express",
+      "departureTime": "19:10",
+      "arrivalTime": "12:45",
+      "duration": "17:35:00",
+      "sourceCode": "AMH",
+      "destinationCode": "NDLS"
+    },
+    {
+      "trainName": "Budh Purnima Express",
+      "departureTime": "14:20",
+      "arrivalTime": "23:30",
+      "duration": "09:10:00",
+      "sourceCode": "GAYA",
+      "destinationCode": "RAJGR"
+    },
+    {
+      "trainName": "Prayagraj Express",
+      "departureTime": "21:00",
+      "arrivalTime": "05:10",
+      "duration": "08:10:00",
+      "sourceCode": "PRYJ",
+      "destinationCode": "NDLS"
+    },
+    {
+      "trainName": "Neelachal Express",
+      "departureTime": "11:40",
+      "arrivalTime": "21:30",
+      "duration": "09:50:00",
+      "sourceCode": "PURI",
+      "destinationCode": "NDLS"
+    },
+    {
+      "trainName": "Tatanagar Superfast",
+      "departureTime": "05:30",
+      "arrivalTime": "14:30",
+      "duration": "09:00:00",
+      "sourceCode": "TATA",
+      "destinationCode": "NDLS"
+    },
+    {
+      "trainName": "Chambal Express",
+      "departureTime": "17:25",
+      "arrivalTime": "08:00",
+      "duration": "14:35:00",
+      "sourceCode": "KURJ",
+      "destinationCode": "HWH"
+    },
+    {
+      "trainName": "Udyog Nagri Express",
+      "departureTime": "16:55",
+      "arrivalTime": "07:10",
+      "duration": "14:15:00",
+      "sourceCode": "LTT",
+      "destinationCode": "PRYJ"
+    },
+    {
+      "trainName": "Bhopal Express",
+      "departureTime": "14:20",
+      "arrivalTime": "06:35",
+      "duration": "16:15:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "BPL"
+    },
+    {
+      "trainName": "Ganga Gomti Express",
+      "departureTime": "18:15",
+      "arrivalTime": "21:55",
+      "duration": "03:40:00",
+      "sourceCode": "LKO",
+      "destinationCode": "PRG"
+    },
+    {
+      "trainName": "Malwa Express",
+      "departureTime": "12:15",
+      "arrivalTime": "03:25",
+      "duration": "15:10:00",
+      "sourceCode": "INDB",
+      "destinationCode": "JAT"
+    },
+    {
+      "trainName": "Mahakaushal Express",
+      "departureTime": "19:05",
+      "arrivalTime": "08:30",
+      "duration": "13:25:00",
+      "sourceCode": "JBP",
+      "destinationCode": "NZM"
+    },
+    {
+      "trainName": "Taj Express",
+      "departureTime": "07:10",
+      "arrivalTime": "10:25",
+      "duration": "03:15:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "AGC"
+    },
+    {
+      "trainName": "Shaktipunj Express",
+      "departureTime": "05:45",
+      "arrivalTime": "16:55",
+      "duration": "11:10:00",
+      "sourceCode": "HWH",
+      "destinationCode": "JBP"
+    },
+    {
+      "trainName": "Ganga Express",
+      "departureTime": "06:00",
+      "arrivalTime": "17:10",
+      "duration": "11:10:00",
+      "sourceCode": "MB",
+      "destinationCode": "PNBE"
+    },
+    {
+      "trainName": "Sabarmati Express",
+      "departureTime": "20:25",
+      "arrivalTime": "05:45",
+      "duration": "09:20:00",
+      "sourceCode": "ADI",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Humsafar Express",
+      "departureTime": "19:00",
+      "arrivalTime": "11:20",
+      "duration": "16:20:00",
+      "sourceCode": "LKO",
+      "destinationCode": "ANVT"
+    },
+    {
+      "trainName": "Magadh Express",
+      "departureTime": "14:00",
+      "arrivalTime": "06:50",
+      "duration": "16:50:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "PNBE"
+    },
+    {
+      "trainName": "Garib Rath Express",
+      "departureTime": "17:00",
+      "arrivalTime": "09:30",
+      "duration": "16:30:00",
+      "sourceCode": "BSB",
+      "destinationCode": "ANVT"
+    },
+    {
+      "trainName": "Jhelum Express",
+      "departureTime": "23:00",
+      "arrivalTime": "18:20",
+      "duration": "19:20:00",
+      "sourceCode": "PUNE",
+      "destinationCode": "JAT"
+    },
+    {
+      "trainName": "Swarna Shatabdi",
+      "departureTime": "07:20",
+      "arrivalTime": "13:45",
+      "duration": "06:25:00",
+      "sourceCode": "NDLS",
+      "destinationCode": "ASR"
+    },
+    {
+      "trainName": "Yuva Express",
+      "departureTime": "18:30",
+      "arrivalTime": "04:50",
+      "duration": "10:20:00",
+      "sourceCode": "HWH",
+      "destinationCode": "NDLS"
+    },
+    {
+      "trainName": "Suvidha Express",
+      "departureTime": "22:45",
+      "arrivalTime": "13:55",
+      "duration": "15:10:00",
+      "sourceCode": "ADI",
+      "destinationCode": "BSB"
+    },
+    {
+      "trainName": "Vikramshila Express",
+      "departureTime": "13:00",
+      "arrivalTime": "05:10",
+      "duration": "16:10:00",
+      "sourceCode": "BGP",
+      "destinationCode": "NDLS"
+    },
+    {
+      "trainName": "Bhrigu Superfast",
+      "departureTime": "18:00",
+      "arrivalTime": "05:30",
+      "duration": "11:30:00",
+      "sourceCode": "BSB",
+      "destinationCode": "ANVT"
+    },
+    {
+      "trainName": "Gomti Superfast Express",
+      "departureTime": "05:45",
+      "arrivalTime": "07:45",
+      "duration": "02:00:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Kranti Intercity",
+      "departureTime": "08:15",
+      "arrivalTime": "10:10",
+      "duration": "01:55:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Rapti Ganga Express",
+      "departureTime": "10:30",
+      "arrivalTime": "12:25",
+      "duration": "01:55:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Avadh Intercity",
+      "departureTime": "11:50",
+      "arrivalTime": "14:00",
+      "duration": "02:10:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Saryu Express",
+      "departureTime": "13:20",
+      "arrivalTime": "15:30",
+      "duration": "02:10:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Mahanadi Intercity",
+      "departureTime": "14:45",
+      "arrivalTime": "16:40",
+      "duration": "01:55:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Shramjeevi Janata SF",
+      "departureTime": "15:40",
+      "arrivalTime": "17:30",
+      "duration": "01:50:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Yamuna Kashi Mail",
+      "departureTime": "17:10",
+      "arrivalTime": "19:05",
+      "duration": "01:55:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Evening Pioneer Express",
+      "departureTime": "18:50",
+      "arrivalTime": "21:00",
+      "duration": "02:10:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Kanpur Lucknow Night Link",
+      "departureTime": "22:30",
+      "arrivalTime": "00:20",
+      "duration": "01:50:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "LKO Kanpur Jan Shatabdi",
+      "departureTime": "04:15",
+      "arrivalTime": "06:05",
+      "duration": "01:50:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Panchwati SF",
+      "departureTime": "07:10",
+      "arrivalTime": "09:00",
+      "duration": "01:50:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Shakti Intercity",
+      "departureTime": "09:20",
+      "arrivalTime": "11:30",
+      "duration": "02:10:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Triveni Local SF",
+      "departureTime": "10:50",
+      "arrivalTime": "13:00",
+      "duration": "02:10:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Heritage Express",
+      "departureTime": "13:30",
+      "arrivalTime": "15:20",
+      "duration": "01:50:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Nawab City SF",
+      "departureTime": "16:00",
+      "arrivalTime": "18:10",
+      "duration": "02:10:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Evening Breeze Special",
+      "departureTime": "17:45",
+      "arrivalTime": "19:30",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Night Owl Intercity",
+      "departureTime": "20:20",
+      "arrivalTime": "22:10",
+      "duration": "01:50:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Late Express 98",
+      "departureTime": "23:30",
+      "arrivalTime": "01:20",
+      "duration": "01:50:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Morning Spark Express",
+      "departureTime": "05:00",
+      "arrivalTime": "06:45",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Sunrise Special",
+      "departureTime": "06:30",
+      "arrivalTime": "08:25",
+      "duration": "01:55:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Tejas Express",
+      "departureTime": "06:10",
+      "arrivalTime": "08:00",
+      "duration": "01:50:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Shatabdi Express",
+      "departureTime": "18:15",
+      "arrivalTime": "20:00",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Pushpak Express",
+      "departureTime": "07:40",
+      "arrivalTime": "09:30",
+      "duration": "01:50:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Awadh Express",
+      "departureTime": "12:20",
+      "arrivalTime": "14:10",
+      "duration": "01:50:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Janata Express",
+      "departureTime": "08:30",
+      "arrivalTime": "10:15",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Ganga Tejas",
+      "departureTime": "05:45",
+      "arrivalTime": "07:30",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Prayagraj Express",
+      "departureTime": "16:00",
+      "arrivalTime": "17:45",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Ganga Gomti SF",
+      "departureTime": "14:25",
+      "arrivalTime": "16:10",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Shramjeevi Superfast",
+      "departureTime": "21:00",
+      "arrivalTime": "22:45",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Anand Vihar Express",
+      "departureTime": "07:00",
+      "arrivalTime": "08:45",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Chauri Chaura Express",
+      "departureTime": "17:10",
+      "arrivalTime": "19:00",
+      "duration": "01:50:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "LJN Intercity",
+      "departureTime": "06:00",
+      "arrivalTime": "07:45",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Avadh Intercity",
+      "departureTime": "13:15",
+      "arrivalTime": "15:05",
+      "duration": "01:50:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Tejas AC Superfast",
+      "departureTime": "15:40",
+      "arrivalTime": "17:30",
+      "duration": "01:50:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Rohilkhand Express",
+      "departureTime": "11:25",
+      "arrivalTime": "13:15",
+      "duration": "01:50:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Amrit Bharat Express",
+      "departureTime": "09:10",
+      "arrivalTime": "10:55",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Krishna Superfast",
+      "departureTime": "19:00",
+      "arrivalTime": "20:45",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Sabarmati Intercity",
+      "departureTime": "04:30",
+      "arrivalTime": "06:15",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Bundelkhand Mail",
+      "departureTime": "22:10",
+      "arrivalTime": "23:55",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Tejas Express",
+      "departureTime": "06:10",
+      "arrivalTime": "08:00",
+      "duration": "01:50:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Shatabdi Express",
+      "departureTime": "18:15",
+      "arrivalTime": "20:00",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Pushpak Express",
+      "departureTime": "07:40",
+      "arrivalTime": "09:30",
+      "duration": "01:50:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Awadh Express",
+      "departureTime": "12:20",
+      "arrivalTime": "14:10",
+      "duration": "01:50:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Rapti Ganga Express",
+      "departureTime": "10:00",
+      "arrivalTime": "11:45",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Janata Express",
+      "departureTime": "08:30",
+      "arrivalTime": "10:15",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Ganga Tejas",
+      "departureTime": "05:45",
+      "arrivalTime": "07:30",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Prayagraj Express",
+      "departureTime": "16:00",
+      "arrivalTime": "17:45",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Ganga Gomti SF",
+      "departureTime": "14:25",
+      "arrivalTime": "16:10",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Shramjeevi Superfast",
+      "departureTime": "21:00",
+      "arrivalTime": "22:45",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Anand Vihar Express",
+      "departureTime": "07:00",
+      "arrivalTime": "08:45",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Chauri Chaura Express",
+      "departureTime": "17:10",
+      "arrivalTime": "19:00",
+      "duration": "01:50:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Gomti Express",
+      "departureTime": "05:20",
+      "arrivalTime": "07:05",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Intercity SF Express",
+      "departureTime": "17:35",
+      "arrivalTime": "19:20",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Kashi Vishwanath Express",
+      "departureTime": "14:00",
+      "arrivalTime": "15:50",
+      "duration": "01:50:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Ganga Satluj Express",
+      "departureTime": "11:10",
+      "arrivalTime": "12:55",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Avadh Assam Express",
+      "departureTime": "07:30",
+      "arrivalTime": "09:15",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Kaifiyat Express",
+      "departureTime": "08:40",
+      "arrivalTime": "10:25",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Chhapra Express",
+      "departureTime": "06:25",
+      "arrivalTime": "08:10",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Superfast SF Rajya Rani",
+      "departureTime": "16:50",
+      "arrivalTime": "18:35",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Lucknow Superfast",
+      "departureTime": "13:30",
+      "arrivalTime": "15:15",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Magadh Intercity",
+      "departureTime": "10:10",
+      "arrivalTime": "11:55",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Rajdhani Link Express",
+      "departureTime": "19:25",
+      "arrivalTime": "21:10",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Varuna Express",
+      "departureTime": "09:15",
+      "arrivalTime": "11:00",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Bhrigu Superfast",
+      "departureTime": "07:05",
+      "arrivalTime": "08:50",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Hazrat Nizamuddin SF",
+      "departureTime": "15:10",
+      "arrivalTime": "16:55",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Sabarmati Janata",
+      "departureTime": "21:30",
+      "arrivalTime": "23:15",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "East Express",
+      "departureTime": "12:00",
+      "arrivalTime": "13:45",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "North Central Express",
+      "departureTime": "06:45",
+      "arrivalTime": "08:30",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "UP SF Intercity",
+      "departureTime": "14:40",
+      "arrivalTime": "16:25",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Kushinagar Express",
+      "departureTime": "05:15",
+      "arrivalTime": "07:00",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Kapilvastu Superfast",
+      "departureTime": "20:00",
+      "arrivalTime": "21:45",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Udyan Abha Toofan",
+      "departureTime": "22:10",
+      "arrivalTime": "23:55",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Tejas Lucknow Express",
+      "departureTime": "06:10",
+      "arrivalTime": "07:50",
+      "duration": "01:40:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Kushinagar SF Express",
+      "departureTime": "08:25",
+      "arrivalTime": "10:10",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Swatantra SF Special",
+      "departureTime": "13:15",
+      "arrivalTime": "14:55",
+      "duration": "01:40:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Ganga Gomti Express",
+      "departureTime": "07:50",
+      "arrivalTime": "09:35",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Rapti Ganga Special",
+      "departureTime": "17:40",
+      "arrivalTime": "19:20",
+      "duration": "01:40:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Yuva Express",
+      "departureTime": "10:20",
+      "arrivalTime": "12:05",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Bhopal-LKO Express",
+      "departureTime": "15:00",
+      "arrivalTime": "16:45",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Saryu Yamuna Intercity",
+      "departureTime": "05:40",
+      "arrivalTime": "07:25",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Doaba SF Express",
+      "departureTime": "18:10",
+      "arrivalTime": "19:50",
+      "duration": "01:40:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Shatabdi Clone Special",
+      "departureTime": "08:55",
+      "arrivalTime": "10:30",
+      "duration": "01:35:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Anand Vihar Express",
+      "departureTime": "11:25",
+      "arrivalTime": "13:05",
+      "duration": "01:40:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "LJN Double Decker",
+      "departureTime": "09:30",
+      "arrivalTime": "11:15",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Kashi SF Clone",
+      "departureTime": "19:00",
+      "arrivalTime": "20:45",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Mahabodhi Express",
+      "departureTime": "06:35",
+      "arrivalTime": "08:20",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Lucknow Pushpak Express",
+      "departureTime": "16:25",
+      "arrivalTime": "18:05",
+      "duration": "01:40:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Ganga Teesta SF",
+      "departureTime": "12:15",
+      "arrivalTime": "14:00",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Rajya Rani Night",
+      "departureTime": "22:45",
+      "arrivalTime": "00:30",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Purvanchal SF",
+      "departureTime": "14:30",
+      "arrivalTime": "16:15",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "GKP Superfast Night",
+      "departureTime": "03:55",
+      "arrivalTime": "05:35",
+      "duration": "01:40:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Awadh Tejas SF",
+      "departureTime": "07:10",
+      "arrivalTime": "08:55",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Gomti Deluxe",
+      "departureTime": "09:30",
+      "arrivalTime": "11:15",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Ganga Intercity Express",
+      "departureTime": "12:25",
+      "arrivalTime": "14:05",
+      "duration": "01:40:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Kranti Superfast",
+      "departureTime": "17:50",
+      "arrivalTime": "19:30",
+      "duration": "01:40:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Yamuna Ghat SF",
+      "departureTime": "06:15",
+      "arrivalTime": "08:00",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Charbagh Shatabdi",
+      "departureTime": "14:20",
+      "arrivalTime": "15:55",
+      "duration": "01:35:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Sankalp Intercity",
+      "departureTime": "10:00",
+      "arrivalTime": "11:40",
+      "duration": "01:40:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Rajghat SF Special",
+      "departureTime": "16:40",
+      "arrivalTime": "18:20",
+      "duration": "01:40:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Ganga Trail Superfast",
+      "departureTime": "05:50",
+      "arrivalTime": "07:30",
+      "duration": "01:40:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Avadh Superfast",
+      "departureTime": "20:00",
+      "arrivalTime": "21:45",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Bhagirathi Tejas",
+      "departureTime": "11:15",
+      "arrivalTime": "13:00",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Krishna Ganga Express",
+      "departureTime": "15:30",
+      "arrivalTime": "17:10",
+      "duration": "01:40:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Central SF Mail",
+      "departureTime": "04:20",
+      "arrivalTime": "06:00",
+      "duration": "01:40:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Uttaranchal SF Special",
+      "departureTime": "19:45",
+      "arrivalTime": "21:30",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Daylight Intercity",
+      "departureTime": "13:05",
+      "arrivalTime": "14:45",
+      "duration": "01:40:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Lakshya SF Mail",
+      "departureTime": "18:15",
+      "arrivalTime": "20:00",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Prayag Tejas Link",
+      "departureTime": "08:35",
+      "arrivalTime": "10:20",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Riverfront Special",
+      "departureTime": "21:25",
+      "arrivalTime": "23:10",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Ayodhya Express",
+      "departureTime": "07:30",
+      "arrivalTime": "09:15",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Uday Raj Intercity",
+      "departureTime": "12:40",
+      "arrivalTime": "14:20",
+      "duration": "01:40:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Kumbh Ganga Tejas",
+      "departureTime": "05:20",
+      "arrivalTime": "07:00",
+      "duration": "01:40:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Rohilkhand Intercity",
+      "departureTime": "07:25",
+      "arrivalTime": "09:10",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Kashi Avadh Special",
+      "departureTime": "10:10",
+      "arrivalTime": "11:55",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Ganga Sagar Express",
+      "departureTime": "15:45",
+      "arrivalTime": "17:25",
+      "duration": "01:40:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Doordarshi SF Express",
+      "departureTime": "06:50",
+      "arrivalTime": "08:35",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Tejas Elite",
+      "departureTime": "19:05",
+      "arrivalTime": "20:50",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Varuna SF Special",
+      "departureTime": "12:30",
+      "arrivalTime": "14:10",
+      "duration": "01:40:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Sangam Express",
+      "departureTime": "22:20",
+      "arrivalTime": "00:00",
+      "duration": "01:40:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Avadh Intercity SF",
+      "departureTime": "08:40",
+      "arrivalTime": "10:20",
+      "duration": "01:40:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Rajdhani Suburb Express",
+      "departureTime": "13:15",
+      "arrivalTime": "14:55",
+      "duration": "01:40:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Naimish Tejas SF",
+      "departureTime": "11:45",
+      "arrivalTime": "13:30",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Gomti Star Special",
+      "departureTime": "16:35",
+      "arrivalTime": "18:20",
+      "duration": "01:45:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Cyber Intercity Express",
+      "departureTime": "09:00",
+      "arrivalTime": "10:45",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Shaan Superfast",
+      "departureTime": "18:30",
+      "arrivalTime": "20:10",
+      "duration": "01:40:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Awadh Premium Link",
+      "departureTime": "14:10",
+      "arrivalTime": "15:55",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Lucknow Dawn Express",
+      "departureTime": "03:30",
+      "arrivalTime": "05:10",
+      "duration": "01:40:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Ganga Gomti Tejas",
+      "departureTime": "06:05",
+      "arrivalTime": "07:50",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Riverline Special",
+      "departureTime": "20:10",
+      "arrivalTime": "21:50",
+      "duration": "01:40:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+      "trainName": "Smart City Express",
+      "departureTime": "17:25",
+      "arrivalTime": "19:10",
+      "duration": "01:45:00",
+      "sourceCode": "CNB",
+      "destinationCode": "LKO"
+    },
+    {
+      "trainName": "Mahananda Intercity",
+      "departureTime": "23:10",
+      "arrivalTime": "00:50",
+      "duration": "01:40:00",
+      "sourceCode": "LKO",
+      "destinationCode": "CNB"
+    },
+    {
+    "trainName": "Rajdhani Link Express",
+    "departureTime": "08:05",
+    "arrivalTime": "08:50",
+    "duration": "00:45:00",
+    "sourceCode": "GZB",
+    "destinationCode": "NDLS"
+  },
+  {
+    "trainName": "Capital Intercity",
+    "departureTime": "18:10",
+    "arrivalTime": "18:55",
+    "duration": "00:45:00",
+    "sourceCode": "NDLS",
+    "destinationCode": "GZB"
+  },
+  {
+    "trainName": "Lucknow Tejas AC",
+    "departureTime": "04:30",
+    "arrivalTime": "12:00",
+    "duration": "07:30:00",
+    "sourceCode": "GZB",
+    "destinationCode": "LKO"
+  },
+  {
+    "trainName": "Ghazipur City Express",
+    "departureTime": "14:25",
+    "arrivalTime": "22:05",
+    "duration": "07:40:00",
+    "sourceCode": "LKO",
+    "destinationCode": "GZB"
+  },
+  {
+    "trainName": "Kanpur Double Decker",
+    "departureTime": "09:10",
+    "arrivalTime": "16:40",
+    "duration": "07:30:00",
+    "sourceCode": "GZB",
+    "destinationCode": "CNB"
+  },
+  {
+    "trainName": "Central Superfast",
+    "departureTime": "20:15",
+    "arrivalTime": "03:50",
+    "duration": "07:35:00",
+    "sourceCode": "CNB",
+    "destinationCode": "GZB"
+  },
+  {
+    "trainName": "NDLS Janshatabdi",
+    "departureTime": "06:00",
+    "arrivalTime": "06:45",
+    "duration": "00:45:00",
+    "sourceCode": "GZB",
+    "destinationCode": "NDLS"
+  },
+  {
+    "trainName": "Evening Express",
+    "departureTime": "21:10",
+    "arrivalTime": "21:55",
+    "duration": "00:45:00",
+    "sourceCode": "NDLS",
+    "destinationCode": "GZB"
+  },
+  {
+    "trainName": "Awadh Rajya Tejas",
+    "departureTime": "10:45",
+    "arrivalTime": "18:30",
+    "duration": "07:45:00",
+    "sourceCode": "GZB",
+    "destinationCode": "LKO"
+  },
+  {
+    "trainName": "LKO Vande Bharat",
+    "departureTime": "05:30",
+    "arrivalTime": "13:00",
+    "duration": "07:30:00",
+    "sourceCode": "LKO",
+    "destinationCode": "GZB"
+  },
+  {
+    "trainName": "Smart Link Special",
+    "departureTime": "13:30",
+    "arrivalTime": "21:00",
+    "duration": "07:30:00",
+    "sourceCode": "GZB",
+    "destinationCode": "CNB"
+  },
+  {
+    "trainName": "Kanpur Nightliner",
+    "departureTime": "23:20",
+    "arrivalTime": "06:50",
+    "duration": "07:30:00",
+    "sourceCode": "CNB",
+    "destinationCode": "GZB"
+  },
+  {
+    "trainName": "Tejas Express CNB-GZB",
+    "departureTime": "07:15",
+    "arrivalTime": "14:45",
+    "duration": "07:30:00",
+    "sourceCode": "CNB",
+    "destinationCode": "GZB"
+  },
+  {
+    "trainName": "Shatabdi Superfast CNB-GZB",
+    "departureTime": "17:40",
+    "arrivalTime": "01:10",
+    "duration": "07:30:00",
+    "sourceCode": "CNB",
+    "destinationCode": "GZB"
+  },
+  {
+    "trainName": "Tejas Elite LKO-GZB",
+    "departureTime": "06:00",
+    "arrivalTime": "13:30",
+    "duration": "07:30:00",
+    "sourceCode": "LKO",
+    "destinationCode": "GZB"
+  },
+  {
+    "trainName": "Shatabdi Premium LKO-GZB",
+    "departureTime": "15:10",
+    "arrivalTime": "22:40",
+    "duration": "07:30:00",
+    "sourceCode": "LKO",
+    "destinationCode": "GZB"
+  },
+  {
+    "trainName": "Delhi Tejas Rapid",
+    "departureTime": "09:50",
+    "arrivalTime": "10:35",
+    "duration": "00:45:00",
+    "sourceCode": "NDLS",
+    "destinationCode": "GZB"
+  },
+  {
+    "trainName": "Delhi Shatabdi Link",
+    "departureTime": "19:20",
+    "arrivalTime": "20:05",
+    "duration": "00:45:00",
+    "sourceCode": "NDLS",
+    "destinationCode": "GZB"
+  },
+  {
+    "trainName": "Tejas Express GZB-CNB",
+    "departureTime": "08:00",
+    "arrivalTime": "15:30",
+    "duration": "07:30:00",
+    "sourceCode": "GZB",
+    "destinationCode": "CNB"
+  },
+  {
+    "trainName": "Shatabdi Superfast GZB-CNB",
+    "departureTime": "18:20",
+    "arrivalTime": "01:50",
+    "duration": "07:30:00",
+    "sourceCode": "GZB",
+    "destinationCode": "CNB"
+  },
+  {
+    "trainName": "Tejas Elite GZB-LKO",
+    "departureTime": "05:30",
+    "arrivalTime": "13:00",
+    "duration": "07:30:00",
+    "sourceCode": "GZB",
+    "destinationCode": "LKO"
+  },
+  {
+    "trainName": "Shatabdi Premium GZB-LKO",
+    "departureTime": "14:45",
+    "arrivalTime": "22:15",
+    "duration": "07:30:00",
+    "sourceCode": "GZB",
+    "destinationCode": "LKO"
+  },
+  {
+    "trainName": "GZB Delhi Tejas Rapid",
+    "departureTime": "11:05",
+    "arrivalTime": "11:50",
+    "duration": "00:45:00",
+    "sourceCode": "GZB",
+    "destinationCode": "NDLS"
+  },
+  {
+    "trainName": "GZB Shatabdi Link",
+    "departureTime": "21:10",
+    "arrivalTime": "21:55",
+    "duration": "00:45:00",
+    "sourceCode": "GZB",
+    "destinationCode": "NDLS"
+  },
+  {
+    "trainName": "Lucknow Tejas SF",
+    "departureTime": "05:00",
+    "arrivalTime": "12:30",
+    "duration": "07:30:00",
+    "sourceCode": "NDLS",
+    "destinationCode": "LKO"
+  },
+  {
+    "trainName": "Shatabdi Morning NDLS-LKO",
+    "departureTime": "07:30",
+    "arrivalTime": "15:00",
+    "duration": "07:30:00",
+    "sourceCode": "NDLS",
+    "destinationCode": "LKO"
+  },
+  {
+    "trainName": "Kashi Tejas Special",
+    "departureTime": "13:00",
+    "arrivalTime": "20:30",
+    "duration": "07:30:00",
+    "sourceCode": "NDLS",
+    "destinationCode": "CNB"
+  },
+  {
+    "trainName": "Awadh Shatabdi NDLS-CNB",
+    "departureTime": "20:40",
+    "arrivalTime": "04:10",
+    "duration": "07:30:00",
+    "sourceCode": "NDLS",
+    "destinationCode": "CNB"
+  },
+  {
+    "trainName": "Kanpur Rajdhani",
+    "departureTime": "16:20",
+    "arrivalTime": "23:00",
+    "duration": "06:40:00",
+    "sourceCode": "CNB",
+    "destinationCode": "NDLS"
+  },
+  {
+    "trainName": "Lucknow Rajdhani",
+    "departureTime": "18:45",
+    "arrivalTime": "02:15",
+    "duration": "07:30:00",
+    "sourceCode": "LKO",
+    "destinationCode": "NDLS"
+  },
+  {
+    "trainName": "Ghaziabad Rajdhani",
+    "departureTime": "06:10",
+    "arrivalTime": "13:40",
+    "duration": "07:30:00",
+    "sourceCode": "GZB",
+    "destinationCode": "CNB"
+  },
+  {
+    "trainName": "Rajdhani Premium GZB-LKO",
+    "departureTime": "12:20",
+    "arrivalTime": "19:50",
+    "duration": "07:30:00",
+    "sourceCode": "GZB",
+    "destinationCode": "LKO"
+  },
+
+  {
+    "trainName": "Garib Rath CNB-GZB",
+    "departureTime": "07:00",
+    "arrivalTime": "14:30",
+    "duration": "07:30:00",
+    "sourceCode": "CNB",
+    "destinationCode": "GZB"
+  },
+  {
+    "trainName": "LKO Garib Rath SF",
+    "departureTime": "20:00",
+    "arrivalTime": "03:30",
+    "duration": "07:30:00",
+    "sourceCode": "LKO",
+    "destinationCode": "GZB"
+  },
+  {
+    "trainName": "Garib Rath Express NDLS-CNB",
+    "departureTime": "23:50",
+    "arrivalTime": "07:20",
+    "duration": "07:30:00",
+    "sourceCode": "NDLS",
+    "destinationCode": "CNB"
+  },
+
+  {
+    "trainName": "Shatranj SF Express",
+    "departureTime": "04:40",
+    "arrivalTime": "12:10",
+    "duration": "07:30:00",
+    "sourceCode": "CNB",
+    "destinationCode": "NDLS"
+  },
+  {
+    "trainName": "Awadh Link SF GZB-LKO",
+    "departureTime": "15:15",
+    "arrivalTime": "22:45",
+    "duration": "07:30:00",
+    "sourceCode": "GZB",
+    "destinationCode": "LKO"
+  },
+  {
+    "trainName": "Yuva SF Express NDLS-LKO",
+    "departureTime": "06:30",
+    "arrivalTime": "14:00",
+    "duration": "07:30:00",
+    "sourceCode": "NDLS",
+    "destinationCode": "LKO"
+  },
+   {
+    "trainName": "Avadh Express",
+    "departureTime": "07:30",
+    "arrivalTime": "11:20",
+    "duration": "27:50:00",
+    "sourceCode": "LKO",
+    "destinationCode": "CSTM"
+  },
+  {
+    "trainName": "Pushpak Express",
+    "departureTime": "18:40",
+    "arrivalTime": "21:20",
+    "duration": "26:40:00",
+    "sourceCode": "LKO",
+    "destinationCode": "CSTM"
+  },
+  {
+    "trainName": "Lucknow LTT SF",
+    "departureTime": "06:00",
+    "arrivalTime": "07:45",
+    "duration": "25:45:00",
+    "sourceCode": "LKO",
+    "destinationCode": "LTT"
+  },
+  {
+    "trainName": "Gomti Ganga Express",
+    "departureTime": "22:15",
+    "arrivalTime": "01:00",
+    "duration": "26:45:00",
+    "sourceCode": "LKO",
+    "destinationCode": "CSTM"
+  },
+  {
+    "trainName": "Rajdhani Express",
+    "departureTime": "16:25",
+    "arrivalTime": "08:35",
+    "duration": "16:10:00",
+    "sourceCode": "CSTM",
+    "destinationCode": "NDLS"
+  },
+  {
+    "trainName": "Mumbai Duronto",
+    "departureTime": "23:15",
+    "arrivalTime": "15:40",
+    "duration": "16:25:00",
+    "sourceCode": "LTT",
+    "destinationCode": "NDLS"
+  },
+  {
+    "trainName": "Punjab Mail",
+    "departureTime": "19:40",
+    "arrivalTime": "05:10",
+    "duration": "33:30:00",
+    "sourceCode": "CSTM",
+    "destinationCode": "NDLS"
+  },
+  {
+    "trainName": "Golden Temple Mail",
+    "departureTime": "21:25",
+    "arrivalTime": "07:30",
+    "duration": "34:05:00",
+    "sourceCode": "CSTM",
+    "destinationCode": "NDLS"
+  },
+   {
+    "trainName": "Pushpak Express",
+    "departureTime": "08:15",
+    "arrivalTime": "10:45",
+    "duration": "26:30:00",
+    "sourceCode": "CSTM",
+    "destinationCode": "LKO"
+  },
+  {
+    "trainName": "Avadh Express",
+    "departureTime": "20:00",
+    "arrivalTime": "23:45",
+    "duration": "27:45:00",
+    "sourceCode": "CSTM",
+    "destinationCode": "LKO"
+  },
+  {
+    "trainName": "LTT Lucknow SF",
+    "departureTime": "13:30",
+    "arrivalTime": "15:20",
+    "duration": "25:50:00",
+    "sourceCode": "LTT",
+    "destinationCode": "LKO"
+  },
+  {
+    "trainName": "Gomti Ganga Express",
+    "departureTime": "03:10",
+    "arrivalTime": "06:00",
+    "duration": "26:50:00",
+    "sourceCode": "CSTM",
+    "destinationCode": "LKO"
+  },
+  {
+    "trainName": "Rajdhani Express",
+    "departureTime": "16:55",
+    "arrivalTime": "08:15",
+    "duration": "15:20:00",
+    "sourceCode": "NDLS",
+    "destinationCode": "CSTM"
+  },
+  {
+    "trainName": "Mumbai Duronto",
+    "departureTime": "22:30",
+    "arrivalTime": "14:50",
+    "duration": "16:20:00",
+    "sourceCode": "NDLS",
+    "destinationCode": "LTT"
+  },
+  {
+    "trainName": "Punjab Mail",
+    "departureTime": "05:15",
+    "arrivalTime": "14:25",
+    "duration": "33:10:00",
+    "sourceCode": "NDLS",
+    "destinationCode": "CSTM"
+  },
+  {
+    "trainName": "Golden Temple Mail",
+    "departureTime": "06:55",
+    "arrivalTime": "17:00",
+    "duration": "34:05:00",
+    "sourceCode": "NDLS",
+    "destinationCode": "CSTM"
+  },
+  {
+    "trainName": "Tejas Express",
+    "departureTime": "06:10",
+    "arrivalTime": "12:55",
+    "duration": "06:45:00",
+    "sourceCode": "CSTM",
+    "destinationCode": "NDLS"
+  },
+  {
+    "trainName": "Humsafar Express",
+    "departureTime": "20:40",
+    "arrivalTime": "13:25",
+    "duration": "16:45:00",
+    "sourceCode": "LTT",
+    "destinationCode": "NDLS"
+  },
+  {
+    "trainName": "Shatabdi Express",
+    "departureTime": "06:30",
+    "arrivalTime": "14:15",
+    "duration": "07:45:00",
+    "sourceCode": "NDLS",
+    "destinationCode": "CSTM"
+  },
+  {
+    "trainName": "Tejas Rajdhani Special",
+    "departureTime": "17:00",
+    "arrivalTime": "08:20",
+    "duration": "15:20:00",
+    "sourceCode": "NDLS",
+    "destinationCode": "CSTM"
+  },
+  {
+    "trainName": "August Kranti Rajdhani",
+    "departureTime": "17:15",
+    "arrivalTime": "09:45",
+    "duration": "16:30:00",
+    "sourceCode": "NZM",
+    "destinationCode": "BCT"
+  },
+  {
+    "trainName": "Karnavati SF Express",
+    "departureTime": "12:40",
+    "arrivalTime": "04:00",
+    "duration": "15:20:00",
+    "sourceCode": "NZM",
+    "destinationCode": "BCT"
+  },
+  {
+    "trainName": "Goa Sampark Kranti",
+    "departureTime": "06:15",
+    "arrivalTime": "00:05",
+    "duration": "17:50:00",
+    "sourceCode": "NZM",
+    "destinationCode": "LTT"
+  },
+  {
+    "trainName": "NZM Bandra Yuva Express",
+    "departureTime": "16:30",
+    "arrivalTime": "08:50",
+    "duration": "16:20:00",
+    "sourceCode": "NZM",
+    "destinationCode": "BCT"
+  },
+
+
+  {
+    "trainName": "August Kranti Rajdhani",
+    "departureTime": "17:40",
+    "arrivalTime": "10:15",
+    "duration": "16:35:00",
+    "sourceCode": "BCT",
+    "destinationCode": "NZM"
+  },
+  {
+    "trainName": "Goa Sampark Kranti",
+    "departureTime": "05:50",
+    "arrivalTime": "00:30",
+    "duration": "18:40:00",
+    "sourceCode": "LTT",
+    "destinationCode": "NZM"
+  },
+  {
+    "trainName": "Karnavati SF Express",
+    "departureTime": "14:00",
+    "arrivalTime": "05:15",
+    "duration": "15:15:00",
+    "sourceCode": "BCT",
+    "destinationCode": "NZM"
+  },
+  {
+    "trainName": "Bandra NZM Yuva Express",
+    "departureTime": "15:20",
+    "arrivalTime": "07:35",
+    "duration": "16:15:00",
+    "sourceCode": "BCT",
+    "destinationCode": "NZM"
+  },
+  {
+    "trainName": "Sampooran  Kranti Express",
+    "departureTime": "17:40",
+    "arrivalTime": "06:35",
+    "duration": "13:15:00",
+    "sourceCode": "NDLS",
+    "destinationCode": "PNBE"
+  },
+  {
+    "trainName": "Intercity Express",
+    "departureTime": "06:10",
+    "arrivalTime": "09:20",
+    "duration": "03:10:00",
+    "sourceCode": "MB",
+    "destinationCode": "NDLS"
+  },
+  {
+    "trainName": "Shatabdi Express",
+    "departureTime": "07:45",
+    "arrivalTime": "10:10",
+    "duration": "02:25:00",
+    "sourceCode": "MB",
+    "destinationCode": "NDLS"
+  },
+  {
+    "trainName": "Garib Rath Express",
+    "departureTime": "11:00",
+    "arrivalTime": "13:40",
+    "duration": "02:40:00",
+    "sourceCode": "MB",
+    "destinationCode": "NDLS"
+  },
+  {
+    "trainName": "Sadbhavna Express",
+    "departureTime": "15:30",
+    "arrivalTime": "18:20",
+    "duration": "02:50:00",
+    "sourceCode": "MB",
+    "destinationCode": "NDLS"
+  },
+  {
+    "trainName": "Intercity Express",
+    "departureTime": "08:15",
+    "arrivalTime": "11:35",
+    "duration": "03:20:00",
+    "sourceCode": "NDLS",
+    "destinationCode": "MB"
+  },
+  {
+    "trainName": "Double Decker Express",
+    "departureTime": "14:00",
+    "arrivalTime": "16:30",
+    "duration": "02:30:00",
+    "sourceCode": "NDLS",
+    "destinationCode": "MB"
+  },
+  {
+    "trainName": "Jan Shatabdi Express",
+    "departureTime": "17:00",
+    "arrivalTime": "19:20",
+    "duration": "02:20:00",
+    "sourceCode": "NDLS",
+    "destinationCode": "MB"
+  },
+  {
+    "trainName": "Satyagrah Express",
+    "departureTime": "20:45",
+    "arrivalTime": "23:30",
+    "duration": "02:45:00",
+    "sourceCode": "NDLS",
+    "destinationCode": "MB"
+  }
+]
+}
+

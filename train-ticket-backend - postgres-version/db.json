@@ -1,0 +1,627 @@
+{
+  "bookings": [
+    {
+      "id": "13ad",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Lucknow Mail",
+        "departureTime": "22:00",
+        "arrivalTime": "06:50",
+        "duration": "08:50:00",
+        "date": "2025-06-20",
+        "source": "Lucknow",
+        "destination": "New Delhi",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "Yash Mishra",
+          "age": 23,
+          "seatType": "2A",
+          "status": "Confirmed",
+          "fare": 470
+        },
+        {
+          "name": "Divyanshu Gupta",
+          "age": 22,
+          "seatType": "2A",
+          "status": "Confirmed",
+          "fare": 350
+        },
+        {
+          "name": "Ashish Kumar",
+          "age": 21,
+          "seatType": "2A",
+          "status": "RAC",
+          "fare": 470
+        }
+      ],
+      "totalAmount": 1290
+    },
+    {
+      "id": "7439",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Lucknow Mail",
+        "departureTime": "22:00",
+        "arrivalTime": "06:50",
+        "duration": "08:50:00",
+        "date": "2025-06-14",
+        "source": "New Delhi",
+        "destination": "Lucknow",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "Prime",
+          "age": 22,
+          "seatType": "2S",
+          "status": "RAC",
+          "fare": 240
+        }
+      ],
+      "totalAmount": 240
+    },
+    {
+      "id": "5e39",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Gomti Express",
+        "departureTime": "12:20",
+        "arrivalTime": "21:30",
+        "duration": "09:10:00",
+        "date": "2025-06-21",
+        "source": "New Delhi",
+        "destination": "Lucknow",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "no",
+          "age": 24,
+          "seatType": "SL",
+          "status": "Waiting",
+          "fare": 290
+        },
+        {
+          "name": "ok122",
+          "age": 23,
+          "seatType": "SL",
+          "status": "RAC",
+          "fare": 250
+        },
+        {
+          "name": "ok1",
+          "age": 22,
+          "seatType": "SL",
+          "status": "RAC",
+          "fare": 310
+        },
+        {
+          "name": "ok",
+          "age": 22,
+          "seatType": "SL",
+          "status": "Confirmed",
+          "fare": 270
+        }
+      ],
+      "totalAmount": 1120
+    },
+    {
+      "id": "1ea7",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Lucknow Mail",
+        "departureTime": "22:00",
+        "arrivalTime": "06:50",
+        "duration": "08:50:00",
+        "date": "2025-06-19",
+        "source": "New Delhi",
+        "destination": "Lucknow",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "OK",
+          "age": 22,
+          "seatType": "SL",
+          "status": "RAC",
+          "fare": 290
+        }
+      ],
+      "totalAmount": 290
+    },
+    {
+      "id": "12b8",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Lucknow Mail",
+        "departureTime": "22:00",
+        "arrivalTime": "06:50",
+        "duration": "08:50:00",
+        "date": "2025-06-25",
+        "source": "New Delhi",
+        "destination": "Lucknow",
+        "numberOfPeople": "2"
+      },
+      "passengers": [
+        {
+          "name": "Yash Mishra",
+          "age": 24,
+          "seatType": "2A",
+          "status": "Confirmed",
+          "fare": 390
+        },
+        {
+          "name": "Ashish Kumar",
+          "age": 22,
+          "seatType": "2A",
+          "status": "Confirmed",
+          "fare": 510
+        }
+      ],
+      "totalAmount": 900
+    },
+    {
+      "id": "7bef",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Lucknow Mail",
+        "departureTime": "22:00",
+        "arrivalTime": "06:50",
+        "duration": "08:50:00",
+        "date": "2025-06-13",
+        "source": "New Delhi",
+        "destination": "Lucknow",
+        "numberOfPeople": "2"
+      },
+      "passengers": [
+        {
+          "name": "Yash Mishra",
+          "age": 24,
+          "seatType": "3A",
+          "status": "Confirmed",
+          "fare": 300
+        },
+        {
+          "name": "Amarjeet Pandey",
+          "age": 19,
+          "seatType": "3A",
+          "status": "Confirmed",
+          "fare": 330
+        }
+      ],
+      "totalAmount": 630
+    },
+    {
+      "id": "5dff",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Gomti Express",
+        "departureTime": "12:20",
+        "arrivalTime": "21:30",
+        "duration": "09:10:00",
+        "date": "2025-06-21",
+        "source": "New Delhi",
+        "destination": "Lucknow",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "Amarjeet Pandey",
+          "age": 20,
+          "seatType": "2A",
+          "status": "RAC",
+          "fare": 390
+        }
+      ],
+      "totalAmount": 390
+    },
+    {
+      "id": "2959",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Lucknow Mail",
+        "departureTime": "22:00",
+        "arrivalTime": "06:50",
+        "duration": "08:50:00",
+        "date": "2025-06-25",
+        "source": "New Delhi",
+        "destination": "Lucknow",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "Yash",
+          "age": 21,
+          "seatType": "3A",
+          "status": "RAC",
+          "fare": 360
+        }
+      ],
+      "totalAmount": 360
+    },
+    {
+      "id": "72fb",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Gomti Express",
+        "departureTime": "12:20",
+        "arrivalTime": "21:30",
+        "duration": "09:10:00",
+        "date": "2025-06-05",
+        "source": "New Delhi",
+        "destination": "Lucknow",
+        "numberOfPeople": "2"
+      },
+      "passengers": [
+        {
+          "name": "Ashish Kumar",
+          "age": 20,
+          "seatType": "1A",
+          "status": "Waiting",
+          "fare": 400
+        },
+        {
+          "name": "Divyam Kumar",
+          "age": 21,
+          "seatType": "1A",
+          "status": "Confirmed",
+          "fare": 550
+        }
+      ],
+      "totalAmount": 950
+    },
+    {
+      "id": "45e5",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Gomti Express",
+        "departureTime": "12:20",
+        "arrivalTime": "21:30",
+        "duration": "09:10:00",
+        "date": "2025-06-19",
+        "source": "New Delhi",
+        "destination": "Lucknow",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "Preetam Ray",
+          "age": 21,
+          "seatType": "3A",
+          "status": "Confirmed",
+          "fare": 390
+        }
+      ],
+      "totalAmount": 390
+    },
+    {
+      "id": "80f6",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Gomti Express",
+        "departureTime": "12:20",
+        "arrivalTime": "21:30",
+        "duration": "09:10:00",
+        "date": "2025-06-07",
+        "source": "New Delhi",
+        "destination": "Lucknow",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "Yash Mishra",
+          "age": 23,
+          "seatType": "SL",
+          "status": "RAC",
+          "fare": 330
+        }
+      ],
+      "totalAmount": 330
+    },
+    {
+      "id": "b9cd",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Kanpur Shatabdi",
+        "departureTime": "16:20",
+        "arrivalTime": "19:45",
+        "duration": "03:25:00",
+        "date": "2025-06-16",
+        "source": "Ghaziabad",
+        "destination": "Kanpur Central",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "Ashish Kumar",
+          "age": 21,
+          "seatType": "1A",
+          "status": "Confirmed",
+          "fare": 600
+        }
+      ],
+      "totalAmount": 600
+    },
+    {
+      "id": "bed9",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "NZM Bandra Yuva Express",
+        "departureTime": "16:30",
+        "arrivalTime": "08:50",
+        "duration": "16:20:00",
+        "date": "2025-06-18",
+        "source": "Hazrat Nizamuddin",
+        "destination": "Mumbai Central",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "Ash",
+          "age": 23,
+          "seatType": "SL",
+          "status": "RAC",
+          "fare": 250
+        }
+      ],
+      "totalAmount": 250
+    },
+    {
+      "id": "8eba",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Garib Rath Express NDLS-CNB",
+        "departureTime": "23:50",
+        "arrivalTime": "07:20",
+        "duration": "07:30:00",
+        "date": "2025-06-15",
+        "source": "New Delhi",
+        "destination": "Kanpur Central",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "Yash",
+          "age": 22,
+          "seatType": "SL",
+          "status": "Waiting",
+          "fare": 290
+        }
+      ],
+      "totalAmount": 290
+    },
+    {
+      "id": "508a",
+      "user": {
+        "name": "Yash",
+        "email": "yash@example.com"
+      },
+      "train": {
+        "trainName": "Sampooran Express",
+        "departureTime": "17:40",
+        "arrivalTime": "06:35",
+        "duration": "16:15:00",
+        "date": "2025-06-16",
+        "source": "New Delhi",
+        "destination": "Patna",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "Shreya Singh",
+          "age": 20,
+          "seatType": "1A",
+          "status": "Confirmed",
+          "fare": 500
+        }
+      ],
+      "totalAmount": 500
+    },
+    {
+      "id": "80f8",
+      "user": {
+        "name": "Shreya Singh",
+        "email": "Shreya123@gmail.com"
+      },
+      "train": {
+        "trainName": "Shatabdi Morning NDLS-LKO",
+        "departureTime": "07:30",
+        "arrivalTime": "15:00",
+        "duration": "07:30:00",
+        "date": "2025-06-16",
+        "source": "New Delhi",
+        "destination": "Lucknow",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "Shreya Singh",
+          "age": 24,
+          "seatType": "SL",
+          "status": "Waiting",
+          "fare": 310
+        }
+      ],
+      "totalAmount": 310
+    },
+    {
+      "id": "3186",
+      "user": {
+        "name": "Shreya Singh",
+        "email": "Shreya123@gmail.com"
+      },
+      "train": {
+        "trainName": "Shatabdi Morning NDLS-LKO",
+        "departureTime": "07:30",
+        "arrivalTime": "15:00",
+        "duration": "07:30:00",
+        "date": "2025-06-16",
+        "source": "New Delhi",
+        "destination": "Lucknow",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "sdfds",
+          "age": 12,
+          "seatType": "SL",
+          "status": "RAC",
+          "fare": 290
+        }
+      ],
+      "totalAmount": 290
+    },
+    {
+      "id": "4388",
+      "user": {
+        "name": "Raj Mishra",
+        "email": "rajp65@gmail.com"
+      },
+      "train": {
+        "trainName": "Shatabdi Express",
+        "departureTime": "06:00",
+        "arrivalTime": "10:50",
+        "duration": "04:50:00",
+        "date": "2025-06-17",
+        "source": "Lucknow",
+        "destination": "New Delhi",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "Raj Mishra",
+          "age": 54,
+          "seatType": "2A",
+          "status": "Waiting",
+          "fare": 430
+        }
+      ],
+      "totalAmount": 430
+    },
+    {
+      "id": "242a",
+      "user": {
+        "name": "Raj Mishra",
+        "email": "rajp65@gmail.com"
+      },
+      "train": {
+        "trainName": "Sadbhavna Express",
+        "departureTime": "15:30",
+        "arrivalTime": "18:20",
+        "duration": "02:50:00",
+        "date": "2025-06-16",
+        "source": "Moradabad",
+        "destination": "New Delhi",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "Divyanshu Gupta",
+          "age": 22,
+          "seatType": "1A",
+          "status": "Confirmed",
+          "fare": 550
+        }
+      ],
+      "totalAmount": 550
+    },
+    {
+      "id": "aa57",
+      "user": {
+        "name": "Yash Mishra",
+        "email": "yashprime000@gmail.com"
+      },
+      "train": {
+        "trainName": "Kashi Tejas Special",
+        "departureTime": "13:00",
+        "arrivalTime": "20:30",
+        "duration": "07:30:00",
+        "date": "2025-06-18",
+        "source": "New Delhi",
+        "destination": "Kanpur Central",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "Yash ",
+          "age": 22,
+          "seatType": "SL",
+          "status": "Waiting",
+          "fare": 270
+        }
+      ],
+      "totalAmount": 270
+    },
+    {
+      "id": "0886",
+      "user": {
+        "name": "Yash Mishra",
+        "email": "yashprime000@gmail.com"
+      },
+      "train": {
+        "trainName": "Intercity Express",
+        "departureTime": "16:40",
+        "arrivalTime": "22:00",
+        "duration": "05:20:00",
+        "date": "2025-06-17",
+        "source": "New Delhi",
+        "destination": "Lucknow",
+        "numberOfPeople": 1
+      },
+      "passengers": [
+        {
+          "name": "Yash",
+          "age": 12,
+          "seatType": "SL",
+          "status": "RAC",
+          "fare": 250
+        }
+      ],
+      "totalAmount": 250
+    }
+  ]
+}

@@ -1,28 +1,49 @@
 const jwt = require("jsonwebtoken");
+const jwksClient = require("jwks-rsa");
+
+// 🛡️ JWKS client setup for Supabase
+const client = jwksClient({
+  jwksUri: 'https://keuzissxunxbdqcordzf.supabase.co/auth/v1/keys',
+});
+
+// 🔑 Dynamic key retriever
+function getKey(header, callback) {
+  client.getSigningKey(header.kid, function (err, key) {
+    if (err) {
+      return callback(err);
+    }
+    const signingKey = key.getPublicKey();
+    callback(null, signingKey);
+  });
+}
 
 const verifyToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];
 
-  // 1️⃣ Check if Authorization header is missing or malformed
+  // 1️⃣ Check token presence and format
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return res.status(401).json({ message: "Access denied. No token provided." });
   }
 
   const token = authHeader.split(" ")[1];
 
-  try {
-    // 2️⃣ Verify the token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || "irctc_secret_key");
-    
-    // 3️⃣ Attach decoded user info to the request
+  // 2️⃣ Verify using RS256 and Supabase's keys
+  jwt.verify(token, getKey, {
+    algorithms: ['RS256'],
+    audience: 'authenticated',
+    issuer: 'https://keuzissxunxbdqcordzf.supabase.co/auth/v1'
+  }, (err, decoded) => {
+    if (err) {
+      console.error("❌ JWT verification failed:", err.message);
+      return res.status(401).json({ message: "Invalid or expired token", error: err.message });
+    }
+
+    // 3️⃣ Attach user info from token
     req.user = decoded;
 
-    // 4️⃣ Continue to the next middleware/route
+    // 4️⃣ Continue to next middleware
     next();
-  } catch (err) {
-    console.error("❌ JWT verification failed:", err.message);
-    return res.status(401).json({ message: "Invalid or expired token", error: err.message });
-  }
+  });
 };
 
 module.exports = verifyToken;

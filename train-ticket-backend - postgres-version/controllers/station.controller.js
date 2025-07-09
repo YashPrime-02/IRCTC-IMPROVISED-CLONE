@@ -8,33 +8,49 @@ exports.getAllStations = async (req, res) => {
 
     const { data: stations, error } = await supabase
       .from("stations")
-      .select("*");
+      .select("*")
+      .order("stationName", { ascending: true }); // Optional: Alphabetical order
 
-    if (error) throw error;
+    if (error) {
+      logger.error(`❌ Supabase error (stations): ${error.message}`);
+      throw error;
+    }
 
     res.status(200).json(stations);
   } catch (err) {
     logger.error(`❌ Failed to fetch stations: ${err.message}`);
-    res.status(500).json({ message: "Failed to fetch stations", error: err.message });
+    res.status(500).json({
+      message: "Failed to fetch stations",
+      error: err.message,
+    });
   }
 };
 
-// 📦 Bulk insert station data
+// 📦 BULK INSERT station data (Admin only or initial load)
 exports.bulkInsertStations = async (req, res) => {
+  const stations = req.body;
+
+  if (!Array.isArray(stations) || stations.length === 0) {
+    return res.status(400).json({ message: "Station list is required." });
+  }
+
   try {
     logger.info("📦 Bulk insert for stations triggered");
 
-    // 🔁 Supabase has no ignoreDuplicates option, so we check manually or allow duplicates for now
-    const { error } = await supabase
-      .from("stations")
-      .insert(req.body);
+    const { error } = await supabase.from("stations").insert(stations);
 
-    if (error) throw error;
+    if (error) {
+      logger.error(`❌ Supabase insert error: ${error.message}`);
+      throw error;
+    }
 
     logger.info("✅ Stations inserted successfully");
     res.status(201).json({ message: "Stations inserted successfully" });
   } catch (err) {
     logger.error(`❌ Failed to insert stations: ${err.message}`);
-    res.status(500).json({ message: "Failed to insert stations", error: err.message });
+    res.status(500).json({
+      message: "Failed to insert stations",
+      error: err.message,
+    });
   }
 };

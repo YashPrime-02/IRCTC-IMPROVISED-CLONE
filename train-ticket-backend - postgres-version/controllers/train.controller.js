@@ -4,18 +4,22 @@ const logger = require("../utils/logger");
 // 🚉 GET all stations (for dropdowns etc.)
 exports.getAllStations = async (req, res) => {
   try {
-    logger.info("📍 Fetching station list (Train Controller)");
+    logger.info("📍 Fetching all stations");
 
     const { data: stations, error } = await supabase
       .from("stations")
-      .select("*");
+      .select("*")
+      .order("stationName", { ascending: true });
 
-    if (error) throw error;
+    if (error) {
+      logger.error(`❌ Supabase error (stations): ${error.message}`);
+      throw error;
+    }
 
     res.status(200).json(stations);
   } catch (err) {
     logger.error(`❌ Error fetching stations: ${err.message}`);
-    res.status(500).json({ message: "Failed to fetch stations" });
+    res.status(500).json({ message: "Failed to fetch stations", error: err.message });
   }
 };
 
@@ -25,11 +29,11 @@ exports.searchTrains = async (req, res) => {
 
   if (!sourceCode || !destinationCode) {
     logger.warn("⚠️ Train search failed: Missing source or destination");
-    return res.status(400).json({ message: "Source and destination required" });
+    return res.status(400).json({ message: "Source and destination codes are required." });
   }
 
   try {
-    logger.info(`🔍 Train search: ${sourceCode} → ${destinationCode}`);
+    logger.info(`🔍 Searching trains: ${sourceCode} → ${destinationCode}`);
 
     const { data: trains, error } = await supabase
       .from("trains")
@@ -37,14 +41,17 @@ exports.searchTrains = async (req, res) => {
       .eq("sourceCode", sourceCode)
       .eq("destinationCode", destinationCode);
 
-    if (error) throw error;
-
-    if (trains.length === 0) {
-      logger.warn(`🚫 No trains found: ${sourceCode} → ${destinationCode}`);
-      return res.status(404).json({ message: "No trains found" });
+    if (error) {
+      logger.error(`❌ Supabase error (trains): ${error.message}`);
+      throw error;
     }
 
-    logger.info(`✅ ${trains.length} train(s) found`);
+    if (!trains || trains.length === 0) {
+      logger.warn(`🚫 No trains found for: ${sourceCode} → ${destinationCode}`);
+      return res.status(404).json({ message: "No trains found for the given route." });
+    }
+
+    logger.info(`✅ Found ${trains.length} train(s)`);
     res.status(200).json(trains);
   } catch (err) {
     logger.error(`❌ Train search failed: ${err.message}`);

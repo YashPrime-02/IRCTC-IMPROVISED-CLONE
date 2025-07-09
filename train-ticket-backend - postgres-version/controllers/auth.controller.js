@@ -13,13 +13,11 @@ exports.signup = async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
-    // 🚫 Check if fields are empty
     if (!name || !email || !password) {
       logger.warn("Signup failed: Missing fields");
       return res.status(400).json({ message: "All fields are required." });
     }
 
-    // 🔎 Check if user already exists
     const { data: existingUser } = await supabase
       .from("users")
       .select("*")
@@ -31,10 +29,8 @@ exports.signup = async (req, res) => {
       return res.status(400).json({ message: "User already exists!" });
     }
 
-    // 🔐 Hash password using bcrypt
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // 💾 Insert new user into Supabase
     const { error: insertError } = await supabase
       .from("users")
       .insert([{ name, email, password: hashedPassword }]);
@@ -54,13 +50,11 @@ exports.login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // 🚫 Basic validation
     if (!email || !password) {
       logger.warn("Login failed: Email or password missing");
       return res.status(400).json({ message: "Email and password are required." });
     }
 
-    // 🔎 Check user in Supabase
     const { data: user, error } = await supabase
       .from("users")
       .select("*")
@@ -72,14 +66,12 @@ exports.login = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // 🔐 Compare entered password with stored hash
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       logger.warn(`Login failed: Invalid credentials (${email})`);
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
-    // 🪙 Create JWT token for session
     const token = jwt.sign(
       { id: user.id, email: user.email },
       process.env.JWT_SECRET,
@@ -88,7 +80,7 @@ exports.login = async (req, res) => {
 
     logger.info(`✅ Login successful: ${email}`);
     res.status(200).json({
-      token,
+      token: `Bearer ${token}`,
       user: {
         id: user.id,
         name: user.name,
@@ -106,7 +98,6 @@ exports.forgotPassword = async (req, res) => {
   const { email } = req.body;
 
   try {
-    // 🔍 Check if user exists
     const { data: user, error } = await supabase
       .from("users")
       .select("*")
@@ -118,11 +109,9 @@ exports.forgotPassword = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // 🔐 Create token & expiry
     const token = crypto.randomBytes(32).toString("hex");
-    const expiry = new Date(Date.now() + 15 * 60 * 1000); // 15 min from now
+    const expiry = new Date(Date.now() + 15 * 60 * 1000); // 15 min
 
-    // 💾 Save token in DB
     const { error: updateError } = await supabase
       .from("users")
       .update({ resetToken: token, resetTokenExpiry: expiry.toISOString() })
@@ -130,8 +119,8 @@ exports.forgotPassword = async (req, res) => {
 
     if (updateError) throw updateError;
 
-    // 📩 Send password reset email
-    const resetLink = `http://localhost:4200/reset-password?token=${token}&email=${email}`;
+    // ✅ If hosted on Render, replace localhost with your frontend URL
+    const resetLink = `${process.env.FRONTEND_URL}/reset-password?token=${token}&email=${email}`;
 
     await transporter.sendMail({
       from: `IRCTC Support <${process.env.EMAIL_USER}>`,
@@ -158,7 +147,6 @@ exports.resetPassword = async (req, res) => {
   const { token, newPassword } = req.body;
 
   try {
-    // 🔍 Find user with matching resetToken and valid expiry
     const { data: user, error } = await supabase
       .from("users")
       .select("*")
@@ -171,10 +159,8 @@ exports.resetPassword = async (req, res) => {
       return res.status(400).json({ message: "Token is invalid or expired." });
     }
 
-    // 🔐 Hash new password
     const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-    // 💾 Save new password and clear token
     const { error: updateError } = await supabase
       .from("users")
       .update({
@@ -186,7 +172,7 @@ exports.resetPassword = async (req, res) => {
 
     if (updateError) throw updateError;
 
-    logger.info(`🔒 Password updated successfully for ${user.email}`);
+    logger.info(`🔒 Password updated for ${user.email}`);
     res.status(200).json({ message: "Password updated successfully!" });
   } catch (error) {
     logger.error(`❌ Reset Password Error: ${error.message}`);
@@ -196,11 +182,14 @@ exports.resetPassword = async (req, res) => {
 
 // 🛡️ VERIFY TOKEN controller - Verifies JWT token
 exports.verifyToken = async (req, res) => {
-  const token = req.headers.authorization?.split(" ")[1];
-  if (!token) {
-    logger.warn("Token verification failed: No token provided");
-    return res.status(401).json({ message: "No token provided" });
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    logger.warn("Token verification failed: Missing or invalid format");
+    return res.status(401).json({ message: "Authorization header missing or malformed" });
   }
+
+  const token = authHeader.split(" ")[1];
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);

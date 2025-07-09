@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const supabase = require("../utils/supabaseClient"); // Supabase client
+const supabase = require("../utils/supabaseClient");
 const authController = require("../controllers/auth.controller");
 const otpController = require("../controllers/otp.controller");
 
-// ✅ OTP endpoints (signup + forgot password)
+// ✅ OTP routes
 router.post("/send-otp", otpController.sendOTP);
 router.post("/verify-otp", otpController.verifyOTP);
 
@@ -13,10 +13,7 @@ router.post("/signup", async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
+    const { data, error } = await supabase.auth.signUp({ email, password });
 
     if (error) return res.status(400).json({ error: error.message });
 
@@ -34,10 +31,7 @@ router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
     if (error) return res.status(401).json({ error: "Invalid credentials" });
 
@@ -51,9 +45,11 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// ✅ Forgot/Reset password handled by your custom controller (optional)
-// You can use Supabase reset link instead if needed
+// ✅ Forgot & Reset Password (Custom controller logic)
 router.post("/forgot-password", authController.forgotPassword);
 router.post("/reset-password", authController.resetPassword);
+
+// ✅ Token Verification Route (WORKS IN POSTMAN + Render)
+router.get("/verify-token", authController.verifyToken);
 
 module.exports = router;

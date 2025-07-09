@@ -43,30 +43,49 @@ src/app/
 
 ---
 
-## 🖥️ Backend (Node.js + Express + Sequelize + MySQL)
-Location: `/backend/`
+
+
+## 🖥️ Backend (Node.js + Express + Sequelize + Postgres SQL)
+Location: `/train-ticket-backend-postgres-version`
 
 ```
-backend/
+train-ticket-backend-postgres-version/
+│
 ├── config/
-│   └── db.config.js
-├── controllers/
-│   ├── auth.controller.js
-│   └── booking.controller.js
-├── middleware/
-│   └── verifyToken.js
-├── models/
-│   ├── index.js
-│   ├── user.model.js
-│   └── booking.model.js
+│   ├── db.config.js              # Sequelize DB config (if used)
+│   └── node.mailer.js            # NodeMailer config (if used)
+│
+├── controllers/                 # (Optional: Controller logic)
+│
+├── data/                        # Static data, seed files
+│
+├── logs/                        # App logs (if using logging middleware)
+│
+├── middleware/                  # Express middleware (auth, error, logger)
+│
+├── node_modules/
+│
 ├── routes/
-│   ├── auth.routes.js
-│   └── booking.routes.js
+│   ├── auth.routes.js           # Auth/signup/login routes
+│   ├── booking.routes.js        # Booking creation & management
+│   ├── dev.routes.js            # Dev-only: ping, user CRUD, cron testing
+│   ├── station.routes.js        # Station list, autocomplete, etc.
+│   ├── test.routes.js           # (Optional) Unit test routes
+│   └── train.routes.js          # Train search, availability, details
+│
 ├── utils/
-│   └── generatePNR.js
-├── .env
-├── index.js
-└── package.json
+│   ├── logger.js                # Custom logger (optional)
+│   └── supabaseClient.js        # ✅ Supabase client (ADMIN KEY based)
+│
+├── .env                         # ✅ Env vars (Supabase, ports, secrets)
+├── db.json                      # (Optional) for older JSON DB mock
+├── index.js                     # ✅ Main entry point (Express + Routes)
+├── package.json
+├── package-lock.json
+├── seed.js                      # (Optional) Initial data population script
+└── vercel.json / render.yaml    # (Optional) for hosting
+
+
 ```
 
 ### Key Features

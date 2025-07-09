@@ -12,7 +12,7 @@ const logger = require("./utils/logger");                  // Custom Winston log
 const requestLogger = require("./controllers/requestLogger"); // Custom middleware logger
 
 const app = express();
-const PORT = process.env.PORT || 3000; // ✅ Fallback only for local dev
+const PORT = process.env.PORT || 3000; // ✅ Render injects PORT
 
 // ✅ Middleware: Log all incoming requests
 app.use(requestLogger);
@@ -25,16 +25,16 @@ app.use(morgan("combined", {
 }));
 
 // ✅ Global middleware
-app.use(cors());                                 // Enable cross-origin access
-app.use(express.json());                         // Parse JSON body
-app.use(express.urlencoded({ extended: true })); // Parse URL-encoded data
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// ✅ Health check
+// ✅ Health check route
 app.get("/", (req, res) => {
   res.send("🚄 IRCTC Clone Backend is Running!");
 });
 
-// ✅ Register routes
+// ✅ API routes
 app.use("/api/auth", require("./routes/auth.routes"));
 app.use("/api/test", require("./routes/test.routes"));
 app.use("/api/trains", require("./routes/train.routes"));
@@ -42,17 +42,15 @@ app.use("/api/stations", require("./routes/station.routes"));
 app.use("/api/dev", require("./routes/dev.routes"));
 app.use("/api/bookings", require("./routes/booking.routes"));
 
-// ✅ Connect to PostgreSQL (Supabase)
+// ✅ PostgreSQL connection (Supabase)
 db.sequelize.authenticate()
   .then(() => {
     console.log("✅ PostgreSQL connected successfully.");
-
-    // 🚫 Skipping Sequelize sync since Supabase manages schema
     console.log("🛠️ Skipping model sync. Using Supabase-managed schema.");
 
-    // ✅ Start server only in local or hosted environments
+    // ✅ Start server on Render, Railway, or local (not Vercel)
     if (process.env.NODE_ENV !== "vercel") {
-      app.listen(PORT, '0.0.0.0', () => {
+      app.listen(PORT, "0.0.0.0", () => {
         console.log(`🚀 Server is running on http://0.0.0.0:${PORT}`);
       });
     }

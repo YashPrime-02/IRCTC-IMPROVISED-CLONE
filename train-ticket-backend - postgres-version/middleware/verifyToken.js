@@ -2,14 +2,14 @@
 const jwt = require("jsonwebtoken");
 const jwksClient = require("jwks-rsa");
 
-// 🔐 JWKS client setup – Supabase public JWKS endpoint
+// 🔐 Supabase JWKS endpoint
 const client = jwksClient({
   jwksUri: 'https://keuzissxunxbdqcordzf.supabase.co/auth/v1/keys',
 });
 
-// 🔑 Public key retriever (for RS256 decoding)
+// 🔑 Key retrieval from JWKS
 function getKey(header, callback) {
-  client.getSigningKey(header.kid, function (err, key) {
+  client.getSigningKey(header.kid, (err, key) => {
     if (err) {
       console.error("🔐 Key retrieval error:", err.message);
       return callback(err);
@@ -19,25 +19,25 @@ function getKey(header, callback) {
   });
 }
 
-// 🛡️ Token verification middleware
+// 🛡️ Middleware: Token verifier
 const verifyToken = (req, res, next) => {
-  const authHeader = req.headers['authorization'];
+  const authHeader = req.headers["authorization"];
 
-  // 1️⃣ Token presence check
+  // 1️⃣ Token check
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return res.status(401).json({ message: "Access denied. No token provided." });
   }
 
   const token = authHeader.split(" ")[1];
 
-  // 2️⃣ JWT verification with Supabase public keys
+  // 2️⃣ Verify JWT with RS256 using Supabase JWKS
   jwt.verify(
     token,
     getKey,
     {
-      algorithms: ['RS256'],
-      audience: 'authenticated',
-      issuer: 'https://keuzissxunxbdqcordzf.supabase.co/auth/v1'
+      algorithms: ["RS256"],
+      audience: "authenticated",
+      issuer: "https://keuzissxunxbdqcordzf.supabase.co/auth/v1",
     },
     (err, decoded) => {
       if (err) {
@@ -45,9 +45,8 @@ const verifyToken = (req, res, next) => {
         return res.status(401).json({ message: "Invalid or expired token", error: err.message });
       }
 
-      // 3️⃣ Attach decoded user to request object
-      req.user = decoded;
-      next();
+      req.user = decoded; // 🧠 Attach user
+      next(); // ✅ Continue
     }
   );
 };

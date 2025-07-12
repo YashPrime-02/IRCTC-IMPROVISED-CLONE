@@ -1,0 +1,5 @@
+[2025-07-11 18:51:37] error: ❌ Send OTP Error: Could not find the 'expiresAt' column of 'otps' in the schema cache
+[2025-07-11 18:53:57] error: ❌ Send OTP Error: there is no unique or exclusion constraint matching the ON CONFLICT specification
+[2025-07-11 18:54:46] error: ❌ Send OTP Error: null value in column "expiresat" of relation "otps" violates not-null constraint
+[2025-07-11 19:01:09] error: ❌ Verify OTP Error: Could not find the 'resetToken' column of 'users' in the schema cache
+[2025-07-11 23:47:28] error: ❌ Reset Password Error: Illegal arguments: undefined, number

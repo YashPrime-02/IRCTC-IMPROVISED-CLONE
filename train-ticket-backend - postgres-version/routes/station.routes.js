@@ -1,15 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../middleware/models');
-const Station = db.stations;
+const supabase = require('../utils/supabaseClient');
 
 // 🔁 Bulk insert stations
 router.post('/', async (req, res) => {
   try {
-    await Station.bulkCreate(req.body, { ignoreDuplicates: true });
-    res.status(201).json({ message: 'Stations added successfully.' });
+    const { data, error } = await supabase.from('stations').insert(req.body, { upsert: true });
+    if (error) throw error;
+    res.status(201).json({ message: 'Stations added successfully.', data });
   } catch (err) {
-    console.error('❌ Error adding stations:', err);
+    console.error('❌ Error adding stations:', err.message);
     res.status(500).json({ error: 'Failed to add stations.' });
   }
 });
@@ -17,9 +17,11 @@ router.post('/', async (req, res) => {
 // 🧪 Get all stations
 router.get('/', async (req, res) => {
   try {
-    const stations = await Station.findAll();
-    res.json(stations);
+    const { data, error } = await supabase.from('stations').select('*');
+    if (error) throw error;
+    res.json(data);
   } catch (err) {
+    console.error('❌ Error fetching stations:', err.message);
     res.status(500).json({ error: 'Failed to fetch stations' });
   }
 });

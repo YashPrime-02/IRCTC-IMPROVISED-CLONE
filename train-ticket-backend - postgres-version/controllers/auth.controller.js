@@ -1,14 +1,11 @@
-// 🔌 Import Supabase Client
 const supabase = require("../utils/supabaseClient");
-
-// 🔐 Utilities
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const transporter = require("../config/node.mailer");
 const crypto = require("crypto");
 const logger = require('../utils/logger');
 
-// 📩 SIGNUP controller - Registers a new user
+// 📩 SIGNUP controller
 exports.signup = async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -45,7 +42,7 @@ exports.signup = async (req, res) => {
   }
 };
 
-// 🔓 LOGIN controller - Authenticates a user
+// 🔓 LOGIN controller
 exports.login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -93,14 +90,14 @@ exports.login = async (req, res) => {
   }
 };
 
-// 📧 FORGOT PASSWORD controller - Sends reset link to email
+// 📧 FORGOT PASSWORD controller
 exports.forgotPassword = async (req, res) => {
   const { email } = req.body;
 
   try {
     const { data: user, error } = await supabase
       .from("users")
-      .select("*")
+      .select("email, name")
       .eq("email", email)
       .single();
 
@@ -110,16 +107,18 @@ exports.forgotPassword = async (req, res) => {
     }
 
     const token = crypto.randomBytes(32).toString("hex");
-    const expiry = new Date(Date.now() + 15 * 60 * 1000); // 15 min
+    const expiry = new Date(Date.now() + 15 * 60 * 1000); // 15 mins
 
     const { error: updateError } = await supabase
       .from("users")
-      .update({ resetToken: token, resetTokenExpiry: expiry.toISOString() })
+      .update({
+        resetToken: token,
+        resetTokenExpiry: expiry.toISOString(),
+      })
       .eq("email", email);
 
     if (updateError) throw updateError;
 
-    // ✅ If hosted on Render, replace localhost with your frontend URL
     const resetLink = `${process.env.FRONTEND_URL}/reset-password?token=${token}&email=${email}`;
 
     await transporter.sendMail({
@@ -128,7 +127,7 @@ exports.forgotPassword = async (req, res) => {
       subject: "🔐 Reset your IRCTC password",
       html: `
         <p>Hi ${user.name || "User"},</p>
-        <p>You requested a password reset. Click below to reset your password:</p>
+        <p>You requested a password reset. Click the link below:</p>
         <a href="${resetLink}">Reset Password</a>
         <p>This link will expire in 15 minutes.</p>
       `,
@@ -142,16 +141,22 @@ exports.forgotPassword = async (req, res) => {
   }
 };
 
-// 🔁 RESET PASSWORD controller - Updates user's password
+
+// 🔁 RESET PASSWORD controller
 exports.resetPassword = async (req, res) => {
   const { token, newPassword } = req.body;
+
+  // ✅ Input validation to prevent undefined in bcrypt
+  if (!token || typeof newPassword !== "string" || newPassword.trim() === "") {
+    return res.status(400).json({ message: "Token and valid new password are required." });
+  }
 
   try {
     const { data: user, error } = await supabase
       .from("users")
       .select("*")
       .eq("resetToken", token)
-      .gt("resetTokenExpiry", new Date().toISOString())
+      .filter("resetTokenExpiry", "gt", new Date().toISOString())
       .single();
 
     if (!user || error) {
@@ -180,7 +185,8 @@ exports.resetPassword = async (req, res) => {
   }
 };
 
-// 🛡️ VERIFY TOKEN controller - Verifies JWT token
+
+// 🛡️ VERIFY JWT TOKEN controller
 exports.verifyToken = async (req, res) => {
   const authHeader = req.headers.authorization;
 

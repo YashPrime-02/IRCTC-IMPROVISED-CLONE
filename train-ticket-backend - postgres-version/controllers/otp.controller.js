@@ -1,9 +1,9 @@
-const supabase = require("../utils/supabaseClient");   // 🔌 Supabase client
-const transporter = require("../config/node.mailer");  // 📧 Nodemailer instance
-const crypto = require("crypto");                      // 🔐 For reset token
-const logger = require("../utils/logger");             // 🪵 Winston logger
+const supabase = require("../utils/supabaseClient");     // 🔌 Supabase client
+const transporter = require("../config/node.mailer");    // 📧 Nodemailer setup
+const crypto = require("crypto");                        // 🔐 Secure token gen
+const logger = require("../utils/logger");               // 🪵 Winston logger
 
-// 📤 SEND OTP to user email
+// 📤 Send OTP to user's email
 exports.sendOTP = async (req, res) => {
   const { email } = req.body;
 
@@ -11,11 +11,9 @@ exports.sendOTP = async (req, res) => {
     return res.status(400).json({ message: "Email is required." });
 
   try {
-    // 🔢 Generate 6-digit OTP
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    const expiresAt = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes
+    const expiresat = new Date(Date.now() + 5 * 60 * 1000); // 5 mins
 
-    // 🔍 Try to get user's name
     const { data: userData } = await supabase
       .from("users")
       .select("name")
@@ -24,14 +22,12 @@ exports.sendOTP = async (req, res) => {
 
     const userName = userData?.name || "User";
 
-    // 💾 Upsert OTP
     const { error: otpError } = await supabase
       .from("otps")
-      .upsert([{ email, otp, expiresAt }], { onConflict: ["email"] });
+      .upsert([{ email, otp, expiresat }], { onConflict: ["email"] });
 
     if (otpError) throw otpError;
 
-    // 📧 Send OTP Email
     await transporter.sendMail({
       from: `"IRCTC Clone" <${process.env.EMAIL_USER}>`,
       to: email,
@@ -55,7 +51,7 @@ exports.sendOTP = async (req, res) => {
   }
 };
 
-// ✅ VERIFY OTP and issue reset token
+// ✅ Verify OTP and issue reset token
 exports.verifyOTP = async (req, res) => {
   const { email, otp } = req.body;
 
@@ -63,36 +59,35 @@ exports.verifyOTP = async (req, res) => {
     return res.status(400).json({ message: "Email and OTP are required." });
 
   try {
-    // 🔍 Check OTP & expiry
     const { data: otpRecord } = await supabase
       .from("otps")
       .select("*")
       .eq("email", email)
       .eq("otp", otp)
-      .gt("expiresAt", new Date().toISOString())
+      .gt("expiresat", new Date().toISOString())
       .single();
 
     if (!otpRecord) {
-      logger.warn(`Invalid or expired OTP attempt for ${email}`);
+      logger.warn(`❌ Invalid or expired OTP for ${email}`);
       return res.status(400).json({ message: "Invalid or expired OTP." });
     }
 
-    // 🧹 Delete used OTP
     await supabase.from("otps").delete().eq("email", email);
 
-    // 🔐 Generate secure reset token
     const resetToken = crypto.randomBytes(32).toString("hex");
-    const resetTokenExpiry = new Date(Date.now() + 15 * 60 * 1000); // 15 minutes
+    const resetTokenExpiry = new Date(Date.now() + 15 * 60 * 1000); // 15 mins
 
-    // 💾 Update users table with token
     const { error: updateError } = await supabase
       .from("users")
-      .update({ resetToken, resetTokenExpiry })
+      .update({
+        resetToken,
+        resetTokenExpiry: resetTokenExpiry.toISOString()
+      })
       .eq("email", email);
 
     if (updateError) throw updateError;
 
-    logger.info(`✅ OTP verified and token issued for ${email}`);
+    logger.info(`✅ OTP verified & reset token issued for ${email}`);
     res.status(200).json({
       message: "OTP verified successfully.",
       token: resetToken,

@@ -1,53 +1,61 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const db = require("../middleware/models");
-const Booking = db.bookings;
+const supabase = require('../utils/supabaseClient');
 
 // ✅ POST - Save Booking
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
   try {
-    const data = await Booking.create(req.body);
-    res.status(201).json({ message: "Booking saved", data });
+    const { data, error } = await supabase
+      .from('bookings')
+      .insert([req.body])
+      .select()
+      .single();
+
+    if (error) throw error;
+    res.status(201).json({ message: 'Booking saved', data });
   } catch (err) {
-    console.error("❌ Booking save error:", err);
-    res.status(500).json({ message: "Failed to save booking" });
+    console.error('❌ Booking save error:', err.message);
+    res.status(500).json({ message: 'Failed to save booking', error: err.message });
   }
 });
 
 // ✅ GET - Get All Bookings by Email
-router.get("/", async (req, res) => {
+router.get('/', async (req, res) => {
   const email = req.query.email;
   if (!email) {
-    return res.status(400).json({ message: "Email is required" });
+    return res.status(400).json({ message: 'Email is required' });
   }
 
   try {
-    const bookings = await Booking.findAll({
-      where: { email },
-      order: [['createdAt', 'DESC']]
-    });
-    res.status(200).json(bookings);
+    const { data, error } = await supabase
+      .from('bookings')
+      .select('*')
+      .eq('email', email)
+      .order('createdAt', { ascending: false });
+
+    if (error) throw error;
+    res.status(200).json(data);
   } catch (err) {
-    console.error("❌ Booking fetch error:", err);
-    res.status(500).json({ message: "Failed to fetch bookings" });
+    console.error('❌ Booking fetch error:', err.message);
+    res.status(500).json({ message: 'Failed to fetch bookings', error: err.message });
   }
 });
 
-// ❌ DELETE - Delete booking by ID
-router.delete("/:id", async (req, res) => {
+// ✅ DELETE - Delete Booking by ID
+router.delete('/:id', async (req, res) => {
   const bookingId = req.params.id;
 
   try {
-    const deleted = await Booking.destroy({ where: { id: bookingId } });
+    const { error } = await supabase
+      .from('bookings')
+      .delete()
+      .eq('id', bookingId);
 
-    if (deleted) {
-      res.status(200).json({ message: "Booking deleted successfully" });
-    } else {
-      res.status(404).json({ message: "Booking not found" });
-    }
+    if (error) throw error;
+    res.status(200).json({ message: 'Booking deleted successfully' });
   } catch (err) {
-    console.error("❌ Booking delete error:", err);
-    res.status(500).json({ message: "Failed to delete booking" });
+    console.error('❌ Booking delete error:', err.message);
+    res.status(500).json({ message: 'Failed to delete booking', error: err.message });
   }
 });
 

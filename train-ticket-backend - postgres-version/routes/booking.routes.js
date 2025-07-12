@@ -5,9 +5,14 @@ const supabase = require('../utils/supabaseClient');
 // ✅ POST - Save Booking
 router.post('/', async (req, res) => {
   try {
+    const bookingData = {
+      ...req.body,
+      bookingdate: new Date().toISOString(), // Set current timestamp
+    };
+
     const { data, error } = await supabase
       .from('bookings')
-      .insert([req.body])
+      .insert([bookingData])
       .select()
       .single();
 
@@ -31,7 +36,7 @@ router.get('/', async (req, res) => {
       .from('bookings')
       .select('*')
       .eq('email', email)
-      .order('createdAt', { ascending: false });
+      .order('bookingdate', { ascending: false }); // 🛠️ Fixed column name
 
     if (error) throw error;
     res.status(200).json(data);

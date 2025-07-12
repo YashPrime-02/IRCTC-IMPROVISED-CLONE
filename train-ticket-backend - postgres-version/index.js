@@ -9,7 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// 🔁 DEV ROUTES (Ping, All Users, Create/Delete User)
+// 🔁 DEV ROUTES
 app.get('/api/dev/ping', (req, res) => {
   console.log("📡 Ping received at", new Date().toISOString());
   res.status(200).json({
@@ -57,7 +57,7 @@ app.post('/api/dev/users', async (req, res) => {
 // 🧭 Main Routes
 app.use('/api/auth', require('./routes/auth.routes'));
 app.use('/api/station', require('./routes/station.routes'));
-app.use('/api/trains', require('./routes/train.routes'));  // ✅ Make sure this has /search in the file
+app.use('/api/trains', require('./routes/train.routes'));
 app.use('/api/bookings', require('./routes/booking.routes'));
 
 // 🚀 Root Route

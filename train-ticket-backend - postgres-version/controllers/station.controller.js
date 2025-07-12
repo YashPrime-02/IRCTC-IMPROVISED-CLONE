@@ -9,13 +9,18 @@ exports.getAllStations = async (req, res) => {
     const { data: stations, error } = await supabase
       .from("stations")
       .select("*")
-      .order("stationName", { ascending: true }); // Optional: Alphabetical order
+      .order("stationname", { ascending: true }); // ✅ Ensure lowercase column name
 
     if (error) {
-      logger.error(`❌ Supabase error (stations): ${error.message}`);
-      throw error;
+      logger.error(`❌ Supabase error (stations): ${error.message}`, error.details);
+      return res.status(500).json({
+        message: "Supabase error fetching stations",
+        error: error.message,
+        details: error.details || null,
+      });
     }
 
+    logger.info(`✅ ${stations.length} stations fetched successfully`);
     res.status(200).json(stations);
   } catch (err) {
     logger.error(`❌ Failed to fetch stations: ${err.message}`);
@@ -26,26 +31,39 @@ exports.getAllStations = async (req, res) => {
   }
 };
 
-// 📦 BULK INSERT station data (Admin only or initial load)
+// 📦 BULK INSERT station data with transform + UPSERT
 exports.bulkInsertStations = async (req, res) => {
-  const stations = req.body;
+  let stations = req.body;
 
   if (!Array.isArray(stations) || stations.length === 0) {
     return res.status(400).json({ message: "Station list is required." });
   }
 
-  try {
-    logger.info("📦 Bulk insert for stations triggered");
+  // ✅ Convert PascalCase to snake_case for Supabase
+  stations = stations.map((station) => ({
+    stationid: station.stationID, // Rename to match Supabase schema
+    stationname: station.stationName,
+    stationcode: station.stationCode,
+  }));
 
-    const { error } = await supabase.from("stations").insert(stations);
+  try {
+    logger.info(`📦 Attempting bulk upsert of ${stations.length} stations`);
+
+    const { data, error } = await supabase
+      .from("stations")
+      .insert(stations, { upsert: true }); // ✅ Avoid duplicates
 
     if (error) {
-      logger.error(`❌ Supabase insert error: ${error.message}`);
-      throw error;
+      logger.error(`❌ Supabase insert error: ${error.message}`, error.details);
+      return res.status(500).json({
+        message: "Failed to insert stations",
+        error: error.message,
+        details: error.details || null,
+      });
     }
 
-    logger.info("✅ Stations inserted successfully");
-    res.status(201).json({ message: "Stations inserted successfully" });
+    logger.info(`✅ ${data?.length || stations.length} stations inserted/upserted`);
+    res.status(201).json({ message: "Stations inserted/upserted successfully", inserted: data });
   } catch (err) {
     logger.error(`❌ Failed to insert stations: ${err.message}`);
     res.status(500).json({

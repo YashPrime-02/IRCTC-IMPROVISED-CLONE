@@ -2,15 +2,16 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const supabase = require('./utils/supabaseClient');
+
 const app = express();
 
 // ✅ Middleware
 app.use(cors());
 app.use(express.json());
 
-// 🟢 Cron Ping Route (Render Keep-Alive)
+// 🔁 DEV ROUTES (Ping, All Users, Create/Delete User)
 app.get('/api/dev/ping', (req, res) => {
-  console.log("📡 Ping received from cron or Render health check at", new Date().toISOString());
+  console.log("📡 Ping received at", new Date().toISOString());
   res.status(200).json({
     status: '✅ IRCTC backend awake',
     time: new Date().toISOString(),
@@ -18,7 +19,6 @@ app.get('/api/dev/ping', (req, res) => {
   });
 });
 
-// 🟢 GET All Users
 app.get('/api/dev/users', async (req, res) => {
   try {
     const { data: users, error } = await supabase.from('users').select('*');
@@ -29,7 +29,6 @@ app.get('/api/dev/users', async (req, res) => {
   }
 });
 
-// 🟢 DELETE All Users (except system ID)
 app.delete('/api/dev/users', async (req, res) => {
   try {
     const { error } = await supabase.from('users').delete().neq('id', 0);
@@ -40,7 +39,6 @@ app.delete('/api/dev/users', async (req, res) => {
   }
 });
 
-// 🟢 POST - Create User
 app.post('/api/dev/users', async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -56,18 +54,18 @@ app.post('/api/dev/users', async (req, res) => {
   }
 });
 
-// 🟢 Other Main Routes (auth, train, bookings, etc.)
+// 🧭 Main Routes
 app.use('/api/auth', require('./routes/auth.routes'));
 app.use('/api/station', require('./routes/station.routes'));
-app.use('/api/trains', require('./routes/train.routes'));
+app.use('/api/trains', require('./routes/train.routes'));  // ✅ Make sure this has /search in the file
 app.use('/api/bookings', require('./routes/booking.routes'));
 
-// 🟢 Base Route (Optional)
+// 🚀 Root Route
 app.get('/', (req, res) => {
   res.send('🚆 IRCTC backend running with Supabase + Render + Cron');
 });
 
-// ✅ Start Server
+// 🔥 Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server live at http://localhost:${PORT}`);

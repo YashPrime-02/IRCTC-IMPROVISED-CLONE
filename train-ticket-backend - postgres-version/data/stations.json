@@ -428,6 +428,8 @@
       "sourceCode": "AMH",
       "destinationCode": "NDLS"
     },
+
+
     {
       "trainName": "Budh Purnima Express",
       "departureTime": "14:20",
@@ -628,6 +630,9 @@
       "sourceCode": "CNB",
       "destinationCode": "LKO"
     },
+
+
+
     {
       "trainName": "Rapti Ganga Express",
       "departureTime": "10:30",
@@ -940,6 +945,8 @@
       "sourceCode": "LKO",
       "destinationCode": "CNB"
     },
+
+
     {
       "trainName": "Shatabdi Express",
       "departureTime": "18:15",
@@ -1236,6 +1243,9 @@
       "sourceCode": "LKO",
       "destinationCode": "CNB"
     },
+
+
+
     {
       "trainName": "Yuva Express",
       "departureTime": "10:20",
@@ -1692,6 +1702,8 @@
     "sourceCode": "GZB",
     "destinationCode": "LKO"
   },
+
+  
   {
     "trainName": "Ghazipur City Express",
     "departureTime": "14:25",

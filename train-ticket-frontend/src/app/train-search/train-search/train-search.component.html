@@ -12,7 +12,9 @@
           {{ s.stationName }} ({{ s.stationCode }})
         </option>
       </select>
-      <small class="error" *ngIf="sourceTouched && !sourceRef.value">Please select a source station.</small>
+      <small class="error" *ngIf="sourceTouched && !sourceRef.value">
+        Please select a source station.
+      </small>
     </div>
 
     <!-- Swap Button -->
@@ -30,8 +32,9 @@
           {{ s.stationName }} ({{ s.stationCode }})
         </option>
       </select>
-      <small class="error" *ngIf="destinationTouched && !destinationRef.value">Please select a destination
-        station.</small>
+      <small class="error" *ngIf="destinationTouched && !destinationRef.value">
+        Please select a destination station.
+      </small>
     </div>
 
     <!-- Journey Date -->
@@ -39,7 +42,9 @@
       <label><i class="fas fa-calendar-alt"></i> <strong>Date</strong></label>
       <input type="date" [(ngModel)]="selectedDate" [min]="minDate" (change)="dateTouched = true"
         class="form-control date-input" required />
-      <small class="error" *ngIf="dateTouched && !selectedDate">Please select a journey date.</small>
+      <small class="error" *ngIf="dateTouched && !selectedDate">
+        Please select a journey date.
+      </small>
     </div>
 
     <!-- Journey Time -->
@@ -48,7 +53,9 @@
       <input type="time" [(ngModel)]="selectedTime" [min]="getMinTime()" (blur)="timeTouched = true"
         [class.invalid-input]="timeTouched && !selectedTime" />
       <div *ngIf="showTimeToast" class="time-toast">⏰ Journey time auto-adjusted.</div>
-      <small class="error" *ngIf="timeTouched && !selectedTime">Please select a journey time.</small>
+      <small class="error" *ngIf="timeTouched && !selectedTime">
+        Please select a journey time.
+      </small>
     </div>
 
     <!-- Number of People -->
@@ -64,7 +71,7 @@
       <i class="fas fa-search"></i> Search Trains
     </button>
 
-    <!-- Loader with Percentage -->
+    <!-- Loader -->
     <div *ngIf="loading" class="loading-container">
       <i class="fas fa-spinner fa-spin loader-icon"></i>
       <div class="progress-percentage">{{ loadingProgress }}%</div>
@@ -74,22 +81,23 @@
     </div>
   </div>
 
-  <!-- Results Modal -->
+  <!-- Train Results Modal -->
   <div class="modal-content" *ngIf="showModal && trains.length > 0">
     <button class="close-cross-btn" (click)="closeModal()">×</button>
-
     <div class="train-cards-container">
       <div class="train-card" *ngFor="let train of trains">
-        <h3><i class="fas fa-train"></i> {{ train.trainName }}</h3>
-        <p><i class="fas fa-clock"></i> {{ train.departureTime }} → {{ train.arrivalTime }}</p>
+        <h3><i class="fas fa-train"></i> {{ train.trainname }}</h3>
+        <p><i class="fas fa-clock"></i> {{ train.departuretime }} → {{ train.arrivaltime }}</p>
         <p><i class="fas fa-hourglass-half"></i> Duration: {{ train.duration }}</p>
         <p><i class="fas fa-calendar-day"></i> Date: {{ selectedDate || 'N/A' }}</p>
         <button class="book-btn" (click)="bookTrain(train, selectedDate, numberOfPeople)">
-          <i class="fas fa-ticket-alt"></i> Book Ticket</button>
+          <i class="fas fa-ticket-alt"></i> Book Ticket
+        </button>
       </div>
     </div>
   </div>
 
+  <!-- No Results -->
   <div *ngIf="searched && trains.length === 0" class="no-results glass-card">
     <p>🚫 No trains found for {{ selectedDate || 'this date' }}.</p>
   </div>

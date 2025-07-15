@@ -1,9 +1,10 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { BookingService } from '../../booking/booking.service';
+import { environment } from '../../environments/environment';
 
 interface Station {
   stationID: number;
@@ -12,13 +13,13 @@ interface Station {
 }
 
 export interface Train {
-  trainName: string;
-  departureTime: string;
-  arrivalTime: string;
+  id: number;
+  trainname: string;
+  departuretime: string;
+  arrivaltime: string;
   duration: string;
-  sourceCode: string;
-  destinationCode: string;
-  date?: string;
+  sourcecode: string;
+  destinationcode: string;
 }
 
 @Component({
@@ -34,7 +35,6 @@ export class TrainSearchComponent implements OnInit {
   @ViewChild('formBox') formBox!: ElementRef;
 
   stations: Station[] = [];
-  trainsList: Train[] = [];
   trains: Train[] = [];
 
   selectedDate = '';
@@ -42,20 +42,20 @@ export class TrainSearchComponent implements OnInit {
   numberOfPeople = 1;
   peopleOptions = Array.from({ length: 8 }, (_, i) => i + 1);
 
-  sourceTouched = false;
-  destinationTouched = false;
-  dateTouched = false;
-  timeTouched = false;
+  selectedSource = '';
+  selectedDestination = '';
 
   searched = false;
   showModal = false;
   loading = false;
   loadingProgress = 0;
-  selectedSource = '';
-  selectedDestination = '';
 
   showTimeToast = false;
   showPastDateToast = false;
+  sourceTouched = false;
+  destinationTouched = false;
+  dateTouched = false;
+  timeTouched = false;
 
   minDate = '';
 
@@ -67,26 +67,22 @@ export class TrainSearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.minDate = new Date().toISOString().split('T')[0];
-    this.loadTrainData();
+    this.loadStationData();
   }
 
-  loadTrainData(): void {
+  loadStationData(): void {
     this.http.get<any>('assets/train_data.json').subscribe({
       next: data => {
         this.stations = data.stations || [];
-        this.trainsList = data.trains || [];
       },
       error: err => {
-        console.error('❌ Failed to load train data:', err);
+        console.error('❌ Failed to load station data:', err);
       }
     });
   }
 
   onSearch(source: string, destination: string): void {
-    this.sourceTouched = true;
-    this.destinationTouched = true;
-    this.dateTouched = true;
-    this.timeTouched = true;
+    this.sourceTouched = this.destinationTouched = this.dateTouched = this.timeTouched = true;
 
     const today = new Date().toISOString().split('T')[0];
     if (this.selectedDate < today) {
@@ -108,52 +104,64 @@ export class TrainSearchComponent implements OnInit {
 
     this.selectedSource = source;
     this.selectedDestination = destination;
-
     this.resetSearchState();
 
-    const interval = setInterval(() => {
-      if (this.loadingProgress < 100) {
-        this.loadingProgress += 10;
-      } else {
-        clearInterval(interval);
-        this.trains = this.filterTrains(source, destination);
+    this.fetchTrainsFromSupabase(source, destination);
+  }
+
+  fetchTrainsFromSupabase(source: string, destination: string): void {
+    const params = new HttpParams()
+      .set('sourcecode', `eq.${source}`)
+      .set('destinationcode', `eq.${destination}`);
+
+    const supabaseUrl = `${environment.baseApiUrl}/trains`;
+
+    this.http.get<Train[]>(supabaseUrl, {
+      params,
+      headers: {
+        apikey: environment.supabaseKey,
+        Authorization: `Bearer ${environment.supabaseKey}`
+      }
+    }).subscribe({
+      next: (data) => {
+        const filtered = data.filter(t => this.isTimeMatch(t.departuretime, this.selectedTime));
+        this.trains = filtered;
         this.searched = true;
         this.loading = false;
-        this.showModal = this.trains.length > 0;
+        this.showModal = filtered.length > 0;
+      },
+      error: (err) => {
+        this.loading = false;
+        console.error('❌ Failed to fetch trains from Supabase:', err);
       }
-    }, 100);
+    });
   }
 
-  swapStations(): void {
-    const src = this.sourceRef.nativeElement;
-    const dest = this.destinationRef.nativeElement;
-
-    if (!src.value || !dest.value) return;
-
-    const temp = src.value;
-    src.classList.add('swap-animation');
-    dest.classList.add('swap-animation');
-
-    setTimeout(() => {
-      src.value = dest.value;
-      dest.value = temp;
-      src.classList.remove('swap-animation');
-      dest.classList.remove('swap-animation');
-    }, 300);
-  }
-
-  filterTrains(source: string, destination: string): Train[] {
-    return this.trainsList.filter(t =>
-      t.sourceCode === source &&
-      t.destinationCode === destination &&
-      this.isTimeMatch(t.departureTime, this.selectedTime)
-    );
+  bookTrain(train: Train, date: string, count: number): void {
+    const bookingData = {
+      trainName: train.trainname,
+      departureTime: train.departuretime,
+      arrivalTime: train.arrivaltime,
+      duration: train.duration,
+      date,
+      source: this.stations.find(s => s.stationCode === this.selectedSource)?.stationName || '',
+      destination: this.stations.find(s => s.stationCode === this.selectedDestination)?.stationName || '',
+      sourceCode: this.selectedSource,
+      destinationCode: this.selectedDestination,
+      numberOfPeople: count
+    };
+    this.router.navigate(['/booking'], { state: { bookingData } });
   }
 
   isTimeMatch(trainTime: string, selectedTime: string): boolean {
     const [th, tm] = trainTime.split(':').map(Number);
     const [sh, sm] = selectedTime.split(':').map(Number);
     return th > sh || (th === sh && tm >= sm);
+  }
+
+  getMinTime(): string {
+    const now = new Date();
+    return `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
   }
 
   resetSearchState(): void {
@@ -168,32 +176,20 @@ export class TrainSearchComponent implements OnInit {
     this.showModal = false;
   }
 
- bookTrain(train: Train, date: string, count: number): void {
-  const bookingData = {
-    trainName: train.trainName,
-    departureTime: train.departureTime,
-    arrivalTime: train.arrivalTime,
-    duration: train.duration,
-    date,
-    source: this.stations.find(s => s.stationCode === this.selectedSource)?.stationName || '',
-    destination: this.stations.find(s => s.stationCode === this.selectedDestination)?.stationName || '',
-    sourceCode: this.selectedSource,              // ✅ Added
-    destinationCode: this.selectedDestination,    // ✅ Added
-    numberOfPeople: count
-  };
-  this.router.navigate(['/booking'], { state: { bookingData } });
-}
+  swapStations(): void {
+    const src = this.sourceRef.nativeElement;
+    const dest = this.destinationRef.nativeElement;
+    if (!src.value || !dest.value) return;
 
-
-  getMinTime(): string {
-    const now = new Date();
-    return `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
-  }
-
-  @HostListener('document:mousemove', ['$event'])
-  updateMouseCoords(e: MouseEvent): void {
-    document.documentElement.style.setProperty('--x', `${e.clientX}px`);
-    document.documentElement.style.setProperty('--y', `${e.clientY}px`);
+    const temp = src.value;
+    src.classList.add('swap-animation');
+    dest.classList.add('swap-animation');
+    setTimeout(() => {
+      src.value = dest.value;
+      dest.value = temp;
+      src.classList.remove('swap-animation');
+      dest.classList.remove('swap-animation');
+    }, 300);
   }
 
   scrollToFirstError(): void {
@@ -207,5 +203,11 @@ export class TrainSearchComponent implements OnInit {
 
   isDisabled(): boolean {
     return !this.selectedDate || !this.selectedTime || !this.sourceRef?.nativeElement.value || !this.destinationRef?.nativeElement.value;
+  }
+
+  @HostListener('document:mousemove', ['$event'])
+  updateMouseCoords(e: MouseEvent): void {
+    document.documentElement.style.setProperty('--x', `${e.clientX}px`);
+    document.documentElement.style.setProperty('--y', `${e.clientY}px`);
   }
 }

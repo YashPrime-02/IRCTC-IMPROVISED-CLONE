@@ -18,9 +18,11 @@
     </div>
 
     <!-- Swap Button -->
-    <button class="swap-btn" (click)="swapStations()" aria-label="Swap">
-      <i class="fas fa-exchange-alt"></i>
-    </button>
+    <div class="form-group text-center">
+      <button class="swap-btn" (click)="swapStations()" aria-label="Swap Stations">
+        <i class="fas fa-exchange-alt"></i>
+      </button>
+    </div>
 
     <!-- Destination Station -->
     <div class="form-group">
@@ -52,10 +54,12 @@
       <label><i class="fas fa-clock"></i> <strong>Time</strong></label>
       <input type="time" [(ngModel)]="selectedTime" [min]="getMinTime()" (blur)="timeTouched = true"
         [class.invalid-input]="timeTouched && !selectedTime" />
-      <div *ngIf="showTimeToast" class="time-toast">⏰ Journey time auto-adjusted.</div>
       <small class="error" *ngIf="timeTouched && !selectedTime">
         Please select a journey time.
       </small>
+      <div *ngIf="showTimeToast" class="toast toast-warning">
+        ⚠️ Time auto-corrected to current time.
+      </div>
     </div>
 
     <!-- Number of People -->
@@ -67,7 +71,7 @@
     </div>
 
     <!-- Search Button -->
-    <button (click)="onSearch(sourceRef.value, destinationRef.value)" [disabled]="isDisabled()">
+    <button class="search-btn" (click)="onSearch(sourceRef.value, destinationRef.value)" [disabled]="isDisabled()">
       <i class="fas fa-search"></i> Search Trains
     </button>
 
@@ -81,7 +85,7 @@
     </div>
   </div>
 
-  <!-- Train Results Modal -->
+  <!-- Train Results -->
   <div class="modal-content" *ngIf="showModal && trains.length > 0">
     <button class="close-cross-btn" (click)="closeModal()">×</button>
     <div class="train-cards-container">
@@ -103,11 +107,7 @@
   </div>
 </div>
 
-<!-- Toasts -->
+<!-- Past Date Toast -->
 <div *ngIf="showPastDateToast" class="toast toast-danger">
   ❌ You cannot select a past date.
-</div>
-
-<div *ngIf="showTimeToast" class="toast toast-warning">
-  ⚠️ Time auto-corrected to current time.
 </div>

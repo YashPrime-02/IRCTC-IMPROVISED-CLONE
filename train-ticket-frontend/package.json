@@ -19,6 +19,7 @@
     "@angular/platform-browser-dynamic": "^19.2.0",
     "@angular/router": "^19.2.0",
     "@emailjs/browser": "^4.4.1",
+    "@supabase/supabase-js": "^2.51.0",
     "canvas-confetti": "^1.9.3",
     "emailjs-com": "^3.2.0",
     "html2pdf.js": "^0.10.3",

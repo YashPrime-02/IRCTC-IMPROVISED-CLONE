@@ -24,15 +24,15 @@
       <tbody>
         <tr>
           <th>🚆 Train:</th>
-          <td><strong>{{ bookingData?.trainName }}</strong></td>
+          <td><strong>{{ bookingData?.train?.trainName }}</strong></td>
         </tr>
         <tr>
           <th>🛤️ From:</th>
-          <td><strong>{{ bookingData?.source }}</strong> ({{ bookingData?.sourceCode }})</td>
+          <td><strong>{{ bookingData?.train?.source }}</strong> ({{ bookingData?.train?.sourceCode }})</td>
         </tr>
         <tr>
           <th>🏁 To:</th>
-          <td><strong>{{ bookingData?.destination }}</strong> ({{ bookingData?.destinationCode }})</td>
+          <td><strong>{{ bookingData?.train?.destination }}</strong> ({{ bookingData?.train?.destinationCode }})</td>
         </tr>
         <tr>
           <th>📅 Date:</th>
@@ -40,11 +40,11 @@
         </tr>
         <tr>
           <th>⏱ Duration:</th>
-          <td><strong>{{ bookingData?.duration }}</strong></td>
+          <td><strong>{{ bookingData?.train?.duration }}</strong></td>
         </tr>
         <tr>
           <th>💰 Total Fare:</th>
-          <td><strong>₹{{ bookingData?.totalAmount }}</strong></td>
+          <td><strong>₹{{ bookingData?.train?.fare }}</strong></td>
         </tr>
       </tbody>
     </table>
@@ -88,19 +88,20 @@
               <strong>
                 <ng-container [ngSwitch]="p.status">
                   <span *ngSwitchCase="'Confirmed'"
-                    [attr.title]="'Coach: ' + p.seatNumber?.split('-')[0] + ', Seat No: ' + p.seatNumber?.split('-')[1]?.split(' ')[0] + ', Berth: ' + p.seatNumber?.split(' ')[1]">
+                        [attr.title]="'Coach: ' + p.seatNumber?.split('-')[0] + ', Seat No: ' + p.seatNumber?.split('-')[1]?.split(' ')[0] + ', Berth: ' + p.seatNumber?.split(' ')[1]">
                     {{ p.seatNumber }}
                   </span>
-                  <span *ngSwitchCase="'RAC'" [attr.title]="'RAC Number: ' + p.seatNumber?.replace('RAC', '')">
+                  <span *ngSwitchCase="'RAC'"
+                        [attr.title]="'RAC Number: ' + p.seatNumber?.replace('RAC', '')">
                     {{ p.seatNumber }}
                   </span>
-                  <span *ngSwitchDefault [attr.title]="'WL Number: ' + p.seatNumber?.replace('WL', '')">
+                  <span *ngSwitchDefault
+                        [attr.title]="'WL Number: ' + p.seatNumber?.replace('WL', '')">
                     {{ p.seatNumber || '-' }}
                   </span>
                 </ng-container>
               </strong>
             </td>
-
 
             <!-- ✅ Status with colored badge -->
             <td data-label="Status">

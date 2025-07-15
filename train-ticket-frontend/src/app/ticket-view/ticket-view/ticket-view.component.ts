@@ -4,6 +4,10 @@ import html2pdf from 'html2pdf.js';
 import { CommonModule } from '@angular/common';
 import QRCode from 'qrcode';
 import { Router } from '@angular/router';
+import { createClient } from '@supabase/supabase-js';
+import { environment } from '../../environments/environment';
+
+const supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
 
 @Component({
   selector: 'app-ticket-view',
@@ -20,10 +24,6 @@ export class TicketViewComponent implements OnInit {
 
   constructor(private router: Router) {}
 
-  goToTrainSearch(): void {
-    this.router.navigate(['/train-search']);
-  }
-
   ngOnInit(): void {
     const sessionBooking = sessionStorage.getItem('bookingSummary');
     const storedUser = localStorage.getItem('loggedInUser');
@@ -32,19 +32,32 @@ export class TicketViewComponent implements OnInit {
       const user = JSON.parse(storedUser);
       const email = user.email;
 
-      fetch(`http://localhost:8080/api/bookings?email=${email}`)
-        .then(res => res.json())
-        .then((data) => {
+      supabase
+        .from('bookings')
+        .select('*')
+        .eq('email', email)
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .then(({ data, error }) => {
+          if (error) {
+            console.error('❌ Supabase error:', error);
+            this.loadFromSession(sessionBooking, user);
+            return;
+          }
+
           if (Array.isArray(data) && data.length > 0) {
             this.bookingData = data[0];
-            this.bookingData.user = { name: user.name || this.extractUsernameFromEmail(email), email };
+
+            this.normalizeTrainData(); // ✅ Normalize train object if flat
+            this.bookingData.user = {
+              name: user.name || this.extractUsernameFromEmail(email),
+              email
+            };
+
             this.afterBookingDataLoaded();
           } else {
             this.loadFromSession(sessionBooking, user);
           }
-        })
-        .catch(() => {
-          this.loadFromSession(sessionBooking, user);
         });
     } else {
       this.loadFromSession(sessionBooking);
@@ -54,6 +67,8 @@ export class TicketViewComponent implements OnInit {
   loadFromSession(sessionData: string | null, userData?: any): void {
     if (!sessionData) return;
     this.bookingData = JSON.parse(sessionData);
+
+    this.normalizeTrainData(); // ✅ Fix train nesting for sessionStorage
 
     if (!this.bookingData.user && userData) {
       this.bookingData.user = {
@@ -65,27 +80,46 @@ export class TicketViewComponent implements OnInit {
     this.afterBookingDataLoaded();
   }
 
-  afterBookingDataLoaded(): void {
-    this.generateQRCode(JSON.stringify(this.bookingData));
-    this.generatePNR();
-
-    this.bookingData.passengers = this.bookingData.passengers.map((p: any) => {
-      if (p.status === 'Confirmed') {
-        const berthType = this.getRandomBerth();
-        p.seatNumber = this.generateFormattedSeat(p.seatType, berthType);
-        p.berth = berthType;
-      } else if (p.status === 'RAC') {
-        const racNum = this.getRandomSeatNumber(1, 50);
-        p.seatNumber = `RAC${racNum}`;
-      } else if (p.status.includes('WL')) {
-        const wlNum = this.getRandomSeatNumber(1, 50);
-        p.seatNumber = `WL${wlNum}`;
-      } else {
-        p.seatNumber = '-';
-      }
-      return p;
-    });
+  normalizeTrainData(): void {
+    if (!this.bookingData.train && this.bookingData.trainName) {
+      this.bookingData.train = {
+        trainName: this.bookingData.trainName,
+        source: this.bookingData.source,
+        sourceCode: this.bookingData.sourceCode,
+        destination: this.bookingData.destination,
+        destinationCode: this.bookingData.destinationCode,
+        duration: this.bookingData.duration,
+        fare: this.bookingData.totalAmount
+      };
+    }
   }
+
+  afterBookingDataLoaded(): void {
+  this.generateQRCode(JSON.stringify(this.bookingData));
+  this.generatePNR();
+
+  console.log('✅ bookingData:', this.bookingData);             // ADD THIS
+  console.log('✅ bookingData.train:', this.bookingData?.train); // AND THIS
+
+  const train = this.bookingData.train;
+  const passengers = this.bookingData.passengers;
+
+  if (!train || typeof train !== 'object') {
+    console.warn('❌ Missing or invalid train data in bookingData:', train);
+    return;
+  }
+
+  if (!Array.isArray(passengers)) {
+    console.warn('❌ Missing or invalid passengers data:', passengers);
+    return;
+  }
+
+  this.bookingData.passengers = passengers.map((p: any) => {
+    // seatNumber logic...
+    return p;
+  });
+}
+
 
   generateFormattedSeat(seatType: string, berthType: string = ''): string {
     const coachMap: any = {
@@ -167,6 +201,9 @@ export class TicketViewComponent implements OnInit {
       setTimeout(() => this.showToast = false, 3000);
     });
   }
+goToTrainSearch(): void {
+  this.router.navigate(['/train-search']);
+}
 
   shareTicket(): void {
     const ticketElement = document.getElementById('ticketSummary');

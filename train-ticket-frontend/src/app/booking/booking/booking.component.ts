@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import confetti from 'canvas-confetti';
-
+import { environment } from '../../environments/environment';
 @Component({
   selector: 'app-booking',
   standalone: true,
@@ -224,40 +224,49 @@ export class BookingComponent implements OnInit, OnDestroy {
     })();
   }
 
-  confirmBooking(): void {
-    if (!this.validatePassengers()) return;
+confirmBooking(): void {
+  if (!this.validatePassengers()) return;
 
-    const train = this.bookingData;
+  const train = this.bookingData;
 
-    const bookingSummary = {
-      email: this.email,
-      trainName: train.trainName,
-      sourceCode: train.sourceCode,
-      destinationCode: train.destinationCode,
-      date: train.date || new Date().toISOString().split('T')[0],
-      duration: train.duration || 'Unknown',
-      passengers: this.passengers.map(p => ({
-        name: p.name,
-        age: p.age,
-        seatType: p.seatType,
-        status: p.status,
-        fare: p.fare
-      })),
-      totalAmount: this.calculateTotal(),
-      bookingDate: new Date()
-    };
+  const bookingSummary = {
+    email: this.email,
+    trainname: train.trainName, // match Supabase column
+    sourcecode: train.sourceCode,
+    destinationcode: train.destinationCode,
+    date: train.date || new Date().toISOString().split('T')[0],
+    duration: train.duration || 'Unknown',
+    passengers: this.passengers.map(p => ({
+      name: p.name,
+      age: p.age,
+      seatType: p.seatType,
+      status: p.status,
+      fare: p.fare
+    })),
+    totalamount: this.calculateTotal(),
+    bookingdate: new Date().toISOString() // ISO string for timestamp
+  };
 
-    this.http.post('http://localhost:8080/api/bookings', bookingSummary).subscribe({
-      next: () => {
-        clearInterval(this.timerInterval);
-        sessionStorage.setItem('bookingSummary', JSON.stringify(bookingSummary));
-        this.launchConfetti(); // 🎉 trigger confetti
-        this.router.navigate(['/ticket-view']);
-      },
-      error: err => {
-        console.error('❌ Error saving booking:', err);
-        this.showToastMessage('Failed to save booking.', 'error');
-      }
-    });
-  }
+  const supabaseUrl = `${environment.baseApiUrl}/bookings`;
+
+  this.http.post(supabaseUrl, bookingSummary, {
+    headers: {
+      apikey: environment.supabaseKey,
+      Authorization: `Bearer ${environment.supabaseKey}`,
+      'Content-Type': 'application/json'
+    }
+  }).subscribe({
+    next: () => {
+      clearInterval(this.timerInterval);
+      sessionStorage.setItem('bookingSummary', JSON.stringify(bookingSummary));
+      this.launchConfetti();
+      this.router.navigate(['/ticket-view']);
+    },
+    error: err => {
+      console.error('❌ Supabase booking error:', err);
+      this.showToastMessage('Failed to save booking to Supabase.', 'error');
+    }
+  });
+}
+
 }

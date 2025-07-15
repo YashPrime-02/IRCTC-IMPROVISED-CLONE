@@ -4,7 +4,8 @@ import { LoginComponent } from '../login/login.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router'; // ✅ IMPORT THIS
+import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 import {
   trigger,
   transition,
@@ -44,19 +45,25 @@ export class AuthWrapperComponent {
   loading = false;
   errorMessage = '';
 
-  constructor(private http: HttpClient, private router: Router) {} // ✅ CORRECTED INJECTION
+  constructor(private http: HttpClient, private router: Router) {}
 
   toggleMode(): void {
     this.isSignupMode = !this.isSignupMode;
     this.isForgotPasswordVisible = false;
+    this.resetForgotForm();
   }
 
   openForgotPassword(): void {
     this.isForgotPasswordVisible = true;
+    this.errorMessage = '';
   }
 
   closeForgotPassword(): void {
     this.isForgotPasswordVisible = false;
+    this.resetForgotForm();
+  }
+
+  private resetForgotForm(): void {
     this.forgotEmail = '';
     this.errorMessage = '';
   }
@@ -68,20 +75,24 @@ export class AuthWrapperComponent {
     }
 
     this.loading = true;
-    this.http.post('http://localhost:8080/api/auth/send-otp', {
+
+    this.http.post(`${environment.baseApiUrl}/auth/send-otp`, {
       email: this.forgotEmail
     }).subscribe({
       next: () => {
         this.loading = false;
-        // ✅ Navigate to OTP screen with email + action
+        console.log('📧 OTP sent successfully to:', this.forgotEmail);
         this.router.navigate(['/otp-verification'], {
-          queryParams: { email: this.forgotEmail, action: 'forgot-password' }
+          queryParams: {
+            email: this.forgotEmail,
+            action: 'forgot-password'
+          }
         });
       },
       error: (err) => {
         this.loading = false;
         console.error('❌ Forgot password error:', err);
-        this.errorMessage = 'Something went wrong while sending OTP.';
+        this.errorMessage = err?.error?.message || 'Something went wrong while sending OTP.';
       }
     });
   }

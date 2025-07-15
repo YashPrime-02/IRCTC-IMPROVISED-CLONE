@@ -2,6 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -16,13 +17,12 @@ export class HeaderComponent {
   invalidUser = false;
   showToast = false;
 
-  private readonly verifyUrl = 'http://localhost:8080/api/auth/verify-token';
+  private readonly verifyUrl = `${environment.baseApiUrl}/auth/verify-token`; // ✅ Now dynamic
 
   constructor(private router: Router, private http: HttpClient) {
     this.initializeUserData();
   }
 
-  // ✅ Centralized user init
   initializeUserData(): void {
     const userData = localStorage.getItem('userData');
     const token = localStorage.getItem('token');
@@ -51,7 +51,6 @@ export class HeaderComponent {
     this.checkTokenWithBackend(token);
   }
 
-  // ✅ Verify token with backend
   checkTokenWithBackend(token: string): void {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
@@ -67,7 +66,6 @@ export class HeaderComponent {
     });
   }
 
-  // ✅ Logout and invalidate session
   invalidateSession(): void {
     this.invalidUser = true;
     this.showLogoutModal = true;
@@ -118,6 +116,4 @@ export class HeaderComponent {
   goToBookingHistory(): void {
     this.router.navigate(['/booking-history']);
   }
-
-
 }

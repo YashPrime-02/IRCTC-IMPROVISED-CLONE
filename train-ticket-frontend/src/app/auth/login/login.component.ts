@@ -35,28 +35,35 @@ export class LoginComponent {
   }
 
   onLogin(): void {
-    const emailTrimmed = this.email.trim();
-    const passwordTrimmed = this.password.trim();
+  const emailTrimmed = this.email.trim();
+  const passwordTrimmed = this.password.trim();
 
-    if (!emailTrimmed || !passwordTrimmed) {
-      this.showToastMessage('⚠️ Please enter both email and password.');
-      return;
-    }
-
-    this.authService.login(emailTrimmed, passwordTrimmed).subscribe({
-      next: (res) => {
-        if (res?.token && res?.user) {
-          this.authService.saveToken(res.token, res.user);  // ✅ Save correctly
-          this.showToastMessage('✅ Login successful!');
-          this.router.navigate(['/train-search']);
-        } else {
-          this.showToastMessage('❌ Login failed. Try again.');
-        }
-      },
-      error: (err) => {
-        console.error('Login failed:', err);
-        this.showToastMessage('❌ Invalid credentials or server error.');
-      }
-    });
+  if (!emailTrimmed || !passwordTrimmed) {
+    this.showToastMessage('⚠️ Please enter both email and password.');
+    return;
   }
+
+  this.authService.login(emailTrimmed, passwordTrimmed).subscribe({
+    next: (res) => {
+      console.log('✅ Login response:', res);
+
+      const token = res?.token || res?.session?.access_token;
+      const user = res?.user;
+
+      if (token && user) {
+        this.authService.saveToken(token, user);
+        this.showToastMessage('✅ Login successful!');
+        this.router.navigate(['/train-search']);
+      } else {
+        console.warn('❌ Invalid login structure:', res);
+        this.showToastMessage('❌ Login failed. Try again.');
+      }
+    },
+    error: (err) => {
+      console.error('Login failed:', err);
+      this.showToastMessage('❌ Invalid credentials or server error.');
+    }
+  });
+}
+
 }

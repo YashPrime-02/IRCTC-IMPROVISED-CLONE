@@ -51,12 +51,13 @@ export class SignupComponent {
     }
 
     this.authService.signup(this.name, this.email, this.password).subscribe({
-      next: () => {
+      next: (res) => {
+        console.log('✅ Signup success:', res); // ✅ log for debug
         this.showToastMessage('✅ Signup successful! Please log in.');
         setTimeout(() => this.switchToLogin.emit(), 3000);
       },
       error: (err) => {
-        console.error('Signup failed:', err);
+        console.error('❌ Signup failed:', err);
         if (err.error?.message === 'User already exists!') {
           this.showToastMessage('⚠️ Email already in use. Try logging in.');
         } else {

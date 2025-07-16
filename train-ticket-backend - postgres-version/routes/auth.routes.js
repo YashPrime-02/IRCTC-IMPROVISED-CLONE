@@ -16,35 +16,47 @@ router.post("/signup", async (req, res) => {
   const { email, password, name } = req.body;
   console.log("📥 Signup request received:", { email, name });
 
-  // ✅ Check for missing fields (to avoid null constraint errors)
   if (!email || !password || !name) {
     return res.status(400).json({ error: "Missing name, email, or password" });
   }
 
   try {
-    // ✅ Step 1: Supabase Auth signup
+    // Step 1: Supabase Auth signup
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
-        data: { name } // stored in user_metadata
+        data: { name }
       }
     });
 
     if (error) {
       console.error("❌ Supabase signup error:", error.message);
+
+      // Check for duplicate email
+      if (
+        error.message.toLowerCase().includes("user already registered") ||
+        error.message.toLowerCase().includes("user already exists")
+      ) {
+        return res.status(409).json({ error: "User already exists. Please log in or reset your password." });
+      }
+
+      // Weak password case
+      if (error.message.toLowerCase().includes("password")) {
+        return res.status(400).json({ error: "Password does not meet security requirements." });
+      }
+
       return res.status(400).json({ error: error.message });
     }
 
     const user = data?.user;
     if (!user || !user.id) {
-      console.error("❌ Supabase did not return user ID");
-      return res.status(400).json({ error: "Signup failed: No user ID." });
+      return res.status(400).json({ error: "Signup failed. No user ID returned." });
     }
 
-    console.log("✅ Supabase Auth user created:", user.id);
+    console.log("✅ Supabase user created:", user.id);
 
-    // ✅ Step 2: Insert into your `users` table
+    // Step 2: Save user info into `users` table (plain password for now)
     const { error: dbError } = await supabase
       .from("users")
       .insert([
@@ -52,27 +64,28 @@ router.post("/signup", async (req, res) => {
           id: user.id,
           name,
           email,
-          password // ⚠️ In production, hash before storing
+          password // ⚠️ Plain text (not recommended for production)
         }
       ])
       .select()
       .single();
 
     if (dbError) {
-      console.error("❌ Error inserting into users table:", dbError.message);
-      return res.status(400).json({ error: "Database error saving new user" });
+      console.error("❌ Error saving user to DB:", dbError.message);
+      return res.status(400).json({ error: "Failed to save user in database" });
     }
 
     console.log("✅ User saved to DB:", email);
     return res.status(201).json({
       message: "Signup successful! Please verify your email.",
-      user: user
+      user
     });
   } catch (err) {
-    console.error("🔥 Internal signup error:", err.message);
+    console.error("🔥 Internal server error:", err.message);
     return res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
 
 // ✅ Login via Supabase Auth
 router.post("/login", async (req, res) => {

@@ -11,53 +11,29 @@ const verifyToken = require("../middleware/verifyToken");
 router.post("/send-otp", otpController.sendOTP);
 router.post("/verify-otp", otpController.verifyOTP);
 
-// ✅ Signup via Supabase Auth + Insert into `users` table
+// ✅ Signup via Supabase Auth
 router.post("/signup", async (req, res) => {
   const { email, password, name } = req.body;
   console.log("📥 Signup request received:", req.body);
 
   try {
-    // Step 1: Sign up using Supabase Auth
-    const { data: authData, error: authError } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
-        data: { name } // stored in raw_user_meta_data
+        data: { name } // 👈 Will be available in raw_user_meta_data
       }
     });
 
-    if (authError) {
-      console.error("❌ Supabase signup error:", authError.message);
-      return res.status(400).json({ error: authError.message });
+    if (error) {
+      console.error("❌ Supabase signup error:", error.message);
+      return res.status(400).json({ error: error.message });
     }
 
-    const authUser = authData?.user;
-
-    // Step 2: Insert into `users` table
-    const { error: dbError } = await supabase
-      .from("users")
-      .insert([
-        {
-          id: authUser.id,     // same ID as Supabase Auth
-          name,
-          email,
-          password             // 🔐 Not secure in production (hash if needed)
-        }
-      ]);
-
-    if (dbError) {
-      console.warn("⚠️ User created in Auth but not in users table:", dbError.message);
-      return res.status(201).json({
-        message: "Signup succeeded (Auth only). DB insert failed.",
-        user: authUser,
-        warning: dbError.message
-      });
-    }
-
-    console.log("✅ User inserted in users table:", email);
+    console.log("✅ User signed up:", data.user.email);
     return res.status(201).json({
       message: "Signup successful! Please verify your email.",
-      user: authUser
+      user: data.user
     });
   } catch (err) {
     console.error("🔥 Internal signup error:", err.message);

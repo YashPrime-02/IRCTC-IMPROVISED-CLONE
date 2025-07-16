@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-// ✅ Controllers
+// ✅ Controllers & Utilities
 const supabase = require("../utils/supabaseClient");
 const authController = require("../controllers/auth.controller");
 const otpController = require("../controllers/otp.controller");
@@ -13,18 +13,30 @@ router.post("/verify-otp", otpController.verifyOTP);
 
 // ✅ Signup via Supabase Auth
 router.post("/signup", async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, name } = req.body;
+  console.log("📥 Signup request received:", req.body);
 
   try {
-    const { data, error } = await supabase.auth.signUp({ email, password });
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: { name } // 👈 Will be available in raw_user_meta_data
+      }
+    });
 
-    if (error) return res.status(400).json({ error: error.message });
+    if (error) {
+      console.error("❌ Supabase signup error:", error.message);
+      return res.status(400).json({ error: error.message });
+    }
 
+    console.log("✅ User signed up:", data.user.email);
     return res.status(201).json({
       message: "Signup successful! Please verify your email.",
-      user: data.user,
+      user: data.user
     });
   } catch (err) {
+    console.error("🔥 Internal signup error:", err.message);
     return res.status(500).json({ error: "Internal Server Error" });
   }
 });
@@ -32,27 +44,33 @@ router.post("/signup", async (req, res) => {
 // ✅ Login via Supabase Auth
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
+  console.log("📥 Login attempt:", email);
 
   try {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
-    if (error) return res.status(401).json({ error: "Invalid credentials" });
+    if (error) {
+      console.warn("❌ Login failed for:", email);
+      return res.status(401).json({ error: "Invalid credentials" });
+    }
 
+    console.log("✅ User logged in:", data.user.email);
     return res.status(200).json({
       message: "Login successful",
       user: data.user,
-      session: data.session,
+      session: data.session
     });
   } catch (err) {
+    console.error("🔥 Internal login error:", err.message);
     return res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
-// ✅ Forgot / Reset password (custom Supabase logic)
+// ✅ Forgot / Reset Password Routes
 router.post("/forgot-password", authController.forgotPassword);
 router.post("/reset-password", authController.resetPassword);
 
-// ✅ Protected Route - Token Verification
+// ✅ Token Verification Route (Protected)
 router.get("/verify-token", verifyToken, (req, res) => {
   return res.status(200).json({
     valid: true,

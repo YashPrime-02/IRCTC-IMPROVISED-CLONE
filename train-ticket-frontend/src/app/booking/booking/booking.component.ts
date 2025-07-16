@@ -36,7 +36,7 @@ export class BookingComponent implements OnInit, OnDestroy {
 
   @ViewChild('audioRef') audioRef!: ElementRef;
 
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(private router: Router, private http: HttpClient) { }
 
   ngOnInit(): void {
     const nav = history.state.bookingData || JSON.parse(sessionStorage.getItem('bookingData') || 'null');
@@ -80,7 +80,7 @@ export class BookingComponent implements OnInit, OnDestroy {
       this.updateTimeDisplay();
 
       if (this.countdown === 30 && this.audioRef) {
-        this.audioRef.nativeElement.play().catch(() => {});
+        this.audioRef.nativeElement.play().catch(() => { });
         this.showWarningAnimation = true;
         this.showToastMessage('⏳ Only 30 seconds left!', 'warning');
       }
@@ -116,47 +116,56 @@ export class BookingComponent implements OnInit, OnDestroy {
   }
 
   generateStatusForPassenger(index: number): string {
-  if (index === 0) {
-    const firstStatus = this.randomStatus();
-    if (firstStatus === 'WL') {
-      this.waitingStartNumber = Math.floor(Math.random() * 10) + 10; // e.g., 12
-      this.statusCounter = this.waitingStartNumber;
-      return `WL${this.statusCounter}`;
-    } else if (firstStatus === 'RAC') {
-      this.statusCounter = Math.floor(Math.random() * 50) + 30; // e.g., 45
-      return `RAC${this.statusCounter}`;
+    if (index === 0) {
+      const firstStatus = this.randomStatus();
+      if (firstStatus === 'WL') {
+        this.waitingStartNumber = Math.floor(Math.random() * 10) + 10;
+        this.statusCounter = this.waitingStartNumber;
+        return `WL${this.statusCounter}`;
+      } else if (firstStatus === 'RAC') {
+        this.statusCounter = Math.floor(Math.random() * 50) + 30;
+        return `RAC${this.statusCounter}`;
+      } else {
+        this.statusCounter = 0; // reset counter if confirmed
+        return 'Confirmed';
+      }
     } else {
-      return 'Confirmed';
-    }
-  } else {
-    const first = this.passengers[0]?.status;
+      const first = this.passengers[0]?.status;
 
-    // If first is WL
-    if (first?.startsWith('WL')) {
-      this.statusCounter++;
-      return `WL${this.statusCounter}`;
-    }
+      // Waiting List logic — untouched
+      if (first?.startsWith('WL')) {
+        this.statusCounter++;
+        return `WL${this.statusCounter}`;
+      }
 
-    // If first is RAC
-    if (first?.startsWith('RAC')) {
-      this.statusCounter++;
+      // RAC logic — once RAC starts, no more Confirmed
+      if (first?.startsWith('RAC')) {
+        this.statusCounter++;
+        const roll = Math.random();
+        return roll < 0.6 ? `RAC${this.statusCounter}` : `WL${++this.statusCounter}`;
+      }
+
+      // If any previous passenger is RAC, no more Confirmed
+      const hasRAC = this.passengers.some(p => p.status?.startsWith('RAC'));
+      if (hasRAC) {
+        this.statusCounter++;
+        return Math.random() < 0.5 ? `RAC${this.statusCounter}` : `WL${++this.statusCounter}`;
+      }
+
+      // First was Confirmed — allow 70% chance for next to be Confirmed
       const roll = Math.random();
-      if (roll < 0.5) return 'Confirmed';
-      else return `RAC${this.statusCounter}`;
-    }
-
-    // First is Confirmed – roll chance for others
-    const roll = Math.random();
-    if (roll < 0.6) return 'Confirmed';
-    else if (roll < 0.8) {
-      this.statusCounter++;
-      return `RAC${this.statusCounter}`;
-    } else {
-      this.statusCounter++;
-      return `WL${this.statusCounter}`;
+      if (roll < 0.7) return 'Confirmed';
+      else if (roll < 0.9) {
+        this.statusCounter++;
+        return `RAC${this.statusCounter}`;
+      } else {
+        this.statusCounter++;
+        return `WL${this.statusCounter}`;
+      }
     }
   }
-}
+
+
 
 
   randomStatus(): string {
@@ -241,55 +250,55 @@ export class BookingComponent implements OnInit, OnDestroy {
     })();
   }
 
-confirmBooking(): void {
-  if (!this.validatePassengers()) return;
+  confirmBooking(): void {
+    if (!this.validatePassengers()) return;
 
-  const train = this.bookingData;
+    const train = this.bookingData;
 
-  // ✅ Flattened structure to match Supabase table
-  const bookingSummary = {
-    email: this.email,
-    trainname: train.trainName,
-    sourcecode: train.sourceCode,
-    destinationcode: train.destinationCode,
-    date: train.date || new Date().toISOString().split('T')[0],
-    duration: train.duration || 'Unknown',
-    passengers: this.passengers.map(p => ({
-      name: p.name,
-      age: p.age,
-      seatType: p.seatType,
-      status: p.status,
-      fare: p.fare
-    })),
-    totalamount: this.calculateTotal(),
-    bookingdate: new Date().toISOString()
-  };
+    // ✅ Flattened structure to match Supabase table
+    const bookingSummary = {
+      email: this.email,
+      trainname: train.trainName,
+      sourcecode: train.sourceCode,
+      destinationcode: train.destinationCode,
+      date: train.date || new Date().toISOString().split('T')[0],
+      duration: train.duration || 'Unknown',
+      passengers: this.passengers.map(p => ({
+        name: p.name,
+        age: p.age,
+        seatType: p.seatType,
+        status: p.status,
+        fare: p.fare
+      })),
+      totalamount: this.calculateTotal(),
+      bookingdate: new Date().toISOString()
+    };
 
-  // ✅ POST to Supabase REST API
-  const supabaseUrl = `${environment.baseApiUrl}/bookings`;
+    // ✅ POST to Supabase REST API
+    const supabaseUrl = `${environment.baseApiUrl}/bookings`;
 
-  this.http.post(supabaseUrl, bookingSummary, {
-    headers: {
-      apikey: environment.supabaseKey,
-      Authorization: `Bearer ${environment.supabaseKey}`,
-      'Content-Type': 'application/json'
-    }
-  }).subscribe({
-    next: () => {
-      clearInterval(this.timerInterval);
+    this.http.post(supabaseUrl, bookingSummary, {
+      headers: {
+        apikey: environment.supabaseKey,
+        Authorization: `Bearer ${environment.supabaseKey}`,
+        'Content-Type': 'application/json'
+      }
+    }).subscribe({
+      next: () => {
+        clearInterval(this.timerInterval);
 
-      // ✅ Save same structure to sessionStorage for ticket-view use
-      sessionStorage.setItem('bookingSummary', JSON.stringify(bookingSummary));
+        // ✅ Save same structure to sessionStorage for ticket-view use
+        sessionStorage.setItem('bookingSummary', JSON.stringify(bookingSummary));
 
-      this.launchConfetti();
-      this.router.navigate(['/ticket-view']);
-    },
-    error: err => {
-      console.error('❌ Supabase booking error:', err);
-      this.showToastMessage('Failed to save booking to Supabase.', 'error');
-    }
-  });
-}
+        this.launchConfetti();
+        this.router.navigate(['/ticket-view']);
+      },
+      error: err => {
+        console.error('❌ Supabase booking error:', err);
+        this.showToastMessage('Failed to save booking to Supabase.', 'error');
+      }
+    });
+  }
 
 
 }

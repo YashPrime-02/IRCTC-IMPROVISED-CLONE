@@ -19,7 +19,7 @@ export class OtpVerificationComponent implements OnInit {
   successMessage = '';
   isLoading = false;
 
-  private readonly baseApi = 'http://localhost:8080/api/auth';
+  private readonly baseApi = 'https://irctc-clone-backend.onrender.com/api/auth';
 
   constructor(
     private route: ActivatedRoute,
@@ -29,15 +29,17 @@ export class OtpVerificationComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.email = params['email'] || '';
+      this.email = (params['email'] || '').toLowerCase();
       const actionParam = params['action'];
+
       if (actionParam === 'signup' || actionParam === 'forgot-password') {
         this.action = actionParam;
       }
 
-      if (!this.email) this.router.navigate(['/auth']);
+      if (!this.email) {
+        this.router.navigate(['/auth']);
+      }
     });
-
   }
 
   verifyOtp(): void {
@@ -66,19 +68,19 @@ export class OtpVerificationComponent implements OnInit {
               token: res.token ?? ''
             }
           });
-        } else if (this.action === 'signup') {
+        } else {
           setTimeout(() => this.router.navigate(['/auth']), 1000);
         }
       },
       error: (err) => {
-        this.error = err.error?.message || '❌ OTP verification failed. Please try again.';
+        this.error = err.error?.message || '❌ OTP verification failed.';
         this.isLoading = false;
       },
       complete: () => this.isLoading = false
     });
   }
-  goToLogin(): void {
-  this.router.navigate(['/auth']);
-}
 
+  goToLogin(): void {
+    this.router.navigate(['/auth']);
+  }
 }

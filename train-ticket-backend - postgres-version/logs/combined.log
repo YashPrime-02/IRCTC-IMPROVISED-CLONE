@@ -72,3 +72,18 @@
 [2025-07-12 11:58:02] info: ✅ OTP verified & reset token issued for tonymishra000@gmail.com
 [2025-07-12 11:59:45] info: 🔒 Password updated for tonymishra000@gmail.com
 [2025-07-15 22:12:38] info: 📨 OTP sent to tonymishra000@gmail.com
+[2025-07-16 12:03:41] warn: Forgot password failed: User not found (yashprime000@gmail.com)
+[2025-07-16 12:04:06] info: 📨 OTP sent to yashprime000@gmail.com
+[2025-07-16 12:05:06] warn: Forgot password failed: User not found (yashprime000@gmail.com)
+[2025-07-16 12:05:22] info: 📨 OTP sent to yashprime000@gmail.com
+[2025-07-16 12:05:56] info: ✅ OTP verified & reset token issued for yashprime000@gmail.com
+[2025-07-16 12:07:11] warn: Reset password failed: Invalid/expired token
+[2025-07-16 12:11:01] info: 📨 OTP sent to yashprime000@gmail.com
+[2025-07-16 12:11:20] info: ✅ OTP verified & reset token issued for yashprime000@gmail.com
+[2025-07-16 12:11:36] warn: Reset password failed: Invalid/expired token
+[2025-07-16 12:14:28] info: 📨 OTP sent to tonymishra000@gmail.com
+[2025-07-16 12:15:14] info: ✅ OTP verified & reset token issued for tonymishra000@gmail.com
+[2025-07-16 12:15:34] info: 🔒 Password updated for tonymishra000@gmail.com
+[2025-07-16 12:16:04] info: 📨 OTP sent to tonymishra000@gmail.com
+[2025-07-16 12:17:50] info: 📨 OTP sent to tonymishra000@gmail.com
+[2025-07-16 12:36:07] info: 📨 OTP sent to tonymishra000@gmail.com

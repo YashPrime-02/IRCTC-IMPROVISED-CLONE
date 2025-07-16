@@ -18,7 +18,12 @@ export class ResetPasswordComponent implements OnInit {
   confirmPassword = '';
   errorMessage = '';
   successMessage = '';
+  isLoading = false;
 
+  showNewPassword = false;
+  showConfirmPassword = false;
+
+  private readonly baseApi = 'https://irctc-clone-backend.onrender.com/api/auth';
 
   constructor(
     private route: ActivatedRoute,
@@ -28,9 +33,12 @@ export class ResetPasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.token = params['token'];
-      this.email = params['email']; // for display only
-      if (!this.token) this.router.navigate(['/auth']);
+      this.token = params['token'] || '';
+      this.email = (params['email'] || '').toLowerCase();
+
+      if (!this.token) {
+        this.router.navigate(['/auth']);
+      }
     });
   }
 
@@ -39,40 +47,44 @@ export class ResetPasswordComponent implements OnInit {
     this.successMessage = '';
 
     if (!this.newPassword || this.newPassword.length < 6) {
-      this.errorMessage = 'Password must be at least 6 characters.';
+      this.errorMessage = '⚠️ Password must be at least 6 characters.';
       return;
     }
 
     if (this.newPassword !== this.confirmPassword) {
-      this.errorMessage = 'Passwords do not match.';
+      this.errorMessage = '⚠️ Passwords do not match.';
       return;
     }
 
-    this.http.post('http://localhost:8080/api/auth/reset-password', {
-      token: this.token,
+    this.isLoading = true;
+
+    const payload = {
+      token: this.token, // ✅ moved token into body
       newPassword: this.newPassword
-    }).subscribe({
+    };
+
+    this.http.post(`${this.baseApi}/reset-password`, payload).subscribe({
       next: () => {
         this.successMessage = '✅ Password reset successful!';
         setTimeout(() => this.router.navigate(['/auth']), 2000);
       },
       error: (err) => {
-        this.errorMessage = err.error?.message || '❌ Something went wrong.';
-      }
+        this.errorMessage = err.error?.message || '❌ Reset failed. Try again.';
+        this.isLoading = false;
+      },
+      complete: () => this.isLoading = false
     });
   }
-    goToLogin(): void {
-  this.router.navigate(['/auth']);
-}
-showNewPassword: boolean = false;
-showConfirmPassword: boolean = false;
 
-toggleNewPasswordVisibility(): void {
-  this.showNewPassword = !this.showNewPassword;
-}
+  toggleNewPasswordVisibility(): void {
+    this.showNewPassword = !this.showNewPassword;
+  }
 
-toggleConfirmPasswordVisibility(): void {
-  this.showConfirmPassword = !this.showConfirmPassword;
-}
+  toggleConfirmPasswordVisibility(): void {
+    this.showConfirmPassword = !this.showConfirmPassword;
+  }
 
+  goToLogin(): void {
+    this.router.navigate(['/auth']);
+  }
 }

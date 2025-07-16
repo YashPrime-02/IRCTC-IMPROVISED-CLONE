@@ -6,11 +6,25 @@ const supabase = require('./utils/supabaseClient');
 const app = express();
 
 // ✅ Middleware
+const allowedOrigins = [
+  'http://localhost:4200',
+  'https://fabulous-sunburst-e594b4.netlify.app',
+  'https://irctc-improvised-clone-6gaf.vercel.app'
+];
+
 app.use(cors({
-  origin: ['http://localhost:4200', 'https://fabulous-sunburst-e594b4.netlify.app'],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error(`❌ CORS error: Origin ${origin} not allowed`));
+    }
+  },
   credentials: true
 }));
-app.use(express.json());
 
 // 🔁 DEV ROUTES
 app.get('/api/dev/ping', (req, res) => {

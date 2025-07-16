@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const transporter = require("../config/node.mailer");
 const crypto = require("crypto");
-const logger = require('../utils/logger');
+const logger = require("../utils/logger");
 
 // 📩 SIGNUP controller
 exports.signup = async (req, res) => {
@@ -28,11 +28,23 @@ exports.signup = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const { error: insertError } = await supabase
+    const { error: insertError, data: insertedUser } = await supabase
       .from("users")
-      .insert([{ name, email, password: hashedPassword }]);
+      .insert([{ name, email, password: hashedPassword }])
+      .select()
+      .single();
 
-    if (insertError) throw insertError;
+    if (insertError) {
+      logger.error(
+        `❌ Supabase Insert Error: ${JSON.stringify(insertError, null, 2)}`
+      );
+      return res
+        .status(400)
+        .json({
+          message: "Database insert failed",
+          error: insertError.message,
+        });
+    }
 
     logger.info(`✅ New user registered: ${email}`);
     res.status(201).json({ message: "User registered successfully!" });
@@ -49,7 +61,9 @@ exports.login = async (req, res) => {
   try {
     if (!email || !password) {
       logger.warn("Login failed: Email or password missing");
-      return res.status(400).json({ message: "Email and password are required." });
+      return res
+        .status(400)
+        .json({ message: "Email and password are required." });
     }
 
     const { data: user, error } = await supabase
@@ -141,14 +155,15 @@ exports.forgotPassword = async (req, res) => {
   }
 };
 
-
 // 🔁 RESET PASSWORD controller
 exports.resetPassword = async (req, res) => {
   const { token, newPassword } = req.body;
 
   // ✅ Input validation to prevent undefined in bcrypt
   if (!token || typeof newPassword !== "string" || newPassword.trim() === "") {
-    return res.status(400).json({ message: "Token and valid new password are required." });
+    return res
+      .status(400)
+      .json({ message: "Token and valid new password are required." });
   }
 
   try {
@@ -185,14 +200,15 @@ exports.resetPassword = async (req, res) => {
   }
 };
 
-
 // 🛡️ VERIFY JWT TOKEN controller
 exports.verifyToken = async (req, res) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     logger.warn("Token verification failed: Missing or invalid format");
-    return res.status(401).json({ message: "Authorization header missing or malformed" });
+    return res
+      .status(401)
+      .json({ message: "Authorization header missing or malformed" });
   }
 
   const token = authHeader.split(" ")[1];

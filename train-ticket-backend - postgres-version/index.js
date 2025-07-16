@@ -7,7 +7,7 @@ const app = express();
 
 // ✅ Middleware
 app.use(cors({
-  origin: ['http://localhost:4200', 'https://fabulous-sunburst-e594b4.netlify.app'],
+  origin: ['http://localhost:4200', 'https://celadon-frangollo-da2177.netlify.app'],
   credentials: true
 }));
 app.use(express.json());

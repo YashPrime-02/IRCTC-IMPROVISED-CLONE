@@ -21,7 +21,7 @@ router.post("/signup", async (req, res) => {
   }
 
   try {
-    // Step 1: Supabase Auth signup
+    // ✅ Step 1: Supabase Auth signup
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -33,7 +33,6 @@ router.post("/signup", async (req, res) => {
     if (error) {
       console.error("❌ Supabase signup error:", error.message);
 
-      // Check for duplicate email
       if (
         error.message.toLowerCase().includes("user already registered") ||
         error.message.toLowerCase().includes("user already exists")
@@ -41,7 +40,6 @@ router.post("/signup", async (req, res) => {
         return res.status(409).json({ error: "User already exists. Please log in or reset your password." });
       }
 
-      // Weak password case
       if (error.message.toLowerCase().includes("password")) {
         return res.status(400).json({ error: "Password does not meet security requirements." });
       }
@@ -56,23 +54,33 @@ router.post("/signup", async (req, res) => {
 
     console.log("✅ Supabase user created:", user.id);
 
-    // Step 2: Save user info into `users` table (plain password for now)
-    const { error: dbError } = await supabase
+    // ✅ Step 2: Check if user already exists in DB
+    const { data: existingUser, error: findErr } = await supabase
       .from("users")
-      .insert([
-        {
-          id: user.id,
-          name,
-          email,
-          password // ⚠️ Plain text (not recommended for production)
-        }
-      ])
-      .select()
-      .single();
+      .select("id")
+      .eq("id", user.id)
+      .maybeSingle();
 
-    if (dbError) {
-      console.error("❌ Error saving user to DB:", dbError.message);
-      return res.status(400).json({ error: "Failed to save user in database" });
+    if (existingUser) {
+      console.warn("⚠️ User already exists in users table, skipping insert.");
+    } else {
+      const { error: dbError } = await supabase
+        .from("users")
+        .insert([
+          {
+            id: user.id,
+            name,
+            email,
+            password // ⚠️ Plain text (not recommended for production)
+          }
+        ])
+        .select()
+        .single();
+
+      if (dbError) {
+        console.error("❌ Error saving user to DB:", dbError.details || dbError.message);
+        return res.status(400).json({ error: "Database error saving new user" });
+      }
     }
 
     console.log("✅ User saved to DB:", email);
@@ -85,6 +93,7 @@ router.post("/signup", async (req, res) => {
     return res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
 
 
 // ✅ Login via Supabase Auth

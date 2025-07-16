@@ -5,30 +5,14 @@ const supabase = require('./utils/supabaseClient');
 
 const app = express();
 
-// ✅ CORS Middleware (dynamic)
-const allowedOrigins = [
-  'http://localhost:4200',
-  'https://fabulous-sunburst-e594b4.netlify.app',
-  'https://irctc-improvised-clone-6gaf.vercel.app'
-];
-
+// ✅ Middleware
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    } else {
-      return callback(new Error(`❌ CORS error: Origin ${origin} not allowed`));
-    }
-  },
+  origin: ['http://localhost:4200', 'https://fabulous-sunburst-e594b4.netlify.app'],
   credentials: true
 }));
-
-// ✅ Body parser middleware — MUST BE HERE to read JSON in req.body
 app.use(express.json());
 
-/* --------------------------------
-   🔁 DEV ROUTES
--------------------------------- */
+// 🔁 DEV ROUTES
 app.get('/api/dev/ping', (req, res) => {
   console.log("📡 Ping received at", new Date().toISOString());
   res.status(200).json({
@@ -60,7 +44,6 @@ app.delete('/api/dev/users', async (req, res) => {
 
 app.post('/api/dev/users', async (req, res) => {
   try {
-    console.log("🔐 DEV signup req.body:", req.body);
     const { name, email, password } = req.body;
     const { data, error } = await supabase
       .from('users')
@@ -74,31 +57,18 @@ app.post('/api/dev/users', async (req, res) => {
   }
 });
 
-/* --------------------------------
-   🧭 MAIN ROUTES
--------------------------------- */
+// 🧭 Main Routes
 app.use('/api/auth', require('./routes/auth.routes'));
 app.use('/api/station', require('./routes/station.routes'));
 app.use('/api/trains', require('./routes/train.routes'));
 app.use('/api/bookings', require('./routes/booking.routes'));
 
-/* --------------------------------
-   ✅ Health Route (for Render)
--------------------------------- */
-app.get('/api/health', (req, res) => {
-  res.status(200).send('✅ Backend is alive');
-});
-
-/* --------------------------------
-   🏁 Root Route
--------------------------------- */
+// 🚀 Root Route
 app.get('/', (req, res) => {
   res.send('🚆 IRCTC backend running with Supabase + Render + Cron');
 });
 
-/* --------------------------------
-   🔥 Start Server
--------------------------------- */
+// 🔥 Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server live at http://localhost:${PORT}`);

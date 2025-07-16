@@ -1,6 +1,11 @@
 <div id="bookingHistoryPDF" class="history-container">
   <h2>📖 Booking History</h2>
 
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading">
+    ⏳ Loading bookings...
+  </div>
+
   <!-- Filter Controls -->
   <div class="filters mb-3">
     <select [(ngModel)]="selectedMonth" (change)="filterBookings()">
@@ -14,33 +19,32 @@
     </select>
   </div>
 
+  <!-- Booking List -->
+  <div *ngIf="!loading && filteredBookings.length > 0" class="card-list">
+    <div class="booking-card" *ngFor="let booking of filteredBookings">
+      <div class="card-header">
+        <h4>🚆 {{ booking.trainname }}</h4>
+        <span class="fare">₹{{ booking.totalamount }}</span>
+      </div>
+      <p><strong>📍 Route:</strong> {{ booking.sourcecode }} → {{ booking.destinationcode }}</p>
+      <p><strong>📅 Date:</strong> {{ booking.date || 'N/A' }}</p>
+      <p><strong>👥 Passengers:</strong> {{ booking.passengers.length }}</p>
 
-  <!-- Booking Table -->
-<div *ngIf="filteredBookings.length > 0" class="card-list">
-  <div class="booking-card" *ngFor="let booking of filteredBookings">
-    <div class="card-header">
-      <h4>🚆 {{ booking.trainName }}</h4>
-      <span class="fare">₹{{ booking.totalAmount }}</span>
+      <button (click)="deleteBooking(booking.id)" class="delete-btn">🗑 Delete</button>
     </div>
-    <p><strong>📍 Route:</strong> {{ booking.sourceCode }} → {{ booking.destinationCode }}</p>
-    <p><strong>📅 Date:</strong> {{ booking.date || 'N/A' }}</p>
-    <p><strong>⏱ Duration:</strong> {{ booking.duration || 'N/A' }}</p>
-
-    <button (click)="deleteBooking(booking.id)" class="delete-btn">🗑 Delete</button>
   </div>
-</div>
-
 
   <!-- No Data -->
-  <div *ngIf="filteredBookings.length === 0">
+  <div *ngIf="!loading && filteredBookings.length === 0">
     <p>❌ No bookings found for the selected filters.</p>
   </div>
 
-  <!-- Back to train search Button -->
+  <!-- Actions -->
   <div class="actions mt-4">
-  <button (click)="downloadPDF()" class="download-btn">📄 Download PDF</button>
+    <button (click)="downloadPDF()" class="download-btn">📄 Download PDF</button>
   </div>
- <div class="actions mt-4">
-  <button (click)="goToTrainSearch()" class="download-btn">🚆Back to Train Search</button>
- </div>
+
+  <!-- <div class="actions mt-4">
+    <button (click)="goToTrainSearch()" class="download-btn">🚆 Back to Train Search</button>
+  </div> -->
 </div>

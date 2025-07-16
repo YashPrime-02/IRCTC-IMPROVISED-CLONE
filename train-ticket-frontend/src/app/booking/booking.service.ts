@@ -34,12 +34,14 @@ export class BookingService {
     });
   }
 
-  getBookingsByEmail(email: string): Observable<any[]> {
-    const url = `${this.baseUrl}?email=eq.${email}`; // Supabase filter
-    return this.http.get<any[]>(url, {
-      headers: this.getHeaders()
-    });
-  }
+getBookingsByEmail(email: string): Observable<any[]> {
+  const safeEmail = encodeURIComponent(email.toLowerCase()); // 🛡 normalize
+  const url = `${this.baseUrl}?email=eq.${safeEmail}`;
+  return this.http.get<any[]>(url, {
+    headers: this.getHeaders()
+  });
+}
+
 
   deleteBookingById(id: string): Observable<any> {
     const url = `${this.baseUrl}?id=eq.${id}`;

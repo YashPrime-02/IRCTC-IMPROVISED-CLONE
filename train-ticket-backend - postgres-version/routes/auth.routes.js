@@ -11,17 +11,19 @@ const verifyToken = require("../middleware/verifyToken");
 router.post("/send-otp", otpController.sendOTP);
 router.post("/verify-otp", otpController.verifyOTP);
 
-// ✅ Signup via Supabase Auth
+
+// ✅ Signup via Supabase Auth + Save to users table
 router.post("/signup", async (req, res) => {
   const { email, password, name } = req.body;
   console.log("📥 Signup request received:", req.body);
 
   try {
+    // Step 1: Supabase Auth signup
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
-        data: { name } // 👈 Will be available in raw_user_meta_data
+        data: { name } // stored in user_metadata
       }
     });
 
@@ -30,16 +32,40 @@ router.post("/signup", async (req, res) => {
       return res.status(400).json({ error: error.message });
     }
 
-    console.log("✅ User signed up:", data.user.email);
+    const user = data?.user;
+    if (!user) {
+      console.error("❌ No user returned from Supabase signup");
+      return res.status(400).json({ error: "Signup failed." });
+    }
+
+    // Step 2: Insert into your custom `users` table
+    const { error: dbError } = await supabase
+      .from("users")
+      .insert([
+        {
+          id: user.id,        // same as Supabase Auth user id (UUID)
+          name: name,
+          email: email,
+          password: password  // ❗optional: you can hash this later
+        }
+      ]);
+
+    if (dbError) {
+      console.error("❌ Error saving user to 'users' table:", dbError.message);
+      return res.status(400).json({ error: "Database error saving new user" });
+    }
+
+    console.log("✅ User signed up and saved to DB:", email);
     return res.status(201).json({
       message: "Signup successful! Please verify your email.",
-      user: data.user
+      user: user
     });
   } catch (err) {
     console.error("🔥 Internal signup error:", err.message);
     return res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
 
 // ✅ Login via Supabase Auth
 router.post("/login", async (req, res) => {

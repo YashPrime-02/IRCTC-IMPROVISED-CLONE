@@ -81,18 +81,19 @@ export class TicketViewComponent implements OnInit {
   }
 
   normalizeTrainData(): void {
-    if (!this.bookingData.train && this.bookingData.trainName) {
-      this.bookingData.train = {
-        trainName: this.bookingData.trainName,
-        source: this.bookingData.source,
-        sourceCode: this.bookingData.sourceCode,
-        destination: this.bookingData.destination,
-        destinationCode: this.bookingData.destinationCode,
-        duration: this.bookingData.duration,
-        fare: this.bookingData.totalAmount
-      };
-    }
+  if (!this.bookingData.train && this.bookingData.trainname) {
+    this.bookingData.train = {
+      trainName: this.bookingData.trainname,
+      source: this.bookingData.sourcecode, // match Supabase field
+      sourceCode: this.bookingData.sourcecode,
+      destination: this.bookingData.destinationcode,
+      destinationCode: this.bookingData.destinationcode,
+      duration: this.bookingData.duration,
+      fare: this.bookingData.totalamount
+    };
   }
+}
+
 
   afterBookingDataLoaded(): void {
   this.generateQRCode(JSON.stringify(this.bookingData));

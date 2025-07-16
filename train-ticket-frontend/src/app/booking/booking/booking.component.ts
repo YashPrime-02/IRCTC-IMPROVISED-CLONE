@@ -229,9 +229,10 @@ confirmBooking(): void {
 
   const train = this.bookingData;
 
+  // ✅ Flattened structure to match Supabase table
   const bookingSummary = {
     email: this.email,
-    trainname: train.trainName, // match Supabase column
+    trainname: train.trainName,
     sourcecode: train.sourceCode,
     destinationcode: train.destinationCode,
     date: train.date || new Date().toISOString().split('T')[0],
@@ -244,9 +245,10 @@ confirmBooking(): void {
       fare: p.fare
     })),
     totalamount: this.calculateTotal(),
-    bookingdate: new Date().toISOString() // ISO string for timestamp
+    bookingdate: new Date().toISOString()
   };
 
+  // ✅ POST to Supabase REST API
   const supabaseUrl = `${environment.baseApiUrl}/bookings`;
 
   this.http.post(supabaseUrl, bookingSummary, {
@@ -258,7 +260,10 @@ confirmBooking(): void {
   }).subscribe({
     next: () => {
       clearInterval(this.timerInterval);
+
+      // ✅ Save same structure to sessionStorage for ticket-view use
       sessionStorage.setItem('bookingSummary', JSON.stringify(bookingSummary));
+
       this.launchConfetti();
       this.router.navigate(['/ticket-view']);
     },
@@ -268,5 +273,6 @@ confirmBooking(): void {
     }
   });
 }
+
 
 }

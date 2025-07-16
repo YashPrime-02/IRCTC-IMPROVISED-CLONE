@@ -22,30 +22,31 @@
   <div class="ticket-summary">
     <table>
       <tbody>
-        <tr>
-          <th>🚆 Train:</th>
-          <td><strong>{{ bookingData?.train?.trainName }}</strong></td>
-        </tr>
-        <tr>
-          <th>🛤️ From:</th>
-          <td><strong>{{ bookingData?.train?.source }}</strong> ({{ bookingData?.train?.sourceCode }})</td>
-        </tr>
-        <tr>
-          <th>🏁 To:</th>
-          <td><strong>{{ bookingData?.train?.destination }}</strong> ({{ bookingData?.train?.destinationCode }})</td>
-        </tr>
-        <tr>
-          <th>📅 Date:</th>
-          <td><strong>{{ bookingData?.date }}</strong></td>
-        </tr>
-        <tr>
-          <th>⏱ Duration:</th>
-          <td><strong>{{ bookingData?.train?.duration }}</strong></td>
-        </tr>
-        <tr>
-          <th>💰 Total Fare:</th>
-          <td><strong>₹{{ bookingData?.train?.fare }}</strong></td>
-        </tr>
+   <tr>
+  <th>🚆 Train:</th>
+  <td><strong>{{ bookingData.train?.trainName || 'N/A' }}</strong></td>
+</tr>
+<tr>
+  <th>🛤️ From:</th>
+  <td><strong>{{ bookingData.train?.source }}</strong> ({{ bookingData.train?.sourceCode }})</td>
+</tr>
+<tr>
+  <th>🏁 To:</th>
+  <td><strong>{{ bookingData.train?.destination }}</strong> ({{ bookingData.train?.destinationCode }})</td>
+</tr>
+<tr>
+  <th>📅 Date:</th>
+  <td><strong>{{ bookingData?.date || 'N/A' }}</strong></td>
+</tr>
+<tr>
+  <th>⏱ Duration:</th>
+  <td><strong>{{ bookingData.train?.duration }}</strong></td>
+</tr>
+<tr>
+  <th>💰 Total Fare:</th>
+  <td><strong>₹{{ bookingData.train?.fare }}</strong></td>
+</tr>
+
       </tbody>
     </table>
   </div>

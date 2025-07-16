@@ -95,12 +95,12 @@ export class TicketViewComponent implements OnInit {
 }
 
 
-  afterBookingDataLoaded(): void {
+afterBookingDataLoaded(): void {
   this.generateQRCode(JSON.stringify(this.bookingData));
   this.generatePNR();
 
-  console.log('✅ bookingData:', this.bookingData);             // ADD THIS
-  console.log('✅ bookingData.train:', this.bookingData?.train); // AND THIS
+  console.log('✅ bookingData:', this.bookingData);
+  console.log('✅ bookingData.train:', this.bookingData?.train);
 
   const train = this.bookingData.train;
   const passengers = this.bookingData.passengers;
@@ -116,10 +116,20 @@ export class TicketViewComponent implements OnInit {
   }
 
   this.bookingData.passengers = passengers.map((p: any) => {
-    // seatNumber logic...
+    if (p.status === 'Confirmed') {
+      const berth = this.getRandomBerth();
+      p.seatNumber = this.generateFormattedSeat(p.seatType, berth); // 🟢 Coach + Seat + Berth
+    } else if (p.status === 'RAC') {
+      const racNum = this.getRandomSeatNumber(1, 100);
+      p.seatNumber = `RAC${racNum}`; // 🟠 RAC style
+    } else {
+      const wlNum = this.getRandomSeatNumber(10, 99);
+      p.seatNumber = `WL${wlNum}`; // 🔴 WL style
+    }
     return p;
   });
 }
+
 
 
   generateFormattedSeat(seatType: string, berthType: string = ''): string {

@@ -116,31 +116,48 @@ export class BookingComponent implements OnInit, OnDestroy {
   }
 
   generateStatusForPassenger(index: number): string {
-    if (index === 0) {
-      const firstStatus = this.randomStatus();
-      if (firstStatus === 'WL') {
-        this.waitingStartNumber = Math.floor(Math.random() * 10) + 10;
-        this.statusCounter = this.waitingStartNumber;
-        return `WL${this.statusCounter}`;
-      } else {
-        return firstStatus;
-      }
+  if (index === 0) {
+    const firstStatus = this.randomStatus();
+    if (firstStatus === 'WL') {
+      this.waitingStartNumber = Math.floor(Math.random() * 10) + 10; // e.g., 12
+      this.statusCounter = this.waitingStartNumber;
+      return `WL${this.statusCounter}`;
+    } else if (firstStatus === 'RAC') {
+      this.statusCounter = Math.floor(Math.random() * 50) + 30; // e.g., 45
+      return `RAC${this.statusCounter}`;
     } else {
-      const first = this.passengers[0]?.status;
-      if (first?.startsWith('WL')) {
-        this.statusCounter++;
-        return `WL${this.statusCounter}`;
-      } else {
-        const roll = Math.random();
-        if (roll < 0.5) return 'Confirmed';
-        else if (roll < 0.8) return 'RAC';
-        else {
-          this.statusCounter++;
-          return `WL${this.statusCounter}`;
-        }
-      }
+      return 'Confirmed';
+    }
+  } else {
+    const first = this.passengers[0]?.status;
+
+    // If first is WL
+    if (first?.startsWith('WL')) {
+      this.statusCounter++;
+      return `WL${this.statusCounter}`;
+    }
+
+    // If first is RAC
+    if (first?.startsWith('RAC')) {
+      this.statusCounter++;
+      const roll = Math.random();
+      if (roll < 0.5) return 'Confirmed';
+      else return `RAC${this.statusCounter}`;
+    }
+
+    // First is Confirmed – roll chance for others
+    const roll = Math.random();
+    if (roll < 0.6) return 'Confirmed';
+    else if (roll < 0.8) {
+      this.statusCounter++;
+      return `RAC${this.statusCounter}`;
+    } else {
+      this.statusCounter++;
+      return `WL${this.statusCounter}`;
     }
   }
+}
+
 
   randomStatus(): string {
     const statuses = ['Confirmed', 'RAC', 'WL'];
